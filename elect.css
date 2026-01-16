@@ -1,0 +1,55 @@
+/* Mejoras para el menú activo */
+
+nav a.active {
+    color: var(--electric-yellow) !important;
+}
+
+nav a.active::after {
+    width: 100% !important;
+}
+
+
+/* Transición suave para el header */
+
+header {
+    transition: all 0.3s ease;
+}
+
+
+/* Mejorar el menú móvil */
+
+@media (max-width: 768px) {
+    nav ul {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    nav ul.active {
+        max-height: 300px;
+    }
+    .mobile-menu {
+        transition: transform 0.3s ease;
+    }
+    .mobile-menu:hover {
+        transform: scale(1.1);
+    }
+}
+
+
+/* Efecto de subrayado animado mejorado */
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after,
+nav a.active::after {
+    width: 100%;
+}

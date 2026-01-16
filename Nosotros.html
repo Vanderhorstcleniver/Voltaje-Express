@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros - Voltaje Express</title>
+    <style>
+        /* Estilos base */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+         :root {
+            --primary: #0d6efd;
+            --secondary: #6c757d;
+            --success: #198754;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --electric-blue: #00a8ff;
+            --electric-yellow: #ffdd59;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        /* Header */
+        
+        header {
+            background: linear-gradient(135deg, var(--dark), #343a40);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--electric-yellow);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover,
+        nav a.active {
+            color: var(--electric-yellow);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--electric-yellow);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+        
+        .btn-login {
+            background-color: var(--electric-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-login:hover {
+            background-color: #0097e6;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        /* Hero Section */
+        
+        .page-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23121212"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="%23333" stroke-width="1"/></svg>');
+            background-size: cover;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+        
+        .page-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.7s;
+        }
+        /* Historia */
+        
+        .about-history {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .about-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--electric-blue);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--secondary);
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.6s ease;
+        }
+        
+        .about-text p.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        /* Valores */
+        
+        .values {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--dark), #343a40);
+            color: white;
+        }
+        
+        .values h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .value-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .value-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .value-card h3 {
+            margin-bottom: 1rem;
+            color: var(--electric-yellow);
+        }
+        /* Equipo */
+        
+        .team {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .team h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: var(--light);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .team-member.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1.5rem;
+            border: 4px solid var(--electric-blue);
+            position: relative;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .member-photo::before {
+            content: '👤';
+            font-size: 4rem;
+            color: #999;
+        }
+        
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: none;
+        }
+        
+        .team-member:hover .member-photo img {
+            transform: scale(1.1);
+        }
+        
+        .team-member h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .member-role {
+            color: var(--electric-blue);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .member-bio {
+            color: var(--secondary);
+        }
+        /* Certificaciones */
+        
+        .certifications {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+        
+        .certifications h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+        
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .cert-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .cert-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .cert-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cert-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cert-item h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        /* Línea de tiempo */
+        
+        .timeline {
+            padding: 5rem 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        .timeline h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+        
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--electric-blue);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            padding: 1.5rem;
+            position: relative;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 3rem;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            width: 20px;
+            height: 20px;
+            background: var(--electric-blue);
+            border-radius: 50%;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: var(--electric-blue);
+            margin-bottom: 0.5rem;
+        }
+        /* Botones de acción */
+        
+        .action-buttons {
+            padding: 3rem 0;
+            background: white;
+            text-align: center;
+        }
+        
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .action-btn {
+            background: var(--electric-blue);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: block;
+            text-align: center;
+        }
+        
+        .action-btn:hover {
+            background: #0097e6;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 168, 255, 0.3);
+        }
+        /* Footer */
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--electric-yellow);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--electric-blue);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+        }
+        /* Animaciones */
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        /* Media Queries */
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark);
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            nav ul.active {
+                display: flex;
+            }
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            .page-hero h1 {
+                font-size: 2.2rem;
+            }
+            .page-hero p {
+                font-size: 1rem;
+            }
+            .timeline-container::before {
+                left: 30px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 0;
+            }
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            .timeline-item::after {
+                left: 20px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>Voltaje<span> Express</span></h1>
+            </div>
+            <nav>
+                <div class="mobile-menu">☰</div>
+                <ul>
+                    <li><a href="Inicio.html">Inicio</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="nosotros.html" class="active">Nosotros</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="login.html" class="btn-login">Acceso Clientes</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Sobre voltaje express</h1>
+            <p>Conoce nuestra historia, valores y equipo profesional</p>
+        </div>
+    </section>
+
+    <!-- Historia -->
+    <section class="about-history">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Nuestra Historia</h2>
+                    <p>Fundada en 2008, Sousa Electricidad nació con el objetivo de ofrecer servicios eléctricos de máxima calidad, combinando la tradición del oficio con las últimas tecnologías del sector.</p>
+                    <p>A lo largo de más de 15 años, hemos crecido hasta convertirnos en una empresa de referencia en la comunidad, realizando proyectos desde pequeñas reformas en viviendas hasta complejas instalaciones industriales.</p>
+                    <p>Nuestro compromiso con la excelencia y la satisfacción del cliente nos ha permitido construir una cartera de clientes fieles que confían en nuestro trabajo para todos sus proyectos eléctricos.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipo de Sousa Electricidad">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Línea de Tiempo -->
+    <section class="timeline">
+        <div class="container">
+            <h2>Nuestra Trayectoria</h2>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2020</div>
+                        <h3>Fundación</h3>
+                        <p>Carlos Sousa funda la empresa con el objetivo de ofrecer servicios eléctricos de calidad en la comunidad local.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2021</div>
+                        <h3>Primera Expansión</h3>
+                        <p>Contratamos a nuestro primer electricista y ampliamos nuestros servicios a instalaciones comerciales.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2022</div>
+                        <h3>Certificación de Calidad</h3>
+                        <p>Obtenemos la certificación ISO 9001 por nuestros procesos de calidad en instalaciones eléctricas.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2023</div>
+                        <h3>Energías Renovables</h3>
+                        <p>Incorporamos servicios de instalación de sistemas de energía solar fotovoltaica.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2024</div>
+                        <h3>Actual Expansión</h3>
+                        <p>Contamos con un equipo de 8 profesionales y hemos realizado más de 1,200 proyectos exitosos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Valores -->
+    <section class="values">
+        <div class="container">
+            <h2>Nuestros Valores</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🔒</div>
+                    <h3>Seguridad</h3>
+                    <p>La seguridad es nuestra prioridad en cada proyecto. Cumplimos con todas las normativas y utilizamos los mejores materiales.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">⭐</div>
+                    <h3>Calidad</h3>
+                    <p>Trabajamos con materiales de primera calidad y aplicamos los más altos estándares en cada instalación.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">⏱️</div>
+                    <h3>Puntualidad</h3>
+                    <p>Respetamos los plazos acordados y nos comprometemos a completar cada proyecto en el tiempo establecido.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">💬</div>
+                    <h3>Transparencia</h3>
+                    <p>Mantenemos una comunicación clara y honesta con nuestros clientes en cada etapa del proyecto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipo -->
+    <section class="team">
+        <div class="container">
+            <h2>Nuestro Equipo</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <!-- Imagen de usuario en gris y blanco -->
+                    </div>
+                    <h3>Luis Anderson</h3>
+                    <p class="member-role">Director y Electricista Jefe</p>
+                    <p class="member-bio">Más de 5 años de experiencia en el sector eléctrico. Especializado en instalaciones industriales y automatización.</p>
+                    <div class="member-skills">
+                        <span class="skill-tag">Instalaciones Industriales</span>
+                        <span class="skill-tag">Automatización</span>
+                        <span class="skill-tag">Gestión de Proyectos</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <!-- Imagen de usuario en gris y blanco -->
+                    </div>
+                    <h3>Luis David</h3>
+                    <p class="member-role">Jefe de Proyectos</p>
+                    <p class="member-bio">Ingeniero técnico industrial con especialización en eficiencia energética y energías renovables.</p>
+                    <div class="member-skills">
+                        <span class="skill-tag">Energías Renovables</span>
+                        <span class="skill-tag">Eficiencia Energética</span>
+                        <span class="skill-tag">Gestión de Proyectos</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <!-- Imagen de usuario en gris y blanco -->
+                    </div>
+                    <h3>Cleniver</h3>
+                    <p class="member-role">Encargada de Electricidad</p>
+                    <p class="member-bio">Especialista en instalaciones residenciales y comerciales. Certificada en domótica y sistemas inteligentes.</p>
+                    <div class="member-skills">
+                        <span class="skill-tag">Instalaciones Residenciales</span>
+                        <span class="skill-tag">Domótica</span>
+                        <span class="skill-tag">Sistemas Inteligentes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificaciones -->
+    <section class="certifications">
+        <div class="container">
+            <h2>Certificaciones y Garantías</h2>
+            <div class="certs-grid">
+                <div class="cert-item">
+                    <div class="cert-icon">📜</div>
+                    <h3>Certificación de Instalaciones</h3>
+                    <p>Todas nuestras instalaciones incluyen certificado oficial de conformidad con el Reglamento Electrotécnico de Baja Tensión.</p>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">🛡️</div>
+                    <h3>Garantía por Escrito</h3>
+                    <p>Ofrecemos garantía por escrito en todos nuestros trabajos, con cobertura de materiales y mano de obra.</p>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">📞</div>
+                    <h3>Servicio Post-venta</h3>
+                    <p>Disponemos de servicio de atención post-venta para resolver cualquier duda o incidencia después de la instalación.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botones de Acción -->
+    <section class="action-buttons">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem; color: var(--dark);">¿Listo para trabajar con nosotros?</h2>
+            <div class="buttons-grid">
+                <a href="servicios.html" class="action-btn">Ver Nuestros Servicios</a>
+                <a href="contacto.html" class="action-btn">Solicitar Presupuesto</a>
+                <a href="contacto.html" class="action-btn">Contactar Ahora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sousa Electricidad</h3>
+                    <p>Empresa especializada en servicios eléctricos para hogares, empresas e industrias. Calidad, seguridad y profesionalidad garantizadas.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">f</a>
+                        <a href="#" aria-label="Instagram">ig</a>
+                        <a href="#" aria-label="Twitter">t</a>
+                        <a href="#" aria-label="LinkedIn">in</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="Inicio.html">Inicio</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                        <li><a href="Nosotros.html">Sobre Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="login.html">Área de Clientes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li>📍 Mahata Calle C sector f1</li>
+                        <li>📞 +1(809-523-8283)</li>
+                        <li>✉️ voltajeexpress@gmail.com</li>
+                        <li>🕒 L-V: 8:00-5:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2021 Sousa Electricidad. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Elementos del DOM
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navUl = document.querySelector('nav ul');
+        const aboutParagraphs = document.querySelectorAll('.about-text p');
+        const valueCards = document.querySelectorAll('.value-card');
+        const teamMembers = document.querySelectorAll('.team-member');
+        const certItems = document.querySelectorAll('.cert-item');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+
+        // Menú móvil
+        mobileMenu.addEventListener('click', () => {
+            navUl.classList.toggle('active');
+        });
+
+        // Animación al hacer scroll
+        function checkScroll() {
+            const triggerBottom = window.innerHeight * 0.85;
+
+            // Párrafos de historia
+            aboutParagraphs.forEach((para, index) => {
+                const paraTop = para.getBoundingClientRect().top;
+                if (paraTop < triggerBottom) {
+                    setTimeout(() => {
+                        para.classList.add('visible');
+                    }, index * 200);
+                }
+            });
+
+            // Tarjetas de valores
+            valueCards.forEach((card, index) => {
+                const cardTop = card.getBoundingClientRect().top;
+                if (cardTop < triggerBottom) {
+                    setTimeout(() => {
+                        card.classList.add('visible');
+                    }, index * 200);
+                }
+            });
+
+            // Miembros del equipo
+            teamMembers.forEach((member, index) => {
+                const memberTop = member.getBoundingClientRect().top;
+                if (memberTop < triggerBottom) {
+                    setTimeout(() => {
+                        member.classList.add('visible');
+                    }, index * 200);
+                }
+            });
+
+            // Elementos de certificación
+            certItems.forEach((item, index) => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < triggerBottom) {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, index * 200);
+                }
+            });
+
+            // Elementos de línea de tiempo
+            timelineItems.forEach((item, index) => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < triggerBottom) {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, index * 200);
+                }
+            });
+        }
+
+        // Efectos de hover para miembros del equipo
+        teamMembers.forEach(member => {
+            const skills = member.querySelector('.member-skills');
+
+            // Estilos para las etiquetas de habilidades
+            if (!document.querySelector('#skills-styles')) {
+                const style = document.createElement('style');
+                style.id = 'skills-styles';
+                style.textContent = `
+                    .member-skills {
+                        margin-top: 1rem;
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.5rem;
+                        justify-content: center;
+                    }
+                    .skill-tag {
+                        background: var(--electric-blue);
+                        color: white;
+                        padding: 0.3rem 0.8rem;
+                        border-radius: 20px;
+                        font-size: 0.8rem;
+                        font-weight: 500;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        });
+
+        // Contador de estadísticas
+        function createStatsCounter() {
+            const statsSection = document.createElement('section');
+            statsSection.className = 'stats';
+            statsSection.innerHTML = `
+                <div class="container">
+                    <h2>En Números</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="15">0</div>
+                            <div class="stat-label">Años de Experiencia</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="1200">0</div>
+                            <div class="stat-label">Proyectos Completados</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="98">0</div>
+                            <div class="stat-label">Clientes Satisfechos (%)</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="8">0</div>
+                            <div class="stat-label">Profesionales</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Insertar después de la línea de tiempo
+            document.querySelector('.timeline').insertAdjacentElement('afterend', statsSection);
+
+            // Estilos para la sección de estadísticas
+            if (!document.querySelector('#stats-styles')) {
+                const statsStyle = document.createElement('style');
+                statsStyle.id = 'stats-styles';
+                statsStyle.textContent = `
+                    .stats {
+                        padding: 5rem 0;
+                        background: linear-gradient(135deg, var(--electric-blue), #0097e6);
+                        color: white;
+                        text-align: center;
+                    }
+                    .stats h2 {
+                        margin-bottom: 3rem;
+                        font-size: 2.5rem;
+                    }
+                    .stats-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                        gap: 2rem;
+                    }
+                    .stat-item {
+                        padding: 2rem;
+                    }
+                    .stat-number {
+                        font-size: 3rem;
+                        font-weight: bold;
+                        margin-bottom: 0.5rem;
+                    }
+                    .stat-label {
+                        font-size: 1.1rem;
+                        opacity: 0.9;
+                    }
+                `;
+                document.head.appendChild(statsStyle);
+            }
+
+            // Animación de contadores
+            const statNumbers = document.querySelectorAll('.stat-number');
+            let animated = false;
+
+            function animateStats() {
+                if (animated) return;
+
+                const statsTop = statsSection.getBoundingClientRect().top;
+                if (statsTop < window.innerHeight * 0.8) {
+                    animated = true;
+
+                    statNumbers.forEach(stat => {
+                        const target = parseInt(stat.getAttribute('data-target'));
+                        const duration = 2000;
+                        const step = target / (duration / 16);
+                        let current = 0;
+
+                        const timer = setInterval(() => {
+                            current += step;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            stat.textContent = Math.floor(current);
+                        }, 16);
+                    });
+                }
+            }
+
+            window.addEventListener('scroll', animateStats);
+        }
+
+        // Inicialización
+        window.addEventListener('DOMContentLoaded', () => {
+            // Crear sección de estadísticas
+            createStatsCounter();
+
+            // Verificar elementos visibles al cargar
+            checkScroll();
+        });
+
+        // Verificar elementos al hacer scroll
+        window.addEventListener('scroll', checkScroll);
+    </script>
+</body>
+
+</html>
