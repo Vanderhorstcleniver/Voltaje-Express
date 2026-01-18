@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Voltaje Express</title>
+    <style>
+        /* Estilos base */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+         :root {
+            --primary: #0d6efd;
+            --secondary: #6c757d;
+            --success: #198754;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --electric-blue: #00a8ff;
+            --electric-yellow: #ffdd59;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        /* Header */
+        
+        header {
+            background: linear-gradient(135deg, var(--dark), #343a40);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--electric-yellow);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover,
+        nav a.active {
+            color: var(--electric-yellow);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--electric-yellow);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+        
+        .btn-login {
+            background-color: var(--electric-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-login:hover {
+            background-color: #0097e6;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        /* Hero Section */
+        
+        .page-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23121212"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="%23333" stroke-width="1"/></svg>');
+            background-size: cover;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+        
+        .page-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.7s;
+        }
+        /* Contacto */
+        
+        #contacto {
+            padding: 5rem 0;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        .contact-info h2,
+        .contact-form h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .contact-info h2::after,
+        .contact-form h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--electric-blue);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        .contact-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            background: var(--electric-blue);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .contact-item h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .contact-note {
+            color: var(--electric-blue);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+        
+        .map-container {
+            margin-top: 2rem;
+        }
+        
+        .map-placeholder {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #f0f0f0 75%), linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            opacity: 0.3;
+        }
+        
+        .map-placeholder p:first-child {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        /* Formulario */
+        
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 100px;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .contact-form.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--electric-blue);
+            box-shadow: 0 0 0 3px rgba(0, 168, 255, 0.1);
+        }
+        
+        .form-control.error {
+            border-color: var(--danger);
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+        }
+        
+        .error-message {
+            color: var(--danger);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        
+        .checkbox-label input {
+            margin-top: 0.2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--electric-blue);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            background-color: #0097e6;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:disabled {
+            background-color: var(--secondary);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        /* Modal de confirmación */
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .modal p {
+            margin-bottom: 2rem;
+            color: var(--secondary);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--secondary);
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--danger);
+        }
+        /* Preguntas Frecuentes */
+        
+        .faq {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+        
+        .faq h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .faq-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .faq-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-item h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .faq-item h3::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: var(--electric-blue);
+        }
+        /* Footer */
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--electric-yellow);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--electric-blue);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+        }
+        /* Animaciones */
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-5px);
+            }
+            75% {
+                transform: translateX(5px);
+            }
+        }
+        
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+        /* Media Queries */
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark);
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            nav ul.active {
+                display: flex;
+            }
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            .contact-form {
+                position: static;
+            }
+            .page-hero h1 {
+                font-size: 2.2rem;
+            }
+            .page-hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>Voltaje <span>Express</span></h1>
+            </div>
+            <nav>
+                <div class="mobile-menu">☰</div>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="contacto.html" class="active">Contacto</a></li>
+                    <li><a href="login.html" class="btn-login">Acceso Clientes</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Contacto</h1>
+            <p>Estamos aquí para ayudarte con todos tus proyectos eléctricos</p>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Información de Contacto</h2>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h3>Dirección</h3>
+                            <p>Mahata Calle C sector f1<br>sector F1, Republica Dominicana</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h3>Teléfono</h3>
+                            <p>+1(809-523-8283)</p>
+                            <p class="contact-note">Urgencias 24/7: +1(809-523-8283)</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <h3>Email</h3>
+                            <p>voltajeexpress@gmail.com</p>
+                            <p>voltajeexpress@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div>
+                            <h3>Horario</h3>
+                            <p>Lunes a Viernes: 8:00 - 15:00<br>Sábados: 9:00 - 1:00<br>Urgencias: 24/7</p>
+                        </div>
+                    </div>
+                    <div class="map-container">
+                        <h3>Nuestra Ubicación</h3>
+                        <div class="map-placeholder">
+                            <p>🗺️ Mapa interactivo de Google Maps</p>
+                            <p><small>En una implementación real, aquí iría un iframe con Google Maps</small></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h2>Solicitar Presupuesto</h2>
+                    <form id="formContacto">
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo *</label>
+                            <input type="text" id="nombre" class="form-control" required>
+                            <div class="error-message" id="nombreError">Por favor, introduce tu nombre completo</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" class="form-control" required>
+                            <div class="error-message" id="emailError">Por favor, introduce un email válido</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono *</label>
+                            <input type="tel" id="telefono" class="form-control" required>
+                            <div class="error-message" id="telefonoError">Por favor, introduce un teléfono válido</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección del proyecto</label>
+                            <input type="text" id="direccion" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="servicio">Servicio de interés *</label>
+                            <select id="servicio" class="form-control" required>
+                                <option value="">Selecciona un servicio</option>
+                                <option value="instalaciones">Instalaciones Eléctricas</option>
+                                <option value="mantenimiento">Mantenimiento y Reparaciones</option>
+                                <option value="iluminacion">Iluminación y Diseño</option>
+                                <option value="industrial">Electricidad Industrial</option>
+                                <option value="carga">Puntos de Carga para Vehículos</option>
+                                <option value="renovables">Energías Renovables</option>
+                                <option value="urgencia">Servicio de Urgencia</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                            <div class="error-message" id="servicioError">Por favor, selecciona un servicio</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Descripción del proyecto *</label>
+                            <textarea id="mensaje" class="form-control" placeholder="Describe brevemente tu proyecto o necesidad..." required></textarea>
+                            <div class="error-message" id="mensajeError">Por favor, describe tu proyecto</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="privacidad" required>
+                                Acepto la política de privacidad y el tratamiento de mis datos
+                            </label>
+                            <div class="error-message" id="privacidadError">Debes aceptar la política de privacidad</div>
+                        </div>
+                        <button type="submit" class="btn" id="submitBtn">Enviar Solicitud</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preguntas Frecuentes -->
+    <section class="faq">
+        <div class="container">
+            <h2>Preguntas Frecuentes</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>¿Cuánto tiempo tardan en responder?</h3>
+                    <p>Normalmente respondemos en un plazo máximo de 24 horas hábiles. Para urgencias, contacta directamente por teléfono.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>¿Ofrecen servicios de urgencia?</h3>
+                    <p>Sí, disponemos de servicio de urgencias 24/7 para averías eléctricas que requieran atención inmediata.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>¿Trabajan en toda la comunidad?</h3>
+                    <p>Trabajamos principalmente en Madrid y área metropolitana. Para proyectos fuera de esta zona, consúltanos.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>¿Los presupuestos son gratuitos?</h3>
+                    <p>Sí, todos nuestros presupuestos son completamente gratuitos y sin compromiso.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de confirmación -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <div class="modal-icon">✅</div>
+            <h3>¡Solicitud Enviada!</h3>
+            <p>Hemos recibido tu solicitud de presupuesto. Nos pondremos en contacto contigo en un plazo máximo de 24 horas hábiles.</p>
+            <button class="btn" onclick="closeModal()">Aceptar</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sousa Electricidad</h3>
+                    <p>Empresa especializada en servicios eléctricos para hogares, empresas e industrias. Calidad, seguridad y profesionalidad garantizadas.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">f</a>
+                        <a href="#" aria-label="Instagram">ig</a>
+                        <a href="#" aria-label="Twitter">t</a>
+                        <a href="#" aria-label="LinkedIn">in</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                        <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="login.html">Área de Clientes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li>📍 Mahata Calle C sector f1</li>
+                        <li>📞 +1(809-523-8283)</li>
+                        <li>✉️ sousaelectricidad@gmail.com</li>
+                        <li>🕒 L-V: 8:00-5:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2021 Sousa Electricidad. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Elementos del DOM
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navUl = document.querySelector('nav ul');
+        const contactItems = document.querySelectorAll('.contact-item');
+        const contactForm = document.querySelector('.contact-form');
+        const faqItems = document.querySelectorAll('.faq-item');
+        const form = document.getElementById('formContacto');
+        const modal = document.getElementById('confirmationModal');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Menú móvil
+        mobileMenu.addEventListener('click', () => {
+            navUl.classList.toggle('active');
+        });
+
+        // Funciones de validación
+        function showError(input, errorElement, message) {
+            input.classList.add('error');
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+            input.classList.add('shake');
+            setTimeout(() => input.classList.remove('shake'), 500);
+        }
+
+        function hideError(input, errorElement) {
+            input.classList.remove('error');
+            errorElement.classList.remove('show');
+        }
+
+        function validateForm() {
+            let isValid = true;
+
+            // Validar nombre
+            const nombre = document.getElementById('nombre');
+            const nombreError = document.getElementById('nombreError');
+            if (!nombre.value.trim()) {
+                showError(nombre, nombreError, 'Por favor, introduce tu nombre completo');
+                isValid = false;
+            } else {
+                hideError(nombre, nombreError);
+            }
+
+            // Validar email
+            const email = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.value.trim() || !emailRegex.test(email.value)) {
+                showError(email, emailError, 'Por favor, introduce un email válido');
+                isValid = false;
+            } else {
+                hideError(email, emailError);
+            }
+
+            // Validar teléfono
+            const telefono = document.getElementById('telefono');
+            const telefonoError = document.getElementById('telefonoError');
+            const telefonoRegex = /^[0-9+-\s()]{9,}$/;
+            if (!telefono.value.trim() || !telefonoRegex.test(telefono.value.replace(/\s/g, ''))) {
+                showError(telefono, telefonoError, 'Por favor, introduce un teléfono válido');
+                isValid = false;
+            } else {
+                hideError(telefono, telefonoError);
+            }
+
+            // Validar servicio
+            const servicio = document.getElementById('servicio');
+            const servicioError = document.getElementById('servicioError');
+            if (!servicio.value) {
+                showError(servicio, servicioError, 'Por favor, selecciona un servicio');
+                isValid = false;
+            } else {
+                hideError(servicio, servicioError);
+            }
+
+            // Validar mensaje
+            const mensaje = document.getElementById('mensaje');
+            const mensajeError = document.getElementById('mensajeError');
+            if (!mensaje.value.trim()) {
+                showError(mensaje, mensajeError, 'Por favor, describe tu proyecto');
+                isValid = false;
+            } else {
+                hideError(mensaje, mensajeError);
+            }
+
+            // Validar privacidad
+            const privacidad = document.getElementById('privacidad');
+            const privacidadError = document.getElementById('privacidadError');
+            if (!privacidad.checked) {
+                showError(privacidad, privacidadError, 'Debes aceptar la política de privacidad');
+                isValid = false;
+            } else {
+                hideError(privacidad, privacidadError);
+            }
+
+            return isValid;
+        }
+
+        // Función para mostrar el modal
+        function showModal() {
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        // Función para cerrar el modal
+        function closeModal() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                form.reset();
+            }, 300);
+        }
+
+        // Manejo del envío del formulario
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (validateForm()) {
+                // Deshabilitar el botón de envío
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Enviando...';
+
+                // Simular envío (en un caso real, aquí iría una petición AJAX)
+                setTimeout(() => {
+                    showModal();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Enviar Solicitud';
+                }, 1500);
+            }
+        });
+
+        // Validación en tiempo real
+        const inputs = form.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                // Validar solo si el campo ha sido tocado
+                if (this.value.trim() !== '' || this.type === 'checkbox') {
+                    validateForm();
+                }
+            });
+        });
+
+        // Animación al hacer scroll
+        function checkScroll() {
+            const triggerBottom = window.innerHeight * 0.85;
+
+            // Elementos de contacto
+            contactItems.forEach((item, index) => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < triggerBottom) {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, index * 200);
+                }
+            });
+
+            // Formulario
+            const formTop = contactForm.getBoundingClientRect().top;
+            if (formTop < triggerBottom) {
+                contactForm.classList.add('visible');
+            }
+
+            // Preguntas frecuentes
+            faqItems.forEach((item, index) => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < triggerBottom) {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, index * 200);
+                }
+            });
+        }
+
+        // Cerrar modal al hacer clic fuera
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Cerrar modal con tecla Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'flex') {
+                closeModal();
+            }
+        });
+
+        // Inicialización
+        window.addEventListener('DOMContentLoaded', () => {
+            checkScroll();
+        });
+
+        window.addEventListener('scroll', checkScroll);
+    </script>
+</body>
+
+</html>

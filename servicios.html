@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestros Servicios - Voltaje Express</title>
+    <style>
+        /* Estilos base */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+         :root {
+            --primary: #0d6efd;
+            --secondary: #6c757d;
+            --success: #198754;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --electric-blue: #00a8ff;
+            --electric-yellow: #ffdd59;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        /* Header */
+        
+        header {
+            background: linear-gradient(135deg, var(--dark), #343a40);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--electric-yellow);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover,
+        nav a.active {
+            color: var(--electric-yellow);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--electric-yellow);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+        
+        .btn-login {
+            background-color: var(--electric-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-login:hover {
+            background-color: #0097e6;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        /* Hero Section */
+        
+        .page-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23121212"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="%23333" stroke-width="1"/></svg>');
+            background-size: cover;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+        
+        .page-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.7s;
+        }
+        /* Servicios Detallados */
+        
+        #servicios-completos {
+            padding: 5rem 0;
+        }
+        
+        .services-detailed-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+        
+        .service-detailed {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .service-detailed.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .service-detailed:nth-child(even) .service-image {
+            order: 2;
+        }
+        
+        .service-detailed:nth-child(even) .service-info {
+            order: 1;
+        }
+        
+        .service-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .service-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .service-info h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--electric-blue);
+        }
+        
+        .service-info p {
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+        
+        .service-info ul {
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        
+        .service-info li {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        
+        .service-info li::before {
+            content: '⚡';
+            position: absolute;
+            left: -1.5rem;
+            color: var(--electric-blue);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--electric-blue);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #0097e6;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        /* Navegación de Servicios */
+        
+        .services-nav {
+            background-color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 70px;
+            z-index: 999;
+            margin-bottom: 2rem;
+        }
+        
+        .services-nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .service-nav-item {
+            padding: 0.5rem 1.2rem;
+            background-color: var(--light);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .service-nav-item:hover,
+        .service-nav-item.active {
+            background-color: var(--electric-blue);
+            color: white;
+        }
+        /* Modal de Servicio */
+        
+        .service-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--secondary);
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--danger);
+        }
+        
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        /* Footer */
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--electric-yellow);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--electric-blue);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+        }
+        /* Animaciones */
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        /* Media Queries */
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark);
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            nav ul.active {
+                display: flex;
+            }
+            .service-detailed {
+                grid-template-columns: 1fr;
+            }
+            .service-detailed:nth-child(even) .service-image {
+                order: 1;
+            }
+            .service-detailed:nth-child(even) .service-info {
+                order: 2;
+            }
+            .page-hero h1 {
+                font-size: 2.2rem;
+            }
+            .page-hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>Voltaje <span>Express</span></h1>
+            </div>
+            <nav>
+                <div class="mobile-menu">☰</div>
+                <ul>
+                    <li><a href="Inicio.html">Inicio</a></li>
+                    <li><a href="servicios.html" class="active">Servicios</a></li>
+                    <li><a href="Nosotros.html">Nosotros</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="login.html" class="btn-login">Acceso Clientes</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Nuestros Servicios</h1>
+            <p>Ofrecemos soluciones eléctricas integrales para todo tipo de necesidades</p>
+        </div>
+    </section>
+
+    <!-- Navegación de Servicios -->
+    <div class="services-nav">
+        <div class="container services-nav-container">
+            <div class="service-nav-item active" data-service="all">Todos</div>
+            <div class="service-nav-item" data-service="instalaciones">Instalaciones</div>
+            <div class="service-nav-item" data-service="mantenimiento">Mantenimiento</div>
+            <div class="service-nav-item" data-service="iluminacion">Iluminación</div>
+            <div class="service-nav-item" data-service="industrial">Industrial</div>
+            <div class="service-nav-item" data-service="carga">Puntos de Carga</div>
+            <div class="service-nav-item" data-service="renovables">Renovables</div>
+        </div>
+    </div>
+
+    <!-- Servicios Completos -->
+    <section id="servicios-completos">
+        <div class="container">
+            <div class="services-detailed-grid">
+                <div class="service-detailed" data-service="instalaciones" id="instalaciones">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Instalaciones eléctricas">
+                    </div>
+                    <div class="service-info">
+                        <h3>Instalaciones Eléctricas</h3>
+                        <p>Realizamos instalaciones eléctricas completas para viviendas, locales comerciales y naves industriales, cumpliendo con todas las normativas de seguridad vigentes.</p>
+                        <ul>
+                            <li>Instalaciones nuevas y reformas</li>
+                            <li>Cuadros eléctricos y automatización</li>
+                            <li>Cableado estructurado y datos</li>
+                            <li>Sistemas de tierra y protección</li>
+                        </ul>
+                        <a href="contacto.html" class="btn">Solicitar Presupuesto</a>
+                        <button class="btn" style="margin-left: 10px; background-color: var(--secondary);" onclick="openModal('instalaciones')">Ver Detalles</button>
+                    </div>
+                </div>
+
+                <div class="service-detailed" data-service="mantenimiento" id="mantenimiento">
+                    <div class="service-info">
+                        <h3>Mantenimiento y Reparaciones</h3>
+                        <p>Servicios de mantenimiento preventivo y correctivo para garantizar el óptimo funcionamiento y seguridad de tus instalaciones eléctricas.</p>
+                        <ul>
+                            <li>Mantenimiento preventivo programado</li>
+                            <li>Reparación de averías eléctricas</li>
+                            <li>Actualización de instalaciones antiguas</li>
+                            <li>Servicio de urgencias 24/7</li>
+                        </ul>
+                        <a href="contacto.html" class="btn">Solicitar Presupuesto</a>
+                        <button class="btn" style="margin-left: 10px; background-color: var(--secondary);" onclick="openModal('mantenimiento')">Ver Detalles</button>
+                    </div>
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mantenimiento eléctrico">
+                    </div>
+                </div>
+
+                <div class="service-detailed" data-service="iluminacion" id="iluminacion">
+                    <div class="service-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWIHXtp_Kj35rETylY2Tyh6AoLd4Xp5I_uPw&s" alt="Diseño de iluminación">
+                    </div>
+                    <div class="service-info">
+                        <h3>Iluminación y Diseño</h3>
+                        <p>Diseñamos e implementamos sistemas de iluminación eficientes y estéticos para interiores y exteriores, combinando funcionalidad y diseño.</p>
+                        <ul>
+                            <li>Estudios de iluminación personalizados</li>
+                            <li>Iluminación LED eficiente</li>
+                            <li>Sistemas de control y domótica</li>
+                            <li>Iluminación decorativa y ambiental</li>
+                        </ul>
+                        <a href="contacto.html" class="btn">Solicitar Presupuesto</a>
+                        <button class="btn" style="margin-left: 10px; background-color: var(--secondary);" onclick="openModal('iluminacion')">Ver Detalles</button>
+                    </div>
+                </div>
+
+                <div class="service-detailed" data-service="industrial" id="industrial">
+                    <div class="service-info">
+                        <h3>Electricidad Industrial</h3>
+                        <p>Soluciones eléctricas especializadas para el sector industrial, con equipos de alta potencia y sistemas de control avanzados.</p>
+                        <ul>
+                            <li>Cuadros de control y automatización</li>
+                            <li>Motores eléctricos y variadores</li>
+                            <li>Sistemas de potencia industrial</li>
+                            <li>Maquinaria especializada</li>
+                        </ul>
+                        <a href="contacto.html" class="btn">Solicitar Presupuesto</a>
+                        <button class="btn" style="margin-left: 10px; background-color: var(--secondary);" onclick="openModal('industrial')">Ver Detalles</button>
+                    </div>
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Electricidad industrial">
+                    </div>
+                </div>
+
+                <div class="service-detailed" data-service="carga" id="carga">
+                    <div class="service-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWh1BMLsbROP-ZTcFIFAka-xzYikbhrRt0HA&s" alt="Puntos de carga para vehículos">
+                    </div>
+                    <div class="service-info">
+                        <h3>Puntos de Carga para Vehículos</h3>
+                        <p>Instalación de puntos de carga para vehículos eléctricos en viviendas unifamiliares, comunidades de vecinos y empresas.</p>
+                        <ul>
+                            <li>Asesoramiento técnico personalizado</li>
+                            <li>Instalación de wallboxes</li>
+                            <li>Sistemas de carga rápida</li>
+                            <li>Gestión de subvenciones y ayudas</li>
+                        </ul>
+                        <a href="contacto.html" class="btn">Solicitar Presupuesto</a>
+                        <button class="btn" style="margin-left: 10px; background-color: var(--secondary);" onclick="openModal('carga')">Ver Detalles</button>
+                    </div>
+                </div>
+
+                <div class="service-detailed" data-service="renovables" id="renovables">
+                    <div class="service-info">
+                        <h3>Energías Renovables</h3>
+                        <p>Instalación de sistemas de energía solar fotovoltaica para autoconsumo, contribuyendo al ahorro energético y la sostenibilidad.</p>
+                        <ul>
+                            <li>Instalaciones solares fotovoltaicas</li>
+                            <li>Sistemas de autoconsumo</li>
+                            <li>Baterías y acumulación</li>
+                            <li>Asesoramiento en subvenciones</li>
+                        </ul>
+                        <a href="contacto.html" class="btn">Solicitar Presupuesto</a>
+                        <button class="btn" style="margin-left: 10px; background-color: var(--secondary);" onclick="openModal('renovables')">Ver Detalles</button>
+                    </div>
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Energías renovables">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Servicio -->
+    <div class="service-modal" id="serviceModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+            <div id="modalDetails"></div>
+            <a href="contacto.html" class="btn" style="margin-top: 1.5rem;">Solicitar Presupuesto</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sousa Electricidad</h3>
+                    <p>Empresa especializada en servicios eléctricos para hogares, empresas e industrias. Calidad, seguridad y profesionalidad garantizadas.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">f</a>
+                        <a href="#" aria-label="Instagram">ig</a>
+                        <a href="#" aria-label="Twitter">t</a>
+                        <a href="#" aria-label="LinkedIn">in</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="Inicio.html">Inicio</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                        <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="login.html">Área de Clientes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li>📍Mahata Calle C sector f1</li>
+                        <li>📞 +1(809-523-8283)</li>
+                        <li>✉️voltajeexpress@gmail.com</li>
+                        <li>🕒 L-V: 8:00-5:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2021 Sousa Electricidad. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Elementos del DOM
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navUl = document.querySelector('nav ul');
+        const serviceDetails = document.querySelectorAll('.service-detailed');
+        const serviceNavItems = document.querySelectorAll('.service-nav-item');
+        const serviceModal = document.getElementById('serviceModal');
+
+        // Datos para el modal
+        const serviceData = {
+            instalaciones: {
+                title: "Instalaciones Eléctricas",
+                description: "Realizamos instalaciones eléctricas completas para viviendas, locales comerciales y naves industriales, cumpliendo con todas las normativas de seguridad vigentes. Nuestro equipo de electricistas certificados garantiza trabajos de calidad y durabilidad.",
+                image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                details: "<h3>Servicios incluidos:</h3><ul><li>Instalaciones nuevas y reformas completas</li><li>Cuadros eléctricos y sistemas de automatización</li><li>Cableado estructurado y redes de datos</li><li>Sistemas de puesta a tierra y protección</li><li>Certificados de instalación eléctrica</li></ul>"
+            },
+            mantenimiento: {
+                title: "Mantenimiento y Reparaciones",
+                description: "Ofrecemos servicios de mantenimiento preventivo y correctivo para garantizar el óptimo funcionamiento y seguridad de tus instalaciones eléctricas. Disponemos de servicio de urgencias 24/7 para resolver cualquier incidencia.",
+                image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                details: "<h3>Servicios incluidos:</h3><ul><li>Mantenimiento preventivo programado</li><li>Reparación de averías eléctricas</li><li>Actualización de instalaciones antiguas</li><li>Servicio de urgencias 24/7</li><li>Diagnóstico y solución de problemas</li></ul>"
+            },
+            iluminacion: {
+                title: "Iluminación y Diseño",
+                description: "Diseñamos e implementamos sistemas de iluminación eficientes y estéticos para interiores y exteriores, combinando funcionalidad y diseño. Trabajamos con las últimas tecnologías en iluminación LED y sistemas de control.",
+                image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fes%2Fsearch%2Felectrician-installing-lights&psig=AOvVaw0KbM00H00c-QudR6jUipeC&ust=1763751288282000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCICxy7KzgZEDFQAAAAAdAAAAABAE",
+                details: "<h3>Servicios incluidos:</h3><ul><li>Estudios de iluminación personalizados</li><li>Iluminación LED de alta eficiencia</li><li>Sistemas de control y domótica</li><li>Iluminación decorativa y ambiental</li><li>Proyectos de iluminación arquitectónica</li></ul>"
+            },
+            industrial: {
+                title: "Electricidad Industrial",
+                description: "Soluciones eléctricas especializadas para el sector industrial, con equipos de alta potencia y sistemas de control avanzados. Trabajamos con maquinaria industrial, automatización y sistemas de potencia.",
+                image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                details: "<h3>Servicios incluidos:</h3><ul><li>Cuadros de control y automatización industrial</li><li>Motores eléctricos y variadores de frecuencia</li><li>Sistemas de potencia industrial</li><li>Maquinaria especializada</li><li>Mantenimiento de instalaciones industriales</li></ul>"
+            },
+            carga: {
+                title: "Puntos de Carga para Vehículos",
+                description: "Instalación de puntos de carga para vehículos eléctricos en viviendas unifamiliares, comunidades de vecinos y empresas. Te asesoramos sobre las mejores opciones y gestionamos las subvenciones disponibles.",
+                image: "https://images.unsplash.com/photo-1593941707882-a5bba5331b56?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                details: "<h3>Servicios incluidos:</h3><ul><li>Asesoramiento técnico personalizado</li><li>Instalación de wallboxes y puntos de carga</li><li>Sistemas de carga rápida</li><li>Gestión de subvenciones y ayudas</li><li>Instalaciones para comunidades de vecinos</li></ul>"
+            },
+            renovables: {
+                title: "Energías Renovables",
+                description: "Instalación de sistemas de energía solar fotovoltaica para autoconsumo, contribuyendo al ahorro energético y la sostenibilidad. Te ayudamos a reducir tu factura eléctrica y tu huella de carbono.",
+                image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                details: "<h3>Servicios incluidos:</h3><ul><li>Instalaciones solares fotovoltaicas</li><li>Sistemas de autoconsumo</li><li>Baterías y sistemas de acumulación</li><li>Asesoramiento en subvenciones</li><li>Mantenimiento de instalaciones solares</li></ul>"
+            }
+        };
+
+        // Menú móvil
+        mobileMenu.addEventListener('click', () => {
+            navUl.classList.toggle('active');
+        });
+
+        // Navegación de servicios
+        serviceNavItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remover clase active de todos los items
+                serviceNavItems.forEach(navItem => navItem.classList.remove('active'));
+                // Agregar clase active al item clickeado
+                item.classList.add('active');
+
+                const serviceType = item.getAttribute('data-service');
+                filterServices(serviceType);
+            });
+        });
+
+        // Filtrar servicios
+        function filterServices(serviceType) {
+            serviceDetails.forEach(service => {
+                if (serviceType === 'all' || service.getAttribute('data-service') === serviceType) {
+                    service.style.display = 'grid';
+                } else {
+                    service.style.display = 'none';
+                }
+            });
+        }
+
+        // Animación al hacer scroll
+        function checkScroll() {
+            const triggerBottom = window.innerHeight * 0.85;
+
+            serviceDetails.forEach(service => {
+                const serviceTop = service.getBoundingClientRect().top;
+                if (serviceTop < triggerBottom) {
+                    service.classList.add('visible');
+                }
+            });
+        }
+
+        // Abrir modal
+        function openModal(serviceId) {
+            const service = serviceData[serviceId];
+            if (service) {
+                document.getElementById('modalImage').src = service.image;
+                document.getElementById('modalTitle').textContent = service.title;
+                document.getElementById('modalDescription').textContent = service.description;
+                document.getElementById('modalDetails').innerHTML = service.details;
+                serviceModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Cerrar modal
+        function closeModal() {
+            serviceModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar modal al hacer clic fuera
+        serviceModal.addEventListener('click', (e) => {
+            if (e.target === serviceModal) {
+                closeModal();
+            }
+        });
+
+        // Inicialización
+        window.addEventListener('DOMContentLoaded', () => {
+            // Verificar elementos visibles al cargar
+            checkScroll();
+        });
+
+        // Verificar elementos al hacer scroll
+        window.addEventListener('scroll', checkScroll);
+    </script>
+</body>
+
+</html>
