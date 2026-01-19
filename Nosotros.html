@@ -647,6 +647,129 @@
                 left: 20px !important;
             }
         }
+
+        /* =============================================
+           PANEL DE PERSONALIZACIÓN (AGREGADO)
+           ============================================= */
+        .customization-panel {
+            position: fixed;
+            top: 50%;
+            right: -300px;
+            transform: translateY(-50%);
+            width: 300px;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px 0 0 8px;
+            transition: right 0.3s;
+            z-index: 2000;
+        }
+        
+        .customization-panel.active {
+            right: 0;
+        }
+        
+        .panel-toggle {
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--electric-blue);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px 0 0 8px;
+            cursor: pointer;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .panel-toggle:hover {
+            background: #0097e6;
+        }
+        
+        .color-options {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.3s;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-option.active {
+            border-color: var(--dark);
+        }
+
+        .customization-panel h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .customization-panel p {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .customization-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            background: var(--electric-blue);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .customization-btn:hover {
+            background: #0097e6;
+        }
+
+        .customization-btn.secondary {
+            background: var(--secondary);
+        }
+
+        .customization-btn.secondary:hover {
+            background: #5a6268;
+        }
+
+        /* Mensaje de personalización */
+        .color-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 3000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .color-message.show {
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -662,7 +785,7 @@
                 <ul>
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="servicios.html">Servicios</a></li>
-                    <li><a href="nosotros.html" class="active">Nosotros</a></li>
+                    <li><a href="Nosotros.html" class="active">Nosotros</a></li>
                     <li><a href="contacto.html">Contacto</a></li>
                     <li><a href="login.html" class="btn-login">Acceso Clientes</a></li>
                 </ul>
@@ -888,12 +1011,149 @@
             </div>
             <div class="copyright">
                 <p>&copy; 2021 Sousa Electricidad. Todos los derechos reservados.</p>
+                <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.7;">
+                    Sistema de personalización activo
+                </p>
             </div>
         </div>
     </footer>
 
+    <!-- Panel de personalización (AGREGADO) -->
+    <div class="customization-panel" id="customizationPanel">
+        <div class="panel-toggle" id="panelToggle">🎨</div>
+        <h3>Personalizar Colores</h3>
+        <p>Cambia el color principal del sitio. Esta configuración se aplicará a todas las páginas.</p>
+        <div class="color-options">
+            <div class="color-option active" style="background-color: #0d6efd;" data-color="#0d6efd"></div>
+            <div class="color-option" style="background-color: #198754;" data-color="#198754"></div>
+            <div class="color-option" style="background-color: #dc3545;" data-color="#dc3545"></div>
+            <div class="color-option" style="background-color: #6f42c1;" data-color="#6f42c1"></div>
+            <div class="color-option" style="background-color: #fd7e14;" data-color="#fd7e14"></div>
+            <div class="color-option" style="background-color: #20c997;" data-color="#20c997"></div>
+            <div class="color-option" style="background-color: #e83e8c;" data-color="#e83e8c"></div>
+            <div class="color-option" style="background-color: #17a2b8;" data-color="#17a2b8"></div>
+        </div>
+        <button class="customization-btn" id="saveColorBtn">💾 Guardar para todas las páginas</button>
+        <button class="customization-btn secondary" id="resetColorsBtn">🔄 Restablecer colores</button>
+    </div>
+
+    <!-- Mensaje de confirmación -->
+    <div class="color-message" id="colorMessage"></div>
+
     <script>
+        // =============================================
+        // SISTEMA DE PERSONALIZACIÓN DE COLORES
+        // =============================================
+
         // Elementos del DOM
+        const panelToggle = document.getElementById('panelToggle');
+        const customizationPanel = document.getElementById('customizationPanel');
+        const colorOptions = document.querySelectorAll('.color-option');
+        const saveColorBtn = document.getElementById('saveColorBtn');
+        const resetColorsBtn = document.getElementById('resetColorsBtn');
+        const colorMessage = document.getElementById('colorMessage');
+
+        // Configurar el panel de personalización
+        function setupCustomizationPanel() {
+            // Toggle del panel
+            panelToggle.addEventListener('click', () => {
+                customizationPanel.classList.toggle('active');
+            });
+
+            // Selección de colores
+            colorOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const color = option.getAttribute('data-color');
+                    
+                    // Remover activo de todos
+                    colorOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Agregar activo al seleccionado
+                    option.classList.add('active');
+                    
+                    // Aplicar color temporalmente
+                    applyColor(color);
+                });
+            });
+
+            // Guardar color para todas las páginas
+            saveColorBtn.addEventListener('click', () => {
+                const activeOption = document.querySelector('.color-option.active');
+                if (activeOption) {
+                    const selectedColor = activeOption.getAttribute('data-color');
+                    saveColorToAllPages(selectedColor);
+                }
+            });
+
+            // Restablecer colores
+            resetColorsBtn.addEventListener('click', resetColors);
+
+            // Cargar color guardado
+            loadSavedColor();
+        }
+
+        // Función para aplicar color
+        function applyColor(color) {
+            document.documentElement.style.setProperty('--primary', color);
+            document.documentElement.style.setProperty('--electric-blue', color);
+            
+            // Actualizar botones activos
+            colorOptions.forEach(option => {
+                option.classList.remove('active');
+                if (option.getAttribute('data-color') === color) {
+                    option.classList.add('active');
+                }
+            });
+        }
+
+        // Función para guardar color en localStorage
+        function saveColorToAllPages(color) {
+            // Guardar el color en localStorage
+            localStorage.setItem('voltagePrimaryColor', color);
+            
+            // Aplicar el color inmediatamente
+            applyColor(color);
+            
+            // Mostrar mensaje de confirmación
+            showColorMessage('¡Color guardado para todas las páginas!');
+            
+            // Cerrar el panel después de guardar
+            setTimeout(() => {
+                customizationPanel.classList.remove('active');
+            }, 1000);
+        }
+
+        // Función para restablecer colores
+        function resetColors() {
+            const defaultColor = '#0d6efd';
+            localStorage.removeItem('voltagePrimaryColor');
+            applyColor(defaultColor);
+            showColorMessage('Colores restablecidos a los valores predeterminados');
+        }
+
+        // Función para mostrar mensaje
+        function showColorMessage(message) {
+            colorMessage.textContent = message;
+            colorMessage.classList.add('show');
+            
+            // Remover después de 3 segundos
+            setTimeout(() => {
+                colorMessage.classList.remove('show');
+            }, 3000);
+        }
+
+        // Cargar color guardado al iniciar
+        function loadSavedColor() {
+            const savedColor = localStorage.getItem('voltagePrimaryColor');
+            if (savedColor) {
+                applyColor(savedColor);
+            }
+        }
+
+        // =============================================
+        // CÓDIGO EXISTENTE DE LA PÁGINA "NOSOTROS"
+        // =============================================
+
         const mobileMenu = document.querySelector('.mobile-menu');
         const navUl = document.querySelector('nav ul');
         const aboutParagraphs = document.querySelectorAll('.about-text p');
@@ -1090,8 +1350,14 @@
             window.addEventListener('scroll', animateStats);
         }
 
-        // Inicialización
+        // =============================================
+        // INICIALIZACIÓN
+        // =============================================
+
         window.addEventListener('DOMContentLoaded', () => {
+            // Configurar panel de personalización
+            setupCustomizationPanel();
+            
             // Crear sección de estadísticas
             createStatsCounter();
 

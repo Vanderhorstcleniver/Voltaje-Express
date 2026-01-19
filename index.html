@@ -565,8 +565,10 @@
         .admin-input::placeholder {
             color: rgba(255, 255, 255, 0.5);
         }
-        /* Panel de personalización */
-        
+
+        /* =============================================
+           PANEL DE PERSONALIZACIÓN MEJORADO (AGREGADO)
+           ============================================= */
         .customization-panel {
             position: fixed;
             top: 50%;
@@ -578,7 +580,7 @@
             padding: 1.5rem;
             border-radius: 8px 0 0 8px;
             transition: right 0.3s;
-            z-index: 1000;
+            z-index: 2000;
         }
         
         .customization-panel.active {
@@ -600,12 +602,18 @@
             border-radius: 8px 0 0 8px;
             cursor: pointer;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .panel-toggle:hover {
+            background: #0097e6;
         }
         
         .color-options {
             display: flex;
             gap: 0.5rem;
             margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
         
         .color-option {
@@ -624,42 +632,72 @@
         .color-option.active {
             border-color: var(--dark);
         }
-        
-        /* Media Queries */
-        
-        @media (max-width: 768px) {
-            .mobile-menu {
-                display: block;
-            }
-            nav ul {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--dark);
-                padding: 1rem;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
-            }
-            nav ul.active {
-                display: flex;
-                max-height: 300px;
-            }
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .admin-panel {
-                width: 320px;
-                left: -320px;
-            }
+
+        .customization-panel h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .customization-panel p {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .customization-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            background: var(--electric-blue);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .customization-btn:hover {
+            background: #0097e6;
+        }
+
+        .customization-btn.secondary {
+            background: var(--secondary);
+        }
+
+        .customization-btn.secondary:hover {
+            background: #5a6268;
+        }
+
+        /* Mensaje de personalización */
+        .color-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 3000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .color-message.show {
+            opacity: 1;
+        }
+
+        /* Indicador de color en el footer */
+        .color-indicator {
+            width: 15px;
+            height: 15px;
+            display: inline-block;
+            border-radius: 50%;
+            margin: 0 5px;
+            vertical-align: middle;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         /* Efectos especiales */
@@ -716,6 +754,46 @@
         #egg1 { top: 20%; left: 5%; }
         #egg2 { top: 40%; right: 5%; }
         #egg3 { bottom: 30%; left: 10%; }
+
+        /* Media Queries */
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark);
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            nav ul.active {
+                display: flex;
+                max-height: 300px;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .admin-panel {
+                width: 320px;
+                left: -320px;
+            }
+            .customization-panel {
+                width: 280px;
+            }
+        }
     </style>
 </head>
 
@@ -747,6 +825,68 @@
             <div class="hero-buttons">
                 <a href="servicios.html" class="btn">Nuestros Servicios</a>
                 <a href="Contactos.html" class="btn btn-secondary">Solicitar Presupuesto</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Destacados -->
+    <section id="servicios-destacados">
+        <div class="container">
+            <h2>Nuestros Servicios Destacados</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <div class="service-content">
+                        <h3>Instalaciones Eléctricas</h3>
+                        <p>Realizamos instalaciones eléctricas completas para viviendas, locales comerciales y naves industriales.</p>
+                        <a href="servicios.html#instalaciones" class="btn-small">Ver más</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <div class="service-content">
+                        <h3>Mantenimiento y Reparaciones</h3>
+                        <p>Servicios de mantenimiento preventivo y correctivo para garantizar el óptimo funcionamiento.</p>
+                        <a href="servicios.html#mantenimiento" class="btn-small">Ver más</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💡</div>
+                    <div class="service-content">
+                        <h3>Iluminación y Diseño</h3>
+                        <p>Diseñamos e implementamos sistemas de iluminación eficientes y estéticos.</p>
+                        <a href="servicios.html#iluminacion" class="btn-small">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por qué elegirnos -->
+    <section class="why-us">
+        <div class="container">
+            <h2>¿Por Qué Elegirnos?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Rapidez y Eficiencia</h3>
+                    <p>Respondemos en menos de 24 horas y completamos los trabajos en tiempo récord.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Calidad Garantizada</h3>
+                    <p>Trabajamos con materiales de primera calidad y ofrecemos garantía por escrito.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">👨‍🔧</div>
+                    <h3>Profesionales Certificados</h3>
+                    <p>Nuestro equipo cuenta con certificaciones y años de experiencia en el sector.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <h3>Precios Competitivos</h3>
+                    <p>Ofrecemos los mejores precios del mercado sin comprometer la calidad.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -856,27 +996,172 @@
             </div>
             <div class="copyright">
                 <p>&copy; 2021-2026 Voltaje Express. Todos los derechos reservados.</p>
-                <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.6;">v2.1.4 | Admin Panel: <span id="adminStatus">OFF</span></p>
+                <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.6;">
+                    v2.1.4 | Admin Panel: <span id="adminStatus">OFF</span> | 
+                    Color: <span class="color-indicator" id="currentColorIndicator"></span>
+                </p>
             </div>
         </div>
     </footer>
 
-    <!-- Panel de personalización -->
+    <!-- Panel de personalización mejorado (AGREGADO) -->
     <div class="customization-panel" id="customizationPanel">
-        <div class="panel-toggle" id="panelToggle">⚙️</div>
-        <h3>Personalizar</h3>
-        <p>Cambia el color principal del sitio:</p>
+        <div class="panel-toggle" id="panelToggle">🎨</div>
+        <h3>Personalizar Colores</h3>
+        <p>Cambia el color principal del sitio. Esta configuración se aplicará a todas las páginas.</p>
         <div class="color-options">
             <div class="color-option active" style="background-color: #0d6efd;" data-color="#0d6efd"></div>
             <div class="color-option" style="background-color: #198754;" data-color="#198754"></div>
             <div class="color-option" style="background-color: #dc3545;" data-color="#dc3545"></div>
             <div class="color-option" style="background-color: #6f42c1;" data-color="#6f42c1"></div>
             <div class="color-option" style="background-color: #fd7e14;" data-color="#fd7e14"></div>
+            <div class="color-option" style="background-color: #20c997;" data-color="#20c997"></div>
+            <div class="color-option" style="background-color: #e83e8c;" data-color="#e83e8c"></div>
+            <div class="color-option" style="background-color: #17a2b8;" data-color="#17a2b8"></div>
         </div>
-        <button class="btn" id="resetColors">Restablecer colores</button>
+        <button class="customization-btn" id="saveColorBtn">💾 Guardar para todas las páginas</button>
+        <button class="customization-btn secondary" id="resetColorsBtn">🔄 Restablecer colores</button>
     </div>
 
+    <!-- Mensaje de confirmación -->
+    <div class="color-message" id="colorMessage"></div>
+
     <script>
+        // =============================================
+        // SISTEMA DE PERSONALIZACIÓN DE COLORES MEJORADO
+        // =============================================
+
+        // Elementos del DOM
+        const panelToggle = document.getElementById('panelToggle');
+        const customizationPanel = document.getElementById('customizationPanel');
+        const colorOptions = document.querySelectorAll('.color-option');
+        const saveColorBtn = document.getElementById('saveColorBtn');
+        const resetColorsBtn = document.getElementById('resetColorsBtn');
+        const colorMessage = document.getElementById('colorMessage');
+        const currentColorIndicator = document.getElementById('currentColorIndicator');
+
+        // Configurar el panel de personalización
+        function setupCustomizationPanel() {
+            // Toggle del panel
+            panelToggle.addEventListener('click', () => {
+                customizationPanel.classList.toggle('active');
+            });
+
+            // Selección de colores
+            colorOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const color = option.getAttribute('data-color');
+                    
+                    // Remover activo de todos
+                    colorOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Agregar activo al seleccionado
+                    option.classList.add('active');
+                    
+                    // Aplicar color temporalmente
+                    applyColor(color);
+                });
+            });
+
+            // Guardar color para todas las páginas
+            saveColorBtn.addEventListener('click', () => {
+                const activeOption = document.querySelector('.color-option.active');
+                if (activeOption) {
+                    const selectedColor = activeOption.getAttribute('data-color');
+                    saveColorToAllPages(selectedColor);
+                }
+            });
+
+            // Restablecer colores
+            resetColorsBtn.addEventListener('click', resetColors);
+
+            // Cargar color guardado
+            loadSavedColor();
+
+            // Actualizar indicador de color
+            updateColorIndicator();
+        }
+
+        // Función para aplicar color
+        function applyColor(color) {
+            document.documentElement.style.setProperty('--primary', color);
+            document.documentElement.style.setProperty('--electric-blue', color);
+            
+            // Actualizar botones activos
+            colorOptions.forEach(option => {
+                option.classList.remove('active');
+                if (option.getAttribute('data-color') === color) {
+                    option.classList.add('active');
+                }
+            });
+        }
+
+        // Función para guardar color en localStorage
+        function saveColorToAllPages(color) {
+            // Guardar el color en localStorage (usando el mismo nombre que las otras páginas)
+            localStorage.setItem('voltagePrimaryColor', color);
+            
+            // Aplicar el color inmediatamente
+            applyColor(color);
+            
+            // Actualizar indicador
+            updateColorIndicator();
+            
+            // Mostrar mensaje de confirmación
+            showColorMessage('¡Color guardado para todas las páginas!');
+            
+            // Cerrar el panel después de guardar
+            setTimeout(() => {
+                customizationPanel.classList.remove('active');
+            }, 1000);
+        }
+
+        // Función para restablecer colores
+        function resetColors() {
+            const defaultColor = '#0d6efd';
+            localStorage.removeItem('voltagePrimaryColor');
+            applyColor(defaultColor);
+            updateColorIndicator();
+            showColorMessage('Colores restablecidos a los valores predeterminados');
+        }
+
+        // Función para mostrar mensaje
+        function showColorMessage(message) {
+            colorMessage.textContent = message;
+            colorMessage.classList.add('show');
+            
+            // Remover después de 3 segundos
+            setTimeout(() => {
+                colorMessage.classList.remove('show');
+            }, 3000);
+        }
+
+        // Cargar color guardado al iniciar
+        function loadSavedColor() {
+            // Intentar cargar el color con el nuevo nombre
+            let savedColor = localStorage.getItem('voltagePrimaryColor');
+            
+            // Si no existe, intentar cargar con el nombre antiguo (para compatibilidad)
+            if (!savedColor) {
+                savedColor = localStorage.getItem('primaryColor');
+                if (savedColor) {
+                    // Migrar al nuevo nombre
+                    localStorage.setItem('voltagePrimaryColor', savedColor);
+                    localStorage.removeItem('primaryColor');
+                }
+            }
+            
+            if (savedColor) {
+                applyColor(savedColor);
+            }
+        }
+
+        // Actualizar indicador de color en el footer
+        function updateColorIndicator() {
+            const currentColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+            currentColorIndicator.style.backgroundColor = currentColor;
+        }
+
         // =============================================
         // CÓDIGO PARA PANEL DE ADMINISTRADOR
         // =============================================
@@ -1247,7 +1532,7 @@
         }
 
         // =============================================
-        // CÓDIGO JAVASCRIPT EXISTENTE (MANTENIDO)
+        // CÓDIGO JAVASCRIPT EXISTENTE
         // =============================================
 
         const mobileMenu = document.querySelector('.mobile-menu');
@@ -1255,11 +1540,8 @@
         const navLinks = document.querySelectorAll('nav a');
         const header = document.querySelector('header');
         const particlesContainer = document.getElementById('particles');
-        const panelToggle = document.getElementById('panelToggle');
-        const customizationPanel = document.getElementById('customizationPanel');
-        const colorOptions = document.querySelectorAll('.color-option');
-        const resetColorsBtn = document.getElementById('resetColors');
-        const electricEffects = document.querySelectorAll('.electric-effect');
+        const serviceCards = document.querySelectorAll('.service-card');
+        const features = document.querySelectorAll('.feature');
 
         // Menú móvil
         mobileMenu.addEventListener('click', (e) => {
@@ -1287,21 +1569,6 @@
                 header.style.backgroundColor = '';
                 header.style.backdropFilter = '';
             }
-        }
-
-        // Resaltar enlace activo
-        function highlightActiveLink() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            navLinks.forEach(link => {
-                const linkHref = link.getAttribute('href');
-                if (linkHref === currentPage) {
-                    link.style.color = '#ffdd59';
-                    link.style.fontWeight = '600';
-                } else {
-                    link.style.color = '';
-                    link.style.fontWeight = '';
-                }
-            });
         }
 
         // Cerrar menú al hacer clic fuera
@@ -1343,52 +1610,27 @@
             }
         }
 
-        // Panel de personalización
-        panelToggle.addEventListener('click', () => {
-            customizationPanel.classList.toggle('active');
-        });
+        // Animación al hacer scroll
+        function checkScroll() {
+            const triggerBottom = window.innerHeight * 0.85;
 
-        // Cambiar colores
-        colorOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                colorOptions.forEach(opt => opt.classList.remove('active'));
-                option.classList.add('active');
-                const newColor = option.getAttribute('data-color');
-                document.documentElement.style.setProperty('--primary', newColor);
-                document.documentElement.style.setProperty('--electric-blue', newColor);
-                localStorage.setItem('primaryColor', newColor);
-                addLog(`🎨 Color principal cambiado a ${newColor}`, "success");
-            });
-        });
-
-        // Restablecer colores
-        resetColorsBtn.addEventListener('click', () => {
-            const defaultColor = '#0d6efd';
-            document.documentElement.style.setProperty('--primary', defaultColor);
-            document.documentElement.style.setProperty('--electric-blue', defaultColor);
-            colorOptions.forEach(option => {
-                option.classList.remove('active');
-                if (option.getAttribute('data-color') === defaultColor) {
-                    option.classList.add('active');
+            serviceCards.forEach((card, index) => {
+                const cardTop = card.getBoundingClientRect().top;
+                if (cardTop < triggerBottom) {
+                    setTimeout(() => {
+                        card.classList.add('visible');
+                    }, index * 200);
                 }
             });
-            localStorage.removeItem('primaryColor');
-            addLog("🎨 Colores restablecidos al predeterminado", "success");
-        });
 
-        // Cargar preferencias
-        function loadPreferences() {
-            const savedColor = localStorage.getItem('primaryColor');
-            if (savedColor) {
-                document.documentElement.style.setProperty('--primary', savedColor);
-                document.documentElement.style.setProperty('--electric-blue', savedColor);
-                colorOptions.forEach(option => {
-                    option.classList.remove('active');
-                    if (option.getAttribute('data-color') === savedColor) {
-                        option.classList.add('active');
-                    }
-                });
-            }
+            features.forEach((feature, index) => {
+                const featureTop = feature.getBoundingClientRect().top;
+                if (featureTop < triggerBottom) {
+                    setTimeout(() => {
+                        feature.classList.add('visible');
+                    }, index * 200);
+                }
+            });
         }
 
         // =============================================
@@ -1396,18 +1638,20 @@
         // =============================================
 
         window.addEventListener('DOMContentLoaded', () => {
+            // Configurar panel de personalización
+            setupCustomizationPanel();
+            
             // Inicializar sistema de administración
             initAdminSystem();
             
             // Inicializar partículas
             createParticles();
             
-            // Cargar preferencias
-            loadPreferences();
-            
             // Inicializar funciones existentes
             handleScroll();
-            highlightActiveLink();
+            
+            // Verificar elementos visibles al cargar
+            checkScroll();
             
             // Asegurar menú cerrado en desktop
             if (window.innerWidth > 768 && navUl.classList.contains('active')) {
@@ -1416,9 +1660,10 @@
             }
         });
 
-        // Event listener para scroll
+        // Event listeners para scroll
         window.addEventListener('scroll', () => {
             handleScroll();
+            checkScroll();
         });
     </script>
 </body>
