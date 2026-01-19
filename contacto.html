@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto - Voltaje Express</title>
     <style>
-        /* Estilos base */
+        /* Estilos base - Optimizados (Mismos que index.html) */
         
         * {
             margin: 0;
@@ -15,7 +15,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-         :root {
+        :root {
             --primary: #0d6efd;
             --secondary: #6c757d;
             --success: #198754;
@@ -40,16 +40,17 @@
             margin: 0 auto;
             padding: 0 15px;
         }
-        /* Header */
         
+        /* Header mejorado con nuevo logo profesional (Mismo que index.html) */
         header {
-            background: linear-gradient(135deg, var(--dark), #343a40);
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             color: white;
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
         }
         
         .header-container {
@@ -58,32 +59,151 @@
             align-items: center;
         }
         
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
+        /* LOGO PROFESIONAL Y ELEGANTE (Mismo que index.html) */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
         }
         
-        .logo span {
-            color: var(--electric-yellow);
+        .logo:hover {
+            transform: translateY(-2px);
         }
         
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--electric-blue), #3b82f6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 168, 255, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        }
+        
+        .logo-icon .bolt {
+            font-size: 32px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+            transform: rotate(-5deg);
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ffffff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+            letter-spacing: 0.8px;
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+        }
+        
+        .logo-text .tagline {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            letter-spacing: 1.2px;
+            font-weight: 500;
+            text-transform: uppercase;
+            border-left: 2px solid var(--electric-blue);
+            padding-left: 8px;
+            margin-top: 2px;
+        }
+        
+        /* Línea decorativa elegante para el logo */
+        .logo-decoration {
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--electric-blue), 
+                var(--electric-yellow), 
+                transparent);
+            border-radius: 1px;
+            opacity: 0.7;
+        }
+        
+        /* Contador de clicks (Mismo que index.html) */
+        .click-counter {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            z-index: 999;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            font-weight: 500;
+        }
+        
+        .click-counter.show {
+            display: flex;
+            animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3) rotate(-180deg); opacity: 0; }
+            70% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+        
+        /* Navegación (Mismo que index.html) */
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 2rem;
         }
         
         nav a {
-            color: white;
+            color: #cbd5e1;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
             position: relative;
+            padding: 0.5rem 0;
+            font-size: 1.05rem;
         }
         
-        nav a:hover,
+        nav a:hover {
+            color: white;
+        }
+        
         nav a.active {
-            color: var(--electric-yellow);
+            color: white;
+            font-weight: 600;
         }
         
         nav a::after {
@@ -91,10 +211,10 @@
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
-            background-color: var(--electric-yellow);
-            transition: width 0.3s;
+            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
+            transition: width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
         
         nav a:hover::after,
@@ -102,54 +222,100 @@
             width: 100%;
         }
         
-        .btn-login {
-            background-color: var(--electric-blue);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        
-        .btn-login:hover {
-            background-color: #0097e6;
-        }
-        
         .mobile-menu {
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            transition: transform 0.3s ease;
+            color: #cbd5e1;
         }
-        /* Hero Section */
         
-        .page-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23121212"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="%23333" stroke-width="1"/></svg>');
-            background-size: cover;
+        .mobile-menu:hover {
+            transform: scale(1.1);
             color: white;
-            padding: 5rem 0;
+        }
+        
+        /* Hero Section - Rediseñada al estilo index.html */
+        .page-hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.95)), 
+                        url('https://images.unsplash.com/photo-1577495508046-b8be3c8cdf4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 8rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
         
-        .page-hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards 0.5s;
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 221, 89, 0.1) 0%, transparent 50%);
+            z-index: 1;
         }
         
-        .page-hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
+        .page-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
             margin: 0 auto;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards 0.7s;
         }
-        /* Contacto */
         
+        .page-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1s forwards 0.3s;
+            background: linear-gradient(90deg, #ffffff, #c7d2fe, #fef3c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+        
+        .page-hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1s forwards 0.6s;
+            color: #94a3b8;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        
+        /* Contacto - Rediseñado completamente */
         #contacto {
-            padding: 5rem 0;
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 2.8rem;
+            color: #0f172a;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
+            margin: 1.5rem auto;
+            border-radius: 2px;
         }
         
         .contact-container {
@@ -161,11 +327,11 @@
         
         .contact-info h2,
         .contact-form h2 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: var(--dark);
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            color: #0f172a;
             position: relative;
-            padding-bottom: 0.5rem;
+            padding-bottom: 1rem;
         }
         
         .contact-info h2::after,
@@ -174,23 +340,26 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 60px;
-            height: 3px;
-            background-color: var(--electric-blue);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
+            border-radius: 2px;
         }
         
+        /* Contact items rediseñados */
         .contact-item {
             display: flex;
             align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            padding: 2rem;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             opacity: 0;
             transform: translateX(-20px);
+            border: 1px solid #e2e8f0;
         }
         
         .contact-item.visible {
@@ -199,51 +368,73 @@
         }
         
         .contact-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px) translateX(0);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--electric-blue);
         }
         
         .contact-icon {
-            font-size: 1.5rem;
-            background: var(--electric-blue);
+            font-size: 2rem;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
         }
         
         .contact-item h3 {
-            margin-bottom: 0.5rem;
-            color: var(--dark);
+            margin-bottom: 0.8rem;
+            color: #0f172a;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        
+        .contact-item p {
+            color: #64748b;
+            line-height: 1.7;
         }
         
         .contact-note {
             color: var(--electric-blue);
-            font-weight: 500;
-            margin-top: 0.5rem;
+            font-weight: 600;
+            margin-top: 0.8rem;
+            padding: 0.5rem 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 10px;
+            display: inline-block;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
         
+        /* Mapa - Rediseñado */
         .map-container {
-            margin-top: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .map-container h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #0f172a;
         }
         
         .map-placeholder {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            padding: 3rem;
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            height: 300px;
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+            height: 350px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            color: white;
         }
         
         .map-placeholder::before {
@@ -253,28 +444,35 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #f0f0f0 75%), linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-            opacity: 0.3;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
         }
         
         .map-placeholder p:first-child {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
-        /* Formulario */
         
+        .map-placeholder p {
+            font-size: 1.2rem;
+            max-width: 400px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Formulario - Rediseñado completamente */
         .contact-form {
             background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             position: sticky;
-            top: 100px;
+            top: 120px;
             opacity: 0;
             transform: translateX(20px);
             transition: all 0.6s ease;
+            border: 1px solid #e2e8f0;
         }
         
         .contact-form.visible {
@@ -282,42 +480,52 @@
             transform: translateX(0);
         }
         
+        .contact-form:hover {
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--dark);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 1.05rem;
         }
         
         .form-control {
             width: 100%;
-            padding: 0.8rem 1rem;
-            border: 2px solid #e9ecef;
-            border-radius: 4px;
+            padding: 1rem 1.2rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
             font-size: 1rem;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+            font-family: inherit;
         }
         
         .form-control:focus {
             outline: none;
             border-color: var(--electric-blue);
-            box-shadow: 0 0 0 3px rgba(0, 168, 255, 0.1);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+            background: white;
         }
         
         .form-control.error {
             border-color: var(--danger);
-            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+            box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.1);
         }
         
         .error-message {
             color: var(--danger);
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
             display: none;
+            font-weight: 500;
         }
         
         .error-message.show {
@@ -325,51 +533,97 @@
         }
         
         textarea.form-control {
-            min-height: 120px;
+            min-height: 150px;
             resize: vertical;
+            line-height: 1.6;
         }
         
         .checkbox-label {
             display: flex;
             align-items: flex-start;
-            gap: 0.5rem;
+            gap: 0.8rem;
             font-weight: normal;
             cursor: pointer;
+            color: #64748b;
+            line-height: 1.6;
         }
         
         .checkbox-label input {
-            margin-top: 0.2rem;
+            margin-top: 0.3rem;
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
         }
         
-        .btn {
-            display: inline-block;
-            background-color: var(--electric-blue);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
+        .checkbox-label a {
+            color: var(--electric-blue);
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s;
+        }
+        
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Botón del formulario - Rediseñado */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: none;
             cursor: pointer;
             width: 100%;
-            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            transition: left 0.7s;
         }
         
         .btn:hover {
-            background-color: #0097e6;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn:disabled {
-            background-color: var(--secondary);
+            background: linear-gradient(135deg, #94a3b8, #64748b);
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
-        /* Modal de confirmación */
         
+        .btn:disabled:hover::before {
+            left: -100%;
+        }
+        
+        /* Modal de confirmación - Rediseñado */
         .modal {
             display: none;
             position: fixed;
@@ -377,91 +631,124 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(15, 23, 42, 0.95);
             z-index: 2000;
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            backdrop-filter: blur(10px);
         }
         
         .modal-content {
-            background-color: white;
-            border-radius: 10px;
+            background: white;
+            border-radius: 20px;
             max-width: 500px;
             width: 100%;
-            padding: 3rem 2rem;
+            padding: 4rem 3rem;
             text-align: center;
             position: relative;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            transform: scale(0.8);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            transform: scale(0.8) translateY(50px);
             opacity: 0;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .modal.show .modal-content {
-            transform: scale(1);
+            transform: scale(1) translateY(0);
             opacity: 1;
         }
         
         .modal-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 4px 8px rgba(16, 185, 129, 0.3));
         }
         
         .modal h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: #0f172a;
+            font-weight: 800;
         }
         
         .modal p {
-            margin-bottom: 2rem;
-            color: var(--secondary);
+            margin-bottom: 2.5rem;
+            color: #64748b;
+            line-height: 1.8;
+            font-size: 1.1rem;
         }
         
         .close-modal {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
             background: none;
             border: none;
-            color: var(--secondary);
-            transition: color 0.3s;
+            color: #94a3b8;
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .close-modal:hover {
             color: var(--danger);
+            background: rgba(220, 53, 69, 0.1);
         }
-        /* Preguntas Frecuentes */
         
+        /* Preguntas Frecuentes - Rediseñado */
         .faq {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            position: relative;
         }
         
         .faq h2 {
             text-align: center;
-            margin-bottom: 3rem;
-            font-size: 2.5rem;
-            color: var(--dark);
+            margin-bottom: 4rem;
+            font-size: 2.8rem;
+            color: white;
+            position: relative;
+        }
+        
+        .faq h2::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
+            margin: 1.5rem auto;
+            border-radius: 2px;
         }
         
         .faq-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
         
         .faq-item {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             opacity: 0;
             transform: translateY(30px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .faq-item.visible {
@@ -470,41 +757,153 @@
         }
         
         .faq-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--electric-blue);
+            box-shadow: 0 25px 50px rgba(0, 168, 255, 0.1);
         }
         
         .faq-item h3 {
-            margin-bottom: 1rem;
-            color: var(--dark);
+            margin-bottom: 1.5rem;
+            color: #c7d2fe;
+            font-size: 1.5rem;
+            font-weight: 700;
             position: relative;
-            padding-left: 1.5rem;
+            padding-left: 2.5rem;
+            line-height: 1.4;
         }
         
         .faq-item h3::before {
             content: '⚡';
             position: absolute;
             left: 0;
-            color: var(--electric-blue);
+            color: var(--electric-yellow);
+            font-size: 1.8rem;
+            top: -2px;
         }
-        /* Footer */
         
+        .faq-item p {
+            color: #94a3b8;
+            line-height: 1.8;
+        }
+        
+        /* =============================================
+           FOOTER ELEGANTE Y MODERNO - TOTALMENTE RENOVADO
+           (Mismo que index.html)
+           ============================================= */
         footer {
-            background-color: var(--dark);
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             color: white;
-            padding: 3rem 0 1rem;
+            padding: 5rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--electric-blue), 
+                var(--electric-yellow),
+                var(--electric-blue));
+            z-index: 1;
+        }
+        
+        .footer-wave {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0 0v46.29c47.79 22.2 103.59 32.17 158 28 70.36-5.37 136.33-33.31 206.8-37.5 73.84-4.36 147.54 16.88 218.2 35.26 69.27 18 138.3 24.88 209.4 13.08 36.15-6 69.85-17.84 104.45-29.34C989.49 25 1113-14.29 1200 52.47V0z' fill='%230f172a'/%3E%3C/svg%3E");
+            background-size: 1200px 100px;
+            animation: wave 20s linear infinite;
+        }
+        
+        @keyframes wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1200px; }
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-column {
+            position: relative;
         }
         
         .footer-column h3 {
-            margin-bottom: 1.5rem;
-            color: var(--electric-yellow);
+            margin-bottom: 2rem;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
+            border-radius: 1.5px;
+        }
+        
+        .footer-about {
+            max-width: 350px;
+        }
+        
+        .footer-about p {
+            color: #94a3b8;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--electric-blue), #3b82f6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.25);
+        }
+        
+        .footer-logo-text h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ffffff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .footer-logo-text span {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            letter-spacing: 1px;
         }
         
         .footer-links {
@@ -512,51 +911,176 @@
         }
         
         .footer-links li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .footer-links li:hover {
+            transform: translateX(10px);
         }
         
         .footer-links a {
-            color: #ccc;
+            color: #cbd5e1;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+            padding: 0.3rem 0;
         }
         
         .footer-links a:hover {
             color: white;
+            padding-left: 5px;
+        }
+        
+        .footer-links a::before {
+            content: '→';
+            color: var(--electric-blue);
+            font-weight: bold;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--electric-blue);
+            flex-shrink: 0;
         }
         
         .social-links {
             display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 1.2rem;
+            margin-top: 2rem;
         }
         
         .social-links a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             color: white;
             text-decoration: none;
             transition: all 0.3s;
+            font-size: 1.3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .social-links a:hover {
-            background-color: var(--electric-blue);
-            transform: translateY(-3px);
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+            border-color: transparent;
         }
         
         .copyright {
             text-align: center;
-            padding-top: 2rem;
+            padding-top: 3rem;
+            margin-top: 3rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #ccc;
+            color: #94a3b8;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 2;
         }
-        /* Animaciones */
         
+        .copyright p {
+            margin-bottom: 0.8rem;
+        }
+        
+        .copyright-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+        }
+        
+        .stat-item .icon {
+            color: var(--electric-blue);
+        }
+        
+        /* Contador de visitas mejorado (Mismo que index.html) */
+        .visit-counter {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(33, 37, 41, 0.9));
+            color: white;
+            padding: 12px 18px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .visit-counter.show {
+            display: flex;
+            animation: slideUp 0.5s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .visit-counter:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Animaciones */
         @keyframes fadeInUp {
             to {
                 opacity: 1;
@@ -565,27 +1089,41 @@
         }
         
         @keyframes shake {
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-            25% {
-                transform: translateX(-5px);
-            }
-            75% {
-                transform: translateX(5px);
-            }
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
         }
         
         .shake {
             animation: shake 0.5s ease-in-out;
         }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
         /* Media Queries */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .contact-form {
+                position: static;
+            }
+            
+            .page-hero h1 {
+                font-size: 3rem;
+            }
+        }
         
         @media (max-width: 768px) {
             .mobile-menu {
                 display: block;
             }
+            
             nav ul {
                 display: none;
                 flex-direction: column;
@@ -593,60 +1131,137 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background-color: var(--dark);
-                padding: 1rem;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                background: linear-gradient(135deg, #0f172a, #1e293b);
+                padding: 1.5rem;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+                backdrop-filter: blur(10px);
+                z-index: 1000;
             }
+            
             nav ul.active {
                 display: flex;
+                animation: slideDown 0.3s ease;
             }
-            .contact-container {
-                grid-template-columns: 1fr;
+            
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
-            .contact-form {
-                position: static;
-            }
+            
             .page-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .page-hero-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .section-title,
+            .contact-info h2,
+            .contact-form h2,
+            .faq h2 {
                 font-size: 2.2rem;
             }
-            .page-hero p {
-                font-size: 1rem;
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .copyright-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .visit-counter {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-hero {
+                padding: 6rem 0;
+            }
+            
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-info,
+            .contact-form {
+                padding: 1.5rem;
+            }
+            
+            .contact-item,
+            .faq-item {
+                padding: 1.5rem;
+            }
+            
+            .map-placeholder {
+                padding: 2rem;
+                height: 300px;
+            }
+            
+            .modal-content {
+                padding: 3rem 2rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Header -->
+    <!-- Header con nuevo logo (Mismo que index.html) -->
     <header>
         <div class="container header-container">
-            <div class="logo">
-                <h1>Voltaje <span>Express</span></h1>
+            <div class="logo" id="logo">
+                <div class="logo-icon">
+                    <div class="bolt">⚡</div>
+                </div>
+                <div class="logo-text">
+                    <h1>VOLTAJE EXPRESS</h1>
+                    <div class="tagline">ENERGÍA INTELIGENTE</div>
+                    <div class="logo-decoration"></div>
+                </div>
             </div>
             <nav>
                 <div class="mobile-menu">☰</div>
                 <ul>
-                    <li><a href="Inicio.html">Inicio</a></li>
+                    <li><a href="index.html">Inicio</a></li>
                     <li><a href="servicios.html">Servicios</a></li>
-                    <li><a href="Nosotros.html">Nosotros</a></li>
-                    <li><a href="Contactos.html" class="active">Contacto</a></li>
-                    <li><a href="login.html" class="btn-login">Acceso Clientes</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="contacto.html" class="active">Contacto</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Contador de clicks -->
+    <div class="click-counter" id="clickCounter">
+        <span>👆</span>
+        <span id="clickCount">0</span> clicks
+    </div>
+
+    <!-- Hero Section - Rediseñada -->
     <section class="page-hero">
-        <div class="container">
-            <h1>Contacto</h1>
-            <p>Estamos aquí para ayudarte con todos tus proyectos eléctricos</p>
+        <div class="container page-hero-content">
+            <h1>Contáctanos</h1>
+            <div class="page-hero-subtitle">Estamos aquí para ayudarte con todos tus proyectos eléctricos</div>
         </div>
     </section>
 
-    <!-- Contacto -->
+    <!-- Contacto - Rediseñado completamente -->
     <section id="contacto">
         <div class="container">
+            <h2 class="section-title">Solicita Tu Presupuesto</h2>
             <div class="contact-container">
                 <div class="contact-info">
                     <h2>Información de Contacto</h2>
@@ -654,37 +1269,37 @@
                         <div class="contact-icon">📍</div>
                         <div>
                             <h3>Dirección</h3>
-                            <p>Calle Electricidad, 123<br>28015 Madrid, España</p>
+                            <p>Mahata Calle C, sector f1<br>Santo Domingo, República Dominicana</p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">📞</div>
                         <div>
                             <h3>Teléfono</h3>
-                            <p>+34 91 123 45 67</p>
-                            <p class="contact-note">Urgencias 24/7: +34 600 123 456</p>
+                            <p>+1 (809) 523-8283</p>
+                            <p class="contact-note">Urgencias 24/7: +1 (809) 523-8283</p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">✉️</div>
                         <div>
                             <h3>Email</h3>
-                            <p>info@sousaelectricidad.com</p>
-                            <p>presupuestos@sousaelectricidad.com</p>
+                            <p>voltajeexpress2@gmail.com</p>
+                            <p>presupuestos@voltajeexpress.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">🕒</div>
                         <div>
                             <h3>Horario</h3>
-                            <p>Lunes a Viernes: 8:00 - 18:00<br>Sábados: 9:00 - 13:00<br>Urgencias: 24/7</p>
+                            <p>Lunes a Viernes: 8:00 AM - 5:00 PM<br>Sábados: 8:00 AM - 12:00 PM<br>Urgencias: 24/7</p>
                         </div>
                     </div>
                     <div class="map-container">
                         <h3>Nuestra Ubicación</h3>
                         <div class="map-placeholder">
-                            <p>🗺️ Mapa interactivo de Google Maps</p>
-                            <p><small>En una implementación real, aquí iría un iframe con Google Maps</small></p>
+                            <p>📍</p>
+                            <p>Mapa interactivo de Google Maps - Santo Domingo, República Dominicana</p>
                         </div>
                     </div>
                 </div>
@@ -693,22 +1308,22 @@
                     <form id="formContacto">
                         <div class="form-group">
                             <label for="nombre">Nombre completo *</label>
-                            <input type="text" id="nombre" class="form-control" required>
+                            <input type="text" id="nombre" class="form-control" placeholder="Tu nombre completo" required>
                             <div class="error-message" id="nombreError">Por favor, introduce tu nombre completo</div>
                         </div>
                         <div class="form-group">
                             <label for="email">Email *</label>
-                            <input type="email" id="email" class="form-control" required>
+                            <input type="email" id="email" class="form-control" placeholder="tu@email.com" required>
                             <div class="error-message" id="emailError">Por favor, introduce un email válido</div>
                         </div>
                         <div class="form-group">
                             <label for="telefono">Teléfono *</label>
-                            <input type="tel" id="telefono" class="form-control" required>
+                            <input type="tel" id="telefono" class="form-control" placeholder="+1 (809) 123-4567" required>
                             <div class="error-message" id="telefonoError">Por favor, introduce un teléfono válido</div>
                         </div>
                         <div class="form-group">
                             <label for="direccion">Dirección del proyecto</label>
-                            <input type="text" id="direccion" class="form-control">
+                            <input type="text" id="direccion" class="form-control" placeholder="Dirección donde se realizará el trabajo">
                         </div>
                         <div class="form-group">
                             <label for="servicio">Servicio de interés *</label>
@@ -727,101 +1342,344 @@
                         </div>
                         <div class="form-group">
                             <label for="mensaje">Descripción del proyecto *</label>
-                            <textarea id="mensaje" class="form-control" placeholder="Describe brevemente tu proyecto o necesidad..." required></textarea>
+                            <textarea id="mensaje" class="form-control" placeholder="Describe brevemente tu proyecto o necesidad eléctrica..." required></textarea>
                             <div class="error-message" id="mensajeError">Por favor, describe tu proyecto</div>
                         </div>
                         <div class="form-group">
                             <label class="checkbox-label">
                                 <input type="checkbox" id="privacidad" required>
-                                Acepto la política de privacidad y el tratamiento de mis datos
+                                Acepto la <a href="#">política de privacidad</a> y el tratamiento de mis datos para gestionar mi solicitud
                             </label>
                             <div class="error-message" id="privacidadError">Debes aceptar la política de privacidad</div>
                         </div>
-                        <button type="submit" class="btn" id="submitBtn">Enviar Solicitud</button>
+                        <button type="submit" class="btn" id="submitBtn">
+                            <span>⚡</span>
+                            Enviar Solicitud
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Preguntas Frecuentes -->
+    <!-- Preguntas Frecuentes - Rediseñado -->
     <section class="faq">
         <div class="container">
             <h2>Preguntas Frecuentes</h2>
             <div class="faq-grid">
                 <div class="faq-item">
                     <h3>¿Cuánto tiempo tardan en responder?</h3>
-                    <p>Normalmente respondemos en un plazo máximo de 24 horas hábiles. Para urgencias, contacta directamente por teléfono.</p>
+                    <p>Normalmente respondemos en un plazo máximo de 24 horas hábiles. Para urgencias eléctricas, contacta directamente por teléfono para atención inmediata.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>¿Ofrecen servicios de urgencia?</h3>
-                    <p>Sí, disponemos de servicio de urgencias 24/7 para averías eléctricas que requieran atención inmediata.</p>
+                    <h3>¿Ofrecen servicios de urgencia 24/7?</h3>
+                    <p>Sí, disponemos de servicio de urgencias eléctricas 24/7 para averías que requieran atención inmediata. Llama al +1 (809) 523-8283.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>¿Trabajan en toda la comunidad?</h3>
-                    <p>Trabajamos principalmente en Madrid y área metropolitana. Para proyectos fuera de esta zona, consúltanos.</p>
+                    <h3>¿Trabajan en toda República Dominicana?</h3>
+                    <p>Trabajamos principalmente en Santo Domingo y área metropolitana. Para proyectos en otras provincias, consúltanos para evaluar la viabilidad.</p>
                 </div>
                 <div class="faq-item">
                     <h3>¿Los presupuestos son gratuitos?</h3>
-                    <p>Sí, todos nuestros presupuestos son completamente gratuitos y sin compromiso.</p>
+                    <p>Sí, todos nuestros presupuestos son completamente gratuitos, detallados y sin compromiso. Te explicaremos cada partida del costo.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>¿Qué métodos de pago aceptan?</h3>
+                    <p>Aceptamos efectivo, transferencias bancarias, tarjetas de crédito/débito y facilitamos financiamiento para proyectos mayores.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>¿Ofrecen garantía en sus trabajos?</h3>
+                    <p>Sí, todos nuestros trabajos incluyen garantía por escrito de 2 años en materiales y mano de obra. La calidad y seguridad están garantizadas.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Modal de confirmación -->
+    <!-- Modal de confirmación - Rediseñado -->
     <div class="modal" id="confirmationModal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal()">×</button>
             <div class="modal-icon">✅</div>
             <h3>¡Solicitud Enviada!</h3>
-            <p>Hemos recibido tu solicitud de presupuesto. Nos pondremos en contacto contigo en un plazo máximo de 24 horas hábiles.</p>
-            <button class="btn" onclick="closeModal()">Aceptar</button>
+            <p>Hemos recibido tu solicitud de presupuesto. Nos pondremos en contacto contigo en un plazo máximo de 24 horas hábiles para evaluar tu proyecto eléctrico.</p>
+            <button class="btn" onclick="closeModal()">
+                <span>👌</span>
+                Aceptar
+            </button>
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer elegante y moderno (Mismo que index.html) -->
     <footer>
+        <div class="footer-wave"></div>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Sousa Electricidad</h3>
-                    <p>Empresa especializada en servicios eléctricos para hogares, empresas e industrias. Calidad, seguridad y profesionalidad garantizadas.</p>
+                <div class="footer-column footer-about">
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <div style="font-size: 24px; color: white; font-weight: bold;">⚡</div>
+                        </div>
+                        <div class="footer-logo-text">
+                            <h4>VOLTAJE EXPRESS</h4>
+                            <span>ENERGÍA CONFIABLE</span>
+                        </div>
+                    </div>
+                    <p>Empresa especializada en servicios eléctricos de alta calidad para hogares, empresas e industrias. Más de 5 años brindando soluciones confiables y seguras en toda la República Dominicana.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook">f</a>
-                        <a href="#" aria-label="Instagram">ig</a>
-                        <a href="#" aria-label="Twitter">t</a>
-                        <a href="#" aria-label="LinkedIn">in</a>
+                        <a href="#" aria-label="Facebook" title="Síguenos en Facebook">f</a>
+                        <a href="#" aria-label="Instagram" title="Síguenos en Instagram">ig</a>
+                        <a href="#" aria-label="Twitter" title="Síguenos en Twitter">𝕏</a>
+                        <a href="#" aria-label="WhatsApp" title="Contáctanos por WhatsApp">📱</a>
                     </div>
                 </div>
+                
                 <div class="footer-column">
-                    <h3>Enlaces Rápidos</h3>
+                    <h3>Nuestros Servicios</h3>
                     <ul class="footer-links">
-                        <li><a href="Inicio.html">Inicio</a></li>
-                        <li><a href="servicios.html">Servicios</a></li>
-                        <li><a href="Nosotros.html">Sobre Nosotros</a></li>
-                        <li><a href="contacto.html">Contacto</a></li>
-                        <li><a href="login.html">Área de Clientes</a></li>
+                        <li><a href="servicios.html#instalaciones">⚡ Instalaciones Eléctricas</a></li>
+                        <li><a href="servicios.html#mantenimiento">🔧 Mantenimiento y Reparaciones</a></li>
+                        <li><a href="servicios.html#iluminacion">💡 Iluminación y Diseño</a></li>
+                        <li><a href="servicios.html#industrial">🏭 Electricidad Industrial</a></li>
+                        <li><a href="servicios.html#renovables">🔋 Energías Renovables</a></li>
+                        <li><a href="servicios.html#carga">🚗 Puntos de Carga VE</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-column">
-                    <h3>Contacto</h3>
-                    <ul class="footer-links">
-                        <li>📍 Calle Electricidad, 123</li>
-                        <li>📞 +34 91 123 45 67</li>
-                        <li>✉️ info@sousaelectricidad.com</li>
-                        <li>🕒 L-V: 8:00-18:00</li>
+                    <h3>Contáctanos</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <strong>Oficina Principal</strong><br>
+                                Mahata Calle C, sector f1<br>
+                                Santo Domingo, República Dominicana
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <strong>Teléfono y WhatsApp</strong><br>
+                                +1 (809) 523-8283<br>
+                                Disponible 24/7 para emergencias
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">✉️</div>
+                            <div>
+                                <strong>Correo Electrónico</strong><br>
+                                voltajeexpress2@gmail.com<br>
+                                Respuesta en menos de 24h
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">🕒</div>
+                            <div>
+                                <strong>Horario de Atención</strong><br>
+                                Lunes a Viernes: 8:00 AM - 5:00 PM<br>
+                                Sábados: 8:00 AM - 12:00 PM
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
+            
             <div class="copyright">
-                <p>&copy; 2023 Sousa Electricidad. Todos los derechos reservados.</p>
+                <p>&copy; 2021-2026 Voltaje Express. Todos los derechos reservados.</p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;">
+                    "Energizando hogares e industrias con excelencia y seguridad"
+                </p>
+                
+                <div class="copyright-stats">
+                    <div class="stat-item">
+                        <span class="icon">👁️</span>
+                        <span>Visitas: <strong id="footerVisitCount">0</strong></span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="icon">👆</span>
+                        <span>Clicks: <strong id="footerClickCount">0</strong></span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="icon">✉️</span>
+                        <span>Solicitudes: <strong>0</strong></span>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Contador de visitas -->
+    <div class="visit-counter" id="visitCounter">
+        👁️ <span id="counterDisplay">0</span> visitas
+    </div>
+
     <script>
-        // Elementos del DOM
+        // =============================================
+        // SISTEMA DE CLICKS EN EL LOGO (Mismo que index.html)
+        // =============================================
+
+        const logo = document.getElementById('logo');
+        const clickCounter = document.getElementById('clickCounter');
+        const clickCountDisplay = document.getElementById('clickCount');
+        const footerClickCount = document.getElementById('footerClickCount');
+        const footerVisitCount = document.getElementById('footerVisitCount');
+        const visitCounter = document.getElementById('visitCounter');
+        const counterDisplay = document.getElementById('counterDisplay');
+
+        // Variables para el sistema de clicks
+        let clickCount = 0;
+        let lastClickTime = 0;
+        let clickTimer = null;
+        let showCounter = false;
+
+        // Sistema de clicks en el logo
+        function setupLogoClickSystem() {
+            logo.addEventListener('click', function(e) {
+                const currentTime = new Date().getTime();
+                
+                // Resetear timer si pasa 1 segundo
+                if (currentTime - lastClickTime > 1000) {
+                    clickCount = 0;
+                }
+                
+                // Incrementar contador
+                clickCount++;
+                lastClickTime = currentTime;
+                
+                // Mostrar contador
+                showClickCounter();
+                
+                // Actualizar estado en footer
+                footerClickCount.textContent = clickCount;
+                
+                // Acciones según cantidad de clicks
+                handleClicks(clickCount);
+                
+                // Resetear contador después de 1.5 segundos
+                clearTimeout(clickTimer);
+                clickTimer = setTimeout(() => {
+                    clickCount = 0;
+                    footerClickCount.textContent = '0';
+                }, 1500);
+            });
+        }
+
+        // Mostrar contador de clicks
+        function showClickCounter() {
+            clickCountDisplay.textContent = clickCount;
+            clickCounter.classList.add('show');
+            
+            // Ocultar después de 1.5 segundos
+            setTimeout(() => {
+                clickCounter.classList.remove('show');
+            }, 1500);
+        }
+
+        // Manejar acciones según cantidad de clicks
+        function handleClicks(count) {
+            switch(count) {
+                case 2:
+                    // 2 clicks: Recargar página
+                    showMessage('🔄 Recargando página...');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 500);
+                    break;
+                    
+                case 5:
+                    // 5 clicks: Abrir panel admin
+                    openAdminPanel();
+                    break;
+                    
+                case 10:
+                    // 10 clicks: Easter egg secreto
+                    showMessage('🎉 ¡Easter egg desbloqueado!');
+                    unlockSecretFeatures();
+                    break;
+            }
+        }
+
+        // Mostrar mensaje temporal
+        function showMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, var(--electric-blue), #0097e6);
+                color: white;
+                padding: 1.5rem 3rem;
+                border-radius: 15px;
+                z-index: 9999;
+                animation: fadeInOut 2s forwards;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                text-align: center;
+                font-weight: 600;
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                document.body.removeChild(messageDiv);
+            }, 2000);
+        }
+
+        // Abrir panel de administrador
+        function openAdminPanel() {
+            // Mostrar prompt de contraseña
+            const password = prompt("🔐 Ingrese la contraseña de administrador:");
+            
+            if (password === "voltaje2026") {
+                showMessage('✅ Panel de administrador activado');
+                showCounter = true;
+                visitCounter.classList.add('show');
+                localStorage.setItem('showCounter', 'true');
+            } else if (password !== null) {
+                showMessage('❌ Contraseña incorrecta');
+            }
+        }
+
+        // Desbloquear características secretas
+        function unlockSecretFeatures() {
+            // Cambiar colores del sitio
+            document.documentElement.style.setProperty('--electric-blue', '#ff0080');
+            document.documentElement.style.setProperty('--electric-yellow', '#00ff88');
+            
+            // Añadir efectos especiales
+            const logoIcon = document.querySelector('.logo-icon');
+            logoIcon.style.background = 'linear-gradient(135deg, #ff0080, #00ff88)';
+            
+            showMessage('✨ ¡Modo especial activado!');
+        }
+
+        // =============================================
+        // SISTEMA DE VISITAS Y ANIMACIONES (Mismo que index.html)
+        // =============================================
+
+        // Sistema de visitas
+        function setupVisitSystem() {
+            let totalVisitCount = localStorage.getItem('totalVisits') || 0;
+            totalVisitCount = parseInt(totalVisitCount) + 1;
+            localStorage.setItem('totalVisits', totalVisitCount);
+            
+            // Actualizar displays
+            counterDisplay.textContent = totalVisitCount;
+            footerVisitCount.textContent = totalVisitCount;
+            
+            // Mostrar/ocultar contador según configuración
+            showCounter = localStorage.getItem('showCounter') === 'true';
+            if (showCounter) {
+                visitCounter.classList.add('show');
+            }
+        }
+
+        // =============================================
+        // FORMULARIO DE CONTACTO Y VALIDACIÓN
+        // =============================================
+
+        // Elementos del DOM para el formulario
         const mobileMenu = document.querySelector('.mobile-menu');
         const navUl = document.querySelector('nav ul');
         const contactItems = document.querySelectorAll('.contact-item');
@@ -832,17 +1690,59 @@
         const submitBtn = document.getElementById('submitBtn');
 
         // Menú móvil
-        mobileMenu.addEventListener('click', () => {
+        mobileMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
             navUl.classList.toggle('active');
+            mobileMenu.textContent = navUl.classList.contains('active') ? '✕' : '☰';
+        });
+        
+        // Cerrar menú móvil al hacer clic en un enlace
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768 && navUl.classList.contains('active')) {
+                    navUl.classList.remove('active');
+                    mobileMenu.textContent = '☰';
+                }
+            });
+        });
+        
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 &&
+                !navUl.contains(e.target) &&
+                !mobileMenu.contains(e.target) &&
+                navUl.classList.contains('active')) {
+                navUl.classList.remove('active');
+                mobileMenu.textContent = '☰';
+            }
+        });
+        
+        // Header al hacer scroll
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.backgroundColor = '';
+                header.style.backdropFilter = '';
+            }
         });
 
-        // Funciones de validación
+        // Funciones de validación mejoradas
         function showError(input, errorElement, message) {
             input.classList.add('error');
             errorElement.textContent = message;
             errorElement.classList.add('show');
             input.classList.add('shake');
             setTimeout(() => input.classList.remove('shake'), 500);
+            
+            // Scroll al error si está fuera de la vista
+            if (errorElement.getBoundingClientRect().top < 0 || 
+                errorElement.getBoundingClientRect().bottom > window.innerHeight) {
+                errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
 
         function hideError(input, errorElement) {
@@ -856,8 +1756,8 @@
             // Validar nombre
             const nombre = document.getElementById('nombre');
             const nombreError = document.getElementById('nombreError');
-            if (!nombre.value.trim()) {
-                showError(nombre, nombreError, 'Por favor, introduce tu nombre completo');
+            if (!nombre.value.trim() || nombre.value.trim().length < 2) {
+                showError(nombre, nombreError, 'Por favor, introduce tu nombre completo (mínimo 2 caracteres)');
                 isValid = false;
             } else {
                 hideError(nombre, nombreError);
@@ -868,7 +1768,7 @@
             const emailError = document.getElementById('emailError');
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!email.value.trim() || !emailRegex.test(email.value)) {
-                showError(email, emailError, 'Por favor, introduce un email válido');
+                showError(email, emailError, 'Por favor, introduce un email válido (ejemplo@dominio.com)');
                 isValid = false;
             } else {
                 hideError(email, emailError);
@@ -877,9 +1777,9 @@
             // Validar teléfono
             const telefono = document.getElementById('telefono');
             const telefonoError = document.getElementById('telefonoError');
-            const telefonoRegex = /^[0-9+-\s()]{9,}$/;
+            const telefonoRegex = /^[\+]?[1-9][\d\s\-\(\)]{8,}$/;
             if (!telefono.value.trim() || !telefonoRegex.test(telefono.value.replace(/\s/g, ''))) {
-                showError(telefono, telefonoError, 'Por favor, introduce un teléfono válido');
+                showError(telefono, telefonoError, 'Por favor, introduce un teléfono válido (ej: +1 809 123-4567)');
                 isValid = false;
             } else {
                 hideError(telefono, telefonoError);
@@ -889,7 +1789,7 @@
             const servicio = document.getElementById('servicio');
             const servicioError = document.getElementById('servicioError');
             if (!servicio.value) {
-                showError(servicio, servicioError, 'Por favor, selecciona un servicio');
+                showError(servicio, servicioError, 'Por favor, selecciona un servicio de nuestra lista');
                 isValid = false;
             } else {
                 hideError(servicio, servicioError);
@@ -898,8 +1798,8 @@
             // Validar mensaje
             const mensaje = document.getElementById('mensaje');
             const mensajeError = document.getElementById('mensajeError');
-            if (!mensaje.value.trim()) {
-                showError(mensaje, mensajeError, 'Por favor, describe tu proyecto');
+            if (!mensaje.value.trim() || mensaje.value.trim().length < 10) {
+                showError(mensaje, mensajeError, 'Por favor, describe tu proyecto con más detalles (mínimo 10 caracteres)');
                 isValid = false;
             } else {
                 hideError(mensaje, mensajeError);
@@ -909,7 +1809,7 @@
             const privacidad = document.getElementById('privacidad');
             const privacidadError = document.getElementById('privacidadError');
             if (!privacidad.checked) {
-                showError(privacidad, privacidadError, 'Debes aceptar la política de privacidad');
+                showError(privacidad, privacidadError, 'Debes aceptar la política de privacidad para continuar');
                 isValid = false;
             } else {
                 hideError(privacidad, privacidadError);
@@ -924,6 +1824,9 @@
             setTimeout(() => {
                 modal.classList.add('show');
             }, 10);
+            
+            // Deshabilitar scroll del body
+            document.body.style.overflow = 'hidden';
         }
 
         // Función para cerrar el modal
@@ -931,7 +1834,13 @@
             modal.classList.remove('show');
             setTimeout(() => {
                 modal.style.display = 'none';
+                // Habilitar scroll del body
+                document.body.style.overflow = '';
+                // Resetear formulario
                 form.reset();
+                // Resetear todos los errores
+                form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+                form.querySelectorAll('.error-message').forEach(el => el.classList.remove('show'));
             }, 300);
         }
 
@@ -942,14 +1851,24 @@
             if (validateForm()) {
                 // Deshabilitar el botón de envío
                 submitBtn.disabled = true;
-                submitBtn.textContent = 'Enviando...';
+                submitBtn.innerHTML = '<span>⏳</span> Enviando...';
 
                 // Simular envío (en un caso real, aquí iría una petición AJAX)
                 setTimeout(() => {
                     showModal();
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'Enviar Solicitud';
-                }, 1500);
+                    submitBtn.innerHTML = '<span>⚡</span> Enviar Solicitud';
+                    
+                    // Registrar solicitud en localStorage
+                    const solicitudes = parseInt(localStorage.getItem('totalRequests') || 0) + 1;
+                    localStorage.setItem('totalRequests', solicitudes);
+                    
+                    // Actualizar estadísticas
+                    const solicitudItem = document.querySelector('.stat-item:nth-child(3) strong');
+                    if (solicitudItem) {
+                        solicitudItem.textContent = solicitudes;
+                    }
+                }, 2000);
             }
         });
 
@@ -957,9 +1876,17 @@
         const inputs = form.querySelectorAll('input, select, textarea');
         inputs.forEach(input => {
             input.addEventListener('blur', function() {
-                // Validar solo si el campo ha sido tocado
                 if (this.value.trim() !== '' || this.type === 'checkbox') {
                     validateForm();
+                }
+            });
+            
+            // Limpiar error al empezar a escribir
+            input.addEventListener('input', function() {
+                const errorId = this.id + 'Error';
+                const errorElement = document.getElementById(errorId);
+                if (errorElement) {
+                    hideError(this, errorElement);
                 }
             });
         });
@@ -967,21 +1894,23 @@
         // Animación al hacer scroll
         function checkScroll() {
             const triggerBottom = window.innerHeight * 0.85;
-
+            
             // Elementos de contacto
             contactItems.forEach((item, index) => {
                 const itemTop = item.getBoundingClientRect().top;
                 if (itemTop < triggerBottom) {
                     setTimeout(() => {
                         item.classList.add('visible');
-                    }, index * 200);
+                    }, index * 150);
                 }
             });
 
             // Formulario
             const formTop = contactForm.getBoundingClientRect().top;
             if (formTop < triggerBottom) {
-                contactForm.classList.add('visible');
+                setTimeout(() => {
+                    contactForm.classList.add('visible');
+                }, 300);
             }
 
             // Preguntas frecuentes
@@ -990,7 +1919,7 @@
                 if (itemTop < triggerBottom) {
                     setTimeout(() => {
                         item.classList.add('visible');
-                    }, index * 200);
+                    }, index * 150);
                 }
             });
         }
@@ -1009,11 +1938,47 @@
             }
         });
 
-        // Inicialización
+        // =============================================
+        // INICIALIZACIÓN COMPLETA
+        // =============================================
+
         window.addEventListener('DOMContentLoaded', () => {
+            // Configurar sistema de clicks
+            setupLogoClickSystem();
+            
+            // Configurar sistema de visitas
+            setupVisitSystem();
+            
+            // Cargar estadísticas de solicitudes
+            const totalRequests = localStorage.getItem('totalRequests') || 0;
+            const solicitudItem = document.querySelector('.stat-item:nth-child(3) strong');
+            if (solicitudItem) {
+                solicitudItem.textContent = totalRequests;
+            }
+            
+            // Verificar elementos visibles al cargar
             checkScroll();
+            
+            // Asegurar menú cerrado en desktop
+            if (window.innerWidth > 768 && navUl.classList.contains('active')) {
+                navUl.classList.remove('active');
+                mobileMenu.textContent = '☰';
+            }
+            
+            // Agregar animación CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeInOut {
+                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                    20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+                    80% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+                    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                }
+            `;
+            document.head.appendChild(style);
         });
 
+        // Event listeners para scroll
         window.addEventListener('scroll', checkScroll);
     </script>
 </body>

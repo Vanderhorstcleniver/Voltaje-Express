@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voltaje Express - Servicios Eléctricos Profesionales</title>
     <style>
-        /* Estilos base */
+        /* Estilos base - Optimizados */
         
         * {
             margin: 0;
@@ -40,16 +40,16 @@
             margin: 0 auto;
             padding: 0 15px;
         }
-        /* Header */
         
+        /* Header mejorado con nuevo logo profesional */
         header {
-            background: linear-gradient(135deg, var(--dark), #343a40);
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             color: white;
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
         }
         
@@ -59,31 +59,145 @@
             align-items: center;
         }
         
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
+        /* LOGO PROFESIONAL Y ELEGANTE */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
         }
         
-        .logo span {
-            color: var(--electric-yellow);
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+        
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--electric-blue), #3b82f6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 168, 255, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        }
+        
+        .logo-icon .bolt {
+            font-size: 32px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+            transform: rotate(-5deg);
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ffffff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+            letter-spacing: 0.8px;
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+        }
+        
+        .logo-text .tagline {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            letter-spacing: 1.2px;
+            font-weight: 500;
+            text-transform: uppercase;
+            border-left: 2px solid var(--electric-blue);
+            padding-left: 8px;
+            margin-top: 2px;
+        }
+        
+        /* Línea decorativa elegante para el logo */
+        .logo-decoration {
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--electric-blue), 
+                var(--electric-yellow), 
+                transparent);
+            border-radius: 1px;
+            opacity: 0.7;
+        }
+        
+        /* Contador de clicks */
+        .click-counter {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            z-index: 999;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            font-weight: 500;
+        }
+        
+        .click-counter.show {
+            display: flex;
+            animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3) rotate(-180deg); opacity: 0; }
+            70% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
         }
         
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 2rem;
         }
         
         nav a {
-            color: white;
+            color: #cbd5e1;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
             position: relative;
+            padding: 0.5rem 0;
+            font-size: 1.05rem;
         }
         
         nav a:hover {
-            color: var(--electric-yellow);
+            color: white;
         }
         
         nav a::after {
@@ -91,10 +205,10 @@
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
-            background-color: var(--electric-yellow);
-            transition: width 0.3s;
+            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
+            transition: width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
         
         nav a:hover::after {
@@ -106,102 +220,191 @@
             font-size: 1.5rem;
             cursor: pointer;
             transition: transform 0.3s ease;
+            color: #cbd5e1;
         }
         
         .mobile-menu:hover {
             transform: scale(1.1);
-        }
-        /* Hero Section */
-        
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23121212"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="%23333" stroke-width="1"/></svg>');
-            background-size: cover;
             color: white;
-            padding: 5rem 0;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.95)), 
+                        url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 8rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
         
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 221, 89, 0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards 0.5s;
+            transform: translateY(40px);
+            animation: fadeInUp 1s forwards 0.3s;
+            background: linear-gradient(90deg, #ffffff, #c7d2fe, #fef3c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1s forwards 0.6s;
+            color: #94a3b8;
+            font-weight: 400;
+            letter-spacing: 1px;
         }
         
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             max-width: 700px;
-            margin: 0 auto 2rem;
+            margin: 0 auto 4rem;
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards 0.7s;
+            transform: translateY(40px);
+            animation: fadeInUp 1s forwards 0.9s;
+            color: #cbd5e1;
+            line-height: 1.8;
         }
         
         .hero-buttons {
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards 0.9s;
+            transform: translateY(40px);
+            animation: fadeInUp 1s forwards 1.2s;
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         
         .btn {
-            display: inline-block;
-            background-color: var(--electric-blue);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
+            padding: 1.3rem 2.8rem;
+            border-radius: 15px;
             text-decoration: none;
             font-weight: 600;
-            margin: 0.5rem;
-            transition: all 0.3s;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: none;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            min-width: 240px;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            transition: left 0.7s;
         }
         
         .btn:hover {
-            background-color: #0097e6;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn-secondary {
-            background-color: transparent;
-            border: 2px solid white;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
         }
         
         .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            box-shadow: 0 18px 35px rgba(255, 255, 255, 0.2);
         }
-        /* Servicios Destacados */
         
+        /* Servicios Destacados - COMPLETO */
         #servicios-destacados {
-            padding: 5rem 0;
-            background-color: white;
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
         }
         
-        #servicios-destacados h2 {
+        .section-title {
             text-align: center;
-            margin-bottom: 3rem;
-            font-size: 2.5rem;
-            color: var(--dark);
+            margin-bottom: 4rem;
+            font-size: 2.8rem;
+            color: #0f172a;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
+            margin: 1.5rem auto;
+            border-radius: 2px;
         }
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
         
         .service-card {
             background: white;
-            border-radius: 8px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px);
+            border: 1px solid #e2e8f0;
         }
         
         .service-card.visible {
@@ -210,74 +413,80 @@
         }
         
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--electric-blue);
         }
         
         .service-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             text-align: center;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, var(--electric-blue), #0097e6);
+            padding: 2.5rem;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             color: white;
         }
         
         .service-content {
-            padding: 1.5rem;
+            padding: 2.5rem;
         }
         
         .service-content h3 {
-            margin-bottom: 1rem;
-            color: var(--dark);
+            margin-bottom: 1.2rem;
+            color: #0f172a;
+            font-size: 1.6rem;
+            font-weight: 700;
         }
         
         .service-content p {
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
+            margin-bottom: 2rem;
+            color: #64748b;
+            line-height: 1.8;
         }
         
         .btn-small {
-            display: inline-block;
-            background-color: var(--electric-blue);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            padding: 0.8rem 1.8rem;
+            border-radius: 10px;
             text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.3s;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
         }
         
         .btn-small:hover {
-            background-color: #0097e6;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
         }
-        /* Por qué elegirnos */
         
+        /* Por qué elegirnos - COMPLETO */
         .why-us {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, var(--dark), #343a40);
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             color: white;
-        }
-        
-        .why-us h2 {
-            text-align: center;
-            margin-bottom: 3rem;
-            font-size: 2.5rem;
+            position: relative;
         }
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
         }
         
         .feature {
             text-align: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            transition: all 0.3s;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            transition: all 0.5s;
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .feature.visible {
@@ -286,37 +495,145 @@
         }
         
         .feature:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--electric-blue);
+            box-shadow: 0 20px 40px rgba(0, 168, 255, 0.1);
         }
         
         .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.8rem;
+            filter: drop-shadow(0 0 10px rgba(0, 168, 255, 0.3));
         }
         
         .feature h3 {
-            margin-bottom: 1rem;
-            color: var(--electric-yellow);
+            margin-bottom: 1.2rem;
+            color: #c7d2fe;
+            font-size: 1.5rem;
         }
-        /* Footer */
         
+        .feature p {
+            color: #94a3b8;
+            line-height: 1.8;
+        }
+        
+        /* =============================================
+           FOOTER ELEGANTE Y MODERNO - TOTALMENTE RENOVADO
+           ============================================= */
         footer {
-            background-color: var(--dark);
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             color: white;
-            padding: 3rem 0 1rem;
+            padding: 5rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--electric-blue), 
+                var(--electric-yellow),
+                var(--electric-blue));
+            z-index: 1;
+        }
+        
+        .footer-wave {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0 0v46.29c47.79 22.2 103.59 32.17 158 28 70.36-5.37 136.33-33.31 206.8-37.5 73.84-4.36 147.54 16.88 218.2 35.26 69.27 18 138.3 24.88 209.4 13.08 36.15-6 69.85-17.84 104.45-29.34C989.49 25 1113-14.29 1200 52.47V0z' fill='%230f172a'/%3E%3C/svg%3E");
+            background-size: 1200px 100px;
+            animation: wave 20s linear infinite;
+        }
+        
+        @keyframes wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1200px; }
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-column {
+            position: relative;
         }
         
         .footer-column h3 {
-            margin-bottom: 1.5rem;
-            color: var(--electric-yellow);
+            margin-bottom: 2rem;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
+            border-radius: 1.5px;
+        }
+        
+        .footer-about {
+            max-width: 350px;
+        }
+        
+        .footer-about p {
+            color: #94a3b8;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--electric-blue), #3b82f6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.25);
+        }
+        
+        .footer-logo-text h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ffffff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .footer-logo-text span {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            letter-spacing: 1px;
         }
         
         .footer-links {
@@ -324,51 +641,234 @@
         }
         
         .footer-links li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .footer-links li:hover {
+            transform: translateX(10px);
         }
         
         .footer-links a {
-            color: #ccc;
+            color: #cbd5e1;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+            padding: 0.3rem 0;
         }
         
         .footer-links a:hover {
             color: white;
+            padding-left: 5px;
+        }
+        
+        .footer-links a::before {
+            content: '→';
+            color: var(--electric-blue);
+            font-weight: bold;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--electric-blue);
+            flex-shrink: 0;
         }
         
         .social-links {
             display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 1.2rem;
+            margin-top: 2rem;
         }
         
         .social-links a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             color: white;
             text-decoration: none;
             transition: all 0.3s;
+            font-size: 1.3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .social-links a:hover {
-            background-color: var(--electric-blue);
-            transform: translateY(-3px);
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+            border-color: transparent;
         }
         
         .copyright {
             text-align: center;
-            padding-top: 2rem;
+            padding-top: 3rem;
+            margin-top: 3rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #ccc;
+            color: #94a3b8;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 2;
         }
-        /* Animaciones */
         
+        .copyright p {
+            margin-bottom: 0.8rem;
+        }
+        
+        .copyright-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+        }
+        
+        .stat-item .icon {
+            color: var(--electric-blue);
+        }
+        
+        /* Contador de visitas mejorado */
+        .visit-counter {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(33, 37, 41, 0.9));
+            color: white;
+            padding: 12px 18px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .visit-counter.show {
+            display: flex;
+            animation: slideUp 0.5s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .visit-counter:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Indicador de progreso para tecla presionada */
+        .key-hold-indicator {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            z-index: 9999;
+            display: none;
+            overflow: hidden;
+            border: 2px solid #3b82f6;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        .key-hold-progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #00a8ff);
+            transition: width 0.1s;
+            border-radius: 8px;
+        }
+        
+        .key-hold-text {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        /* Notificación de acceso rápido */
+        .access-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(15, 23, 42, 0.9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            z-index: 9998;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease;
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Animaciones */
         @keyframes fadeInUp {
             to {
                 opacity: 1;
@@ -376,391 +876,50 @@
             }
         }
         
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
             }
             50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
+                transform: translateY(-10px);
             }
         }
-        /* Efectos de partículas */
         
-        .particles-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
+        @keyframes pulse {
+            0% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); }
+            100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
         }
         
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background-color: var(--electric-blue);
-            border-radius: 50%;
-            opacity: 0.7;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Panel de Administrador (oculto por defecto) */
-        .admin-panel {
-            position: fixed;
-            top: 50%;
-            left: -400px;
-            transform: translateY(-50%);
-            width: 380px;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: white;
-            padding: 2rem;
-            border-radius: 0 10px 10px 0;
-            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
-            z-index: 2000;
-            transition: left 0.4s ease;
-            max-height: 90vh;
-            overflow-y: auto;
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+            80% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
         }
         
-        .admin-panel.active {
-            left: 0;
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .admin-toggle {
-            position: absolute;
-            right: -40px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: linear-gradient(135deg, #ff416c, #ff4b2b);
-            color: white;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
-            font-weight: bold;
-        }
-        
-        .admin-toggle:hover {
-            background: linear-gradient(135deg, #ff4b2b, #ff416c);
-        }
-        
-        .admin-section {
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .admin-section h3 {
-            color: #4cc9f0;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-        
-        .admin-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .stat-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #4cc9f0;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        .admin-controls {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-        
-        .admin-btn {
-            background: linear-gradient(135deg, #4361ee, #3a0ca3);
-            color: white;
-            border: none;
-            padding: 0.8rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-        
-        .admin-btn:hover {
-            background: linear-gradient(135deg, #3a0ca3, #4361ee);
-            transform: translateY(-2px);
-        }
-        
-        .admin-btn.danger {
-            background: linear-gradient(135deg, #f72585, #b5179e);
-        }
-        
-        .admin-btn.danger:hover {
-            background: linear-gradient(135deg, #b5179e, #f72585);
-        }
-        
-        .admin-log {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 1rem;
-            border-radius: 6px;
-            max-height: 200px;
-            overflow-y: auto;
-            font-family: monospace;
-            font-size: 0.9rem;
-        }
-        
-        .log-entry {
-            padding: 0.3rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .log-entry.success {
-            color: #4ade80;
-        }
-        
-        .log-entry.warning {
-            color: #fbbf24;
-        }
-        
-        .log-entry.error {
-            color: #f87171;
-        }
-        
-        .admin-input {
-            width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-radius: 4px;
-        }
-        
-        .admin-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* =============================================
-           PANEL DE PERSONALIZACIÓN MEJORADO (AGREGADO)
-           ============================================= */
-        .customization-panel {
-            position: fixed;
-            top: 50%;
-            right: -300px;
-            transform: translateY(-50%);
-            width: 300px;
-            background: white;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-            border-radius: 8px 0 0 8px;
-            transition: right 0.3s;
-            z-index: 2000;
-        }
-        
-        .customization-panel.active {
-            right: 0;
-        }
-        
-        .panel-toggle {
-            position: absolute;
-            left: -40px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--electric-blue);
-            color: white;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px 0 0 8px;
-            cursor: pointer;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-        }
-        
-        .panel-toggle:hover {
-            background: #0097e6;
-        }
-        
-        .color-options {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .color-option {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: transform 0.3s;
-        }
-        
-        .color-option:hover {
-            transform: scale(1.1);
-        }
-        
-        .color-option.active {
-            border-color: var(--dark);
-        }
-
-        .customization-panel h3 {
-            color: var(--dark);
-            margin-bottom: 1rem;
-        }
-
-        .customization-panel p {
-            margin-bottom: 1rem;
-            color: var(--secondary);
-        }
-
-        .customization-btn {
-            display: block;
-            width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 0.5rem;
-            background: var(--electric-blue);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background 0.3s;
-        }
-
-        .customization-btn:hover {
-            background: #0097e6;
-        }
-
-        .customization-btn.secondary {
-            background: var(--secondary);
-        }
-
-        .customization-btn.secondary:hover {
-            background: #5a6268;
-        }
-
-        /* Mensaje de personalización */
-        .color-message {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 6px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 3000;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .color-message.show {
-            opacity: 1;
-        }
-
-        /* Indicador de color en el footer */
-        .color-indicator {
-            width: 15px;
-            height: 15px;
-            display: inline-block;
-            border-radius: 50%;
-            margin: 0 5px;
-            vertical-align: middle;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Efectos especiales */
-        
-        .electric-effect {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .electric-effect::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .electric-effect:hover::before {
-            left: 100%;
-        }
-        
-        /* Contador de visitas secreto */
-        .visit-counter {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            opacity: 0.7;
-            z-index: 100;
-            transition: opacity 0.3s;
-        }
-        
-        .visit-counter:hover {
-            opacity: 1;
-        }
-        
-        /* Easter egg trigger */
-        .easter-egg {
-            position: fixed;
-            width: 30px;
-            height: 30px;
-            background: transparent;
-            cursor: pointer;
-            z-index: 3000;
-        }
-        
-        #egg1 { top: 20%; left: 5%; }
-        #egg2 { top: 40%; right: 5%; }
-        #egg3 { bottom: 30%; left: 10%; }
-
         /* Media Queries */
-        
         @media (max-width: 768px) {
             .mobile-menu {
                 display: block;
             }
+            
             nav ul {
                 display: none;
                 flex-direction: column;
@@ -768,791 +927,674 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background-color: var(--dark);
-                padding: 1rem;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
+                background: linear-gradient(135deg, #0f172a, #1e293b);
+                padding: 1.5rem;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+                backdrop-filter: blur(10px);
+                z-index: 1000;
             }
+            
             nav ul.active {
                 display: flex;
-                max-height: 300px;
+                animation: slideDown 0.3s ease;
             }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .copyright-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .visit-counter {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .key-hold-indicator {
+                width: 150px;
+                height: 15px;
+            }
+            
+            .key-hold-text {
+                top: -25px;
+                font-size: 12px;
+            }
+            
+            .access-hint {
+                bottom: 70px;
+                right: 15px;
+                max-width: 250px;
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                padding: 6rem 0;
+            }
+            
             .hero h1 {
                 font-size: 2.2rem;
             }
-            .hero p {
-                font-size: 1rem;
+            
+            .hero-buttons {
+                flex-direction: column;
             }
             
-            .admin-panel {
-                width: 320px;
-                left: -320px;
+            .btn {
+                width: 100%;
             }
-            .customization-panel {
-                width: 280px;
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .access-hint {
+                display: none; /* Ocultar en móvil para no molestar */
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Header -->
+    <!-- Header con nuevo logo -->
     <header>
         <div class="container header-container">
-            <div class="logo">
-                <h1>Voltaje <span>Express</span></h1>
+            <div class="logo" id="logo">
+                <div class="logo-icon">
+                    <div class="bolt">⚡</div>
+                </div>
+                <div class="logo-text">
+                    <h1>VOLTAJE EXPRESS</h1>
+                    <div class="tagline">ENERGÍA INTELIGENTE</div>
+                    <div class="logo-decoration"></div>
+                </div>
             </div>
             <nav>
                 <div class="mobile-menu">☰</div>
                 <ul>
-                    <li><a href="index.html" class="electric-effect">Inicio</a></li>
-                    <li><a href="servicios.html" class="electric-effect">Servicios</a></li>
-                    <li><a href="Nosotros.html" class="electric-effect">Nosotros</a></li>
-                    <li><a href="Contactos.html" class="electric-effect">Contacto</a></li>
-                    <li><a href="Login.html" class="btn-admin">Sesion de clientes</a></li>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <!-- Quitado: Acceso Clientes -->
                 </ul>
             </nav>
         </div>
     </header>
 
+    <!-- Contador de clicks -->
+    <div class="click-counter" id="clickCounter">
+        <span>👆</span>
+        <span id="clickCount">0</span> clicks
+    </div>
+
+    <!-- Indicador de tecla presionada -->
+    <div class="key-hold-indicator" id="keyHoldIndicator">
+        <div class="key-hold-progress" id="keyHoldProgress"></div>
+        <div class="key-hold-text" id="keyHoldText">Mantén presionado para acceder al panel...</div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero" id="inicio">
-        <div class="particles-container" id="particles"></div>
-        <div class="container">
+        <div class="container hero-content">
             <h1>Soluciones Eléctricas Profesionales</h1>
-            <p>En Voltaje Express ofrecemos servicios eléctricos de alta calidad para hogares, empresas e industrias. Más de 5 años de experiencia nos respaldan.</p>
+            <div class="hero-subtitle">Excelencia en cada conexión eléctrica</div>
+            <p>En Voltaje Express ofrecemos servicios eléctricos de alta calidad para hogares, empresas e industrias. Garantizamos seguridad, eficiencia y profesionalidad en cada proyecto.</p>
             <div class="hero-buttons">
-                <a href="servicios.html" class="btn">Nuestros Servicios</a>
-                <a href="Contactos.html" class="btn btn-secondary">Solicitar Presupuesto</a>
+                <a href="servicios.html" class="btn">
+                    <span>⚡</span>
+                    Ver Servicios
+                </a>
+                <a href="contacto.html" class="btn btn-secondary">
+                    <span>📋</span>
+                    Solicitar Presupuesto
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Servicios Destacados -->
+    <!-- Servicios Destacados - COMPLETO -->
     <section id="servicios-destacados">
         <div class="container">
-            <h2>Nuestros Servicios Destacados</h2>
+            <h2 class="section-title">Servicios Destacados</h2>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">⚡</div>
                     <div class="service-content">
                         <h3>Instalaciones Eléctricas</h3>
-                        <p>Realizamos instalaciones eléctricas completas para viviendas, locales comerciales y naves industriales.</p>
-                        <a href="servicios.html#instalaciones" class="btn-small">Ver más</a>
+                        <p>Realizamos instalaciones eléctricas completas para viviendas, locales comerciales y naves industriales. Desde cableado básico hasta sistemas complejos de distribución de energía, garantizando cumplimiento de normativas y máxima seguridad.</p>
+                        <a href="servicios.html#instalaciones" class="btn-small">
+                            <span>🔍</span>
+                            Ver Detalles
+                        </a>
                     </div>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🔧</div>
                     <div class="service-content">
                         <h3>Mantenimiento y Reparaciones</h3>
-                        <p>Servicios de mantenimiento preventivo y correctivo para garantizar el óptimo funcionamiento.</p>
-                        <a href="servicios.html#mantenimiento" class="btn-small">Ver más</a>
+                        <p>Servicio de mantenimiento preventivo y correctivo para todo tipo de instalaciones eléctricas. Diagnóstico preciso, reparaciones urgentes 24/7 y programas de mantenimiento personalizados para evitar fallos futuros.</p>
+                        <a href="servicios.html#mantenimiento" class="btn-small">
+                            <span>🔍</span>
+                            Ver Detalles
+                        </a>
                     </div>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">💡</div>
                     <div class="service-content">
                         <h3>Iluminación y Diseño</h3>
-                        <p>Diseñamos e implementamos sistemas de iluminación eficientes y estéticos.</p>
-                        <a href="servicios.html#iluminacion" class="btn-small">Ver más</a>
+                        <p>Diseño e implementación de sistemas de iluminación inteligente y eficiente. Soluciones LED personalizadas, automatización de iluminación, diseño de ambientes y optimización del consumo energético para hogares y empresas.</p>
+                        <a href="servicios.html#iluminacion" class="btn-small">
+                            <span>🔍</span>
+                            Ver Detalles
+                        </a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏭</div>
+                    <div class="service-content">
+                        <h3>Electricidad Industrial</h3>
+                        <p>Soluciones eléctricas especializadas para el sector industrial. Instalación y mantenimiento de maquinaria industrial, sistemas de potencia, automatización de procesos y tableros de control de alta eficiencia.</p>
+                        <a href="servicios.html#industrial" class="btn-small">
+                            <span>🔍</span>
+                            Ver Detalles
+                        </a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔋</div>
+                    <div class="service-content">
+                        <h3>Energías Renovables</h3>
+                        <p>Instalación de sistemas fotovoltaicos para autoconsumo. Diseño de proyectos solares, instalación de paneles, sistemas de almacenamiento energético y gestión de subvenciones para energías limpias.</p>
+                        <a href="servicios.html#renovables" class="btn-small">
+                            <span>🔍</span>
+                            Ver Detalles
+                        </a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚗</div>
+                    <div class="service-content">
+                        <h3>Puntos de Carga VE</h3>
+                        <p>Instalación de puntos de carga para vehículos eléctricos en hogares, empresas y comunidades. Asesoramiento técnico, wallboxes de alta potencia y gestión integral de proyectos de movilidad eléctrica.</p>
+                        <a href="servicios.html#carga" class="btn-small">
+                            <span>🔍</span>
+                            Ver Detalles
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Por qué elegirnos -->
+    <!-- Por qué elegirnos - COMPLETO -->
     <section class="why-us">
         <div class="container">
-            <h2>¿Por Qué Elegirnos?</h2>
+            <h2 class="section-title">¿Por Qué Elegirnos?</h2>
             <div class="features-grid">
                 <div class="feature">
                     <div class="feature-icon">⏱️</div>
-                    <h3>Rapidez y Eficiencia</h3>
-                    <p>Respondemos en menos de 24 horas y completamos los trabajos en tiempo récord.</p>
+                    <h3>Respuesta Inmediata</h3>
+                    <p>Atendemos sus necesidades en menos de 24 horas. Servicio de emergencias disponible 24/7 para resolver cualquier incidencia eléctrica de manera inmediata.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">⭐</div>
-                    <h3>Calidad Garantizada</h3>
-                    <p>Trabajamos con materiales de primera calidad y ofrecemos garantía por escrito.</p>
+                    <h3>Calidad Certificada</h3>
+                    <p>Trabajamos con materiales de primera calidad y contamos con certificaciones internacionales. Garantía por escrito en todos nuestros servicios y trabajos.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">👨‍🔧</div>
-                    <h3>Profesionales Certificados</h3>
-                    <p>Nuestro equipo cuenta con certificaciones y años de experiencia en el sector.</p>
+                    <h3>Expertos Certificados</h3>
+                    <p>Nuestro equipo de electricistas cuenta con más de 5 años de experiencia y certificaciones especializadas en sistemas eléctricos residenciales e industriales.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">💰</div>
-                    <h3>Precios Competitivos</h3>
-                    <p>Ofrecemos los mejores precios del mercado sin comprometer la calidad.</p>
+                    <h3>Precios Transparentes</h3>
+                    <p>Presupuestos detallados sin costos ocultos. Ofrecemos las mejores tarifas del mercado manteniendo los más altos estándares de calidad y seguridad.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Seguridad Garantizada</h3>
+                    <p>Todas nuestras instalaciones cumplen con las normativas de seguridad vigentes. Implementamos los más altos estándares de protección eléctrica.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📞</div>
+                    <h3>Soporte Continuo</h3>
+                    <p>Atención personalizada antes, durante y después de cada proyecto. Asesoramiento técnico permanente y seguimiento de todas las instalaciones realizadas.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Panel de Administrador (OCULTO) -->
-    <div class="admin-panel" id="adminPanel">
-        <div class="admin-toggle" id="adminToggle">⚙️</div>
-        
-        <div class="admin-section">
-            <h3>📊 Dashboard Administrativo</h3>
-            <div class="admin-stats">
-                <div class="stat-card">
-                    <div class="stat-number" id="visitsCount">0</div>
-                    <div class="stat-label">Visitas Hoy</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="totalVisits">0</div>
-                    <div class="stat-label">Total Visitas</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="activeUsers">1</div>
-                    <div class="stat-label">Usuarios Activos</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="serverStatus">✓</div>
-                    <div class="stat-label">Estado Servidor</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="admin-section">
-            <h3>🔧 Controles Rápidos</h3>
-            <div class="admin-controls">
-                <button class="admin-btn" id="backupBtn">📂 Crear Backup</button>
-                <button class="admin-btn" id="clearCache">🗑️ Limpiar Cache</button>
-                <button class="admin-btn" id="analyticsBtn">📈 Ver Analytics</button>
-                <button class="admin-btn danger" id="maintenanceBtn">🚧 Modo Mantenimiento</button>
-            </div>
-        </div>
-        
-        <div class="admin-section">
-            <h3>📝 Notas Rápidas</h3>
-            <textarea class="admin-input" id="adminNotes" placeholder="Escribe notas aquí..." rows="3"></textarea>
-            <button class="admin-btn" id="saveNotes">💾 Guardar Notas</button>
-        </div>
-        
-        <div class="admin-section">
-            <h3>📋 Registro de Actividad</h3>
-            <div class="admin-log" id="adminLog">
-                <div class="log-entry success">✅ Panel cargado correctamente</div>
-                <div class="log-entry">🕒 Sistema iniciado: <span id="currentTime"></span></div>
-            </div>
-        </div>
-        
-        <div class="admin-section">
-            <h3>🔐 Acceso Rápido</h3>
-            <div class="admin-controls">
-                <button class="admin-btn" id="viewMessages">📨 Ver Mensajes</button>
-                <button class="admin-btn" id="viewOrders">📋 Ver Pedidos</button>
-                <button class="admin-btn danger" id="logoutAdmin">🚪 Salir del Panel</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contador de visitas (secreto) -->
-    <div class="visit-counter" id="visitCounter">
-        👁️ <span id="counterDisplay">0</span> visitas
-    </div>
-
-    <!-- Easter eggs triggers -->
-    <div class="easter-egg" id="egg1"></div>
-    <div class="easter-egg" id="egg2"></div>
-    <div class="easter-egg" id="egg3"></div>
-
-    <!-- Footer -->
+    <!-- Footer elegante y moderno -->
     <footer>
+        <div class="footer-wave"></div>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Voltaje Express</h3>
-                    <p>Empresa especializada en servicios eléctricos para hogares, empresas e industrias. Calidad, seguridad y profesionalidad garantizadas.</p>
+                <div class="footer-column footer-about">
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <div style="font-size: 24px; color: white; font-weight: bold;">⚡</div>
+                        </div>
+                        <div class="footer-logo-text">
+                            <h4>VOLTAJE EXPRESS</h4>
+                            <span>ENERGÍA CONFIABLE</span>
+                        </div>
+                    </div>
+                    <p>Empresa especializada en servicios eléctricos de alta calidad para hogares, empresas e industrias. Más de 5 años brindando soluciones confiables y seguras en toda la República Dominicana.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook">f</a>
-                        <a href="#" aria-label="Instagram">ig</a>
-                        <a href="#" aria-label="Twitter">t</a>
-                        <a href="#" aria-label="LinkedIn">in</a>
+                        <a href="#" aria-label="Facebook" title="Síguenos en Facebook">f</a>
+                        <a href="#" aria-label="Instagram" title="Síguenos en Instagram">ig</a>
+                        <a href="#" aria-label="Twitter" title="Síguenos en Twitter">𝕏</a>
+                        <a href="#" aria-label="WhatsApp" title="Contáctanos por WhatsApp">📱</a>
                     </div>
                 </div>
+                
                 <div class="footer-column">
-                    <h3>Enlaces Rápidos</h3>
+                    <h3>Nuestros Servicios</h3>
                     <ul class="footer-links">
-                        <li><a href="index.html">Inicio</a></li>
-                        <li><a href="servicios.html">Servicios</a></li>
-                        <li><a href="Nosotros.html">Sobre Nosotros</a></li>
-                        <li><a href="Contactos.html">Contacto</a></li>
+                        <li><a href="servicios.html#instalaciones">⚡ Instalaciones Eléctricas</a></li>
+                        <li><a href="servicios.html#mantenimiento">🔧 Mantenimiento y Reparaciones</a></li>
+                        <li><a href="servicios.html#iluminacion">💡 Iluminación y Diseño</a></li>
+                        <li><a href="servicios.html#industrial">🏭 Electricidad Industrial</a></li>
+                        <li><a href="servicios.html#renovables">🔋 Energías Renovables</a></li>
+                        <li><a href="servicios.html#carga">🚗 Puntos de Carga VE</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-column">
-                    <h3>Contacto</h3>
-                    <ul class="footer-links">
-                        <li>📍 Mahata Calle C sector f1</li>
-                        <li>📞 +1(809-523-8283)</li>
-                        <li>✉️ voltajeexpress2@gmail.com</li>
-                        <li>🕒 L-V: 8:00-5:00</li>
+                    <h3>Contáctanos</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <strong>Oficina Principal</strong><br>
+                                Mahata Calle C, sector f1<br>
+                                Santo Domingo, República Dominicana
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <strong>Teléfono y WhatsApp</strong><br>
+                                +1 (809) 523-8283<br>
+                                Disponible 24/7 para emergencias
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">✉️</div>
+                            <div>
+                                <strong>Correo Electrónico</strong><br>
+                                voltajeexpress2@gmail.com<br>
+                                Respuesta en menos de 24h
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">🕒</div>
+                            <div>
+                                <strong>Horario de Atención</strong><br>
+                                Lunes a Viernes: 8:00 AM - 5:00 PM<br>
+                                Sábados: 8:00 AM - 12:00 PM
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
+            
             <div class="copyright">
                 <p>&copy; 2021-2026 Voltaje Express. Todos los derechos reservados.</p>
-                <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.6;">
-                    v2.1.4 | Admin Panel: <span id="adminStatus">OFF</span> | 
-                    Color: <span class="color-indicator" id="currentColorIndicator"></span>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;">
+                    "Energizando hogares e industrias con excelencia y seguridad"
                 </p>
+                
+                <div class="copyright-stats">
+                    <div class="stat-item">
+                        <span class="icon">👁️</span>
+                        <span>Visitas: <strong id="footerVisitCount">0</strong></span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="icon">👆</span>
+                        <span>Clicks: <strong id="footerClickCount">0</strong></span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="icon">🔒</span>
+                        <span>Seguridad: <strong>100%</strong></span>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Panel de personalización mejorado (AGREGADO) -->
-    <div class="customization-panel" id="customizationPanel">
-        <div class="panel-toggle" id="panelToggle">🎨</div>
-        <h3>Personalizar Colores</h3>
-        <p>Cambia el color principal del sitio. Esta configuración se aplicará a todas las páginas.</p>
-        <div class="color-options">
-            <div class="color-option active" style="background-color: #0d6efd;" data-color="#0d6efd"></div>
-            <div class="color-option" style="background-color: #198754;" data-color="#198754"></div>
-            <div class="color-option" style="background-color: #dc3545;" data-color="#dc3545"></div>
-            <div class="color-option" style="background-color: #6f42c1;" data-color="#6f42c1"></div>
-            <div class="color-option" style="background-color: #fd7e14;" data-color="#fd7e14"></div>
-            <div class="color-option" style="background-color: #20c997;" data-color="#20c997"></div>
-            <div class="color-option" style="background-color: #e83e8c;" data-color="#e83e8c"></div>
-            <div class="color-option" style="background-color: #17a2b8;" data-color="#17a2b8"></div>
-        </div>
-        <button class="customization-btn" id="saveColorBtn">💾 Guardar para todas las páginas</button>
-        <button class="customization-btn secondary" id="resetColorsBtn">🔄 Restablecer colores</button>
+    <!-- Contador de visitas -->
+    <div class="visit-counter" id="visitCounter">
+        👁️ <span id="counterDisplay">0</span> visitas
     </div>
-
-    <!-- Mensaje de confirmación -->
-    <div class="color-message" id="colorMessage"></div>
 
     <script>
         // =============================================
-        // SISTEMA DE PERSONALIZACIÓN DE COLORES MEJORADO
+        // SISTEMA DE REDIRECCIÓN POR TECLA PRESIONADA
         // =============================================
 
-        // Elementos del DOM
-        const panelToggle = document.getElementById('panelToggle');
-        const customizationPanel = document.getElementById('customizationPanel');
-        const colorOptions = document.querySelectorAll('.color-option');
-        const saveColorBtn = document.getElementById('saveColorBtn');
-        const resetColorsBtn = document.getElementById('resetColorsBtn');
-        const colorMessage = document.getElementById('colorMessage');
-        const currentColorIndicator = document.getElementById('currentColorIndicator');
+        let keyHoldTimer = null;
+        let keyHoldStartTime = 0;
+        let keyHoldProgress = 0;
+        
+        // Elementos del indicador
+        const keyHoldIndicator = document.getElementById('keyHoldIndicator');
+        const keyHoldProgressBar = document.getElementById('keyHoldProgress');
+        const keyHoldText = document.getElementById('keyHoldText');
 
-        // Configurar el panel de personalización
-        function setupCustomizationPanel() {
-            // Toggle del panel
-            panelToggle.addEventListener('click', () => {
-                customizationPanel.classList.toggle('active');
-            });
-
-            // Selección de colores
-            colorOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    const color = option.getAttribute('data-color');
-                    
-                    // Remover activo de todos
-                    colorOptions.forEach(opt => opt.classList.remove('active'));
-                    
-                    // Agregar activo al seleccionado
-                    option.classList.add('active');
-                    
-                    // Aplicar color temporalmente
-                    applyColor(color);
-                });
-            });
-
-            // Guardar color para todas las páginas
-            saveColorBtn.addEventListener('click', () => {
-                const activeOption = document.querySelector('.color-option.active');
-                if (activeOption) {
-                    const selectedColor = activeOption.getAttribute('data-color');
-                    saveColorToAllPages(selectedColor);
-                }
-            });
-
-            // Restablecer colores
-            resetColorsBtn.addEventListener('click', resetColors);
-
-            // Cargar color guardado
-            loadSavedColor();
-
-            // Actualizar indicador de color
-            updateColorIndicator();
-        }
-
-        // Función para aplicar color
-        function applyColor(color) {
-            document.documentElement.style.setProperty('--primary', color);
-            document.documentElement.style.setProperty('--electric-blue', color);
-            
-            // Actualizar botones activos
-            colorOptions.forEach(option => {
-                option.classList.remove('active');
-                if (option.getAttribute('data-color') === color) {
-                    option.classList.add('active');
-                }
-            });
-        }
-
-        // Función para guardar color en localStorage
-        function saveColorToAllPages(color) {
-            // Guardar el color en localStorage (usando el mismo nombre que las otras páginas)
-            localStorage.setItem('voltagePrimaryColor', color);
-            
-            // Aplicar el color inmediatamente
-            applyColor(color);
-            
-            // Actualizar indicador
-            updateColorIndicator();
-            
-            // Mostrar mensaje de confirmación
-            showColorMessage('¡Color guardado para todas las páginas!');
-            
-            // Cerrar el panel después de guardar
-            setTimeout(() => {
-                customizationPanel.classList.remove('active');
-            }, 1000);
-        }
-
-        // Función para restablecer colores
-        function resetColors() {
-            const defaultColor = '#0d6efd';
-            localStorage.removeItem('voltagePrimaryColor');
-            applyColor(defaultColor);
-            updateColorIndicator();
-            showColorMessage('Colores restablecidos a los valores predeterminados');
-        }
-
-        // Función para mostrar mensaje
-        function showColorMessage(message) {
-            colorMessage.textContent = message;
-            colorMessage.classList.add('show');
-            
-            // Remover después de 3 segundos
-            setTimeout(() => {
-                colorMessage.classList.remove('show');
-            }, 3000);
-        }
-
-        // Cargar color guardado al iniciar
-        function loadSavedColor() {
-            // Intentar cargar el color con el nuevo nombre
-            let savedColor = localStorage.getItem('voltagePrimaryColor');
-            
-            // Si no existe, intentar cargar con el nombre antiguo (para compatibilidad)
-            if (!savedColor) {
-                savedColor = localStorage.getItem('primaryColor');
-                if (savedColor) {
-                    // Migrar al nuevo nombre
-                    localStorage.setItem('voltagePrimaryColor', savedColor);
-                    localStorage.removeItem('primaryColor');
-                }
+        // Detectar cuando se presiona una tecla
+        document.addEventListener('keydown', function(e) {
+            // Evitar teclas de navegación (F5, Ctrl+R, etc.)
+            if (e.key === 'F5' || (e.ctrlKey && e.key === 'r') || e.key === 'Escape') {
+                return;
             }
             
-            if (savedColor) {
-                applyColor(savedColor);
+            // Solo iniciar si no hay un timer activo
+            if (!keyHoldTimer) {
+                keyHoldStartTime = Date.now();
+                keyHoldProgress = 0;
+                
+                // Mostrar indicador de progreso
+                keyHoldIndicator.style.display = 'block';
+                keyHoldText.textContent = 'Mantén presionado para acceder al panel...';
+                
+                // Actualizar progreso cada 100ms
+                keyHoldTimer = setInterval(() => {
+                    const currentTime = Date.now();
+                    const elapsed = currentTime - keyHoldStartTime;
+                    keyHoldProgress = Math.min(elapsed / 10000, 1); // 10 segundos = 10000ms
+                    
+                    // Actualizar barra de progreso
+                    keyHoldProgressBar.style.width = `${keyHoldProgress * 100}%`;
+                    keyHoldText.textContent = `Acceso al panel... ${Math.round(keyHoldProgress * 100)}%`;
+                    
+                    // Cambiar color cuando esté cerca de completarse
+                    if (keyHoldProgress > 0.8) {
+                        keyHoldProgressBar.style.background = 'linear-gradient(90deg, #10b981, #00a8ff)';
+                    } else if (keyHoldProgress > 0.5) {
+                        keyHoldProgressBar.style.background = 'linear-gradient(90deg, #f59e0b, #3b82f6)';
+                    }
+                    
+                    // Completado: redirigir después de 10 segundos
+                    if (elapsed >= 10000) {
+                        clearInterval(keyHoldTimer);
+                        keyHoldTimer = null;
+                        
+                        // Efecto visual de completado
+                        keyHoldProgressBar.style.width = '100%';
+                        keyHoldText.textContent = '¡Acceso concedido!';
+                        keyHoldIndicator.style.borderColor = '#10b981';
+                        keyHoldIndicator.style.boxShadow = '0 0 30px rgba(16, 185, 129, 0.7)';
+                        
+                        // Redirigir después de 1 segundo
+                        setTimeout(() => {
+                            keyHoldIndicator.style.display = 'none';
+                            keyHoldIndicator.style.borderColor = '#3b82f6';
+                            keyHoldIndicator.style.boxShadow = '0 0 20px rgba(59, 130, 246, 0.5)';
+                            keyHoldProgressBar.style.background = 'linear-gradient(90deg, #3b82f6, #00a8ff)';
+                            keyHoldProgressBar.style.width = '0%';
+                            
+                            // Redirigir a Login.html
+                            window.location.href = 'Login.html';
+                        }, 1000);
+                    }
+                }, 100);
             }
-        }
+        });
 
-        // Actualizar indicador de color en el footer
-        function updateColorIndicator() {
-            const currentColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
-            currentColorIndicator.style.backgroundColor = currentColor;
-        }
+        // Detectar cuando se suelta una tecla
+        document.addEventListener('keyup', function() {
+            if (keyHoldTimer) {
+                clearInterval(keyHoldTimer);
+                keyHoldTimer = null;
+                
+                // Ocultar indicador con animación
+                keyHoldIndicator.style.opacity = '0';
+                keyHoldIndicator.style.transition = 'opacity 0.3s';
+                
+                setTimeout(() => {
+                    keyHoldIndicator.style.display = 'none';
+                    keyHoldIndicator.style.opacity = '1';
+                    keyHoldProgressBar.style.width = '0%';
+                    keyHoldIndicator.style.borderColor = '#3b82f6';
+                    keyHoldIndicator.style.boxShadow = '0 0 20px rgba(59, 130, 246, 0.5)';
+                    keyHoldProgressBar.style.background = 'linear-gradient(90deg, #3b82f6, #00a8ff)';
+                }, 300);
+            }
+        });
 
         // =============================================
-        // CÓDIGO PARA PANEL DE ADMINISTRADOR
+        // SISTEMA DE CLICKS EN EL LOGO
         // =============================================
 
-        // Elementos del DOM para el panel admin
-        const adminPanel = document.getElementById('adminPanel');
-        const adminToggle = document.getElementById('adminToggle');
-        const adminStatus = document.getElementById('adminStatus');
-        const visitsCount = document.getElementById('visitsCount');
-        const totalVisits = document.getElementById('totalVisits');
-        const activeUsers = document.getElementById('activeUsers');
-        const serverStatus = document.getElementById('serverStatus');
-        const adminNotes = document.getElementById('adminNotes');
-        const adminLog = document.getElementById('adminLog');
-        const currentTime = document.getElementById('currentTime');
-        const counterDisplay = document.getElementById('counterDisplay');
+        const logo = document.getElementById('logo');
+        const clickCounter = document.getElementById('clickCounter');
+        const clickCountDisplay = document.getElementById('clickCount');
+        const footerClickCount = document.getElementById('footerClickCount');
+        const footerVisitCount = document.getElementById('footerVisitCount');
         const visitCounter = document.getElementById('visitCounter');
+        const counterDisplay = document.getElementById('counterDisplay');
 
-        // Variables de estado del admin
-        let adminPassword = "voltaje2026"; // Contraseña secreta
-        let isAdminPanelVisible = false;
-        let visitCount = 0;
-        let totalVisitCount = 0;
-        let notes = "";
-        let logs = [];
+        // Variables para el sistema de clicks
+        let clickCount = 0;
+        let lastClickTime = 0;
+        let clickTimer = null;
+        let showCounter = false;
 
-        // Inicializar sistema de administración
-        function initAdminSystem() {
-            // Cargar datos del localStorage
-            loadAdminData();
-            
-            // Inicializar contador de visitas
-            updateVisitCounter();
-            
-            // Actualizar hora actual
-            updateCurrentTime();
-            
-            // Configurar evento para acceder al panel (doble click en logo)
-            setupAdminAccess();
-            
-            // Configurar easter eggs
-            setupEasterEggs();
-            
-            // Configurar botones del panel
-            setupAdminControls();
-            
-            // Ocultar contador de visitas inicialmente
-            visitCounter.style.display = 'none';
-        }
-
-        // Cargar datos del localStorage
-        function loadAdminData() {
-            // Cargar contador de visitas totales
-            const savedTotalVisits = localStorage.getItem('totalVisits');
-            totalVisitCount = savedTotalVisits ? parseInt(savedTotalVisits) : 0;
-            
-            // Cargar notas
-            const savedNotes = localStorage.getItem('adminNotes');
-            adminNotes.value = savedNotes || "";
-            
-            // Cargar logs
-            const savedLogs = localStorage.getItem('adminLogs');
-            logs = savedLogs ? JSON.parse(savedLogs) : [];
-            
-            // Actualizar logs en pantalla
-            updateLogsDisplay();
-        }
-
-        // Configurar acceso secreto al panel
-        function setupAdminAccess() {
-            const logo = document.querySelector('.logo h1');
-            let clickCount = 0;
-            let lastClickTime = 0;
-            
+        // Sistema de clicks en el logo
+        function setupLogoClickSystem() {
             logo.addEventListener('click', function(e) {
                 const currentTime = new Date().getTime();
-                const timeDiff = currentTime - lastClickTime;
                 
-                if (timeDiff < 500) { // Doble click detectado
-                    clickCount++;
-                    
-                    if (clickCount >= 2) {
-                        showPasswordPrompt();
-                        clickCount = 0;
-                    }
-                } else {
-                    clickCount = 1;
+                // Resetear timer si pasa 1 segundo
+                if (currentTime - lastClickTime > 1000) {
+                    clickCount = 0;
                 }
                 
+                // Incrementar contador
+                clickCount++;
                 lastClickTime = currentTime;
-            });
-            
-            // También acceder con combinación de teclas Ctrl+Alt+A
-            document.addEventListener('keydown', function(e) {
-                if (e.ctrlKey && e.altKey && e.key === 'a') {
-                    e.preventDefault();
-                    showPasswordPrompt();
-                }
+                
+                // Mostrar contador
+                showClickCounter();
+                
+                // Actualizar estado en footer
+                footerClickCount.textContent = clickCount;
+                
+                // Acciones según cantidad de clicks
+                handleClicks(clickCount);
+                
+                // Resetear contador después de 1.5 segundos
+                clearTimeout(clickTimer);
+                clickTimer = setTimeout(() => {
+                    clickCount = 0;
+                    footerClickCount.textContent = '0';
+                }, 1500);
             });
         }
 
-        // Mostrar prompt de contraseña
-        function showPasswordPrompt() {
+        // Mostrar contador de clicks
+        function showClickCounter() {
+            clickCountDisplay.textContent = clickCount;
+            clickCounter.classList.add('show');
+            
+            // Ocultar después de 1.5 segundos
+            setTimeout(() => {
+                clickCounter.classList.remove('show');
+            }, 1500);
+        }
+
+        // Manejar acciones según cantidad de clicks
+        function handleClicks(count) {
+            switch(count) {
+                case 2:
+                    // 2 clicks: Recargar página
+                    showMessage('🔄 Recargando página...');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 500);
+                    break;
+                    
+                case 5:
+                    // 5 clicks: Abrir panel admin
+                    openAdminPanel();
+                    break;
+                    
+                case 10:
+                    // 10 clicks: Easter egg secreto
+                    showMessage('🎉 ¡Easter egg desbloqueado!');
+                    unlockSecretFeatures();
+                    break;
+            }
+        }
+
+        // Mostrar mensaje temporal
+        function showMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, var(--electric-blue), #0097e6);
+                color: white;
+                padding: 1.5rem 3rem;
+                border-radius: 15px;
+                z-index: 9999;
+                animation: fadeInOut 2s forwards;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                text-align: center;
+                font-weight: 600;
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                document.body.removeChild(messageDiv);
+            }, 2000);
+        }
+
+        // Abrir panel de administrador
+        function openAdminPanel() {
+            // Mostrar prompt de contraseña
             const password = prompt("🔐 Ingrese la contraseña de administrador:");
             
-            if (password === adminPassword) {
-                adminPanel.classList.add('active');
-                isAdminPanelVisible = true;
-                adminStatus.textContent = "ON";
-                addLog("🔓 Panel de administrador activado", "success");
-                
-                // Mostrar contador de visitas
-                visitCounter.style.display = 'block';
+            if (password === "voltaje2026") {
+                showMessage('✅ Panel de administrador activado');
+                showCounter = true;
+                visitCounter.classList.add('show');
+                localStorage.setItem('showCounter', 'true');
             } else if (password !== null) {
-                alert("❌ Contraseña incorrecta");
-                addLog("⚠️ Intento de acceso no autorizado", "warning");
+                showMessage('❌ Contraseña incorrecta');
             }
         }
 
-        // Configurar botones del panel
-        function setupAdminControls() {
-            // Toggle del panel
-            adminToggle.addEventListener('click', function() {
-                adminPanel.classList.toggle('active');
-                isAdminPanelVisible = !isAdminPanelVisible;
-                adminStatus.textContent = isAdminPanelVisible ? "ON" : "OFF";
-                
-                if (isAdminPanelVisible) {
-                    addLog("🔓 Panel de administrador activado", "success");
-                    visitCounter.style.display = 'block';
-                } else {
-                    addLog("🔒 Panel de administrador cerrado", "warning");
-                    visitCounter.style.display = 'none';
-                }
-            });
-
-            // Botón de backup
-            document.getElementById('backupBtn').addEventListener('click', function() {
-                createBackup();
-            });
-
-            // Botón de limpiar cache
-            document.getElementById('clearCache').addEventListener('click', function() {
-                clearCache();
-            });
-
-            // Botón de analytics
-            document.getElementById('analyticsBtn').addEventListener('click', function() {
-                showAnalytics();
-            });
-
-            // Botón de modo mantenimiento
-            document.getElementById('maintenanceBtn').addEventListener('click', function() {
-                toggleMaintenance();
-            });
-
-            // Guardar notas
-            document.getElementById('saveNotes').addEventListener('click', function() {
-                saveNotes();
-            });
-
-            // Ver mensajes
-            document.getElementById('viewMessages').addEventListener('click', function() {
-                viewMessages();
-            });
-
-            // Ver pedidos
-            document.getElementById('viewOrders').addEventListener('click', function() {
-                viewOrders();
-            });
-
-            // Salir del panel
-            document.getElementById('logoutAdmin').addEventListener('click', function() {
-                logoutAdmin();
-            });
-        }
-
-        // Funciones del panel de administración
-        function createBackup() {
-            const backupData = {
-                date: new Date().toLocaleString(),
-                visits: totalVisitCount,
-                notes: adminNotes.value,
-                logs: logs.slice(-10) // Últimos 10 logs
-            };
+        // Desbloquear características secretas
+        function unlockSecretFeatures() {
+            // Cambiar colores del sitio
+            document.documentElement.style.setProperty('--electric-blue', '#ff0080');
+            document.documentElement.style.setProperty('--electric-yellow', '#00ff88');
             
-            const backupStr = JSON.stringify(backupData, null, 2);
-            const blob = new Blob([backupStr], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `backup-voltaje-${new Date().toISOString().split('T')[0]}.json`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            // Añadir efectos especiales
+            const logoIcon = document.querySelector('.logo-icon');
+            logoIcon.style.background = 'linear-gradient(135deg, #ff0080, #00ff88)';
             
-            addLog("📂 Backup creado exitosamente", "success");
+            showMessage('✨ ¡Modo especial activado!');
         }
 
-        function clearCache() {
-            localStorage.removeItem('adminNotes');
-            localStorage.removeItem('adminLogs');
-            adminNotes.value = "";
-            logs = [];
-            updateLogsDisplay();
-            addLog("🗑️ Cache limpiado correctamente", "success");
-        }
-
-        function showAnalytics() {
-            const analyticsMsg = `
-📊 **Analíticas del Sitio**
-• Total de visitas: ${totalVisitCount}
-• Visitas hoy: ${visitCount}
-• Usuarios activos: ${isAdminPanelVisible ? 1 : 0}
-• Estado del sistema: ✅ Operativo
-• Última actividad: ${new Date().toLocaleString()}
-            `;
-            alert(analyticsMsg);
-            addLog("📈 Analytics visualizados", "success");
-        }
-
-        function toggleMaintenance() {
-            const maintenanceBtn = document.getElementById('maintenanceBtn');
-            const isMaintenance = maintenanceBtn.textContent.includes("Desactivar");
-            
-            if (isMaintenance) {
-                maintenanceBtn.textContent = "🚧 Modo Mantenimiento";
-                maintenanceBtn.classList.remove("success");
-                addLog("🌐 Modo mantenimiento desactivado", "success");
-            } else {
-                maintenanceBtn.textContent = "✅ Desactivar Mantenimiento";
-                maintenanceBtn.classList.add("success");
-                addLog("🚧 Modo mantenimiento activado", "warning");
-            }
-        }
-
-        function saveNotes() {
-            localStorage.setItem('adminNotes', adminNotes.value);
-            addLog("💾 Notas guardadas exitosamente", "success");
-        }
-
-        function viewMessages() {
-            addLog("📨 Visualizando mensajes pendientes", "success");
-            // Aquí iría la lógica para cargar mensajes
-        }
-
-        function viewOrders() {
-            addLog("📋 Visualizando pedidos activos", "success");
-            // Aquí iría la lógica para cargar pedidos
-        }
-
-        function logoutAdmin() {
-            adminPanel.classList.remove('active');
-            isAdminPanelVisible = false;
-            adminStatus.textContent = "OFF";
-            visitCounter.style.display = 'none';
-            addLog("🚪 Sesión de administrador cerrada", "warning");
-        }
-
-        // Sistema de logs
-        function addLog(message, type = "") {
-            const timestamp = new Date().toLocaleTimeString();
-            const logEntry = {
-                message: `[${timestamp}] ${message}`,
-                type: type,
-                timestamp: new Date().toISOString()
-            };
-            
-            logs.push(logEntry);
-            
-            // Mantener solo los últimos 50 logs
-            if (logs.length > 50) {
-                logs.shift();
-            }
-            
-            // Actualizar localStorage
-            localStorage.setItem('adminLogs', JSON.stringify(logs));
-            
-            // Actualizar display
-            updateLogsDisplay();
-        }
-
-        function updateLogsDisplay() {
-            adminLog.innerHTML = "";
-            
-            const recentLogs = logs.slice(-10).reverse(); // Mostrar últimos 10, más reciente primero
-            
-            recentLogs.forEach(log => {
-                const logDiv = document.createElement('div');
-                logDiv.className = `log-entry ${log.type}`;
-                logDiv.textContent = log.message;
-                adminLog.appendChild(logDiv);
-            });
-        }
+        // =============================================
+        // SISTEMA DE VISITAS Y ANIMACIONES
+        // =============================================
 
         // Sistema de visitas
-        function updateVisitCounter() {
-            // Incrementar contador de visitas del día
-            visitCount++;
-            
-            // Incrementar contador total
-            totalVisitCount++;
+        function setupVisitSystem() {
+            let totalVisitCount = localStorage.getItem('totalVisits') || 0;
+            totalVisitCount = parseInt(totalVisitCount) + 1;
             localStorage.setItem('totalVisits', totalVisitCount);
             
             // Actualizar displays
             counterDisplay.textContent = totalVisitCount;
-            visitsCount.textContent = visitCount;
-            totalVisits.textContent = totalVisitCount;
+            footerVisitCount.textContent = totalVisitCount;
             
-            // Actualizar cada 10 visitas
-            if (totalVisitCount % 10 === 0) {
-                addLog(`🎉 ¡${totalVisitCount} visitas totales alcanzadas!`, "success");
+            // Mostrar/ocultar contador según configuración
+            showCounter = localStorage.getItem('showCounter') === 'true';
+            visitCounter.style.display = showCounter ? 'flex' : 'none';
+            
+            // Si está oculto, añadir clase para animación cuando se muestre
+            if (!showCounter) {
+                visitCounter.classList.remove('show');
             }
         }
 
-        // Actualizar hora actual
-        function updateCurrentTime() {
-            const now = new Date();
-            currentTime.textContent = now.toLocaleTimeString();
-            
-            // Actualizar cada minuto
-            setInterval(() => {
-                currentTime.textContent = new Date().toLocaleTimeString();
-            }, 60000);
-        }
-
-        // Configurar easter eggs
-        function setupEasterEggs() {
-            const eggs = document.querySelectorAll('.easter-egg');
-            let eggSequence = [];
-            const secretCode = [1, 2, 3]; // Clic en egg1, egg2, egg3
-            
-            eggs.forEach((egg, index) => {
-                egg.addEventListener('click', function() {
-                    eggSequence.push(index + 1);
+        // Mostrar mensaje de acceso rápido (solo en desktop)
+        function showAccessHint() {
+            if (window.innerWidth > 480) { // Solo mostrar en desktop
+                setTimeout(() => {
+                    const hint = document.createElement('div');
+                    hint.className = 'access-hint';
+                    hint.innerHTML = `
+                        <strong>💡 Acceso rápido al panel:</strong><br>
+                        Mantén presionada cualquier tecla por 10 segundos
+                    `;
+                    document.body.appendChild(hint);
                     
-                    // Verificar si la secuencia coincide
-                    if (arraysEqual(eggSequence, secretCode)) {
-                        unlockSecretFeature();
-                        eggSequence = [];
-                    }
-                    
-                    // Limpiar secuencia si es muy larga
-                    if (eggSequence.length > secretCode.length) {
-                        eggSequence = [];
-                    }
-                });
-            });
-        }
-
-        function arraysEqual(a, b) {
-            return JSON.stringify(a) === JSON.stringify(b);
-        }
-
-        function unlockSecretFeature() {
-            addLog("🎯 ¡Easter egg descubierto! Característica secreta desbloqueada", "success");
-            alert("🎉 ¡Felicidades! Has descubierto un easter egg secreto.\n\n✨ Característica secreta desbloqueada: Panel de administrador avanzado");
-            
-            // Mostrar todos los paneles
-            adminPanel.classList.add('active');
-            isAdminPanelVisible = true;
-            adminStatus.textContent = "ON";
-            visitCounter.style.display = 'block';
-            
-            // Agregar funcionalidad extra
-            addLog("🚀 Modo administrador avanzado activado", "success");
+                    // Eliminar mensaje después de 8 segundos
+                    setTimeout(() => {
+                        hint.style.opacity = '0';
+                        hint.style.transition = 'opacity 1s';
+                        setTimeout(() => hint.remove(), 1000);
+                    }, 8000);
+                }, 2000);
+            }
         }
 
         // =============================================
-        // CÓDIGO JAVASCRIPT EXISTENTE
+        // FUNCIONALIDADES EXISTENTES DEL INDEX
         // =============================================
-
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navUl = document.querySelector('nav ul');
-        const navLinks = document.querySelectorAll('nav a');
-        const header = document.querySelector('header');
-        const particlesContainer = document.getElementById('particles');
-        const serviceCards = document.querySelectorAll('.service-card');
-        const features = document.querySelectorAll('.feature');
 
         // Menú móvil
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navUl = document.querySelector('nav ul');
+        
         mobileMenu.addEventListener('click', (e) => {
             e.stopPropagation();
             navUl.classList.toggle('active');
             mobileMenu.textContent = navUl.classList.contains('active') ? '✕' : '☰';
         });
-
+        
         // Cerrar menú móvil al hacer clic en un enlace
-        navLinks.forEach(link => {
+        document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
                 if (window.innerWidth <= 768 && navUl.classList.contains('active')) {
                     navUl.classList.remove('active');
@@ -1560,18 +1602,7 @@
                 }
             });
         });
-
-        // Cambiar estilo del header al hacer scroll
-        function handleScroll() {
-            if (window.scrollY > 100) {
-                header.style.backgroundColor = 'rgba(13, 13, 13, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
-            } else {
-                header.style.backgroundColor = '';
-                header.style.backdropFilter = '';
-            }
-        }
-
+        
         // Cerrar menú al hacer clic fuera
         document.addEventListener('click', (e) => {
             if (window.innerWidth <= 768 &&
@@ -1582,54 +1613,42 @@
                 mobileMenu.textContent = '☰';
             }
         });
-
-        // Manejar redimensionamiento
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && navUl.classList.contains('active')) {
-                navUl.classList.remove('active');
-                mobileMenu.textContent = '☰';
+        
+        // Header al hacer scroll
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.backgroundColor = '';
+                header.style.backdropFilter = '';
             }
         });
-
-        // Crear partículas
-        function createParticles() {
-            const particleCount = 50;
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                particle.style.left = `${posX}%`;
-                particle.style.top = `${posY}%`;
-                const size = Math.random() * 4 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.opacity = Math.random() * 0.5 + 0.2;
-                const duration = Math.random() * 20 + 10;
-                particle.style.animation = `float ${duration}s linear infinite`;
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Animación al hacer scroll
+        
+        // Animaciones al hacer scroll
+        const serviceCards = document.querySelectorAll('.service-card');
+        const features = document.querySelectorAll('.feature');
+        
         function checkScroll() {
             const triggerBottom = window.innerHeight * 0.85;
-
+            
             serviceCards.forEach((card, index) => {
                 const cardTop = card.getBoundingClientRect().top;
                 if (cardTop < triggerBottom) {
                     setTimeout(() => {
                         card.classList.add('visible');
-                    }, index * 200);
+                    }, index * 150);
                 }
             });
-
+            
             features.forEach((feature, index) => {
                 const featureTop = feature.getBoundingClientRect().top;
                 if (featureTop < triggerBottom) {
                     setTimeout(() => {
                         feature.classList.add('visible');
-                    }, index * 200);
+                    }, index * 150);
                 }
             });
         }
@@ -1639,17 +1658,14 @@
         // =============================================
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Configurar panel de personalización
-            setupCustomizationPanel();
+            // Configurar sistema de clicks en logo
+            setupLogoClickSystem();
             
-            // Inicializar sistema de administración
-            initAdminSystem();
+            // Configurar sistema de visitas
+            setupVisitSystem();
             
-            // Inicializar partículas
-            createParticles();
-            
-            // Inicializar funciones existentes
-            handleScroll();
+            // Mostrar mensaje de acceso rápido
+            showAccessHint();
             
             // Verificar elementos visibles al cargar
             checkScroll();
@@ -1662,11 +1678,7 @@
         });
 
         // Event listeners para scroll
-        window.addEventListener('scroll', () => {
-            handleScroll();
-            checkScroll();
-        });
+        window.addEventListener('scroll', checkScroll);
     </script>
 </body>
-
 </html>
