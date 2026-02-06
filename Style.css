@@ -349,7 +349,7 @@ nav ul li a.active {
 .feature {
     text-align: center;
     padding: 30px 20px;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     border-radius: 8px;
     box-shadow: var(--shadow);
     transition: var(--transition);

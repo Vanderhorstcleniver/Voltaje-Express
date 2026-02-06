@@ -67,6 +67,12 @@
             cursor: pointer;
             position: relative;
             transition: all 0.3s ease;
+            user-select: none; /* Evitar selección de texto */
+        }
+        
+        /* Efectos específicos para doble click - EXACTAMENTE IGUAL AL PRIMER CÓDIGO */
+        .logo.double-click-active {
+            animation: logoPulse 0.3s ease;
         }
         
         .logo:hover {
@@ -85,6 +91,12 @@
             overflow: hidden;
             box-shadow: 0 8px 25px rgba(0, 168, 255, 0.25);
             border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .logo-icon.double-click-effect {
+            animation: iconShock 0.5s ease;
+            box-shadow: 0 0 30px var(--electric-blue), 0 0 60px var(--electric-yellow);
         }
         
         .logo-icon::before {
@@ -103,6 +115,11 @@
             z-index: 2;
             filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
             transform: rotate(-5deg);
+            transition: all 0.3s ease;
+        }
+        
+        .logo-icon .bolt.double-click-effect {
+            animation: boltFlash 0.5s ease;
         }
         
         .logo-text {
@@ -120,6 +137,7 @@
             margin-bottom: 4px;
             letter-spacing: 0.8px;
             font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+            transition: all 0.3s ease;
         }
         
         .logo-text .tagline {
@@ -131,6 +149,7 @@
             border-left: 2px solid var(--electric-blue);
             padding-left: 8px;
             margin-top: 2px;
+            transition: all 0.3s ease;
         }
         
         /* Línea decorativa elegante para el logo */
@@ -147,37 +166,151 @@
                 transparent);
             border-radius: 1px;
             opacity: 0.7;
+            transition: all 0.3s ease;
         }
         
-        /* Contador de clicks */
-        .click-counter {
+        .logo-decoration.double-click-effect {
+            animation: lineGlow 1s ease;
+            opacity: 1;
+            height: 4px;
+        }
+        
+        /* ANIMACIONES ESPECÍFICAS PARA DOBLE CLICK - SIN GIRO */
+        @keyframes logoPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes iconShock {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1.1); }
+            75% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes boltFlash {
+            0% { 
+                color: white;
+                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+            }
+            50% { 
+                color: var(--electric-yellow);
+                filter: drop-shadow(0 0 15px var(--electric-yellow));
+                transform: rotate(-5deg) scale(1.3);
+            }
+            100% { 
+                color: white;
+                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+                transform: rotate(-5deg);
+            }
+        }
+        
+        @keyframes lineGlow {
+            0% { 
+                opacity: 0.7;
+                height: 2px;
+                background: linear-gradient(90deg, 
+                    transparent, 
+                    var(--electric-blue), 
+                    var(--electric-yellow), 
+                    transparent);
+            }
+            50% { 
+                opacity: 1;
+                height: 6px;
+                background: linear-gradient(90deg, 
+                    var(--electric-blue), 
+                    var(--electric-yellow),
+                    var(--electric-blue), 
+                    var(--electric-yellow));
+                box-shadow: 0 0 20px var(--electric-blue);
+            }
+            100% { 
+                opacity: 0.7;
+                height: 2px;
+                background: linear-gradient(90deg, 
+                    transparent, 
+                    var(--electric-blue), 
+                    var(--electric-yellow), 
+                    transparent);
+            }
+        }
+        
+        /* Overlay de recarga - SIN ANIMACIÓN DE GIRO */
+        .reload-overlay {
             position: fixed;
-            top: 80px;
-            right: 20px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
-            padding: 10px 16px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            z-index: 999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+            z-index: 9999;
             display: none;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+            justify-content: center;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            font-weight: 500;
         }
         
-        .click-counter.show {
+        .reload-overlay.show {
             display: flex;
-            animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: fadeIn 0.3s ease;
         }
         
-        @keyframes bounceIn {
-            0% { transform: scale(0.3) rotate(-180deg); opacity: 0; }
-            70% { transform: scale(1.1) rotate(5deg); }
-            100% { transform: scale(1) rotate(0); opacity: 1; }
+        .reload-content {
+            text-align: center;
+            color: white;
+            max-width: 500px;
+            padding: 2rem;
+        }
+        
+        .reload-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: pulse 1.5s ease-in-out infinite;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--electric-blue), var(--electric-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @keyframes pulse {
+            0% { 
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px var(--electric-blue));
+            }
+            50% { 
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 20px var(--electric-blue));
+            }
+            100% { 
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px var(--electric-blue));
+            }
+        }
+        
+        .reload-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        
+        .reload-content p {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         nav ul {
@@ -320,6 +453,9 @@
             color: #0f172a;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
             font-size: 1.05rem;
+            user-select: none;
+            -webkit-user-select: none;
+            position: relative;
         }
         
         .service-nav-item:hover {
@@ -378,6 +514,8 @@
             border-radius: 20px;
             background: white;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            position: relative;
         }
         
         .service-detailed.visible {
@@ -399,6 +537,7 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             position: relative;
             transition: all 0.5s;
+            cursor: pointer;
         }
         
         .service-image:hover {
@@ -442,6 +581,7 @@
             color: #0f172a;
             position: relative;
             padding-bottom: 1rem;
+            cursor: pointer;
         }
         
         .service-info h3::after {
@@ -721,6 +861,7 @@
             align-items: center;
             gap: 15px;
             margin-bottom: 2rem;
+            cursor: pointer;
         }
         
         .footer-logo-icon {
@@ -901,6 +1042,8 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s;
+            cursor: pointer;
+            user-select: none;
         }
         
         .visit-counter.show {
@@ -922,6 +1065,46 @@
         .visit-counter:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* ESTILOS EXACTAMENTE IGUALES AL PRIMER CÓDIGO PARA EL MENSAJE DE RECARGA */
+        #reloadMessageContainer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            animation: slideIn 0.5s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(0, 168, 255, 0.5);
+        }
+        
+        #reloadMessageContainer.show {
+            display: flex;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+        
+        #reloadMessageContainer span {
+            font-size: 1.2rem;
         }
         
         /* Animaciones */
@@ -1020,6 +1203,10 @@
                 padding: 10px 15px;
                 font-size: 0.85rem;
             }
+            
+            #reloadMessageContainer {
+                padding: 12px 20px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1048,15 +1235,29 @@
             .modal-content {
                 padding: 2rem;
             }
+            
+            #reloadMessageContainer {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 
 <body>
+    <!-- Overlay de recarga - SIN GIRO -->
+    <div class="reload-overlay" id="reloadOverlay">
+        <div class="reload-content">
+            <div class="reload-icon">⚡</div>
+            <h3>Recargando Energía</h3>
+            <p>Voltaje Express está recargando la página con energía eléctrica...</p>
+        </div>
+    </div>
+
     <!-- Header con nuevo logo -->
     <header>
         <div class="container header-container">
-            <div class="logo" id="logo">
+            <div class="logo" id="mainLogo">
                 <div class="logo-icon">
                     <div class="bolt">⚡</div>
                 </div>
@@ -1077,12 +1278,6 @@
             </nav>
         </div>
     </header>
-
-    <!-- Contador de clicks -->
-    <div class="click-counter" id="clickCounter">
-        <span>👆</span>
-        <span id="clickCount">0</span> clicks
-    </div>
 
     <!-- Hero Section para página de servicios -->
     <section class="page-hero">
@@ -1302,7 +1497,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column footer-about">
-                    <div class="footer-logo">
+                    <div class="footer-logo" id="footerLogo">
                         <div class="footer-logo-icon">
                             <div style="font-size: 24px; color: white; font-weight: bold;">⚡</div>
                         </div>
@@ -1383,12 +1578,12 @@
                         <span>Visitas: <strong id="footerVisitCount">0</strong></span>
                     </div>
                     <div class="stat-item">
-                        <span class="icon">👆</span>
-                        <span>Clicks: <strong id="footerClickCount">0</strong></span>
-                    </div>
-                    <div class="stat-item">
                         <span class="icon">⚡</span>
                         <span>Servicios: <strong>6</strong></span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="icon">👆👆</span>
+                        <span>Doble click activo</span>
                     </div>
                 </div>
             </div>
@@ -1402,154 +1597,81 @@
 
     <script>
         // =============================================
-        // SISTEMA DE CLICKS EN EL LOGO
+        // SISTEMA DE DOBLE CLICK EXACTO AL PRIMER CÓDIGO
         // =============================================
 
-        const logo = document.getElementById('logo');
-        const clickCounter = document.getElementById('clickCounter');
-        const clickCountDisplay = document.getElementById('clickCount');
-        const footerClickCount = document.getElementById('footerClickCount');
-        const footerVisitCount = document.getElementById('footerVisitCount');
-        const visitCounter = document.getElementById('visitCounter');
-        const counterDisplay = document.getElementById('counterDisplay');
-
-        // Variables para el sistema de clicks
-        let clickCount = 0;
-        let lastClickTime = 0;
-        let clickTimer = null;
-        let showCounter = false;
-
-        // Sistema de clicks en el logo
-        function setupLogoClickSystem() {
-            logo.addEventListener('click', function(e) {
-                const currentTime = new Date().getTime();
+        class DoubleClickHandler {
+            constructor(element, doubleCallback, singleCallback = null, delay = 300) {
+                this.element = element;
+                this.doubleCallback = doubleCallback;
+                this.singleCallback = singleCallback;
+                this.delay = delay;
+                this.clickCount = 0;
+                this.timer = null;
                 
-                // Resetear timer si pasa 1 segundo
-                if (currentTime - lastClickTime > 1000) {
-                    clickCount = 0;
+                this.element.addEventListener('click', this.handleClick.bind(this));
+            }
+
+            handleClick(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                this.clickCount++;
+
+                if (this.clickCount === 1) {
+                    this.timer = setTimeout(() => {
+                        // Click único
+                        if (this.singleCallback) {
+                            this.singleCallback(event);
+                        }
+                        this.reset();
+                    }, this.delay);
+                } else if (this.clickCount === 2) {
+                    clearTimeout(this.timer);
+                    // Doble click
+                    this.doubleCallback(event);
+                    this.reset();
                 }
-                
-                // Incrementar contador
-                clickCount++;
-                lastClickTime = currentTime;
-                
-                // Mostrar contador
-                showClickCounter();
-                
-                // Actualizar estado en footer
-                footerClickCount.textContent = clickCount;
-                
-                // Acciones según cantidad de clicks
-                handleClicks(clickCount);
-                
-                // Resetear contador después de 1.5 segundos
-                clearTimeout(clickTimer);
-                clickTimer = setTimeout(() => {
-                    clickCount = 0;
-                    footerClickCount.textContent = '0';
-                }, 1500);
-            });
-        }
+            }
 
-        // Mostrar contador de clicks
-        function showClickCounter() {
-            clickCountDisplay.textContent = clickCount;
-            clickCounter.classList.add('show');
-            
-            // Ocultar después de 1.5 segundos
-            setTimeout(() => {
-                clickCounter.classList.remove('show');
-            }, 1500);
-        }
-
-        // Manejar acciones según cantidad de clicks
-        function handleClicks(count) {
-            switch(count) {
-                case 2:
-                    // 2 clicks: Recargar página
-                    showMessage('🔄 Recargando página...');
-                    setTimeout(() => {
-                        location.reload();
-                    }, 500);
-                    break;
-                    
-                case 5:
-                    // 5 clicks: Abrir panel admin
-                    openAdminPanel();
-                    break;
-                    
-                case 10:
-                    // 10 clicks: Easter egg secreto
-                    showMessage('🎉 ¡Easter egg desbloqueado!');
-                    unlockSecretFeatures();
-                    break;
+            reset() {
+                this.clickCount = 0;
+                if (this.timer) {
+                    clearTimeout(this.timer);
+                    this.timer = null;
+                }
             }
         }
 
-        // Mostrar mensaje temporal
-        function showMessage(message) {
-            const messageDiv = document.createElement('div');
-            messageDiv.textContent = message;
-            messageDiv.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: linear-gradient(135deg, var(--electric-blue), #0097e6);
-                color: white;
-                padding: 1.5rem 3rem;
-                border-radius: 15px;
-                z-index: 9999;
-                animation: fadeInOut 2s forwards;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-                text-align: center;
-                font-weight: 600;
-            `;
-            
-            document.body.appendChild(messageDiv);
-            
-            setTimeout(() => {
-                document.body.removeChild(messageDiv);
-            }, 2000);
-        }
+        // =============================================
+        // FUNCIÓN DE RECARGA DE PÁGINA - SIN GIRO
+        // =============================================
 
-        // Abrir panel de administrador
-        function openAdminPanel() {
-            // Mostrar prompt de contraseña
-            const password = prompt("🔐 Ingrese la contraseña de administrador:");
+        function triggerPageReload() {
+            // Mostrar overlay de recarga
+            const reloadOverlay = document.getElementById('reloadOverlay');
+            reloadOverlay.classList.add('show');
             
-            if (password === "voltaje2026") {
-                showMessage('✅ Panel de administrador activado');
-                showCounter = true;
-                visitCounter.classList.add('show');
-                localStorage.setItem('showCounter', 'true');
-            } else if (password !== null) {
-                showMessage('❌ Contraseña incorrecta');
-            }
-        }
-
-        // Desbloquear características secretas
-        function unlockSecretFeatures() {
-            // Cambiar colores del sitio
-            document.documentElement.style.setProperty('--electric-blue', '#ff0080');
-            document.documentElement.style.setProperty('--electric-yellow', '#00ff88');
-            
-            // Añadir efectos especiales
+            // Aplicar efectos al logo (SIN GIRO)
+            const logo = document.querySelector('.logo');
             const logoIcon = document.querySelector('.logo-icon');
-            logoIcon.style.background = 'linear-gradient(135deg, #ff0080, #00ff88)';
+            const bolt = document.querySelector('.logo-icon .bolt');
+            const logoDecoration = document.querySelector('.logo-decoration');
             
-            showMessage('✨ ¡Modo especial activado!');
+            logo.classList.add('double-click-active');
+            logoIcon.classList.add('double-click-effect');
+            bolt.classList.add('double-click-effect');
+            logoDecoration.classList.add('double-click-effect');
+            
+            // Recargar la página después de 1.5 segundos
+            setTimeout(() => {
+                location.reload(true);
+            }, 1500);
         }
 
         // =============================================
         // SISTEMA DE SERVICIOS Y FILTRADO
         // =============================================
 
-        const serviceDetails = document.querySelectorAll('.service-detailed');
-        const serviceNavItems = document.querySelectorAll('.service-nav-item');
-        const serviceModal = document.getElementById('serviceModal');
-
-        // Datos para el modal
         const serviceData = {
             instalaciones: {
                 title: "Instalaciones Eléctricas",
@@ -1637,6 +1759,10 @@
             }
         };
 
+        const serviceDetails = document.querySelectorAll('.service-detailed');
+        const serviceNavItems = document.querySelectorAll('.service-nav-item');
+        const serviceModal = document.getElementById('serviceModal');
+
         // Navegación de servicios
         serviceNavItems.forEach(item => {
             item.addEventListener('click', () => {
@@ -1706,7 +1832,7 @@
         });
 
         // =============================================
-        // SISTEMA DE VISITAS Y ANIMACIONES
+        // SISTEMA DE VISITAS
         // =============================================
 
         // Sistema de visitas
@@ -1716,17 +1842,11 @@
             localStorage.setItem('totalVisits', totalVisitCount);
             
             // Actualizar displays
-            counterDisplay.textContent = totalVisitCount;
-            footerVisitCount.textContent = totalVisitCount;
+            document.getElementById('counterDisplay').textContent = totalVisitCount;
+            document.getElementById('footerVisitCount').textContent = totalVisitCount;
             
-            // Mostrar/ocultar contador según configuración
-            showCounter = localStorage.getItem('showCounter') === 'true';
-            visitCounter.style.display = showCounter ? 'flex' : 'none';
-            
-            // Si está oculto, añadir clase para animación cuando se muestre
-            if (!showCounter) {
-                visitCounter.classList.remove('show');
-            }
+            // Mostrar contador de visitas
+            document.getElementById('visitCounter').classList.add('show');
         }
 
         // Menú móvil
@@ -1749,13 +1869,10 @@
         });
 
         // =============================================
-        // INICIALIZACIÓN COMPLETA
+        // INICIALIZACIÓN COMPLETA CON DOBLE CLICK
         // =============================================
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Configurar sistema de clicks
-            setupLogoClickSystem();
-            
             // Configurar sistema de visitas
             setupVisitSystem();
             
@@ -1768,28 +1885,21 @@
                 mobileMenu.textContent = '☰';
             }
             
-            // Agregar animación CSS
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fadeInOut {
-                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                    20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-                    80% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-                    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                }
-                
-                @keyframes slideDown {
-                    from {
-                        opacity: 0;
-                        transform: translateY(-10px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-            `;
-            document.head.appendChild(style);
+            // AGREGAR SISTEMA DE DOBLE CLICK AL LOGO PRINCIPAL - SIN GIRO
+            const mainLogo = document.getElementById('mainLogo');
+            new DoubleClickHandler(mainLogo, triggerPageReload, null);
+            
+            // AGREGAR SISTEMA DE DOBLE CLICK AL LOGO DEL FOOTER - SIN GIRO
+            const footerLogo = document.getElementById('footerLogo');
+            if (footerLogo) {
+                new DoubleClickHandler(footerLogo, triggerPageReload, null);
+            }
+            
+            // Agregar tooltip a los logos
+            mainLogo.title = "Haz doble clic para recargar la página";
+            if (footerLogo) {
+                footerLogo.title = "Haz doble clic para recargar la página";
+            }
         });
 
         // Event listeners para scroll

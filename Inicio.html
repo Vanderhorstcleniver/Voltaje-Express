@@ -59,7 +59,9 @@
             align-items: center;
         }
         
-        /* LOGO PROFESIONAL Y ELEGANTE */
+        /* =============================================
+           LOGO CON SISTEMA DE DOBLE CLICK - IGUAL AL OTRO CÓDIGO
+           ============================================= */
         .logo {
             display: flex;
             align-items: center;
@@ -67,6 +69,12 @@
             cursor: pointer;
             position: relative;
             transition: all 0.3s ease;
+            user-select: none; /* Evitar selección de texto */
+        }
+        
+        /* Efectos específicos para doble click - EXACTAMENTE IGUAL AL OTRO CÓDIGO */
+        .logo.double-click-active {
+            animation: logoPulse 0.3s ease;
         }
         
         .logo:hover {
@@ -85,6 +93,12 @@
             overflow: hidden;
             box-shadow: 0 8px 25px rgba(0, 168, 255, 0.25);
             border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .logo-icon.double-click-effect {
+            animation: iconShock 0.5s ease;
+            box-shadow: 0 0 30px var(--electric-blue), 0 0 60px var(--electric-yellow);
         }
         
         .logo-icon::before {
@@ -103,6 +117,11 @@
             z-index: 2;
             filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
             transform: rotate(-5deg);
+            transition: all 0.3s ease;
+        }
+        
+        .logo-icon .bolt.double-click-effect {
+            animation: boltFlash 0.5s ease;
         }
         
         .logo-text {
@@ -120,6 +139,7 @@
             margin-bottom: 4px;
             letter-spacing: 0.8px;
             font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+            transition: all 0.3s ease;
         }
         
         .logo-text .tagline {
@@ -131,6 +151,7 @@
             border-left: 2px solid var(--electric-blue);
             padding-left: 8px;
             margin-top: 2px;
+            transition: all 0.3s ease;
         }
         
         /* Línea decorativa elegante para el logo */
@@ -147,39 +168,160 @@
                 transparent);
             border-radius: 1px;
             opacity: 0.7;
+            transition: all 0.3s ease;
         }
         
-        /* Contador de clicks */
-        .click-counter {
+        .logo-decoration.double-click-effect {
+            animation: lineGlow 1s ease;
+            opacity: 1;
+            height: 4px;
+        }
+        
+        /* =============================================
+           OVERLAY DE RECARGA - EXACTAMENTE IGUAL
+           ============================================= */
+        .reload-overlay {
             position: fixed;
-            top: 80px;
-            right: 20px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
-            padding: 10px 16px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            z-index: 999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+            z-index: 9999;
             display: none;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+            justify-content: center;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            font-weight: 500;
         }
         
-        .click-counter.show {
+        .reload-overlay.show {
             display: flex;
-            animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: fadeIn 0.3s ease;
         }
         
-        @keyframes bounceIn {
-            0% { transform: scale(0.3) rotate(-180deg); opacity: 0; }
-            70% { transform: scale(1.1) rotate(5deg); }
-            100% { transform: scale(1) rotate(0); opacity: 1; }
+        .reload-content {
+            text-align: center;
+            color: white;
+            max-width: 500px;
+            padding: 2rem;
         }
         
+        .reload-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: pulse 1.5s ease-in-out infinite;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--electric-blue), var(--electric-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @keyframes pulse {
+            0% { 
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px var(--electric-blue));
+            }
+            50% { 
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 20px var(--electric-blue));
+            }
+            100% { 
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px var(--electric-blue));
+            }
+        }
+        
+        .reload-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        
+        .reload-content p {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        /* =============================================
+           ANIMACIONES ESPECÍFICAS PARA DOBLE CLICK - SIN GIRO
+           ============================================= */
+        @keyframes logoPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes iconShock {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1.1); }
+            75% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes boltFlash {
+            0% { 
+                color: white;
+                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+            }
+            50% { 
+                color: var(--electric-yellow);
+                filter: drop-shadow(0 0 15px var(--electric-yellow));
+                transform: rotate(-5deg) scale(1.3);
+            }
+            100% { 
+                color: white;
+                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+                transform: rotate(-5deg);
+            }
+        }
+        
+        @keyframes lineGlow {
+            0% { 
+                opacity: 0.7;
+                height: 2px;
+                background: linear-gradient(90deg, 
+                    transparent, 
+                    var(--electric-blue), 
+                    var(--electric-yellow), 
+                    transparent);
+            }
+            50% { 
+                opacity: 1;
+                height: 6px;
+                background: linear-gradient(90deg, 
+                    var(--electric-blue), 
+                    var(--electric-yellow),
+                    var(--electric-blue), 
+                    var(--electric-yellow));
+                box-shadow: 0 0 20px var(--electric-blue);
+            }
+            100% { 
+                opacity: 0.7;
+                height: 2px;
+                background: linear-gradient(90deg, 
+                    transparent, 
+                    var(--electric-blue), 
+                    var(--electric-yellow), 
+                    transparent);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* =============================================
+           ESTILOS EXISTENTES DE LA PÁGINA ACTUAL
+           ============================================= */
         nav ul {
             display: flex;
             list-style: none;
@@ -471,6 +613,16 @@
             position: relative;
         }
         
+        /* TÍTULO VISIBLE - CORREGIDO */
+        .why-us .section-title {
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0, 168, 255, 0.5);
+        }
+        
+        .why-us .section-title::after {
+            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
+        }
+        
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -519,7 +671,7 @@
         }
         
         /* =============================================
-           FOOTER ELEGANTE Y MODERNO
+           FOOTER ELEGANTE Y MODERNO - CON LOGO PARA DOBLE CLICK
            ============================================= */
         footer {
             background: linear-gradient(135deg, #0f172a, #1e293b);
@@ -602,11 +754,19 @@
             margin-bottom: 2rem;
         }
         
+        /* Logo del footer también clickeable */
         .footer-logo {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        
+        .footer-logo:hover {
+            transform: translateY(-2px);
         }
         
         .footer-logo-icon {
@@ -618,6 +778,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 5px 15px rgba(0, 168, 255, 0.25);
+            transition: all 0.3s ease;
         }
         
         .footer-logo-text h4 {
@@ -769,6 +930,245 @@
             color: var(--electric-blue);
         }
         
+        /* Contador de visitas */
+        .visit-counter {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(33, 37, 41, 0.9));
+            color: white;
+            padding: 12px 18px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .visit-counter.show {
+            display: flex;
+            animation: slideUp 0.5s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .visit-counter:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* ESTILOS EXACTAMENTE IGUALES PARA EL MENSAJE DE RECARGA */
+        #reloadMessageContainer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            animation: slideIn 0.5s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(0, 168, 255, 0.5);
+        }
+        
+        #reloadMessageContainer.show {
+            display: flex;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+        
+        #reloadMessageContainer span {
+            font-size: 1.2rem;
+        }
+        
+        /* ESTILOS PARA LA BARRA DE CARGA DEL COMBO DE TECLAS */
+        .secret-loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        
+        .secret-loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .secret-loading-text {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00a8ff, #ffdd59);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.3);
+        }
+        
+        .secret-loading-subtext {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .secret-loading-bar-container {
+            width: 80%;
+            max-width: 500px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .secret-loading-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00a8ff, #ffdd59);
+            border-radius: 15px;
+            transition: width 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .secret-loading-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            animation: loadingShimmer 1.5s infinite;
+        }
+        
+        @keyframes loadingShimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .secret-loading-percentage {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        
+        .secret-key-combo {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 3rem;
+        }
+        
+        .secret-key {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 168, 255, 0.1);
+            border: 2px solid #00a8ff;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(0, 168, 255, 0.3);
+        }
+        
+        .secret-key.active {
+            background: #00a8ff;
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 168, 255, 0.6);
+        }
+        
+        .secret-loading-message {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 500px;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .success-message {
+            color: #00ff88;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 1rem;
+            animation: pulseSuccess 1s infinite;
+        }
+        
+        @keyframes pulseSuccess {
+            0% { opacity: 0.7; text-shadow: 0 0 5px #00ff88; }
+            50% { opacity: 1; text-shadow: 0 0 15px #00ff88; }
+            100% { opacity: 0.7; text-shadow: 0 0 5px #00ff88; }
+        }
+        
+        .countdown-message {
+            color: #ffdd59;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 0.5rem;
+            animation: pulseCountdown 1s infinite;
+        }
+        
+        @keyframes pulseCountdown {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
         /* Animaciones */
         @keyframes fadeInUp {
             to {
@@ -822,6 +1222,21 @@
                 flex-direction: column;
                 gap: 1rem;
             }
+            
+            /* Ajustes para la barra de carga en móvil */
+            .secret-loading-text {
+                font-size: 1.8rem;
+            }
+            
+            .secret-loading-subtext {
+                font-size: 1rem;
+            }
+            
+            .secret-key {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -844,15 +1259,41 @@
             .services-grid {
                 grid-template-columns: 1fr;
             }
+            
+            /* Ajustes para la barra de carga en móvil pequeño */
+            .secret-loading-text {
+                font-size: 1.5rem;
+            }
+            
+            .secret-key-combo {
+                gap: 5px;
+            }
+            
+            .secret-key {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 
 <body>
+    <!-- =============================================
+         OVERLAY DE RECARGA - EXACTAMENTE IGUAL
+         ============================================= -->
+    <div class="reload-overlay" id="reloadOverlay">
+        <div class="reload-content">
+            <div class="reload-icon">⚡</div>
+            <h3>Recargando Energía</h3>
+            <p>Voltaje Express está recargando la página con energía eléctrica...</p>
+        </div>
+    </div>
+
     <!-- Header con nuevo logo -->
     <header>
         <div class="container header-container">
-            <div class="logo" id="logo">
+            <div class="logo" id="mainLogo">
                 <div class="logo-icon">
                     <div class="bolt">⚡</div>
                 </div>
@@ -869,17 +1310,10 @@
                     <li><a href="servicios.html">Servicios</a></li>
                     <li><a href="nosotros.html">Nosotros</a></li>
                     <li><a href="contacto.html">Contacto</a></li>
-                    <!-- Quitado: Acceso Clientes -->
                 </ul>
             </nav>
         </div>
     </header>
-
-    <!-- Contador de clicks -->
-    <div class="click-counter" id="clickCounter">
-        <span>👆</span>
-        <span id="clickCount">0</span> clicks
-    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="inicio">
@@ -1020,7 +1454,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column footer-about">
-                    <div class="footer-logo">
+                    <div class="footer-logo" id="footerLogo">
                         <div class="footer-logo-icon">
                             <div style="font-size: 24px; color: white; font-weight: bold;">⚡</div>
                         </div>
@@ -1101,135 +1535,140 @@
                         <span>Visitas: <strong id="footerVisitCount">0</strong></span>
                     </div>
                     <div class="stat-item">
-                        <span class="icon">👆</span>
-                        <span>Clicks: <strong id="footerClickCount">0</strong></span>
+                        <span class="icon">⚡</span>
+                        <span>Servicios: <strong>6</strong></span>
                     </div>
                     <div class="stat-item">
-                        <span class="icon">🔒</span>
-                        <span>Seguridad: <strong>100%</strong></span>
+                        <span class="icon">👆👆</span>
+                        <span>Doble click activo</span>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- Contador de visitas -->
+    <div class="visit-counter" id="visitCounter">
+        👁️ <span id="counterDisplay">0</span> visitas
+    </div>
+
+    <!-- Overlay de carga para el combo secreto -->
+    <div id="secretLoadingOverlay" class="secret-loading-overlay">
+        <div class="secret-loading-text">Accediendo al Panel de Administración</div>
+        <div class="secret-loading-subtext">Por favor espera mientras configuramos tu acceso seguro</div>
+        
+        <div class="secret-key-combo">
+            <div class="secret-key" id="keyV">V</div>
+            <div class="secret-key" id="keyL">L</div>
+            <div class="secret-key" id="keyT">T</div>
+        </div>
+        
+        <div class="secret-loading-bar-container">
+            <div class="secret-loading-bar" id="secretLoadingBar"></div>
+        </div>
+        
+        <div class="secret-loading-percentage" id="secretLoadingPercentage">0%</div>
+        <div class="secret-loading-message" id="secretLoadingMessage">Combinación de teclas detectada: V + L + T</div>
+        <div id="successMessage" class="success-message" style="display: none;"></div>
+        <div id="countdownMessage" class="countdown-message" style="display: none;"></div>
+    </div>
+
+    <!-- =============================================
+         JAVASCRIPT EXACTO AL OTRO CÓDIGO
+         ============================================= -->
     <script>
-        // Sistema de clicks
-        const logo = document.getElementById('logo');
-        const clickCounter = document.getElementById('clickCounter');
-        const clickCountDisplay = document.getElementById('clickCount');
-        const footerClickCount = document.getElementById('footerClickCount');
-        const footerVisitCount = document.getElementById('footerVisitCount');
+        // =============================================
+        // SISTEMA DE DOBLE CLICK EXACTO AL OTRO CÓDIGO
+        // =============================================
 
-        let clickCount = 0;
-        let lastClickTime = 0;
-        let clickTimer = null;
-
-        function setupLogoClickSystem() {
-            logo.addEventListener('click', function(e) {
-                const currentTime = new Date().getTime();
+        class DoubleClickHandler {
+            constructor(element, doubleCallback, singleCallback = null, delay = 300) {
+                this.element = element;
+                this.doubleCallback = doubleCallback;
+                this.singleCallback = singleCallback;
+                this.delay = delay;
+                this.clickCount = 0;
+                this.timer = null;
                 
-                if (currentTime - lastClickTime > 1000) {
-                    clickCount = 0;
+                this.element.addEventListener('click', this.handleClick.bind(this));
+            }
+
+            handleClick(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                this.clickCount++;
+
+                if (this.clickCount === 1) {
+                    this.timer = setTimeout(() => {
+                        // Click único
+                        if (this.singleCallback) {
+                            this.singleCallback(event);
+                        }
+                        this.reset();
+                    }, this.delay);
+                } else if (this.clickCount === 2) {
+                    clearTimeout(this.timer);
+                    // Doble click
+                    this.doubleCallback(event);
+                    this.reset();
                 }
-                
-                clickCount++;
-                lastClickTime = currentTime;
-                
-                showClickCounter();
-                footerClickCount.textContent = clickCount;
-                
-                handleClicks(clickCount);
-                
-                clearTimeout(clickTimer);
-                clickTimer = setTimeout(() => {
-                    clickCount = 0;
-                    footerClickCount.textContent = '0';
-                }, 1500);
-            });
+            }
+
+            reset() {
+                this.clickCount = 0;
+                if (this.timer) {
+                    clearTimeout(this.timer);
+                    this.timer = null;
+                }
+            }
         }
 
-        function showClickCounter() {
-            clickCountDisplay.textContent = clickCount;
-            clickCounter.classList.add('show');
+        // =============================================
+        // FUNCIÓN DE RECARGA DE PÁGINA - SIN GIRO
+        // =============================================
+
+        function triggerPageReload() {
+            // Mostrar overlay de recarga
+            const reloadOverlay = document.getElementById('reloadOverlay');
+            reloadOverlay.classList.add('show');
             
+            // Aplicar efectos al logo (SIN GIRO)
+            const logo = document.querySelector('.logo');
+            const logoIcon = document.querySelector('.logo-icon');
+            const bolt = document.querySelector('.logo-icon .bolt');
+            const logoDecoration = document.querySelector('.logo-decoration');
+            
+            logo.classList.add('double-click-active');
+            logoIcon.classList.add('double-click-effect');
+            bolt.classList.add('double-click-effect');
+            logoDecoration.classList.add('double-click-effect');
+            
+            // Recargar la página después de 1.5 segundos
             setTimeout(() => {
-                clickCounter.classList.remove('show');
+                location.reload(true);
             }, 1500);
         }
 
-        function handleClicks(count) {
-            switch(count) {
-                case 2:
-                    showMessage('🔄 Recargando página...');
-                    setTimeout(() => {
-                        location.reload();
-                    }, 500);
-                    break;
-                    
-                case 5:
-                    openAdminPanel();
-                    break;
-                    
-                case 10:
-                    showMessage('🎉 ¡Easter egg desbloqueado!');
-                    unlockSecretFeatures();
-                    break;
-            }
+        // =============================================
+        // SISTEMA DE VISITAS
+        // =============================================
+
+        function setupVisitSystem() {
+            let totalVisitCount = localStorage.getItem('totalVisits') || 0;
+            totalVisitCount = parseInt(totalVisitCount) + 1;
+            localStorage.setItem('totalVisits', totalVisitCount);
+            
+            // Actualizar displays
+            document.getElementById('counterDisplay').textContent = totalVisitCount;
+            document.getElementById('footerVisitCount').textContent = totalVisitCount;
+            
+            // Mostrar contador de visitas
+            document.getElementById('visitCounter').classList.add('show');
         }
 
-        function showMessage(message) {
-            const messageDiv = document.createElement('div');
-            messageDiv.textContent = message;
-            messageDiv.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-                color: white;
-                padding: 1.5rem 3rem;
-                border-radius: 15px;
-                z-index: 9999;
-                animation: fadeInOut 2s forwards;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-                text-align: center;
-                font-weight: 600;
-            `;
-            
-            document.body.appendChild(messageDiv);
-            
-            setTimeout(() => {
-                document.body.removeChild(messageDiv);
-            }, 2000);
-        }
-
-        function openAdminPanel() {
-            const password = prompt("🔐 Ingrese la contraseña de administrador:");
-            
-            if (password === "voltaje2026") {
-                showMessage('✅ Panel de administrador activado');
-            } else if (password !== null) {
-                showMessage('❌ Contraseña incorrecta');
-            }
-        }
-
-        function unlockSecretFeatures() {
-            document.documentElement.style.setProperty('--electric-blue', '#ff0080');
-            document.documentElement.style.setProperty('--electric-yellow', '#00ff88');
-            
-            const logoIcon = document.querySelector('.logo-icon');
-            logoIcon.style.background = 'linear-gradient(135deg, #ff0080, #00ff88)';
-            
-            showMessage('✨ ¡Modo especial activado!');
-        }
-
-        // Sistema de visitas
-        let totalVisitCount = localStorage.getItem('totalVisits') || 0;
-        totalVisitCount = parseInt(totalVisitCount) + 1;
-        localStorage.setItem('totalVisits', totalVisitCount);
-        footerVisitCount.textContent = totalVisitCount;
+        // =============================================
+        // FUNCIONES EXISTENTES DE LA PÁGINA ACTUAL
+        // =============================================
 
         // Menú móvil
         const mobileMenu = document.querySelector('.mobile-menu');
@@ -1264,24 +1703,189 @@
             });
         }
 
-        // Inicialización
+        // =============================================
+        // FUNCIÓN PARA EL COMBO DE TECLAS V + L + T
+        // =============================================
+
+        function setupKeyComboListener() {
+            const keys = {
+                v: false,
+                l: false,
+                t: false
+            };
+            
+            const secretOverlay = document.getElementById('secretLoadingOverlay');
+            const keyV = document.getElementById('keyV');
+            const keyL = document.getElementById('keyL');
+            const keyT = document.getElementById('keyT');
+            const loadingBar = document.getElementById('secretLoadingBar');
+            const loadingPercentage = document.getElementById('secretLoadingPercentage');
+            const loadingMessage = document.getElementById('secretLoadingMessage');
+            const successMessage = document.getElementById('successMessage');
+            const countdownMessage = document.getElementById('countdownMessage');
+            
+            // Función para verificar si todas las teclas están presionadas
+            function checkCombo() {
+                if (keys.v && keys.l && keys.t) {
+                    // Activar la barra de carga
+                    secretOverlay.classList.add('active');
+                    
+                    // Animar las teclas
+                    [keyV, keyL, keyT].forEach(key => key.classList.add('active'));
+                    
+                    // Iniciar la barra de carga
+                    let progress = 0;
+                    const interval = setInterval(() => {
+                        progress += 2;
+                        loadingBar.style.width = `${progress}%`;
+                        loadingPercentage.textContent = `${progress}%`;
+                        
+                        // Actualizar mensajes según el progreso
+                        if (progress < 25) {
+                            loadingMessage.textContent = "Verificando credenciales...";
+                        } else if (progress < 50) {
+                            loadingMessage.textContent = "Conectando con el servidor seguro...";
+                        } else if (progress < 75) {
+                            loadingMessage.textContent = "Estableciendo conexión encriptada...";
+                        } else if (progress < 95) {
+                            loadingMessage.textContent = "Preparando panel de administración...";
+                        } else if (progress < 100) {
+                            loadingMessage.textContent = "Finalizando configuración...";
+                        } else {
+                            // Cuando llegue al 100%
+                            clearInterval(interval);
+                            
+                            // Cambiar color de la barra a verde de éxito
+                            loadingBar.style.background = 'linear-gradient(90deg, #00ff88, #00ffcc)';
+                            loadingBar.style.boxShadow = '0 0 20px rgba(0, 255, 136, 0.5)';
+                            
+                            // Ocultar mensaje normal y mostrar mensaje de éxito
+                            loadingMessage.style.display = 'none';
+                            successMessage.style.display = 'block';
+                            successMessage.textContent = "✅ ¡Acceso concedido exitosamente!";
+                            
+                            // Mostrar contador regresivo
+                            countdownMessage.style.display = 'block';
+                            
+                            // Contador regresivo de 3 segundos
+                            let countdown = 3;
+                            countdownMessage.textContent = `Redirigiendo en ${countdown} segundos...`;
+                            
+                            const countdownInterval = setInterval(() => {
+                                countdown--;
+                                if (countdown > 0) {
+                                    countdownMessage.textContent = `Redirigiendo en ${countdown} segundos...`;
+                                } else {
+                                    clearInterval(countdownInterval);
+                                    countdownMessage.textContent = "¡Redirigiendo ahora!";
+                                    
+                                    // Redirigir después de un breve momento
+                                    setTimeout(() => {
+                                        window.location.href = 'login.html';
+                                    }, 500);
+                                }
+                            }, 1000);
+                        }
+                    }, 60); // Actualizar cada 60ms para ~3 segundos de carga
+                    
+                    // Resetear las teclas después de activar el combo
+                    setTimeout(() => {
+                        keys.v = keys.l = keys.t = false;
+                        [keyV, keyL, keyT].forEach(key => key.classList.remove('active'));
+                    }, 3000);
+                }
+            }
+            
+            // Detectar cuando se presionan las teclas
+            document.addEventListener('keydown', (e) => {
+                const key = e.key.toLowerCase();
+                
+                if (key === 'v') {
+                    keys.v = true;
+                    keyV.classList.add('active');
+                }
+                if (key === 'l') {
+                    keys.l = true;
+                    keyL.classList.add('active');
+                }
+                if (key === 't') {
+                    keys.t = true;
+                    keyT.classList.add('active');
+                }
+                
+                checkCombo();
+            });
+            
+            // Detectar cuando se sueltan las teclas
+            document.addEventListener('keyup', (e) => {
+                const key = e.key.toLowerCase();
+                
+                if (key === 'v') {
+                    keys.v = false;
+                    keyV.classList.remove('active');
+                }
+                if (key === 'l') {
+                    keys.l = false;
+                    keyL.classList.remove('active');
+                }
+                if (key === 't') {
+                    keys.t = false;
+                    keyT.classList.remove('active');
+                }
+            });
+            
+            // También permitir hacer clic en las teclas para activar el combo (para móviles)
+            [keyV, keyL, keyT].forEach((keyElement, index) => {
+                keyElement.addEventListener('click', () => {
+                    const key = ['v', 'l', 't'][index];
+                    keys[key] = true;
+                    keyElement.classList.add('active');
+                    checkCombo();
+                    
+                    // Resetear después de un tiempo
+                    setTimeout(() => {
+                        keys[key] = false;
+                        keyElement.classList.remove('active');
+                    }, 1000);
+                });
+            });
+        }
+
+        // =============================================
+        // INICIALIZACIÓN COMPLETA CON DOBLE CLICK
+        // =============================================
+
         window.addEventListener('DOMContentLoaded', () => {
-            setupLogoClickSystem();
+            // Configurar sistema de visitas
+            setupVisitSystem();
             
             // Verificar elementos visibles al cargar
             checkScroll();
             
-            // Agregar animación CSS
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fadeInOut {
-                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                    20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-                    80% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-                    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                }
-            `;
-            document.head.appendChild(style);
+            // Asegurar menú cerrado en desktop
+            if (window.innerWidth > 768 && navUl.classList.contains('active')) {
+                navUl.classList.remove('active');
+                mobileMenu.textContent = '☰';
+            }
+            
+            // AGREGAR SISTEMA DE DOBLE CLICK AL LOGO PRINCIPAL - EXACTO AL OTRO CÓDIGO
+            const mainLogo = document.getElementById('mainLogo');
+            new DoubleClickHandler(mainLogo, triggerPageReload, null);
+            
+            // AGREGAR SISTEMA DE DOBLE CLICK AL LOGO DEL FOOTER - EXACTO AL OTRO CÓDIGO
+            const footerLogo = document.getElementById('footerLogo');
+            if (footerLogo) {
+                new DoubleClickHandler(footerLogo, triggerPageReload, null);
+            }
+            
+            // Configurar el combo de teclas V + L + T
+            setupKeyComboListener();
+            
+            // Agregar tooltip a los logos
+            mainLogo.title = "Haz doble clic para recargar la página";
+            if (footerLogo) {
+                footerLogo.title = "Haz doble clic para recargar la página";
+            }
         });
 
         // Event listeners para scroll
