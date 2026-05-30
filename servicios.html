@@ -4,379 +4,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestros Servicios - Voltaje Express</title>
+    <title>Servicios - Voltaje Express | Energía Inteligente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Estilos base - Optimizados */
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-         :root {
-            --primary: #0d6efd;
-            --secondary: #6c757d;
-            --success: #198754;
-            --warning: #ffc107;
-            --danger: #dc3545;
-            --dark: #212529;
-            --light: #f8f9fa;
-            --electric-blue: #00a8ff;
-            --electric-yellow: #ffdd59;
+
+        :root {
+            --bg-primary: #03050b;
+            --bg-secondary: #0a0f1a;
+            --bg-card: #0f1622;
+            --electric-cyan: #00f5ff;
+            --electric-purple: #7b2cbf;
+            --electric-gold: #ffd966;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a8c3;
+            --gradient-primary: linear-gradient(135deg, #00f5ff, #7b2cbf);
+            --gradient-gold: linear-gradient(135deg, #ffd966, #ffaa33);
+            --success: #10b981;
         }
-        
+
         body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
             overflow-x: hidden;
         }
-        
+
         .container {
             width: 90%;
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 1rem;
         }
-        
-        /* Header mejorado con nuevo logo profesional */
+
+        /* Header */
         header {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            padding: 1rem 0;
+            background: rgba(3, 5, 11, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
         }
-        
+
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0.9rem 0;
         }
-        
-        /* LOGO PROFESIONAL Y ELEGANTE */
+
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 1rem;
             cursor: pointer;
-            position: relative;
-            transition: all 0.3s ease;
-            user-select: none; /* Evitar selección de texto */
+            user-select: none;
         }
-        
-        /* Efectos específicos para doble click - EXACTAMENTE IGUAL AL PRIMER CÓDIGO */
-        .logo.double-click-active {
-            animation: logoPulse 0.3s ease;
+
+        .logo:active {
+            transform: scale(0.97);
         }
-        
-        .logo:hover {
-            transform: translateY(-2px);
-        }
-        
+
         .logo-icon {
             width: 55px;
             height: 55px;
-            background: linear-gradient(135deg, var(--electric-blue), #3b82f6);
-            border-radius: 12px;
+            background: linear-gradient(145deg, #0a1030, #020410);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 168, 255, 0.25);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            border: 1.5px solid rgba(0, 245, 255, 0.5);
         }
-        
-        .logo-icon.double-click-effect {
-            animation: iconShock 0.5s ease;
-            box-shadow: 0 0 30px var(--electric-blue), 0 0 60px var(--electric-yellow);
+
+        .logo-icon i {
+            font-size: 30px;
+            color: var(--electric-cyan);
         }
-        
-        .logo-icon::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-        }
-        
-        .logo-icon .bolt {
-            font-size: 32px;
-            font-weight: 900;
-            color: white;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            z-index: 2;
-            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
-            transform: rotate(-5deg);
-            transition: all 0.3s ease;
-        }
-        
-        .logo-icon .bolt.double-click-effect {
-            animation: boltFlash 0.5s ease;
-        }
-        
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-        
+
         .logo-text h1 {
-            font-size: 1.9rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            background: linear-gradient(90deg, #ffffff, #c7d2fe);
+            background: linear-gradient(120deg, #ffffff, var(--electric-cyan));
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 4px;
-            letter-spacing: 0.8px;
-            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
-            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', monospace;
         }
-        
+
         .logo-text .tagline {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            letter-spacing: 1.2px;
+            font-size: 0.7rem;
             font-weight: 500;
+            letter-spacing: 2px;
+            color: var(--electric-cyan);
             text-transform: uppercase;
-            border-left: 2px solid var(--electric-blue);
+            border-left: 2px solid var(--electric-gold);
             padding-left: 8px;
-            margin-top: 2px;
-            transition: all 0.3s ease;
+            margin-top: 4px;
         }
-        
-        /* Línea decorativa elegante para el logo */
+
         .logo-decoration {
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--electric-blue), 
-                var(--electric-yellow), 
-                transparent);
-            border-radius: 1px;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
-        
-        .logo-decoration.double-click-effect {
-            animation: lineGlow 1s ease;
-            opacity: 1;
-            height: 4px;
-        }
-        
-        /* ANIMACIONES ESPECÍFICAS PARA DOBLE CLICK - SIN GIRO */
-        @keyframes logoPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes iconShock {
-            0% { transform: scale(1); }
-            25% { transform: scale(1.2); }
-            50% { transform: scale(1.1); }
-            75% { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes boltFlash {
-            0% { 
-                color: white;
-                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
-            }
-            50% { 
-                color: var(--electric-yellow);
-                filter: drop-shadow(0 0 15px var(--electric-yellow));
-                transform: rotate(-5deg) scale(1.3);
-            }
-            100% { 
-                color: white;
-                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
-                transform: rotate(-5deg);
-            }
-        }
-        
-        @keyframes lineGlow {
-            0% { 
-                opacity: 0.7;
-                height: 2px;
-                background: linear-gradient(90deg, 
-                    transparent, 
-                    var(--electric-blue), 
-                    var(--electric-yellow), 
-                    transparent);
-            }
-            50% { 
-                opacity: 1;
-                height: 6px;
-                background: linear-gradient(90deg, 
-                    var(--electric-blue), 
-                    var(--electric-yellow),
-                    var(--electric-blue), 
-                    var(--electric-yellow));
-                box-shadow: 0 0 20px var(--electric-blue);
-            }
-            100% { 
-                opacity: 0.7;
-                height: 2px;
-                background: linear-gradient(90deg, 
-                    transparent, 
-                    var(--electric-blue), 
-                    var(--electric-yellow), 
-                    transparent);
-            }
-        }
-        
-        /* Overlay de recarga - SIN ANIMACIÓN DE GIRO */
-        .reload-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+            background: linear-gradient(90deg, var(--electric-cyan), var(--electric-gold), transparent);
             width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
+            margin-top: 5px;
+            border-radius: 2px;
         }
-        
-        .reload-overlay.show {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .reload-content {
-            text-align: center;
-            color: white;
-            max-width: 500px;
-            padding: 2rem;
-        }
-        
-        .reload-icon {
-            font-size: 5rem;
-            margin-bottom: 1.5rem;
-            animation: pulse 1.5s ease-in-out infinite;
-            display: inline-block;
-            background: linear-gradient(135deg, var(--electric-blue), var(--electric-yellow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        @keyframes pulse {
-            0% { 
-                transform: scale(1);
-                filter: drop-shadow(0 0 5px var(--electric-blue));
-            }
-            50% { 
-                transform: scale(1.1);
-                filter: drop-shadow(0 0 20px var(--electric-blue));
-            }
-            100% { 
-                transform: scale(1);
-                filter: drop-shadow(0 0 5px var(--electric-blue));
-            }
-        }
-        
-        .reload-content h3 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-        }
-        
-        .reload-content p {
-            color: #94a3b8;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
+
         nav ul {
             display: flex;
-            list-style: none;
             gap: 2rem;
+            list-style: none;
         }
-        
+
         nav a {
-            color: #cbd5e1;
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s;
+            font-size: 1rem;
+            transition: 0.2s;
             position: relative;
-            padding: 0.5rem 0;
-            font-size: 1.05rem;
         }
-        
+
         nav a:hover,
         nav a.active {
-            color: white;
+            color: var(--electric-cyan);
         }
-        
+
         nav a::after {
             content: '';
             position: absolute;
+            bottom: -5px;
+            left: 0;
             width: 0;
             height: 2px;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            transition: width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
         }
-        
+
         nav a:hover::after,
         nav a.active::after {
             width: 100%;
         }
-        
+
         .mobile-menu {
             display: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            color: #cbd5e1;
+            color: var(--text-secondary);
         }
-        
-        .mobile-menu:hover {
-            transform: scale(1.1);
-            color: white;
-        }
-        
-        /* Hero Section para página de servicios */
+
+        /* Hero Section */
         .page-hero {
-            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.95)), 
-                        url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            padding: 8rem 0;
-            text-align: center;
             position: relative;
+            padding: 6rem 0 7rem;
+            text-align: center;
             overflow: hidden;
         }
-        
+
         .page-hero::before {
             content: '';
             position: absolute;
@@ -384,308 +177,264 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 221, 89, 0.1) 0%, transparent 50%);
-            z-index: 1;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 245, 255, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(123, 44, 191, 0.08) 0%, transparent 50%);
+            pointer-events: none;
         }
-        
-        .page-hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            margin: 0 auto;
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 50px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--electric-cyan);
         }
-        
+
+        .hero-badge i {
+            margin-right: 0.5rem;
+        }
+
         .page-hero h1 {
             font-size: 4rem;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeInUp 1s forwards 0.3s;
-            background: linear-gradient(90deg, #ffffff, #c7d2fe, #fef3c7);
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, var(--electric-cyan), var(--electric-gold));
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-            line-height: 1.1;
+            margin-bottom: 1rem;
         }
-        
+
         .page-hero p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
             max-width: 700px;
             margin: 0 auto;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeInUp 1s forwards 0.6s;
-            color: #cbd5e1;
-            line-height: 1.8;
         }
-        
-        /* Navegación de Servicios mejorada */
+
+        /* Navegación de Servicios */
         .services-nav {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.98));
-            padding: 1.5rem 0;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            background: rgba(10, 15, 26, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 1rem 0;
             position: sticky;
             top: 70px;
-            z-index: 999;
-            margin-bottom: 3rem;
-            backdrop-filter: blur(10px);
-            border-bottom: 3px solid var(--electric-blue);
+            z-index: 99;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
         }
-        
+
         .services-nav-container {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.8rem;
         }
-        
+
         .service-nav-item {
-            padding: 0.8rem 1.8rem;
-            background: white;
-            border-radius: 30px;
+            padding: 0.6rem 1.5rem;
+            background: rgba(15, 22, 34, 0.8);
+            border-radius: 50px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            font-weight: 600;
-            border: 2px solid transparent;
-            color: #0f172a;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-            font-size: 1.05rem;
-            user-select: none;
-            -webkit-user-select: none;
-            position: relative;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border: 1px solid rgba(0, 245, 255, 0.2);
         }
-        
+
+        .service-nav-item i {
+            margin-right: 0.5rem;
+        }
+
         .service-nav-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
-            border-color: var(--electric-blue);
+            border-color: var(--electric-cyan);
+            color: var(--electric-cyan);
+            transform: translateY(-2px);
         }
-        
+
         .service-nav-item.active {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            background: var(--gradient-primary);
             color: white;
-            border-color: var(--electric-blue);
-            box-shadow: 0 12px 25px rgba(59, 130, 246, 0.25);
-            transform: translateY(-3px);
+            border-color: transparent;
         }
-        
-        /* Servicios Detallados mejorados */
+
+        /* Servicios Completos */
         #servicios-completos {
             padding: 5rem 0;
-            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            background: var(--bg-secondary);
         }
-        
+
         .section-title {
             text-align: center;
-            margin-bottom: 4rem;
-            font-size: 2.8rem;
-            color: #0f172a;
-            position: relative;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
         }
-        
+
+        .section-title i {
+            margin-right: 0.5rem;
+            background: linear-gradient(120deg, var(--electric-cyan), var(--electric-gold));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title span {
+            background: linear-gradient(120deg, var(--electric-cyan), var(--electric-gold));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         .section-title::after {
             content: '';
+            width: 80px;
+            height: 3px;
+            background: var(--gradient-primary);
             display: block;
-            width: 120px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            margin: 1.5rem auto;
-            border-radius: 2px;
+            margin: 1rem auto 0;
+            border-radius: 3px;
         }
-        
+
         .services-detailed-grid {
             display: flex;
             flex-direction: column;
-            gap: 6rem;
+            gap: 4rem;
         }
-        
+
         .service-detailed {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 3rem;
             align-items: center;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(15, 22, 34, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
             padding: 2rem;
-            border-radius: 20px;
-            background: white;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
-            cursor: pointer;
-            position: relative;
+            border: 1px solid rgba(0, 245, 255, 0.1);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
         }
-        
+
         .service-detailed.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
+        .service-detailed:hover {
+            border-color: var(--electric-cyan);
+            transform: translateY(-5px);
+        }
+
         .service-detailed:nth-child(even) .service-image {
             order: 2;
         }
-        
+
         .service-detailed:nth-child(even) .service-info {
             order: 1;
         }
-        
+
         .service-image {
-            border-radius: 15px;
+            border-radius: 1rem;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            position: relative;
-            transition: all 0.5s;
-            cursor: pointer;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
         }
-        
+
         .service-image:hover {
             transform: scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
         }
-        
-        .service-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, 
-                rgba(0, 168, 255, 0.1) 0%, 
-                rgba(255, 221, 89, 0.1) 100%);
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-        
-        .service-image:hover::before {
-            opacity: 1;
-        }
-        
+
         .service-image img {
             width: 100%;
-            height: 400px;
+            height: 320px;
             object-fit: cover;
-            transition: transform 0.8s ease;
+            transition: transform 0.5s ease;
         }
-        
+
         .service-image:hover img {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
-        
+
         .service-info h3 {
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-            color: #0f172a;
-            position: relative;
-            padding-bottom: 1rem;
-            cursor: pointer;
-        }
-        
-        .service-info h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            border-radius: 2px;
-        }
-        
-        .service-info p {
-            margin-bottom: 2rem;
-            color: #555;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-        
-        .service-info ul {
-            margin-bottom: 2.5rem;
-            padding-left: 0;
-        }
-        
-        .service-info li {
+            font-size: 1.8rem;
             margin-bottom: 1rem;
-            position: relative;
-            padding-left: 2.5rem;
+            color: var(--electric-cyan);
+        }
+
+        .service-info p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .service-info ul {
             list-style: none;
-            font-size: 1.05rem;
-            color: #4b5563;
+            margin-bottom: 1.5rem;
         }
-        
-        .service-info li::before {
-            content: '⚡';
-            position: absolute;
-            left: 0;
-            color: var(--electric-blue);
-            font-size: 1.2rem;
+
+        .service-info li {
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
-        
-        /* BOTONES MEJORADOS */
+
+        .service-info li i {
+            color: var(--electric-cyan);
+            font-size: 0.9rem;
+            width: 20px;
+        }
+
         .btn-container {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
         }
-        
+
         .btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
-            padding: 1.2rem 2.5rem;
-            border-radius: 12px;
+            gap: 0.6rem;
+            background: var(--gradient-primary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
             text-decoration: none;
+            color: white;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            min-width: 200px;
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
         }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.2), 
-                transparent);
-            transition: left 0.6s;
+
+        .btn i {
+            font-size: 1rem;
         }
-        
+
         .btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 245, 255, 0.3);
         }
-        
-        .btn:hover::before {
-            left: 100%;
-        }
-        
+
         .btn-secondary {
-            background: linear-gradient(135deg, #6b7280, #4b5563);
-            box-shadow: 0 8px 25px rgba(107, 114, 128, 0.25);
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            color: var(--electric-cyan);
         }
-        
+
         .btn-secondary:hover {
-            background: linear-gradient(135deg, #4b5563, #6b7280);
-            box-shadow: 0 15px 30px rgba(107, 114, 128, 0.35);
+            background: rgba(0, 245, 255, 0.2);
+            box-shadow: none;
         }
-        
-        /* Modal de Servicio mejorado */
+
+        /* Modal */
         .service-modal {
             display: none;
             position: fixed;
@@ -693,574 +442,315 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(3, 5, 11, 0.98);
+            backdrop-filter: blur(15px);
             z-index: 2000;
             align-items: center;
             justify-content: center;
             padding: 2rem;
-            backdrop-filter: blur(10px);
         }
-        
+
+        .service-modal.show {
+            display: flex;
+        }
+
         .modal-content {
-            background: white;
-            border-radius: 20px;
-            max-width: 900px;
+            background: linear-gradient(145deg, #0f1622, #0a0f1a);
+            border-radius: 1.5rem;
+            max-width: 800px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            padding: 3rem;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-            animation: modalSlide 0.4s ease;
+            padding: 2rem;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            animation: modalFadeIn 0.3s ease;
         }
-        
-        @keyframes modalSlide {
+
+        @keyframes modalFadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-50px) scale(0.95);
+                transform: scale(0.95);
             }
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: scale(1);
             }
         }
-        
+
         .close-modal {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            font-size: 2rem;
-            cursor: pointer;
+            top: 1rem;
+            right: 1rem;
             background: none;
             border: none;
-            color: var(--secondary);
-            transition: all 0.3s;
-            width: 40px;
-            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: 0.2s;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            z-index: 1;
         }
-        
+
         .close-modal:hover {
             color: var(--danger);
-            background: rgba(220, 53, 69, 0.1);
-            transform: rotate(90deg);
+            background: rgba(239, 68, 68, 0.1);
         }
-        
+
         .modal-image {
             width: 100%;
-            height: 350px;
+            height: 250px;
             object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        }
-        
-        .modal-content h2 {
-            font-size: 2.5rem;
+            border-radius: 1rem;
             margin-bottom: 1.5rem;
-            color: #0f172a;
         }
-        
+
+        .modal-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--electric-cyan);
+        }
+
         .modal-content p {
-            margin-bottom: 2rem;
-            color: #4b5563;
-            line-height: 1.8;
-            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
-        
-        /* =============================================
-           FOOTER ELEGANTE Y MODERNO - IGUAL QUE INICIO
-           ============================================= */
+
+        .modal-content h3 {
+            font-size: 1.2rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--electric-gold);
+        }
+
+        .modal-content ul {
+            list-style: none;
+        }
+
+        .modal-content li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .modal-content li i {
+            color: var(--electric-cyan);
+            width: 20px;
+        }
+
+        /* Footer */
         footer {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            padding: 5rem 0 2rem;
-            position: relative;
-            overflow: hidden;
+            background: #02040a;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(0, 245, 255, 0.2);
         }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, 
-                var(--electric-blue), 
-                var(--electric-yellow),
-                var(--electric-blue));
-            z-index: 1;
-        }
-        
-        .footer-wave {
-            position: absolute;
-            top: -100px;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0 0v46.29c47.79 22.2 103.59 32.17 158 28 70.36-5.37 136.33-33.31 206.8-37.5 73.84-4.36 147.54 16.88 218.2 35.26 69.27 18 138.3 24.88 209.4 13.08 36.15-6 69.85-17.84 104.45-29.34C989.49 25 1113-14.29 1200 52.47V0z' fill='%230f172a'/%3E%3C/svg%3E");
-            background-size: 1200px 100px;
-            animation: wave 20s linear infinite;
-        }
-        
-        @keyframes wave {
-            0% { background-position-x: 0; }
-            100% { background-position-x: 1200px; }
-        }
-        
+
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 4rem;
-            margin-bottom: 3rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .footer-column {
-            position: relative;
-        }
-        
-        .footer-column h3 {
-            margin-bottom: 2rem;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-            position: relative;
-            padding-bottom: 1rem;
-        }
-        
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            border-radius: 1.5px;
-        }
-        
-        .footer-about {
-            max-width: 350px;
-        }
-        
-        .footer-about p {
-            color: #94a3b8;
-            line-height: 1.8;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
             margin-bottom: 2rem;
         }
-        
+
         .footer-logo {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 2rem;
+            gap: 10px;
             cursor: pointer;
+            margin-bottom: 1rem;
         }
-        
+
         .footer-logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--electric-blue), #3b82f6);
-            border-radius: 12px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(145deg, #0ae0ff20, #0b1120);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.25);
+            border: 1px solid rgba(0, 245, 255, 0.4);
         }
-        
-        .footer-logo-text h4 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, #ffffff, #c7d2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 5px;
+
+        .footer-logo-icon i {
+            font-size: 1.2rem;
+            color: var(--electric-cyan);
         }
-        
-        .footer-logo-text span {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            letter-spacing: 1px;
+
+        .footer-column h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--electric-cyan);
+            display: inline-block;
         }
-        
+
         .footer-links {
             list-style: none;
         }
-        
+
         .footer-links li {
-            margin-bottom: 1.2rem;
-            transition: transform 0.3s;
+            margin-bottom: 0.6rem;
         }
-        
-        .footer-links li:hover {
-            transform: translateX(10px);
-        }
-        
+
         .footer-links a {
-            color: #cbd5e1;
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.05rem;
-            padding: 0.3rem 0;
+            font-size: 0.85rem;
+            transition: 0.2s;
         }
-        
+
+        .footer-links a i {
+            margin-right: 0.5rem;
+            width: 20px;
+            color: var(--electric-cyan);
+        }
+
         .footer-links a:hover {
-            color: white;
-            padding-left: 5px;
+            color: var(--electric-cyan);
         }
-        
-        .footer-links a::before {
-            content: '→';
-            color: var(--electric-blue);
-            font-weight: bold;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s;
-        }
-        
-        .footer-links a:hover::before {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
+
         .contact-info {
             list-style: none;
         }
-        
+
         .contact-info li {
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            color: #cbd5e1;
-            line-height: 1.6;
-        }
-        
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--electric-blue);
-            flex-shrink: 0;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1.2rem;
-            margin-top: 2rem;
-        }
-        
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 1.3rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .social-links a:hover {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            transform: translateY(-5px) rotate(5deg);
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
-            border-color: transparent;
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 3rem;
-            margin-top: 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #94a3b8;
-            font-size: 0.95rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .copyright p {
             margin-bottom: 0.8rem;
-        }
-        
-        .copyright-stats {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
+            gap: 0.8rem;
+            color: var(--text-secondary);
             font-size: 0.85rem;
         }
-        
-        .stat-item {
+
+        .contact-info i {
+            width: 20px;
+            color: var(--electric-cyan);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            background: rgba(0, 245, 255, 0.1);
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
+            justify-content: center;
+            color: var(--electric-cyan);
+            transition: 0.2s;
+            text-decoration: none;
         }
-        
-        .stat-item .icon {
-            color: var(--electric-blue);
+
+        .social-links a i {
+            font-size: 1rem;
         }
-        
-        /* Contador de visitas */
-        .visit-counter {
+
+        .social-links a:hover {
+            background: var(--electric-cyan);
+            color: #02040a;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+
+        /* Overlay recarga */
+        .reload-overlay {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(33, 37, 41, 0.9));
-            color: white;
-            padding: 12px 18px;
-            border-radius: 25px;
-            font-size: 0.95rem;
-            z-index: 100;
-            display: none;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-            cursor: pointer;
-            user-select: none;
-        }
-        
-        .visit-counter.show {
-            display: flex;
-            animation: slideUp 0.5s ease;
-        }
-        
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .visit-counter:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-        }
-        
-        /* ESTILOS EXACTAMENTE IGUALES AL PRIMER CÓDIGO PARA EL MENSAJE DE RECARGA */
-        #reloadMessageContainer {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 10px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 5, 11, 0.98);
+            backdrop-filter: blur(15px);
             z-index: 9999;
             display: none;
             align-items: center;
-            gap: 15px;
-            font-weight: 600;
-            animation: slideIn 0.5s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 30px rgba(0, 168, 255, 0.5);
+            justify-content: center;
+            flex-direction: column;
         }
-        
-        #reloadMessageContainer.show {
+
+        .reload-overlay.show {
             display: flex;
         }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -60%);
-            }
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
+
+        .reload-icon {
+            font-size: 4rem;
+            animation: pulse 1.2s infinite;
+            color: var(--electric-cyan);
         }
-        
-        #reloadMessageContainer span {
-            font-size: 1.2rem;
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 5px #00f5ff; }
+            50% { transform: scale(1.1); text-shadow: 0 0 25px #00f5ff; }
         }
-        
-        /* Animaciones */
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Media Queries */
+
         @media (max-width: 992px) {
             .service-detailed {
                 grid-template-columns: 1fr;
-                gap: 2.5rem;
+                gap: 1.5rem;
             }
-            
             .service-detailed:nth-child(even) .service-image {
                 order: 1;
             }
-            
             .service-detailed:nth-child(even) .service-info {
                 order: 2;
             }
-            
-            .btn-container {
-                justify-content: center;
-            }
+            .page-hero h1 { font-size: 3rem; }
         }
-        
+
         @media (max-width: 768px) {
-            .mobile-menu {
-                display: block;
-            }
-            
+            .mobile-menu { display: block; }
             nav ul {
                 display: none;
-                flex-direction: column;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: linear-gradient(135deg, #0f172a, #1e293b);
-                padding: 1.5rem;
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-                backdrop-filter: blur(10px);
-                z-index: 1000;
-            }
-            
-            nav ul.active {
-                display: flex;
-                animation: slideDown 0.3s ease;
-            }
-            
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            
-            .page-hero h1 {
-                font-size: 2.8rem;
-            }
-            
-            .page-hero p {
-                font-size: 1.2rem;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .service-nav-item {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.95rem;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            
-            .copyright-stats {
+                background: #03050b;
                 flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .visit-counter {
-                bottom: 15px;
-                right: 15px;
-                padding: 10px 15px;
-                font-size: 0.85rem;
-            }
-            
-            #reloadMessageContainer {
-                padding: 12px 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .page-hero {
-                padding: 6rem 0;
-            }
-            
-            .page-hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .service-info h3 {
-                font-size: 1.8rem;
-            }
-            
-            .btn-container {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .btn {
-                width: 100%;
+                padding: 1rem;
+                gap: 0.8rem;
                 text-align: center;
+                border-bottom: 1px solid rgba(0, 245, 255, 0.2);
             }
-            
-            .modal-content {
-                padding: 2rem;
-            }
-            
-            #reloadMessageContainer {
-                padding: 10px 15px;
-                font-size: 0.9rem;
-            }
+            nav ul.active { display: flex; }
+            .page-hero h1 { font-size: 2.2rem; }
+            .page-hero p { font-size: 1rem; }
+            .section-title { font-size: 1.8rem; }
+            .service-info h3 { font-size: 1.5rem; }
+            .services-nav { top: 60px; }
+            .service-nav-item { padding: 0.4rem 1rem; font-size: 0.8rem; }
+            .service-image img { height: 220px; }
         }
     </style>
 </head>
 
 <body>
-    <!-- Overlay de recarga - SIN GIRO -->
     <div class="reload-overlay" id="reloadOverlay">
-        <div class="reload-content">
-            <div class="reload-icon">⚡</div>
-            <h3>Recargando Energía</h3>
-            <p>Voltaje Express está recargando la página con energía eléctrica...</p>
-        </div>
+        <div class="reload-icon"><i class="fas fa-bolt"></i></div>
+        <h3 style="color:white; margin-top:1rem;">Recargando Voltaje Express</h3>
+        <p style="color:#aaa">Energía en cada conexión...</p>
     </div>
 
-    <!-- Header con nuevo logo -->
     <header>
         <div class="container header-container">
             <div class="logo" id="mainLogo">
-                <div class="logo-icon">
-                    <div class="bolt">⚡</div>
-                </div>
+                <div class="logo-icon"><i class="fas fa-bolt"></i></div>
                 <div class="logo-text">
                     <h1>VOLTAJE EXPRESS</h1>
                     <div class="tagline">ENERGÍA INTELIGENTE</div>
@@ -1268,7 +758,7 @@
                 </div>
             </div>
             <nav>
-                <div class="mobile-menu">☰</div>
+                <div class="mobile-menu"><i class="fas fa-bars"></i></div>
                 <ul>
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="servicios.html" class="active">Servicios</a></li>
@@ -1279,31 +769,29 @@
         </div>
     </header>
 
-    <!-- Hero Section para página de servicios -->
     <section class="page-hero">
-        <div class="container page-hero-content">
+        <div class="container">
+            <div class="hero-badge"><i class="fas fa-bolt"></i> SOLUCIONES ELÉCTRICAS INTEGRALES</div>
             <h1>Nuestros Servicios</h1>
             <p>Ofrecemos soluciones eléctricas integrales para todo tipo de necesidades. Más de 5 años de experiencia nos respaldan en cada proyecto.</p>
         </div>
     </section>
 
-    <!-- Navegación de Servicios -->
     <div class="services-nav">
         <div class="container services-nav-container">
-            <div class="service-nav-item active" data-service="all">Todos</div>
-            <div class="service-nav-item" data-service="instalaciones">Instalaciones</div>
-            <div class="service-nav-item" data-service="mantenimiento">Mantenimiento</div>
-            <div class="service-nav-item" data-service="iluminacion">Iluminación</div>
-            <div class="service-nav-item" data-service="industrial">Industrial</div>
-            <div class="service-nav-item" data-service="renovables">Renovables</div>
-            <div class="service-nav-item" data-service="carga">Puntos de Carga</div>
+            <div class="service-nav-item active" data-service="all"><i class="fas fa-th-large"></i> Todos</div>
+            <div class="service-nav-item" data-service="instalaciones"><i class="fas fa-bolt"></i> Instalaciones</div>
+            <div class="service-nav-item" data-service="mantenimiento"><i class="fas fa-tools"></i> Mantenimiento</div>
+            <div class="service-nav-item" data-service="iluminacion"><i class="fas fa-lightbulb"></i> Iluminación</div>
+            <div class="service-nav-item" data-service="industrial"><i class="fas fa-industry"></i> Industrial</div>
+            <div class="service-nav-item" data-service="renovables"><i class="fas fa-solar-panel"></i> Renovables</div>
+            <div class="service-nav-item" data-service="carga"><i class="fas fa-car"></i> Puntos de Carga</div>
         </div>
     </div>
 
-    <!-- Servicios Completos -->
     <section id="servicios-completos">
         <div class="container">
-            <h2 class="section-title">Servicios Especializados</h2>
+            <h2 class="section-title"><i class="fas fa-cogs"></i> <span>Servicios</span> Especializados</h2>
             <div class="services-detailed-grid">
                 <!-- Instalaciones Eléctricas -->
                 <div class="service-detailed" data-service="instalaciones" id="instalaciones">
@@ -1311,24 +799,17 @@
                         <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Instalaciones eléctricas">
                     </div>
                     <div class="service-info">
-                        <h3>Instalaciones Eléctricas</h3>
-                        <p>Realizamos instalaciones eléctricas completas para viviendas, locales comerciales y naves industriales, cumpliendo con todas las normativas de seguridad vigentes. Nuestro equipo de electricistas certificados garantiza trabajos de calidad y durabilidad.</p>
+                        <h3><i class="fas fa-bolt"></i> Instalaciones Eléctricas</h3>
+                        <p>Realizamos instalaciones eléctricas completas para viviendas, locales comerciales y naves industriales, cumpliendo con todas las normativas de seguridad vigentes.</p>
                         <ul>
-                            <li>Instalaciones nuevas y reformas completas</li>
-                            <li>Cuadros eléctricos y sistemas de automatización</li>
-                            <li>Cableado estructurado y redes de datos</li>
-                            <li>Sistemas de puesta a tierra y protección</li>
-                            <li>Certificados de instalación eléctrica</li>
+                            <li><i class="fas fa-check-circle"></i> Instalaciones nuevas y reformas completas</li>
+                            <li><i class="fas fa-check-circle"></i> Cuadros eléctricos y sistemas de automatización</li>
+                            <li><i class="fas fa-check-circle"></i> Cableado estructurado y redes de datos</li>
+                            <li><i class="fas fa-check-circle"></i> Sistemas de puesta a tierra y protección</li>
                         </ul>
                         <div class="btn-container">
-                            <a href="contacto.html" class="btn">
-                                <span>📋</span>
-                                Solicitar Presupuesto
-                            </a>
-                            <button class="btn btn-secondary" onclick="openModal('instalaciones')">
-                                <span>🔍</span>
-                                Ver Detalles
-                            </button>
+                            <a href="contacto.html" class="btn"><i class="fas fa-file-invoice"></i> Solicitar Presupuesto</a>
+                            <button class="btn btn-secondary" onclick="openModal('instalaciones')"><i class="fas fa-info-circle"></i> Ver Detalles</button>
                         </div>
                     </div>
                 </div>
@@ -1336,24 +817,17 @@
                 <!-- Mantenimiento -->
                 <div class="service-detailed" data-service="mantenimiento" id="mantenimiento">
                     <div class="service-info">
-                        <h3>Mantenimiento y Reparaciones</h3>
-                        <p>Ofrecemos servicios de mantenimiento preventivo y correctivo para garantizar el óptimo funcionamiento y seguridad de tus instalaciones eléctricas. Disponemos de servicio de urgencias 24/7 para resolver cualquier incidencia.</p>
+                        <h3><i class="fas fa-tools"></i> Mantenimiento y Reparaciones</h3>
+                        <p>Ofrecemos servicios de mantenimiento preventivo y correctivo para garantizar el óptimo funcionamiento y seguridad de tus instalaciones eléctricas.</p>
                         <ul>
-                            <li>Mantenimiento preventivo programado</li>
-                            <li>Reparación de averías eléctricas</li>
-                            <li>Actualización de instalaciones antiguas</li>
-                            <li>Servicio de urgencias 24/7</li>
-                            <li>Diagnóstico y solución de problemas</li>
+                            <li><i class="fas fa-check-circle"></i> Mantenimiento preventivo programado</li>
+                            <li><i class="fas fa-check-circle"></i> Reparación de averías eléctricas</li>
+                            <li><i class="fas fa-check-circle"></i> Actualización de instalaciones antiguas</li>
+                            <li><i class="fas fa-check-circle"></i> Servicio de urgencias 24/7</li>
                         </ul>
                         <div class="btn-container">
-                            <a href="contacto.html" class="btn">
-                                <span>📋</span>
-                                Solicitar Presupuesto
-                            </a>
-                            <button class="btn btn-secondary" onclick="openModal('mantenimiento')">
-                                <span>🔍</span>
-                                Ver Detalles
-                            </button>
+                            <a href="contacto.html" class="btn"><i class="fas fa-file-invoice"></i> Solicitar Presupuesto</a>
+                            <button class="btn btn-secondary" onclick="openModal('mantenimiento')"><i class="fas fa-info-circle"></i> Ver Detalles</button>
                         </div>
                     </div>
                     <div class="service-image">
@@ -1367,24 +841,17 @@
                         <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Diseño de iluminación">
                     </div>
                     <div class="service-info">
-                        <h3>Iluminación y Diseño</h3>
-                        <p>Diseñamos e implementamos sistemas de iluminación eficientes y estéticos para interiores y exteriores, combinando funcionalidad y diseño. Trabajamos con las últimas tecnologías en iluminación LED y sistemas de control.</p>
+                        <h3><i class="fas fa-lightbulb"></i> Iluminación y Diseño</h3>
+                        <p>Diseñamos e implementamos sistemas de iluminación eficientes y estéticos para interiores y exteriores, combinando funcionalidad y diseño.</p>
                         <ul>
-                            <li>Estudios de iluminación personalizados</li>
-                            <li>Iluminación LED de alta eficiencia</li>
-                            <li>Sistemas de control y domótica</li>
-                            <li>Iluminación decorativa y ambiental</li>
-                            <li>Proyectos de iluminación arquitectónica</li>
+                            <li><i class="fas fa-check-circle"></i> Estudios de iluminación personalizados</li>
+                            <li><i class="fas fa-check-circle"></i> Iluminación LED de alta eficiencia</li>
+                            <li><i class="fas fa-check-circle"></i> Sistemas de control y domótica</li>
+                            <li><i class="fas fa-check-circle"></i> Iluminación decorativa y ambiental</li>
                         </ul>
                         <div class="btn-container">
-                            <a href="contacto.html" class="btn">
-                                <span>📋</span>
-                                Solicitar Presupuesto
-                            </a>
-                            <button class="btn btn-secondary" onclick="openModal('iluminacion')">
-                                <span>🔍</span>
-                                Ver Detalles
-                            </button>
+                            <a href="contacto.html" class="btn"><i class="fas fa-file-invoice"></i> Solicitar Presupuesto</a>
+                            <button class="btn btn-secondary" onclick="openModal('iluminacion')"><i class="fas fa-info-circle"></i> Ver Detalles</button>
                         </div>
                     </div>
                 </div>
@@ -1392,24 +859,17 @@
                 <!-- Industrial -->
                 <div class="service-detailed" data-service="industrial" id="industrial">
                     <div class="service-info">
-                        <h3>Electricidad Industrial</h3>
-                        <p>Soluciones eléctricas especializadas para el sector industrial, con equipos de alta potencia y sistemas de control avanzados. Trabajamos con maquinaria industrial, automatización y sistemas de potencia.</p>
+                        <h3><i class="fas fa-industry"></i> Electricidad Industrial</h3>
+                        <p>Soluciones eléctricas especializadas para el sector industrial, con equipos de alta potencia y sistemas de control avanzados.</p>
                         <ul>
-                            <li>Cuadros de control y automatización industrial</li>
-                            <li>Motores eléctricos y variadores de frecuencia</li>
-                            <li>Sistemas de potencia industrial</li>
-                            <li>Maquinaria especializada</li>
-                            <li>Mantenimiento de instalaciones industriales</li>
+                            <li><i class="fas fa-check-circle"></i> Cuadros de control y automatización industrial</li>
+                            <li><i class="fas fa-check-circle"></i> Motores eléctricos y variadores de frecuencia</li>
+                            <li><i class="fas fa-check-circle"></i> Sistemas de potencia industrial</li>
+                            <li><i class="fas fa-check-circle"></i> Mantenimiento de instalaciones industriales</li>
                         </ul>
                         <div class="btn-container">
-                            <a href="contacto.html" class="btn">
-                                <span>📋</span>
-                                Solicitar Presupuesto
-                            </a>
-                            <button class="btn btn-secondary" onclick="openModal('industrial')">
-                                <span>🔍</span>
-                                Ver Detalles
-                            </button>
+                            <a href="contacto.html" class="btn"><i class="fas fa-file-invoice"></i> Solicitar Presupuesto</a>
+                            <button class="btn btn-secondary" onclick="openModal('industrial')"><i class="fas fa-info-circle"></i> Ver Detalles</button>
                         </div>
                     </div>
                     <div class="service-image">
@@ -1423,24 +883,17 @@
                         <img src="https://images.unsplash.com/photo-1593941707882-a5bba5338fe2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Puntos de carga para vehículos">
                     </div>
                     <div class="service-info">
-                        <h3>Puntos de Carga para Vehículos</h3>
-                        <p>Instalación de puntos de carga para vehículos eléctricos en viviendas unifamiliares, comunidades de vecinos y empresas. Te asesoramos sobre las mejores opciones y gestionamos las subvenciones disponibles.</p>
+                        <h3><i class="fas fa-car"></i> Puntos de Carga para Vehículos</h3>
+                        <p>Instalación de puntos de carga para vehículos eléctricos en viviendas, comunidades de vecinos y empresas.</p>
                         <ul>
-                            <li>Asesoramiento técnico personalizado</li>
-                            <li>Instalación de wallboxes y puntos de carga</li>
-                            <li>Sistemas de carga rápida</li>
-                            <li>Gestión de subvenciones y ayudas</li>
-                            <li>Instalaciones para comunidades de vecinos</li>
+                            <li><i class="fas fa-check-circle"></i> Asesoramiento técnico personalizado</li>
+                            <li><i class="fas fa-check-circle"></i> Instalación de wallboxes y puntos de carga</li>
+                            <li><i class="fas fa-check-circle"></i> Sistemas de carga rápida</li>
+                            <li><i class="fas fa-check-circle"></i> Gestión de subvenciones y ayudas</li>
                         </ul>
                         <div class="btn-container">
-                            <a href="contacto.html" class="btn">
-                                <span>📋</span>
-                                Solicitar Presupuesto
-                            </a>
-                            <button class="btn btn-secondary" onclick="openModal('carga')">
-                                <span>🔍</span>
-                                Ver Detalles
-                            </button>
+                            <a href="contacto.html" class="btn"><i class="fas fa-file-invoice"></i> Solicitar Presupuesto</a>
+                            <button class="btn btn-secondary" onclick="openModal('carga')"><i class="fas fa-info-circle"></i> Ver Detalles</button>
                         </div>
                     </div>
                 </div>
@@ -1448,24 +901,17 @@
                 <!-- Renovables -->
                 <div class="service-detailed" data-service="renovables" id="renovables">
                     <div class="service-info">
-                        <h3>Energías Renovables</h3>
-                        <p>Instalación de sistemas de energía solar fotovoltaica para autoconsumo, contribuyendo al ahorro energético y la sostenibilidad. Te ayudamos a reducir tu factura eléctrica y tu huella de carbono.</p>
+                        <h3><i class="fas fa-solar-panel"></i> Energías Renovables</h3>
+                        <p>Instalación de sistemas de energía solar fotovoltaica para autoconsumo, contribuyendo al ahorro energético y la sostenibilidad.</p>
                         <ul>
-                            <li>Instalaciones solares fotovoltaicas</li>
-                            <li>Sistemas de autoconsumo</li>
-                            <li>Baterías y sistemas de acumulación</li>
-                            <li>Asesoramiento en subvenciones</li>
-                            <li>Mantenimiento de instalaciones solares</li>
+                            <li><i class="fas fa-check-circle"></i> Instalaciones solares fotovoltaicas</li>
+                            <li><i class="fas fa-check-circle"></i> Sistemas de autoconsumo</li>
+                            <li><i class="fas fa-check-circle"></i> Baterías y sistemas de acumulación</li>
+                            <li><i class="fas fa-check-circle"></i> Asesoramiento en subvenciones</li>
                         </ul>
                         <div class="btn-container">
-                            <a href="contacto.html" class="btn">
-                                <span>📋</span>
-                                Solicitar Presupuesto
-                            </a>
-                            <button class="btn btn-secondary" onclick="openModal('renovables')">
-                                <span>🔍</span>
-                                Ver Detalles
-                            </button>
+                            <a href="contacto.html" class="btn"><i class="fas fa-file-invoice"></i> Solicitar Presupuesto</a>
+                            <button class="btn btn-secondary" onclick="openModal('renovables')"><i class="fas fa-info-circle"></i> Ver Detalles</button>
                         </div>
                     </div>
                     <div class="service-image">
@@ -1476,314 +922,139 @@
         </div>
     </section>
 
-    <!-- Modal de Servicio -->
-    <div class="service-modal" id="serviceModal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal()">×</button>
-            <img id="modalImage" class="modal-image" src="" alt="">
-            <h2 id="modalTitle"></h2>
-            <p id="modalDescription"></p>
-            <div id="modalDetails"></div>
-            <a href="contacto.html" class="btn" style="margin-top: 2rem;">
-                <span>📋</span>
-                Solicitar Presupuesto
-            </a>
-        </div>
-    </div>
-
-    <!-- Footer elegante y moderno -->
     <footer>
-        <div class="footer-wave"></div>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column footer-about">
-                    <div class="footer-logo" id="footerLogo">
-                        <div class="footer-logo-icon">
-                            <div style="font-size: 24px; color: white; font-weight: bold;">⚡</div>
-                        </div>
-                        <div class="footer-logo-text">
-                            <h4>VOLTAJE EXPRESS</h4>
-                            <span>ENERGÍA CONFIABLE</span>
-                        </div>
-                    </div>
-                    <p>Empresa especializada en servicios eléctricos de alta calidad para hogares, empresas e industrias. Más de 5 años brindando soluciones confiables y seguras en toda la República Dominicana.</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook" title="Síguenos en Facebook">f</a>
-                        <a href="#" aria-label="Instagram" title="Síguenos en Instagram">ig</a>
-                        <a href="#" aria-label="Twitter" title="Síguenos en Twitter">𝕏</a>
-                        <a href="#" aria-label="WhatsApp" title="Contáctanos por WhatsApp">📱</a>
-                    </div>
-                </div>
-                
                 <div class="footer-column">
-                    <h3>Nuestros Servicios</h3>
+                    <div class="footer-logo" id="footerLogo">
+                        <div class="footer-logo-icon"><i class="fas fa-bolt"></i></div>
+                        <div><h4 style="color:white">VOLTAJE EXPRESS</h4><span style="color:#8e9ccd; font-size:12px;">⚡ Energía confiable</span></div>
+                    </div>
+                    <p style="color:var(--text-secondary); font-size:0.8rem;">Expertos en soluciones eléctricas de alta calidad para hogares, empresas e industrias.</p>
+                    <div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div>
+                </div>
+                <div class="footer-column">
+                    <h3>Servicios</h3>
                     <ul class="footer-links">
-                        <li><a href="#instalaciones">⚡ Instalaciones Eléctricas</a></li>
-                        <li><a href="#mantenimiento">🔧 Mantenimiento y Reparaciones</a></li>
-                        <li><a href="#iluminacion">💡 Iluminación y Diseño</a></li>
-                        <li><a href="#industrial">🏭 Electricidad Industrial</a></li>
-                        <li><a href="#renovables">🔋 Energías Renovables</a></li>
-                        <li><a href="#carga">🚗 Puntos de Carga VE</a></li>
+                        <li><a href="#instalaciones"><i class="fas fa-bolt"></i> Instalaciones Eléctricas</a></li>
+                        <li><a href="#mantenimiento"><i class="fas fa-tools"></i> Mantenimiento</a></li>
+                        <li><a href="#iluminacion"><i class="fas fa-lightbulb"></i> Iluminación</a></li>
+                        <li><a href="#renovables"><i class="fas fa-solar-panel"></i> Energías Renovables</a></li>
+                        <li><a href="#carga"><i class="fas fa-car"></i> Puntos de Carga VE</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-column">
-                    <h3>Contáctanos</h3>
+                    <h3>Contacto</h3>
                     <ul class="contact-info">
-                        <li>
-                            <div class="contact-icon">📍</div>
-                            <div>
-                                <strong>Oficina Principal</strong><br>
-                                Mahata Calle C, sector f1<br>
-                                Santo Domingo, República Dominicana
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon">📞</div>
-                            <div>
-                                <strong>Teléfono y WhatsApp</strong><br>
-                                +1 (809) 523-8283<br>
-                                Disponible 24/7 para emergencias
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon">✉️</div>
-                            <div>
-                                <strong>Correo Electrónico</strong><br>
-                                voltajeexpress2@gmail.com<br>
-                                Respuesta en menos de 24h
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon">🕒</div>
-                            <div>
-                                <strong>Horario de Atención</strong><br>
-                                Lunes a Viernes: 8:00 AM - 5:00 PM<br>
-                                Sábados: 8:00 AM - 12:00 PM
-                            </div>
-                        </li>
+                        <li><i class="fas fa-map-marker-alt"></i> Mahata Calle C, Santo Domingo</li>
+                        <li><i class="fas fa-phone-alt"></i> +1 (809) 523-8283</li>
+                        <li><i class="fas fa-envelope"></i> voltajeexpress2@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Lun-Vie 8am-5pm · Urgencias 24/7</li>
                     </ul>
                 </div>
             </div>
-            
             <div class="copyright">
-                <p>&copy; 2021-2026 Voltaje Express. Todos los derechos reservados.</p>
-                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;">
-                    "Soluciones eléctricas profesionales para un futuro energéticamente eficiente"
-                </p>
-                
-                <div class="copyright-stats">
-                    <div class="stat-item">
-                        <span class="icon">👁️</span>
-                        <span>Visitas: <strong id="footerVisitCount">0</strong></span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="icon">⚡</span>
-                        <span>Servicios: <strong>6</strong></span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="icon">👆👆</span>
-                        <span>Doble click activo</span>
-                    </div>
-                </div>
+                <p>&copy; 2026 Voltaje Express - Energía que transforma espacios</p>
+                <p style="font-size: 0.7rem; margin-top: 0.5rem;">"Soluciones eléctricas profesionales para un futuro energéticamente eficiente"</p>
             </div>
         </div>
     </footer>
 
-    <!-- Contador de visitas -->
-    <div class="visit-counter" id="visitCounter">
-        👁️ <span id="counterDisplay">0</span> visitas
+    <div class="service-modal" id="serviceModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+            <div id="modalDetails"></div>
+            <a href="contacto.html" class="btn" style="margin-top: 1rem;"><i class="fas fa-file-invoice"></i> Solicitar Presupuesto</a>
+        </div>
     </div>
 
     <script>
-        // =============================================
-        // SISTEMA DE DOBLE CLICK EXACTO AL PRIMER CÓDIGO
-        // =============================================
-
+        // Double Click Handler
         class DoubleClickHandler {
-            constructor(element, doubleCallback, singleCallback = null, delay = 300) {
-                this.element = element;
-                this.doubleCallback = doubleCallback;
-                this.singleCallback = singleCallback;
+            constructor(el, callback, delay = 280) {
+                this.el = el;
+                this.callback = callback;
                 this.delay = delay;
-                this.clickCount = 0;
+                this.clicks = 0;
                 this.timer = null;
-                
-                this.element.addEventListener('click', this.handleClick.bind(this));
-            }
-
-            handleClick(event) {
-                event.preventDefault();
-                event.stopPropagation();
-                this.clickCount++;
-
-                if (this.clickCount === 1) {
-                    this.timer = setTimeout(() => {
-                        // Click único
-                        if (this.singleCallback) {
-                            this.singleCallback(event);
-                        }
+                el.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.clicks++;
+                    if (this.clicks === 1) {
+                        this.timer = setTimeout(() => this.reset(), this.delay);
+                    } else if (this.clicks === 2) {
+                        clearTimeout(this.timer);
+                        this.callback(e);
                         this.reset();
-                    }, this.delay);
-                } else if (this.clickCount === 2) {
-                    clearTimeout(this.timer);
-                    // Doble click
-                    this.doubleCallback(event);
-                    this.reset();
-                }
+                    }
+                });
             }
-
-            reset() {
-                this.clickCount = 0;
-                if (this.timer) {
-                    clearTimeout(this.timer);
-                    this.timer = null;
-                }
-            }
+            reset() { this.clicks = 0; if (this.timer) clearTimeout(this.timer); this.timer = null; }
         }
 
-        // =============================================
-        // FUNCIÓN DE RECARGA DE PÁGINA - SIN GIRO
-        // =============================================
-
-        function triggerPageReload() {
-            // Mostrar overlay de recarga
-            const reloadOverlay = document.getElementById('reloadOverlay');
-            reloadOverlay.classList.add('show');
-            
-            // Aplicar efectos al logo (SIN GIRO)
-            const logo = document.querySelector('.logo');
-            const logoIcon = document.querySelector('.logo-icon');
-            const bolt = document.querySelector('.logo-icon .bolt');
-            const logoDecoration = document.querySelector('.logo-decoration');
-            
-            logo.classList.add('double-click-active');
-            logoIcon.classList.add('double-click-effect');
-            bolt.classList.add('double-click-effect');
-            logoDecoration.classList.add('double-click-effect');
-            
-            // Recargar la página después de 1.5 segundos
-            setTimeout(() => {
-                location.reload(true);
-            }, 1500);
+        function reloadPage() {
+            document.getElementById('reloadOverlay').classList.add('show');
+            setTimeout(() => location.reload(true), 1300);
         }
 
-        // =============================================
-        // SISTEMA DE SERVICIOS Y FILTRADO
-        // =============================================
-
+        // Datos de servicios para el modal
         const serviceData = {
             instalaciones: {
                 title: "Instalaciones Eléctricas",
-                description: "Realizamos instalaciones eléctricas completas para viviendas, locales comerciales y naves industriales, cumpliendo con todas las normativas de seguridad vigentes. Nuestro equipo de electricistas certificados garantiza trabajos de calidad y durabilidad.",
+                description: "Realizamos instalaciones eléctricas completas para viviendas, locales comerciales y naves industriales, cumpliendo con todas las normativas de seguridad vigentes.",
                 image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                details: `<h3>Servicios incluidos:</h3>
-                <ul>
-                    <li><strong>Instalaciones nuevas:</strong> Desde cero para viviendas, locales y naves industriales</li>
-                    <li><strong>Reformas completas:</strong> Actualización de instalaciones antiguas</li>
-                    <li><strong>Cuadros eléctricos:</strong> Diseño e instalación de cuadros de distribución</li>
-                    <li><strong>Cableado estructurado:</strong> Redes eléctricas y de datos integradas</li>
-                    <li><strong>Sistemas de protección:</strong> Puesta a tierra, diferenciales y protecciones</li>
-                    <li><strong>Certificación:</strong> Certificado de instalación eléctrica (CIE)</li>
-                </ul>`
+                details: `<h3><i class="fas fa-list"></i> Servicios incluidos:</h3>
+                <ul><li><i class="fas fa-check-circle"></i> Instalaciones nuevas desde cero</li><li><i class="fas fa-check-circle"></i> Reformas completas de instalaciones</li><li><i class="fas fa-check-circle"></i> Cuadros eléctricos y automatización</li><li><i class="fas fa-check-circle"></i> Cableado estructurado y redes</li><li><i class="fas fa-check-circle"></i> Sistemas de puesta a tierra</li><li><i class="fas fa-check-circle"></i> Certificado de instalación eléctrica</li></ul>`
             },
             mantenimiento: {
                 title: "Mantenimiento y Reparaciones",
-                description: "Ofrecemos servicios de mantenimiento preventivo y correctivo para garantizar el óptimo funcionamiento y seguridad de tus instalaciones eléctricas. Disponemos de servicio de urgencias 24/7 para resolver cualquier incidencia.",
+                description: "Ofrecemos servicios de mantenimiento preventivo y correctivo para garantizar el óptimo funcionamiento y seguridad de tus instalaciones eléctricas.",
                 image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                details: `<h3>Servicios incluidos:</h3>
-                <ul>
-                    <li><strong>Mantenimiento preventivo:</strong> Revisiones periódicas programadas</li>
-                    <li><strong>Reparación de averías:</strong> Solución rápida de problemas eléctricos</li>
-                    <li><strong>Actualización de instalaciones:</strong> Modernización de sistemas antiguos</li>
-                    <li><strong>Servicio de urgencias 24/7:</strong> Disponibles para emergencias</li>
-                    <li><strong>Diagnóstico técnico:</strong> Identificación precisa de problemas</li>
-                    <li><strong>Programas de mantenimiento:</strong> Personalizados según necesidades</li>
-                </ul>`
+                details: `<h3><i class="fas fa-list"></i> Servicios incluidos:</h3>
+                <ul><li><i class="fas fa-check-circle"></i> Mantenimiento preventivo programado</li><li><i class="fas fa-check-circle"></i> Reparación de averías eléctricas</li><li><i class="fas fa-check-circle"></i> Actualización de instalaciones antiguas</li><li><i class="fas fa-check-circle"></i> Servicio de urgencias 24/7</li><li><i class="fas fa-check-circle"></i> Diagnóstico técnico preciso</li><li><i class="fas fa-check-circle"></i> Programas personalizados</li></ul>`
             },
             iluminacion: {
                 title: "Iluminación y Diseño",
-                description: "Diseñamos e implementamos sistemas de iluminación eficientes y estéticos para interiores y exteriores, combinando funcionalidad y diseño. Trabajamos con las últimas tecnologías en iluminación LED y sistemas de control.",
+                description: "Diseñamos e implementamos sistemas de iluminación eficientes y estéticos para interiores y exteriores.",
                 image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                details: `<h3>Servicios incluidos:</h3>
-                <ul>
-                    <li><strong>Estudios de iluminación:</strong> Personalizados para cada espacio</li>
-                    <li><strong>Iluminación LED:</strong> Alta eficiencia y ahorro energético</li>
-                    <li><strong>Sistemas de control:</strong> Domótica y automatización</li>
-                    <li><strong>Iluminación decorativa:</strong> Diseño de ambientes</li>
-                    <li><strong>Iluminación arquitectónica:</strong> Proyectos especiales</li>
-                    <li><strong>Optimización energética:</strong> Reducción del consumo eléctrico</li>
-                </ul>`
+                details: `<h3><i class="fas fa-list"></i> Servicios incluidos:</h3>
+                <ul><li><i class="fas fa-check-circle"></i> Estudios de iluminación personalizados</li><li><i class="fas fa-check-circle"></i> Iluminación LED de alta eficiencia</li><li><i class="fas fa-check-circle"></i> Sistemas de control y domótica</li><li><i class="fas fa-check-circle"></i> Iluminación decorativa y ambiental</li><li><i class="fas fa-check-circle"></i> Proyectos de iluminación arquitectónica</li><li><i class="fas fa-check-circle"></i> Optimización del consumo energético</li></ul>`
             },
             industrial: {
                 title: "Electricidad Industrial",
-                description: "Soluciones eléctricas especializadas para el sector industrial, con equipos de alta potencia y sistemas de control avanzados. Trabajamos con maquinaria industrial, automatización y sistemas de potencia.",
+                description: "Soluciones eléctricas especializadas para el sector industrial, con equipos de alta potencia y sistemas de control avanzados.",
                 image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                details: `<h3>Servicios incluidos:</h3>
-                <ul>
-                    <li><strong>Cuadros de control:</strong> Automatización industrial</li>
-                    <li><strong>Motores eléctricos:</strong> Instalación y mantenimiento</li>
-                    <li><strong>Sistemas de potencia:</strong> Distribución industrial</li>
-                    <li><strong>Maquinaria especializada:</strong> Conexión y puesta en marcha</li>
-                    <li><strong>Mantenimiento industrial:</strong> Programas preventivos</li>
-                    <li><strong>Proyectos llave en mano:</strong> Soluciones integrales</li>
-                </ul>`
+                details: `<h3><i class="fas fa-list"></i> Servicios incluidos:</h3>
+                <ul><li><i class="fas fa-check-circle"></i> Cuadros de control y automatización</li><li><i class="fas fa-check-circle"></i> Motores eléctricos y variadores</li><li><i class="fas fa-check-circle"></i> Sistemas de potencia industrial</li><li><i class="fas fa-check-circle"></i> Mantenimiento industrial</li><li><i class="fas fa-check-circle"></i> Proyectos llave en mano</li></ul>`
             },
             carga: {
                 title: "Puntos de Carga para Vehículos",
-                description: "Instalación de puntos de carga para vehículos eléctricos en viviendas unifamiliares, comunidades de vecinos y empresas. Te asesoramos sobre las mejores opciones y gestionamos las subvenciones disponibles.",
+                description: "Instalación de puntos de carga para vehículos eléctricos en viviendas, comunidades y empresas.",
                 image: "https://images.unsplash.com/photo-1593941707882-a5bba5338fe2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                details: `<h3>Servicios incluidos:</h3>
-                <ul>
-                    <li><strong>Asesoramiento técnico:</strong> Soluciones personalizadas</li>
-                    <li><strong>Wallboxes:</strong> Instalación de puntos de carga</li>
-                    <li><strong>Carga rápida:</strong> Sistemas de alta potencia</li>
-                    <li><strong>Gestión de subvenciones:</strong> Ayudas y bonificaciones</li>
-                    <li><strong>Comunidades de vecinos:</strong> Instalaciones colectivas</li>
-                    <li><strong>Proyectos empresariales:</strong> Flotas de vehículos eléctricos</li>
-                </ul>`
+                details: `<h3><i class="fas fa-list"></i> Servicios incluidos:</h3>
+                <ul><li><i class="fas fa-check-circle"></i> Asesoramiento técnico personalizado</li><li><i class="fas fa-check-circle"></i> Instalación de wallboxes</li><li><i class="fas fa-check-circle"></i> Sistemas de carga rápida</li><li><i class="fas fa-check-circle"></i> Gestión de subvenciones</li><li><i class="fas fa-check-circle"></i> Instalaciones colectivas</li></ul>`
             },
             renovables: {
                 title: "Energías Renovables",
-                description: "Instalación de sistemas de energía solar fotovoltaica para autoconsumo, contribuyendo al ahorro energético y la sostenibilidad. Te ayudamos a reducir tu factura eléctrica y tu huella de carbono.",
+                description: "Instalación de sistemas de energía solar fotovoltaica para autoconsumo.",
                 image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                details: `<h3>Servicios incluidos:</h3>
-                <ul>
-                    <li><strong>Instalaciones fotovoltaicas:</strong> Paneles solares</li>
-                    <li><strong>Sistemas de autoconsumo:</strong> Con y sin excedentes</li>
-                    <li><strong>Baterías de acumulación:</strong> Almacenamiento energético</li>
-                    <li><strong>Asesoramiento en subvenciones:</strong> Ayudas disponibles</li>
-                    <li><strong>Mantenimiento de instalaciones:</strong> Revisiones periódicas</li>
-                    <li><strong>Estudios de viabilidad:</strong> Análisis de rentabilidad</li>
-                </ul>`
+                details: `<h3><i class="fas fa-list"></i> Servicios incluidos:</h3>
+                <ul><li><i class="fas fa-check-circle"></i> Instalaciones solares fotovoltaicas</li><li><i class="fas fa-check-circle"></i> Sistemas de autoconsumo</li><li><i class="fas fa-check-circle"></i> Baterías y acumulación</li><li><i class="fas fa-check-circle"></i> Asesoramiento en subvenciones</li><li><i class="fas fa-check-circle"></i> Mantenimiento de instalaciones</li><li><i class="fas fa-check-circle"></i> Estudios de viabilidad</li></ul>`
             }
         };
 
+        // Filtrado de servicios
         const serviceDetails = document.querySelectorAll('.service-detailed');
-        const serviceNavItems = document.querySelectorAll('.service-nav-item');
-        const serviceModal = document.getElementById('serviceModal');
+        const navItems = document.querySelectorAll('.service-nav-item');
 
-        // Navegación de servicios
-        serviceNavItems.forEach(item => {
-            item.addEventListener('click', () => {
-                // Remover clase active de todos los items
-                serviceNavItems.forEach(navItem => navItem.classList.remove('active'));
-                // Agregar clase active al item clickeado
-                item.classList.add('active');
-
-                const serviceType = item.getAttribute('data-service');
-                filterServices(serviceType);
-            });
-        });
-
-        // Filtrar servicios
         function filterServices(serviceType) {
             serviceDetails.forEach(service => {
                 if (serviceType === 'all' || service.getAttribute('data-service') === serviceType) {
                     service.style.display = 'grid';
-                    setTimeout(() => {
-                        service.classList.add('visible');
-                    }, 50);
+                    setTimeout(() => service.classList.add('visible'), 50);
                 } else {
                     service.style.display = 'none';
                     service.classList.remove('visible');
@@ -1791,118 +1062,63 @@
             });
         }
 
-        // Animación al hacer scroll
-        function checkScroll() {
-            const triggerBottom = window.innerHeight * 0.85;
-
-            serviceDetails.forEach(service => {
-                if (service.style.display !== 'none') {
-                    const serviceTop = service.getBoundingClientRect().top;
-                    if (serviceTop < triggerBottom) {
-                        service.classList.add('visible');
-                    }
-                }
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navItems.forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+                filterServices(item.getAttribute('data-service'));
             });
-        }
+        });
 
-        // Abrir modal
+        // Modal
+        const modal = document.getElementById('serviceModal');
         function openModal(serviceId) {
-            const service = serviceData[serviceId];
-            if (service) {
-                document.getElementById('modalImage').src = service.image;
-                document.getElementById('modalTitle').textContent = service.title;
-                document.getElementById('modalDescription').textContent = service.description;
-                document.getElementById('modalDetails').innerHTML = service.details;
-                serviceModal.style.display = 'flex';
+            const data = serviceData[serviceId];
+            if (data) {
+                document.getElementById('modalImage').src = data.image;
+                document.getElementById('modalTitle').innerHTML = `<i class="fas fa-info-circle"></i> ${data.title}`;
+                document.getElementById('modalDescription').textContent = data.description;
+                document.getElementById('modalDetails').innerHTML = data.details;
+                modal.classList.add('show');
                 document.body.style.overflow = 'hidden';
             }
         }
-
-        // Cerrar modal
         function closeModal() {
-            serviceModal.style.display = 'none';
+            modal.classList.remove('show');
             document.body.style.overflow = 'auto';
         }
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-        // Cerrar modal al hacer clic fuera
-        serviceModal.addEventListener('click', (e) => {
-            if (e.target === serviceModal) {
-                closeModal();
-            }
-        });
-
-        // =============================================
-        // SISTEMA DE VISITAS
-        // =============================================
-
-        // Sistema de visitas
-        function setupVisitSystem() {
-            let totalVisitCount = localStorage.getItem('totalVisits') || 0;
-            totalVisitCount = parseInt(totalVisitCount) + 1;
-            localStorage.setItem('totalVisits', totalVisitCount);
-            
-            // Actualizar displays
-            document.getElementById('counterDisplay').textContent = totalVisitCount;
-            document.getElementById('footerVisitCount').textContent = totalVisitCount;
-            
-            // Mostrar contador de visitas
-            document.getElementById('visitCounter').classList.add('show');
+        // Animación scroll
+        function checkScroll() {
+            const trigger = window.innerHeight * 0.85;
+            serviceDetails.forEach(service => {
+                if (service.style.display !== 'none' && service.getBoundingClientRect().top < trigger) {
+                    service.classList.add('visible');
+                }
+            });
         }
 
         // Menú móvil
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navUl = document.querySelector('nav ul');
-
-        mobileMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navUl.classList.toggle('active');
-            mobileMenu.textContent = navUl.classList.contains('active') ? '✕' : '☰';
-        });
-
+        const mobileBtn = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('nav ul');
+        if (mobileBtn) {
+            mobileBtn.addEventListener('click', () => navMenu.classList.toggle('active'));
+        }
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
-                if (window.innerWidth <= 768 && navUl.classList.contains('active')) {
-                    navUl.classList.remove('active');
-                    mobileMenu.textContent = '☰';
+                if (window.innerWidth <= 768 && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
                 }
             });
         });
 
-        // =============================================
-        // INICIALIZACIÓN COMPLETA CON DOBLE CLICK
-        // =============================================
-
         window.addEventListener('DOMContentLoaded', () => {
-            // Configurar sistema de visitas
-            setupVisitSystem();
-            
-            // Verificar elementos visibles al cargar
             checkScroll();
-            
-            // Asegurar menú cerrado en desktop
-            if (window.innerWidth > 768 && navUl.classList.contains('active')) {
-                navUl.classList.remove('active');
-                mobileMenu.textContent = '☰';
-            }
-            
-            // AGREGAR SISTEMA DE DOBLE CLICK AL LOGO PRINCIPAL - SIN GIRO
-            const mainLogo = document.getElementById('mainLogo');
-            new DoubleClickHandler(mainLogo, triggerPageReload, null);
-            
-            // AGREGAR SISTEMA DE DOBLE CLICK AL LOGO DEL FOOTER - SIN GIRO
+            new DoubleClickHandler(document.getElementById('mainLogo'), reloadPage);
             const footerLogo = document.getElementById('footerLogo');
-            if (footerLogo) {
-                new DoubleClickHandler(footerLogo, triggerPageReload, null);
-            }
-            
-            // Agregar tooltip a los logos
-            mainLogo.title = "Haz doble clic para recargar la página";
-            if (footerLogo) {
-                footerLogo.title = "Haz doble clic para recargar la página";
-            }
+            if (footerLogo) new DoubleClickHandler(footerLogo, reloadPage);
         });
-
-        // Event listeners para scroll
         window.addEventListener('scroll', checkScroll);
     </script>
 </body>

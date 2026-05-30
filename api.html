@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍿 Buscador de Películas - API OMDb</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #141414 0%, #2d2d2d 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            scroll-margin-top: 20px;
+            background: linear-gradient(135deg, #e50914 0%, #b2070f 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
+        }
+
+        h1 {
+            font-size: 3em;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2em;
+        }
+
+        /* BOTÓN DE INICIO - VERSIÓN SIMPLE QUE SOLO SUBE */
+        .home-button-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 30px 0;
+        }
+
+        .home-btn {
+            background: linear-gradient(45deg, #e50914, #ff6b6b);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.5);
+            transition: all 0.3s;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(229, 9, 20, 0.7);
+            border-color: white;
+        }
+
+        .home-btn i {
+            font-size: 24px;
+        }
+
+        /* Botón flotante de inicio */
+        .home-float {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: #e50914;
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 26px;
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.6);
+            transition: all 0.3s;
+            z-index: 998;
+            border: 3px solid white;
+        }
+
+        .home-float:hover {
+            transform: scale(1.1);
+            background: #b2070f;
+        }
+
+        @media (max-width: 768px) {
+            .home-btn span {
+                display: none;
+            }
+            .home-btn {
+                padding: 15px 25px;
+            }
+            .home-float {
+                display: flex;
+            }
+            h1 {
+                font-size: 2em;
+            }
+        }
+
+        .search-container {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 300px;
+            padding: 15px 20px;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+            background: rgba(255,255,255,0.9);
+        }
+
+        .search-input:focus {
+            border-color: #e50914;
+            box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.3);
+        }
+
+        .search-btn {
+            padding: 15px 40px;
+            background: #e50914;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .search-btn:hover {
+            background: #b2070f;
+            transform: translateY(-2px);
+            border-color: white;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 12px 25px;
+            border: 1px solid #444;
+            border-radius: 10px;
+            background: #333;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-select:hover {
+            background: #444;
+            border-color: #e50914;
+        }
+
+        .stats {
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+            border-left: 6px solid #e50914;
+        }
+
+        .stats-buttons {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .stats-btn {
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .stats-btn:hover {
+            background: #e50914;
+            transform: translateY(-2px);
+        }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .movie-card {
+            background: #1f1f1f;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.4);
+            border-color: #e50914;
+        }
+
+        .movie-poster-container {
+            width: 100%;
+            height: 300px;
+            background: #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .movie-card:hover .movie-poster {
+            transform: scale(1.1);
+        }
+
+        .movie-poster-fallback {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #333, #1a1a1a);
+            color: #e50914;
+            font-size: 64px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .movie-poster-fallback span {
+            font-size: 14px;
+            margin-top: 15px;
+            color: #999;
+            word-break: break-word;
+        }
+
+        .movie-info {
+            padding: 15px;
+        }
+
+        .movie-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .movie-year {
+            color: #e50914;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .movie-type {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(229, 9, 20, 0.95);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: bold;
+            z-index: 2;
+            border: 1px solid white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+            margin: 50px auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 1000px;
+            border-radius: 20px;
+            position: relative;
+            animation: modalFade 0.4s;
+            border: 1px solid #e50914;
+        }
+
+        @keyframes modalFade {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            font-size: 40px;
+            cursor: pointer;
+            color: #999;
+            transition: all 0.3s;
+            z-index: 1001;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .close:hover {
+            color: #e50914;
+            transform: rotate(90deg);
+        }
+
+        .movie-detail {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .detail-poster {
+            flex: 0 0 300px;
+        }
+
+        .detail-poster img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            border: 3px solid #e50914;
+        }
+
+        .detail-info h2 {
+            font-size: 2.5em;
+            color: #e50914;
+            margin-bottom: 20px;
+        }
+
+        .detail-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 15px;
+            border: 1px solid #e50914;
+        }
+
+        .plot {
+            line-height: 1.8;
+            color: #ddd;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            border-left: 4px solid #e50914;
+        }
+
+        .ratings {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .rating {
+            background: rgba(229, 9, 20, 0.15);
+            padding: 12px 25px;
+            border-radius: 10px;
+            border-left: 4px solid #e50914;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 80px;
+            font-size: 18px;
+            color: #999;
+            grid-column: 1 / -1;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(229, 9, 20, 0.3);
+            border-radius: 50%;
+            border-top-color: #e50914;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 80px;
+            background: rgba(229, 9, 20, 0.15);
+            border-radius: 20px;
+            color: #e50914;
+            font-size: 18px;
+            grid-column: 1 / -1;
+            border: 2px solid #e50914;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            padding: 12px 18px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: bold;
+            min-width: 45px;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            background: #e50914;
+            transform: translateY(-2px);
+        }
+
+        .page-btn.active {
+            background: #e50914;
+            border: 2px solid white;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            background: #e50914;
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 26px;
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.5);
+            transition: all 0.3s;
+            z-index: 999;
+            border: 3px solid white;
+        }
+
+        .back-to-top:hover {
+            background: #b2070f;
+            transform: translateY(-5px);
+        }
+
+        .back-to-top.hidden {
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #666;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER con ID para navegación -->
+        <header id="inicio">
+            <h1>🍿 CINEMATEK</h1>
+            <div class="subtitle">Busca tus películas favoritas con OMDb API</div>
+        </header>
+
+        <!-- BOTÓN DE INICIO - SOLO SUBE -->
+        <div class="home-button-container">
+            <button class="home-btn" onclick="irAlInicio()">
+                <i>🏠</i>
+                <span>Subir al Inicio</span>
+            </button>
+        </div>
+
+        <!-- BOTÓN DE INICIO FLOTANTE -->
+        <button class="home-float" onclick="irAlInicio()" title="Subir al inicio">
+            🏠
+        </button>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    id="searchInput" 
+                    placeholder="Ej: Avengers, Matrix, Batman, Titanic..."
+                    autocomplete="off"
+                    value="avengers"
+                >
+                <button class="search-btn" id="searchBtn">🔍 Buscar</button>
+            </div>
+            
+            <div class="filters">
+                <select class="filter-select" id="typeFilter">
+                    <option value="">Todos los tipos</option>
+                    <option value="movie">Películas</option>
+                    <option value="series">Series</option>
+                    <option value="episode">Episodios</option>
+                </select>
+
+                <select class="filter-select" id="yearFilter">
+                    <option value="">Año (todos)</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="stats" id="stats">
+            <div class="stats-buttons" id="statsButtons"></div>
+        </div>
+
+        <div id="moviesGrid" class="movies-grid">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>Cargando películas populares...</p>
+            </div>
+        </div>
+
+        <div class="pagination" id="pagination"></div>
+
+        <footer>
+            <p>© 2024 CINEMATEK - Buscador de películas con OMDb API</p>
+        </footer>
+    </div>
+
+    <!-- Botón volver arriba -->
+    <button class="back-to-top hidden" id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <div id="movieModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="movieDetail"></div>
+        </div>
+    </div>
+
+    <script>
+        // 🔑 TU API KEY DE OMDb
+        const API_KEY = '9d574cc8';
+        const BASE_URL = 'https://www.omdbapi.com/';
+        
+        // Estado de la aplicación
+        let currentPage = 1;
+        let currentSearch = '';
+        let currentType = '';
+        let currentYear = '';
+        let totalResults = 0;
+
+        // Elementos del DOM
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const typeFilter = document.getElementById('typeFilter');
+        const yearFilter = document.getElementById('yearFilter');
+        const moviesGrid = document.getElementById('moviesGrid');
+        const stats = document.getElementById('stats');
+        const statsButtons = document.getElementById('statsButtons');
+        const pagination = document.getElementById('pagination');
+        const modal = document.getElementById('movieModal');
+        const modalContent = document.getElementById('movieDetail');
+        const backToTop = document.getElementById('backToTop');
+        const header = document.getElementById('inicio');
+
+        // Event Listeners
+        searchBtn.addEventListener('click', () => searchMovies());
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchMovies();
+        });
+        typeFilter.addEventListener('change', () => searchMovies());
+        yearFilter.addEventListener('change', () => searchMovies());
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // Detectar scroll para mostrar/ocultar botón volver arriba
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.remove('hidden');
+            } else {
+                backToTop.classList.add('hidden');
+            }
+        });
+
+        /**
+         * FUNCIÓN PARA IR AL INICIO - SOLO SUBE SUAVEMENTE
+         */
+        function irAlInicio() {
+            console.log('🟢 Subiendo al inicio...');
+            
+            // Scroll suave hasta el header
+            header.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Pequeño efecto visual
+            header.style.transition = 'transform 0.3s, box-shadow 0.3s';
+            header.style.transform = 'scale(1.02)';
+            header.style.boxShadow = '0 20px 40px rgba(229, 9, 20, 0.8)';
+            
+            setTimeout(() => {
+                header.style.transform = 'scale(1)';
+                header.style.boxShadow = '0 10px 30px rgba(229, 9, 20, 0.3)';
+            }, 300);
+        }
+
+        /**
+         * Función para volver al principio (scroll suave)
+         */
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        /**
+         * Función para volver a la primera página
+         */
+        function goToFirstPage() {
+            searchMovies(1);
+            scrollToTop();
+        }
+
+        /**
+         * Cierra el modal
+         */
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        /**
+         * Función principal de búsqueda
+         */
+        async function searchMovies(page = 1) {
+            const searchTerm = searchInput.value.trim();
+            
+            if (!searchTerm) {
+                showError('Por favor, ingresa un término de búsqueda');
+                return;
+            }
+
+            currentSearch = searchTerm;
+            currentType = typeFilter.value;
+            currentYear = yearFilter.value;
+            currentPage = page;
+
+            showLoading();
+
+            try {
+                let url = `${BASE_URL}?apikey=${API_KEY}&s=${encodeURIComponent(searchTerm)}&page=${page}`;
+                
+                if (currentType) url += `&type=${currentType}`;
+                if (currentYear) url += `&y=${currentYear}`;
+
+                console.log('Consultando API:', url);
+
+                const response = await fetch(url);
+                
+                if (!response.ok) throw new Error('Error en la conexión');
+
+                const data = await response.json();
+
+                if (data.Response === 'False') {
+                    showError(data.Error || 'No se encontraron resultados');
+                    return;
+                }
+
+                totalResults = parseInt(data.totalResults);
+                displayMovies(data.Search);
+                displayStats();
+                displayPagination();
+
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Error al conectar con la API. Verifica tu conexión.');
+            }
+        }
+
+        function displayMovies(movies) {
+            if (!movies || movies.length === 0) {
+                showError('No se encontraron películas');
+                return;
+            }
+
+            moviesGrid.innerHTML = movies.map(movie => {
+                const posterHtml = movie.Poster !== 'N/A' 
+                    ? `<img class="movie-poster" 
+                            src="${movie.Poster}" 
+                            alt="${movie.Title}"
+                            onerror="this.onerror=null; this.parentElement.innerHTML=getFallbackPoster('${movie.Title}');">`
+                    : getFallbackPoster(movie.Title);
+
+                return `
+                    <div class="movie-card" onclick="getMovieDetails('${movie.imdbID}')">
+                        <div class="movie-poster-container">
+                            ${posterHtml}
+                        </div>
+                        <div class="movie-info">
+                            <div class="movie-title">${movie.Title}</div>
+                            <div class="movie-year">${movie.Year}</div>
+                        </div>
+                        <div class="movie-type">${movie.Type}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getFallbackPoster(title) {
+            return `
+                <div class="movie-poster-fallback">
+                    🎬
+                    <span>${title}</span>
+                </div>
+            `;
+        }
+
+        async function getMovieDetails(imdbID) {
+            try {
+                const url = `${BASE_URL}?apikey=${API_KEY}&i=${imdbID}&plot=full`;
+                const response = await fetch(url);
+                const movie = await response.json();
+                displayMovieDetails(movie);
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al cargar los detalles');
+            }
+        }
+
+        function displayMovieDetails(movie) {
+            const ratings = movie.Ratings.map(rating => `
+                <div class="rating">
+                    <div class="rating-source">${rating.Source}</div>
+                    <div class="rating-value">${rating.Value}</div>
+                </div>
+            `).join('');
+
+            const posterImg = movie.Poster !== 'N/A' 
+                ? movie.Poster 
+                : 'https://via.placeholder.com/300x450?text=No+Poster';
+
+            modalContent.innerHTML = `
+                <div class="movie-detail">
+                    <div class="detail-poster">
+                        <img src="${posterImg}" 
+                             alt="${movie.Title}"
+                             onerror="this.src='https://via.placeholder.com/300x450?text=No+Poster'">
+                    </div>
+                    <div class="detail-info">
+                        <h2>${movie.Title} (${movie.Year})</h2>
+                        <div class="detail-meta">
+                            <div class="meta-item">
+                                <div class="meta-label">Duración</div>
+                                <div class="meta-value">${movie.Runtime || 'N/A'}</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-label">Género</div>
+                                <div class="meta-value">${movie.Genre || 'N/A'}</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-label">Director</div>
+                                <div class="meta-value">${movie.Director || 'N/A'}</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-label">Actores</div>
+                                <div class="meta-value">${movie.Actors || 'N/A'}</div>
+                            </div>
+                        </div>
+                        <div class="plot">
+                            <strong>Sinopsis:</strong>
+                            <p>${movie.Plot || 'No disponible'}</p>
+                        </div>
+                        <div class="ratings">${ratings || '<p>No hay calificaciones</p>'}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function displayStats() {
+            const totalPages = Math.ceil(totalResults / 10);
+            stats.style.display = 'block';
+            
+            stats.innerHTML = `
+                <strong>📊 Resultados:</strong> ${totalResults} encontradas
+                ${currentType ? ` | <strong>Tipo:</strong> ${currentType}` : ''}
+                ${currentYear ? ` | <strong>Año:</strong> ${currentYear}` : ''}
+                <br><strong>Página:</strong> ${currentPage} de ${totalPages}
+            `;
+
+            statsButtons.innerHTML = `
+                <button class="stats-btn" onclick="goToFirstPage()">⏮️ Primera</button>
+                <button class="stats-btn" onclick="irAlInicio()">🏠 Subir</button>
+                <button class="stats-btn" onclick="scrollToTop()">⬆️ Arriba</button>
+                <button class="stats-btn" onclick="searchInput.focus()">🔍 Buscar</button>
+            `;
+        }
+
+        function displayPagination() {
+            const totalPages = Math.ceil(totalResults / 10);
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+
+            let pagesHTML = '';
+
+            pagesHTML += `<button class="page-btn" onclick="searchMovies(1)" ${currentPage === 1 ? 'disabled' : ''}>⏮️</button>`;
+            pagesHTML += `<button class="page-btn" onclick="searchMovies(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>⬅️</button>`;
+
+            const startPage = Math.max(1, currentPage - 2);
+            const endPage = Math.min(totalPages, startPage + 4);
+
+            for (let i = startPage; i <= endPage; i++) {
+                pagesHTML += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="searchMovies(${i})">${i}</button>`;
+            }
+
+            pagesHTML += `<button class="page-btn" onclick="searchMovies(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>➡️</button>`;
+            pagesHTML += `<button class="page-btn" onclick="searchMovies(${totalPages})" ${currentPage === totalPages ? 'disabled' : ''}>⏭️</button>`;
+
+            pagination.innerHTML = pagesHTML;
+        }
+
+        function showLoading() {
+            moviesGrid.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Buscando películas...</p>
+                </div>
+            `;
+            stats.style.display = 'none';
+            pagination.innerHTML = '';
+        }
+
+        function showError(message) {
+            moviesGrid.innerHTML = `
+                <div class="error-message">
+                    <div style="font-size: 64px; margin-bottom: 20px;">🎬</div>
+                    <h3>¡Oops!</h3>
+                    <p>${message}</p>
+                    <button onclick="searchMovies()" style="margin-top: 20px; padding: 12px 35px; background: #e50914; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Intentar de nuevo</button>
+                </div>
+            `;
+            stats.style.display = 'none';
+            pagination.innerHTML = '';
+        }
+
+        // Hacer funciones globales
+        window.irAlInicio = irAlInicio;
+        window.scrollToTop = scrollToTop;
+        window.goToFirstPage = goToFirstPage;
+        window.getMovieDetails = getMovieDetails;
+        window.getFallbackPoster = getFallbackPoster;
+        window.searchMovies = searchMovies;
+        window.closeModal = closeModal;
+
+        // Cargar películas al iniciar
+        window.addEventListener('load', () => {
+            console.log('✅ Página cargada correctamente');
+            searchMovies();
+        });
+    </script>
+</body>
+</html>

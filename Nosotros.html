@@ -4,383 +4,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre Nosotros - Voltaje Express</title>
+    <title>Sobre Nosotros - Voltaje Express | Energía Inteligente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Estilos base - Optimizados (Mismos que index.html) */
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-         :root {
-            --primary: #0d6efd;
-            --secondary: #6c757d;
-            --success: #198754;
-            --warning: #ffc107;
-            --danger: #dc3545;
-            --dark: #212529;
-            --light: #f8f9fa;
-            --electric-blue: #00a8ff;
-            --electric-yellow: #ffdd59;
+
+        :root {
+            --bg-primary: #03050b;
+            --bg-secondary: #0a0f1a;
+            --bg-card: #0f1622;
+            --electric-cyan: #00f5ff;
+            --electric-purple: #7b2cbf;
+            --electric-gold: #ffd966;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a8c3;
+            --gradient-primary: linear-gradient(135deg, #00f5ff, #7b2cbf);
         }
-        
+
         body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
             overflow-x: hidden;
         }
-        
+
         .container {
             width: 90%;
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 1rem;
         }
-        
-        /* Header mejorado con nuevo logo profesional */
+
+        /* Header */
         header {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            padding: 1rem 0;
+            background: rgba(3, 5, 11, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
         }
-        
+
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0.9rem 0;
         }
-        
-        /* LOGO PROFESIONAL Y ELEGANTE - CON EFECTOS DE DOBLE CLICK */
+
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 1rem;
             cursor: pointer;
-            position: relative;
-            transition: all 0.3s ease;
             user-select: none;
         }
-        
-        .logo.double-click-active {
-            animation: logoPulse 0.3s ease;
+
+        .logo:active {
+            transform: scale(0.97);
         }
-        
-        .logo:hover {
-            transform: translateY(-2px);
-        }
-        
+
         .logo-icon {
             width: 55px;
             height: 55px;
-            background: linear-gradient(135deg, var(--electric-blue), #3b82f6);
-            border-radius: 12px;
+            background: linear-gradient(145deg, #0a1030, #020410);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 168, 255, 0.25);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            border: 1.5px solid rgba(0, 245, 255, 0.5);
         }
-        
-        .logo-icon.double-click-effect {
-            animation: iconShock 0.5s ease;
-            box-shadow: 0 0 30px var(--electric-blue), 0 0 60px var(--electric-yellow);
+
+        .logo-icon i {
+            font-size: 30px;
+            color: var(--electric-cyan);
         }
-        
-        .logo-icon::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-        }
-        
-        .logo-icon .bolt {
-            font-size: 32px;
-            font-weight: 900;
-            color: white;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            z-index: 2;
-            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
-            transform: rotate(-5deg);
-            transition: all 0.3s ease;
-        }
-        
-        .logo-icon .bolt.double-click-effect {
-            animation: boltFlash 0.5s ease;
-        }
-        
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-        
+
         .logo-text h1 {
-            font-size: 1.9rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            background: linear-gradient(90deg, #ffffff, #c7d2fe);
+            background: linear-gradient(120deg, #ffffff, var(--electric-cyan));
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 4px;
-            letter-spacing: 0.8px;
-            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
-            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', monospace;
         }
-        
+
         .logo-text .tagline {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            letter-spacing: 1.2px;
+            font-size: 0.7rem;
             font-weight: 500;
+            letter-spacing: 2px;
+            color: var(--electric-cyan);
             text-transform: uppercase;
-            border-left: 2px solid var(--electric-blue);
+            border-left: 2px solid var(--electric-gold);
             padding-left: 8px;
-            margin-top: 2px;
-            transition: all 0.3s ease;
+            margin-top: 4px;
         }
-        
-        /* Línea decorativa elegante para el logo */
+
         .logo-decoration {
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--electric-blue), 
-                var(--electric-yellow), 
-                transparent);
-            border-radius: 1px;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
-        
-        .logo-decoration.double-click-effect {
-            animation: lineGlow 1s ease;
-            opacity: 1;
-            height: 4px;
-        }
-        
-        /* ANIMACIONES ESPECÍFICAS PARA DOBLE CLICK - SIN GIRO */
-        @keyframes logoPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes iconShock {
-            0% { transform: scale(1); }
-            25% { transform: scale(1.2); }
-            50% { transform: scale(1.1); }
-            75% { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes boltFlash {
-            0% { 
-                color: white;
-                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
-            }
-            50% { 
-                color: var(--electric-yellow);
-                filter: drop-shadow(0 0 15px var(--electric-yellow));
-                transform: rotate(-5deg) scale(1.3);
-            }
-            100% { 
-                color: white;
-                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
-                transform: rotate(-5deg);
-            }
-        }
-        
-        @keyframes lineGlow {
-            0% { 
-                opacity: 0.7;
-                height: 2px;
-                background: linear-gradient(90deg, 
-                    transparent, 
-                    var(--electric-blue), 
-                    var(--electric-yellow), 
-                    transparent);
-            }
-            50% { 
-                opacity: 1;
-                height: 6px;
-                background: linear-gradient(90deg, 
-                    var(--electric-blue), 
-                    var(--electric-yellow),
-                    var(--electric-blue), 
-                    var(--electric-yellow));
-                box-shadow: 0 0 20px var(--electric-blue);
-            }
-            100% { 
-                opacity: 0.7;
-                height: 2px;
-                background: linear-gradient(90deg, 
-                    transparent, 
-                    var(--electric-blue), 
-                    var(--electric-yellow), 
-                    transparent);
-            }
-        }
-        
-        /* Overlay de recarga - EXACTO A LAS OTRAS PÁGINAS */
-        .reload-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+            background: linear-gradient(90deg, var(--electric-cyan), var(--electric-gold), transparent);
             width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
+            margin-top: 5px;
+            border-radius: 2px;
         }
-        
-        .reload-overlay.show {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .reload-content {
-            text-align: center;
-            color: white;
-            max-width: 500px;
-            padding: 2rem;
-        }
-        
-        .reload-icon {
-            font-size: 5rem;
-            margin-bottom: 1.5rem;
-            animation: pulse 1.5s ease-in-out infinite;
-            display: inline-block;
-            background: linear-gradient(135deg, var(--electric-blue), var(--electric-yellow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        @keyframes pulse {
-            0% { 
-                transform: scale(1);
-                filter: drop-shadow(0 0 5px var(--electric-blue));
-            }
-            50% { 
-                transform: scale(1.1);
-                filter: drop-shadow(0 0 20px var(--electric-blue));
-            }
-            100% { 
-                transform: scale(1);
-                filter: drop-shadow(0 0 5px var(--electric-blue));
-            }
-        }
-        
-        .reload-content h3 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-        }
-        
-        .reload-content p {
-            color: #94a3b8;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* Navegación */
+
         nav ul {
             display: flex;
-            list-style: none;
             gap: 2rem;
+            list-style: none;
         }
-        
+
         nav a {
-            color: #cbd5e1;
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s;
+            font-size: 1rem;
+            transition: 0.2s;
             position: relative;
-            padding: 0.5rem 0;
-            font-size: 1.05rem;
         }
-        
-        nav a:hover {
-            color: white;
-        }
-        
+
+        nav a:hover,
         nav a.active {
-            color: white;
-            font-weight: 600;
+            color: var(--electric-cyan);
         }
-        
+
         nav a::after {
             content: '';
             position: absolute;
+            bottom: -5px;
+            left: 0;
             width: 0;
             height: 2px;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            transition: width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
         }
-        
+
         nav a:hover::after,
         nav a.active::after {
             width: 100%;
         }
-        
+
         .mobile-menu {
             display: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            color: #cbd5e1;
+            color: var(--text-secondary);
         }
-        
-        .mobile-menu:hover {
-            transform: scale(1.1);
-            color: white;
-        }
-        
-        /* Hero Section - Rediseñada al estilo index.html */
+
+        /* Hero Section */
         .page-hero {
-            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.95)), 
-                        url('https://images.unsplash.com/photo-1577495508326-19a1b3cf65a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            padding: 8rem 0;
-            text-align: center;
             position: relative;
+            padding: 6rem 0 7rem;
+            text-align: center;
             overflow: hidden;
         }
-        
+
         .page-hero::before {
             content: '';
             position: absolute;
@@ -388,158 +175,159 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 221, 89, 0.1) 0%, transparent 50%);
-            z-index: 1;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 245, 255, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(123, 44, 191, 0.08) 0%, transparent 50%);
+            pointer-events: none;
         }
-        
-        .page-hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            margin: 0 auto;
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 50px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--electric-cyan);
         }
-        
+
+        .hero-badge i {
+            margin-right: 0.5rem;
+        }
+
         .page-hero h1 {
             font-size: 4rem;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeInUp 1s forwards 0.3s;
-            background: linear-gradient(90deg, #ffffff, #c7d2fe, #fef3c7);
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, var(--electric-cyan), var(--electric-gold));
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-            line-height: 1.1;
+            margin-bottom: 1rem;
         }
-        
+
         .page-hero-subtitle {
-            font-size: 1.8rem;
-            margin-bottom: 2.5rem;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeInUp 1s forwards 0.6s;
-            color: #94a3b8;
-            font-weight: 400;
-            letter-spacing: 1px;
+            font-size: 1.3rem;
+            color: var(--text-secondary);
         }
-        
-        /* Historia - Rediseñada */
+
+        /* Sección Historia */
         .about-history {
             padding: 6rem 0;
-            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            background: var(--bg-secondary);
         }
-        
+
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
         }
-        
+
         .about-text h2 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            color: #0f172a;
-            position: relative;
-            padding-bottom: 1rem;
+            background: linear-gradient(120deg, #ffffff, var(--electric-cyan));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        
-        .about-text h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 120px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            border-radius: 2px;
+
+        .about-text h2 i {
+            margin-right: 0.5rem;
+            background: none;
+            -webkit-text-fill-color: var(--electric-cyan);
+            color: var(--electric-cyan);
         }
-        
+
         .about-text p {
-            margin-bottom: 1.8rem;
-            font-size: 1.15rem;
-            color: #64748b;
-            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
             opacity: 0;
             transform: translateX(-20px);
             transition: all 0.6s ease;
         }
-        
+
         .about-text p.visible {
             opacity: 1;
             transform: translateX(0);
         }
-        
+
         .about-image {
-            border-radius: 20px;
+            border-radius: 1.5rem;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            position: relative;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            transition: all 0.4s ease;
         }
-        
+
         .about-image:hover {
             transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            border-color: var(--electric-cyan);
         }
-        
+
         .about-image img {
             width: 100%;
-            height: 450px;
+            height: 400px;
             object-fit: cover;
-            transition: transform 0.8s ease;
         }
-        
-        .about-image:hover img {
-            transform: scale(1.05);
-        }
-        
-        /* Línea de tiempo - Rediseñada - CORREGIDA */
+
+        /* Timeline */
         .timeline {
             padding: 6rem 0;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            position: relative;
+            background: var(--bg-primary);
         }
-        
-        .timeline h2 {
+
+        .section-title {
             text-align: center;
-            margin-bottom: 4rem;
-            font-size: 2.8rem;
-            color: white;
-            position: relative;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
         }
-        
-        .timeline h2::after {
+
+        .section-title i {
+            margin-right: 0.5rem;
+            background: linear-gradient(120deg, var(--electric-cyan), var(--electric-gold));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title span {
+            background: linear-gradient(120deg, var(--electric-cyan), var(--electric-gold));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title::after {
             content: '';
+            width: 80px;
+            height: 3px;
+            background: var(--gradient-primary);
             display: block;
-            width: 120px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            margin: 1.5rem auto;
-            border-radius: 2px;
+            margin: 1rem auto 0;
+            border-radius: 3px;
         }
-        
+
         .timeline-container {
             position: relative;
             max-width: 1000px;
             margin: 0 auto;
         }
-        
+
         .timeline-container::before {
             content: '';
             position: absolute;
             left: 50%;
             top: 0;
             bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg, var(--electric-blue), var(--electric-yellow));
-            transform: translateX(-50%); /* CORREGIDO: faltaba cerrar paréntesis */
+            width: 3px;
+            background: linear-gradient(180deg, var(--electric-cyan), var(--electric-gold));
+            transform: translateX(-50%);
         }
-        
+
         .timeline-item {
             padding: 2rem;
             position: relative;
@@ -548,882 +336,561 @@
             transform: translateY(30px);
             transition: all 0.6s ease;
         }
-        
+
         .timeline-item.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         .timeline-item:nth-child(odd) {
             left: 0;
-            padding-right: 4rem;
+            padding-right: 3rem;
         }
-        
+
         .timeline-item:nth-child(even) {
             left: 50%;
-            padding-left: 4rem;
+            padding-left: 3rem;
         }
-        
+
         .timeline-item::after {
             content: '';
             position: absolute;
             top: 50%;
-            width: 24px;
-            height: 24px;
-            background: linear-gradient(135deg, var(--electric-blue), var(--electric-yellow));
+            width: 20px;
+            height: 20px;
+            background: var(--electric-cyan);
             border-radius: 50%;
             transform: translateY(-50%);
-            box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.2);
-            border: 3px solid #0f172a;
+            box-shadow: 0 0 0 4px rgba(0, 245, 255, 0.2);
+            border: 2px solid var(--bg-primary);
         }
-        
+
         .timeline-item:nth-child(odd)::after {
-            right: -12px;
+            right: -10px;
         }
-        
+
         .timeline-item:nth-child(even)::after {
-            left: -12px;
+            left: -10px;
         }
-        
+
         .timeline-content {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background: rgba(15, 22, 34, 0.8);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.8rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(0, 245, 255, 0.1);
             transition: all 0.3s ease;
         }
-        
+
         .timeline-content:hover {
-            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--electric-cyan);
             transform: translateY(-5px);
-            border-color: var(--electric-blue);
         }
-        
+
         .timeline-year {
-            font-weight: 700;
-            color: var(--electric-yellow);
-            margin-bottom: 0.8rem;
-            font-size: 1.3rem;
             display: inline-block;
-            padding: 0.5rem 1.2rem;
-            background: rgba(59, 130, 246, 0.15);
+            background: rgba(0, 245, 255, 0.15);
+            color: var(--electric-gold);
+            padding: 0.3rem 1rem;
             border-radius: 20px;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-        
-        .timeline-content h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
             margin-bottom: 1rem;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
             color: white;
-            font-size: 1.5rem;
         }
-        
+
+        .timeline-content h3 i {
+            margin-right: 0.5rem;
+            color: var(--electric-cyan);
+        }
+
         .timeline-content p {
-            color: #94a3b8;
-            line-height: 1.7;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
-        
-        /* Valores - Rediseñada */
+
+        /* Valores */
         .values {
             padding: 6rem 0;
-            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            background: var(--bg-secondary);
         }
-        
-        .values h2 {
-            text-align: center;
-            margin-bottom: 4rem;
-            font-size: 2.8rem;
-            color: #0f172a;
-            position: relative;
-        }
-        
-        .values h2::after {
-            content: '';
-            display: block;
-            width: 120px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            margin: 1.5rem auto;
-            border-radius: 2px;
-        }
-        
+
         .values-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
+            gap: 2rem;
         }
-        
+
         .value-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
+            background: rgba(15, 22, 34, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 2rem;
             text-align: center;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0, 245, 255, 0.1);
+            transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(30px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e2e8f0;
         }
-        
+
         .value-card.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         .value-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            border-color: var(--electric-blue);
+            border-color: var(--electric-cyan);
+            transform: translateY(-10px);
         }
-        
+
         .value-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .value-icon i {
+            font-size: 2.5rem;
             color: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
         }
-        
+
         .value-card h3 {
-            margin-bottom: 1.2rem;
-            color: #0f172a;
-            font-size: 1.6rem;
-            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--electric-cyan);
         }
-        
+
         .value-card p {
-            color: #64748b;
-            line-height: 1.8;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
-        
-        /* Equipo - Rediseñada */
+
+        /* Equipo */
         .team {
             padding: 6rem 0;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            position: relative;
+            background: var(--bg-primary);
         }
-        
-        .team h2 {
-            text-align: center;
-            margin-bottom: 4rem;
-            font-size: 2.8rem;
-            color: white;
-            position: relative;
-        }
-        
-        .team h2::after {
-            content: '';
-            display: block;
-            width: 120px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            margin: 1.5rem auto;
-            border-radius: 2px;
-        }
-        
+
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
+            gap: 2rem;
         }
-        
+
         .team-member {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2.5rem;
-            border-radius: 20px;
+            background: rgba(15, 22, 34, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 2rem;
             text-align: center;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0, 245, 255, 0.1);
+            transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(30px);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .team-member.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         .team-member:hover {
-            transform: translateY(-15px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--electric-blue);
-            box-shadow: 0 25px 50px rgba(0, 168, 255, 0.1);
+            border-color: var(--electric-cyan);
+            transform: translateY(-10px);
         }
-        
+
         .member-photo {
-            width: 160px;
-            height: 160px;
+            width: 120px;
+            height: 120px;
+            background: var(--gradient-primary);
             border-radius: 50%;
-            overflow: hidden;
-            margin: 0 auto 2rem;
-            border: 5px solid var(--electric-blue);
-            position: relative;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            margin: 0 auto 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 3px solid var(--electric-cyan);
         }
-        
-        .member-photo::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
-        }
-        
+
         .member-initials {
-            font-size: 4rem;
-            font-weight: 800;
-            color: white;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .team-member h3 {
-            margin-bottom: 0.8rem;
-            color: white;
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             font-weight: 700;
+            color: white;
         }
-        
+
+        .team-member h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
+        }
+
         .member-role {
-            color: var(--electric-yellow);
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
+            color: var(--electric-gold);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
-        
+
+        .member-role i {
+            margin-right: 0.3rem;
+        }
+
         .member-bio {
-            color: #94a3b8;
-            margin-bottom: 2rem;
-            line-height: 1.8;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
         }
-        
+
         .member-skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.8rem;
+            gap: 0.5rem;
             justify-content: center;
         }
-        
+
         .skill-tag {
-            background: rgba(59, 130, 246, 0.2);
-            color: #c7d2fe;
-            padding: 0.5rem 1.2rem;
+            background: rgba(0, 245, 255, 0.1);
+            padding: 0.3rem 0.8rem;
             border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            transition: all 0.3s ease;
+            font-size: 0.7rem;
+            color: var(--electric-cyan);
+            border: 1px solid rgba(0, 245, 255, 0.2);
         }
-        
-        .skill-tag:hover {
-            background: rgba(59, 130, 246, 0.3);
-            transform: translateY(-2px);
+
+        .skill-tag i {
+            margin-right: 0.3rem;
+            font-size: 0.65rem;
         }
-        
-        /* Certificaciones - Rediseñada */
+
+        /* Certificaciones - CON ICONOS VISIBLES */
         .certifications {
             padding: 6rem 0;
-            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            background: var(--bg-secondary);
         }
-        
-        .certifications h2 {
-            text-align: center;
-            margin-bottom: 4rem;
-            font-size: 2.8rem;
-            color: #0f172a;
-            position: relative;
-        }
-        
-        .certifications h2::after {
-            content: '';
-            display: block;
-            width: 120px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            margin: 1.5rem auto;
-            border-radius: 2px;
-        }
-        
+
         .certs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
-        
+
         .cert-item {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
+            background: rgba(15, 22, 34, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 2rem;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0, 245, 255, 0.1);
+            transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(30px);
-            border: 1px solid #e2e8f0;
         }
-        
+
         .cert-item.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         .cert-item:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            border-color: var(--electric-blue);
+            border-color: var(--electric-cyan);
+            transform: translateY(-10px);
         }
-        
+
         .cert-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
-        }
-        
-        .cert-item h3 {
-            margin-bottom: 1.2rem;
-            color: #0f172a;
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-        
-        .cert-item p {
-            color: #64748b;
-            line-height: 1.8;
-        }
-        
-        /* Botones de acción - Rediseñados */
-        .action-buttons {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            text-align: center;
-        }
-        
-        .action-buttons h2 {
-            margin-bottom: 4rem;
-            font-size: 2.8rem;
-            position: relative;
-        }
-        
-        .action-buttons h2::after {
-            content: '';
-            display: block;
-            width: 120px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            margin: 1.5rem auto;
-            border-radius: 2px;
-        }
-        
-        .buttons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .action-btn {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .cert-icon i {
+            font-size: 2.8rem;
             color: white;
-            padding: 1.5rem 2.5rem;
-            border-radius: 15px;
+        }
+
+        .cert-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--electric-cyan);
+        }
+
+        .cert-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Botones de acción */
+        .action-buttons {
+            padding: 6rem 0;
+            background: var(--bg-primary);
+            text-align: center;
+        }
+
+        .buttons-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: var(--gradient-primary);
+            padding: 1rem 2rem;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-            min-width: 260px;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-        }
-        
-        .action-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.2), 
-                transparent);
-            transition: left 0.7s;
-        }
-        
-        .action-btn:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
-        }
-        
-        .action-btn:hover::before {
-            left: 100%;
-        }
-        
-        /* =============================================
-           FOOTER ELEGANTE Y MODERNO
-           ============================================= */
-        footer {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
             color: white;
-            padding: 5rem 0 2rem;
-            position: relative;
-            overflow: hidden;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, 
-                var(--electric-blue), 
-                var(--electric-yellow),
-                var(--electric-blue));
-            z-index: 1;
+
+        .action-btn i {
+            font-size: 1.1rem;
         }
-        
-        .footer-wave {
-            position: absolute;
-            top: -100px;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0 0v46.29c47.79 22.2 103.59 32.17 158 28 70.36-5.37 136.33-33.31 206.8-37.5 73.84-4.36 147.54 16.88 218.2 35.26 69.27 18 138.3 24.88 209.4 13.08 36.15-6 69.85-17.84 104.45-29.34C989.49 25 1113-14.29 1200 52.47V0z' fill='%230f172a'/%3E%3C/svg%3E");
-            background-size: 1200px 100px;
-            animation: wave 20s linear infinite;
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 245, 255, 0.3);
         }
-        
-        @keyframes wave {
-            0% { background-position-x: 0; }
-            100% { background-position-x: 1200px; }
+
+        /* Footer */
+        footer {
+            background: #02040a;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(0, 245, 255, 0.2);
         }
-        
+
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 4rem;
-            margin-bottom: 3rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .footer-column {
-            position: relative;
-        }
-        
-        .footer-column h3 {
-            margin-bottom: 2rem;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-            position: relative;
-            padding-bottom: 1rem;
-        }
-        
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            border-radius: 1.5px;
-        }
-        
-        .footer-about {
-            max-width: 350px;
-        }
-        
-        .footer-about p {
-            color: #94a3b8;
-            line-height: 1.8;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
             margin-bottom: 2rem;
         }
-        
+
         .footer-logo {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 2rem;
-            cursor: pointer;
-        }
-        
-        .footer-logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--electric-blue), #3b82f6);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.25);
-        }
-        
-        .footer-logo-text h4 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, #ffffff, #c7d2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 5px;
-        }
-        
-        .footer-logo-text span {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            letter-spacing: 1px;
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 1.2rem;
-            transition: transform 0.3s;
-        }
-        
-        .footer-links li:hover {
-            transform: translateX(10px);
-        }
-        
-        .footer-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
             gap: 10px;
-            font-size: 1.05rem;
-            padding: 0.3rem 0;
+            cursor: pointer;
+            margin-bottom: 1rem;
         }
-        
-        .footer-links a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-        
-        .footer-links a::before {
-            content: '→';
-            color: var(--electric-blue);
-            font-weight: bold;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s;
-        }
-        
-        .footer-links a:hover::before {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .contact-info {
-            list-style: none;
-        }
-        
-        .contact-info li {
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            color: #cbd5e1;
-            line-height: 1.6;
-        }
-        
-        .contact-icon {
+
+        .footer-logo-icon {
             width: 40px;
             height: 40px;
-            background: rgba(59, 130, 246, 0.1);
+            background: linear-gradient(145deg, #0ae0ff20, #0b1120);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--electric-blue);
-            flex-shrink: 0;
+            border: 1px solid rgba(0, 245, 255, 0.4);
         }
-        
-        .social-links {
-            display: flex;
-            gap: 1.2rem;
-            margin-top: 2rem;
+
+        .footer-logo-icon i {
+            font-size: 1.2rem;
+            color: var(--electric-cyan);
         }
-        
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            color: white;
+
+        .footer-column h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--electric-cyan);
+            display: inline-block;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: all 0.3s;
-            font-size: 1.3rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            transition: 0.2s;
         }
-        
-        .social-links a:hover {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            transform: translateY(-5px) rotate(5deg);
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
-            border-color: transparent;
+
+        .footer-links a i {
+            margin-right: 0.5rem;
+            width: 20px;
+            color: var(--electric-cyan);
         }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 3rem;
-            margin-top: 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #94a3b8;
-            font-size: 0.95rem;
-            position: relative;
-            z-index: 2;
+
+        .footer-links a:hover {
+            color: var(--electric-cyan);
         }
-        
-        .copyright p {
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
             margin-bottom: 0.8rem;
-        }
-        
-        .copyright-stats {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
+            gap: 0.8rem;
+            color: var(--text-secondary);
             font-size: 0.85rem;
         }
-        
-        .stat-item {
+
+        .contact-info i {
+            width: 20px;
+            color: var(--electric-cyan);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            background: rgba(0, 245, 255, 0.1);
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
+            justify-content: center;
+            color: var(--electric-cyan);
+            transition: 0.2s;
+            text-decoration: none;
         }
-        
-        .stat-item .icon {
-            color: var(--electric-blue);
+
+        .social-links a i {
+            font-size: 1rem;
         }
-        
-        /* Contador de visitas mejorado */
-        .visit-counter {
+
+        .social-links a:hover {
+            background: var(--electric-cyan);
+            color: #02040a;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+
+        /* Overlay recarga */
+        .reload-overlay {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(33, 37, 41, 0.9));
-            color: white;
-            padding: 12px 18px;
-            border-radius: 25px;
-            font-size: 0.95rem;
-            z-index: 100;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 5, 11, 0.98);
+            backdrop-filter: blur(15px);
+            z-index: 9999;
             display: none;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-            cursor: pointer;
+            justify-content: center;
+            flex-direction: column;
         }
-        
-        .visit-counter.show {
+
+        .reload-overlay.show {
             display: flex;
-            animation: slideUp 0.5s ease;
         }
-        
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+
+        .reload-icon {
+            font-size: 4rem;
+            animation: pulse 1.2s infinite;
+            color: var(--electric-cyan);
         }
-        
-        .visit-counter:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 5px #00f5ff; }
+            50% { transform: scale(1.1); text-shadow: 0 0 25px #00f5ff; }
         }
-        
-        /* Animaciones */
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Media Queries */
+
         @media (max-width: 992px) {
             .about-content {
                 grid-template-columns: 1fr;
-                gap: 3rem;
+                gap: 2rem;
             }
-            
             .timeline-container::before {
-                left: 30px;
+                left: 20px;
             }
-            
             .timeline-item {
                 width: 100%;
-                padding-left: 80px;
+                padding-left: 50px;
                 padding-right: 0;
             }
-            
             .timeline-item:nth-child(even) {
                 left: 0;
             }
-            
             .timeline-item::after {
-                left: 18px !important;
+                left: 10px !important;
             }
+            .page-hero h1 { font-size: 3rem; }
         }
-        
+
         @media (max-width: 768px) {
-            .mobile-menu {
-                display: block;
-            }
-            
+            .mobile-menu { display: block; }
             nav ul {
                 display: none;
-                flex-direction: column;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: linear-gradient(135deg, #0f172a, #1e293b);
-                padding: 1.5rem;
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-                backdrop-filter: blur(10px);
-                z-index: 1000;
-            }
-            
-            nav ul.active {
-                display: flex;
-                animation: slideDown 0.3s ease;
-            }
-            
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            
-            .page-hero h1 {
-                font-size: 2.8rem;
-            }
-            
-            .page-hero-subtitle {
-                font-size: 1.4rem;
-            }
-            
-            .about-text h2,
-            .timeline h2,
-            .values h2,
-            .team h2,
-            .certifications h2,
-            .action-buttons h2 {
-                font-size: 2.2rem;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            
-            .copyright-stats {
+                background: #03050b;
                 flex-direction: column;
-                gap: 1rem;
+                padding: 1rem;
+                gap: 0.8rem;
+                text-align: center;
+                border-bottom: 1px solid rgba(0, 245, 255, 0.2);
             }
-            
-            .visit-counter {
-                bottom: 15px;
-                right: 15px;
-                padding: 10px 15px;
-                font-size: 0.85rem;
+            nav ul.active { display: flex; }
+            .page-hero h1 { font-size: 2.2rem; }
+            .page-hero-subtitle { font-size: 1rem; }
+            .section-title { font-size: 1.8rem; }
+            .cert-icon {
+                width: 65px;
+                height: 65px;
             }
-        }
-        
-        @media (max-width: 480px) {
-            .page-hero {
-                padding: 6rem 0;
-            }
-            
-            .page-hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .about-content,
-            .team-grid,
-            .values-grid,
-            .certs-grid,
-            .buttons-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .timeline-item {
-                padding-left: 60px;
-            }
-            
-            .timeline-item::after {
-                left: 10px !important;
+            .cert-icon i {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Overlay de recarga - EXACTO A LAS OTRAS PÁGINAS -->
     <div class="reload-overlay" id="reloadOverlay">
-        <div class="reload-content">
-            <div class="reload-icon">⚡</div>
-            <h3>Recargando Energía</h3>
-            <p>Voltaje Express está recargando la página con energía eléctrica...</p>
-        </div>
+        <div class="reload-icon"><i class="fas fa-bolt"></i></div>
+        <h3 style="color:white; margin-top:1rem;">Recargando Voltaje Express</h3>
+        <p style="color:#aaa">Energía en cada conexión...</p>
     </div>
 
-    <!-- Header con nuevo logo -->
     <header>
         <div class="container header-container">
             <div class="logo" id="mainLogo">
                 <div class="logo-icon">
-                    <div class="bolt">⚡</div>
+                    <i class="fas fa-bolt"></i>
                 </div>
                 <div class="logo-text">
                     <h1>VOLTAJE EXPRESS</h1>
@@ -1432,7 +899,7 @@
                 </div>
             </div>
             <nav>
-                <div class="mobile-menu">☰</div>
+                <div class="mobile-menu"><i class="fas fa-bars"></i></div>
                 <ul>
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="servicios.html">Servicios</a></li>
@@ -1443,20 +910,19 @@
         </div>
     </header>
 
-    <!-- Hero Section - Rediseñada -->
     <section class="page-hero">
-        <div class="container page-hero-content">
+        <div class="container">
+            <div class="hero-badge"><i class="fas fa-users"></i> CONOCE NUESTRA HISTORIA</div>
             <h1>Sobre Voltaje Express</h1>
             <div class="page-hero-subtitle">Conoce nuestra historia, valores y equipo profesional</div>
         </div>
     </section>
 
-    <!-- Historia - Rediseñada -->
     <section class="about-history">
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2>Nuestra Historia</h2>
+                    <h2><i class="fas fa-history"></i> Nuestra Historia</h2>
                     <p>Fundada en 2021, Voltaje Express nació con el objetivo de ofrecer servicios eléctricos de máxima calidad, combinando la tradición del oficio con las últimas tecnologías del sector.</p>
                     <p>A lo largo de más de 5 años, hemos crecido hasta convertirnos en una empresa de referencia en la comunidad, realizando proyectos desde pequeñas reformas en viviendas hasta complejas instalaciones industriales.</p>
                     <p>Nuestro compromiso con la excelencia y la satisfacción del cliente nos ha permitido construir una cartera de clientes fieles que confían en nuestro trabajo para todos sus proyectos eléctricos.</p>
@@ -1469,514 +935,237 @@
         </div>
     </section>
 
-    <!-- Línea de Tiempo - Rediseñada -->
     <section class="timeline">
         <div class="container">
-            <h2>Nuestra Trayectoria</h2>
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> <span>Nuestra</span> Trayectoria</h2>
             <div class="timeline-container">
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <div class="timeline-year">2021</div>
-                        <h3>Fundación</h3>
-                        <p>Luis Anderson funda Voltaje Express para ofrecer servicios eléctricos profesionales en la comunidad local, iniciando con proyectos residenciales básicos.</p>
+                        <h3><i class="fas fa-flag-checkered"></i> Fundación</h3>
+                        <p>Luis Anderson funda Voltaje Express para ofrecer servicios eléctricos profesionales en la comunidad local.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <div class="timeline-year">2022</div>
-                        <h3>Primera Expansión</h3>
-                        <p>Contratamos a nuestro primer electricista certificado y ampliamos nuestros servicios a instalaciones comerciales y pequeñas industrias.</p>
+                        <h3><i class="fas fa-chart-line"></i> Primera Expansión</h3>
+                        <p>Contratamos a nuestro primer electricista certificado y ampliamos servicios a instalaciones comerciales.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <div class="timeline-year">2024</div>
-                        <h3>Certificación de Calidad</h3>
-                        <p>Obtenemos la certificación ISO 9001 por nuestros procesos de calidad en instalaciones eléctricas, marcando un hito en nuestra profesionalización.</p>
+                        <h3><i class="fas fa-certificate"></i> Certificación de Calidad</h3>
+                        <p>Obtenemos certificación ISO 9001 por nuestros procesos de calidad en instalaciones eléctricas.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <div class="timeline-year">2025</div>
-                        <h3>Energías Renovables</h3>
-                        <p>Incorporamos servicios especializados en instalación de sistemas de energía solar fotovoltaica y puntos de carga para vehículos eléctricos.</p>
+                        <h3><i class="fas fa-solar-panel"></i> Energías Renovables</h3>
+                        <p>Incorporamos servicios de energía solar fotovoltaica y puntos de carga para vehículos eléctricos.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <div class="timeline-year">2026</div>
-                        <h3>Actual Expansión</h3>
-                        <p>Contamos con un equipo de 6 profesionales altamente capacitados y hemos realizado más de 500 proyectos exitosos en toda la República Dominicana.</p>
+                        <h3><i class="fas fa-rocket"></i> Actualidad</h3>
+                        <p>Contamos con un equipo de 6 profesionales y más de 500 proyectos exitosos en toda República Dominicana.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Valores - Rediseñada -->
     <section class="values">
         <div class="container">
-            <h2>Nuestros Valores</h2>
+            <h2 class="section-title"><i class="fas fa-star"></i> <span>Nuestros</span> Valores</h2>
             <div class="values-grid">
                 <div class="value-card">
-                    <div class="value-icon">🔒</div>
+                    <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
                     <h3>Seguridad</h3>
-                    <p>La seguridad es nuestra prioridad absoluta en cada proyecto. Cumplimos rigurosamente con todas las normativas y utilizamos los mejores materiales certificados.</p>
+                    <p>Prioridad absoluta en cada proyecto, cumpliendo rigurosamente todas las normativas.</p>
                 </div>
                 <div class="value-card">
-                    <div class="value-icon">⭐</div>
+                    <div class="value-icon"><i class="fas fa-gem"></i></div>
                     <h3>Calidad Excelente</h3>
-                    <p>Trabajamos exclusivamente con materiales de primera calidad y aplicamos los más altos estándares internacionales en cada instalación eléctrica.</p>
+                    <p>Materiales de primera calidad y los más altos estándares internacionales.</p>
                 </div>
                 <div class="value-card">
-                    <div class="value-icon">⏱️</div>
+                    <div class="value-icon"><i class="fas fa-clock"></i></div>
                     <h3>Puntualidad</h3>
-                    <p>Respetamos rigurosamente los plazos acordados y nos comprometemos a completar cada proyecto en el tiempo establecido, sin comprometer la calidad.</p>
+                    <p>Respetamos rigurosamente los plazos acordados en cada proyecto.</p>
                 </div>
                 <div class="value-card">
-                    <div class="value-icon">💬</div>
-                    <h3>Transparencia Total</h3>
-                    <p>Mantenemos una comunicación clara, honesta y constante con nuestros clientes en cada etapa del proyecto, sin costos ocultos ni sorpresas.</p>
+                    <div class="value-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>Transparencia</h3>
+                    <p>Comunicación clara y honesta sin costos ocultos ni sorpresas.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Equipo - Rediseñada -->
     <section class="team">
         <div class="container">
-            <h2>Nuestro Equipo</h2>
+            <h2 class="section-title"><i class="fas fa-users"></i> <span>Nuestro</span> Equipo</h2>
             <div class="team-grid">
                 <div class="team-member">
-                    <div class="member-photo">
-                        <div class="member-initials">LA</div>
-                    </div>
+                    <div class="member-photo"><div class="member-initials">LA</div></div>
                     <h3>Luis Anderson</h3>
-                    <p class="member-role">Director y Electricista Jefe</p>
-                    <p class="member-bio">Más de 15 años de experiencia en el sector eléctrico. Especializado en instalaciones industriales, automatización y sistemas de energía renovable.</p>
-                    <div class="member-skills">
-                        <span class="skill-tag">Instalaciones Industriales</span>
-                        <span class="skill-tag">Automatización</span>
-                        <span class="skill-tag">Gestión de Proyectos</span>
-                        <span class="skill-tag">Energías Renovables</span>
-                    </div>
+                    <p class="member-role"><i class="fas fa-bolt"></i> Director y Electricista Jefe</p>
+                    <p class="member-bio">Más de 15 años de experiencia. Especializado en instalaciones industriales, automatización y energías renovables.</p>
+                    <div class="member-skills"><span class="skill-tag"><i class="fas fa-industry"></i> Industrial</span><span class="skill-tag"><i class="fas fa-robot"></i> Automatización</span><span class="skill-tag"><i class="fas fa-solar-panel"></i> Renovables</span></div>
                 </div>
                 <div class="team-member">
-                    <div class="member-photo">
-                        <div class="member-initials">LD</div>
-                    </div>
+                    <div class="member-photo"><div class="member-initials">LD</div></div>
                     <h3>Luis David</h3>
-                    <p class="member-role">Jefe de Proyectos</p>
-                    <p class="member-bio">Ingeniero técnico industrial con especialización en eficiencia energética y energías renovables. Más de 8 años liderando proyectos eléctricos complejos.</p>
-                    <div class="member-skills">
-                        <span class="skill-tag">Energías Renovables</span>
-                        <span class="skill-tag">Eficiencia Energética</span>
-                        <span class="skill-tag">Gestión de Proyectos</span>
-                        <span class="skill-tag">Diseño Eléctrico</span>
-                    </div>
+                    <p class="member-role"><i class="fas fa-project-diagram"></i> Jefe de Proyectos</p>
+                    <p class="member-bio">Ingeniero técnico industrial con especialización en eficiencia energética y energías renovables.</p>
+                    <div class="member-skills"><span class="skill-tag"><i class="fas fa-solar-panel"></i> Renovables</span><span class="skill-tag"><i class="fas fa-chart-line"></i> Eficiencia</span><span class="skill-tag"><i class="fas fa-tasks"></i> Gestión</span></div>
                 </div>
                 <div class="team-member">
-                    <div class="member-photo">
-                        <div class="member-initials">CS</div>
-                    </div>
+                    <div class="member-photo"><div class="member-initials">CS</div></div>
                     <h3>Cleniver</h3>
-                    <p class="member-role">Encargada de Electricidad Residencial</p>
-                    <p class="member-bio">Especialista en instalaciones residenciales y comerciales. Certificada en domótica, sistemas inteligentes y seguridad eléctrica residencial.</p>
-                    <div class="member-skills">
-                        <span class="skill-tag">Instalaciones Residenciales</span>
-                        <span class="skill-tag">Domótica</span>
-                        <span class="skill-tag">Sistemas Inteligentes</span>
-                        <span class="skill-tag">Iluminación LED</span>
-                    </div>
+                    <p class="member-role"><i class="fas fa-home"></i> Encargada de Electricidad Residencial</p>
+                    <p class="member-bio">Especialista en instalaciones residenciales, domótica y sistemas inteligentes.</p>
+                    <div class="member-skills"><span class="skill-tag"><i class="fas fa-home"></i> Residencial</span><span class="skill-tag"><i class="fas fa-microchip"></i> Domótica</span><span class="skill-tag"><i class="fas fa-lightbulb"></i> Iluminación LED</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Certificaciones - Rediseñada -->
     <section class="certifications">
         <div class="container">
-            <h2>Certificaciones y Garantías</h2>
+            <h2 class="section-title"><i class="fas fa-medal"></i> <span>Certificaciones</span> y Garantías</h2>
             <div class="certs-grid">
                 <div class="cert-item">
-                    <div class="cert-icon">📜</div>
+                    <div class="cert-icon"><i class="fas fa-file-certificate"></i></div>
                     <h3>Certificación de Instalaciones</h3>
-                    <p>Todas nuestras instalaciones incluyen certificado oficial de conformidad con el Reglamento Electrotécnico de Baja Tensión y normativas internacionales vigentes.</p>
+                    <p>Todas nuestras instalaciones incluyen certificado oficial de conformidad con el Reglamento Electrotécnico y normativas internacionales vigentes.</p>
                 </div>
                 <div class="cert-item">
-                    <div class="cert-icon">🛡️</div>
+                    <div class="cert-icon"><i class="fas fa-medal"></i></div>
                     <h3>Garantía por Escrito</h3>
                     <p>Ofrecemos garantía por escrito en todos nuestros trabajos, con cobertura completa de materiales y mano de obra durante 2 años desde la fecha de instalación.</p>
                 </div>
                 <div class="cert-item">
-                    <div class="cert-icon">📞</div>
+                    <div class="cert-icon"><i class="fas fa-headset"></i></div>
                     <h3>Servicio Post-venta</h3>
-                    <p>Disponemos de servicio de atención post-venta 24/7 para resolver cualquier duda o incidencia después de la instalación. Soporte técnico permanente.</p>
+                    <p>Disponemos de servicio de atención post-venta 24/7 para resolver cualquier duda o incidencia después de la instalación.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Botones de Acción - Rediseñados -->
     <section class="action-buttons">
         <div class="container">
-            <h2>¿Listo para trabajar con nosotros?</h2>
+            <h2 class="section-title"><i class="fas fa-bolt"></i> <span>¿Listo para</span> trabajar con nosotros?</h2>
             <div class="buttons-grid">
-                <a href="servicios.html" class="action-btn">
-                    <span>⚡</span>
-                    Ver Nuestros Servicios
-                </a>
-                <a href="contacto.html" class="action-btn">
-                    <span>📋</span>
-                    Solicitar Presupuesto
-                </a>
-                <a href="contacto.html" class="action-btn">
-                    <span>📞</span>
-                    Contactar Ahora
-                </a>
+                <a href="servicios.html" class="action-btn"><i class="fas fa-bolt"></i> Ver Servicios</a>
+                <a href="contacto.html" class="action-btn"><i class="fas fa-file-invoice"></i> Solicitar Presupuesto</a>
+                <a href="contacto.html" class="action-btn"><i class="fas fa-phone-alt"></i> Contactar Ahora</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer elegante y moderno -->
     <footer>
-        <div class="footer-wave"></div>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column footer-about">
-                    <div class="footer-logo" id="footerLogo">
-                        <div class="footer-logo-icon">
-                            <div style="font-size: 24px; color: white; font-weight: bold;">⚡</div>
-                        </div>
-                        <div class="footer-logo-text">
-                            <h4>VOLTAJE EXPRESS</h4>
-                            <span>ENERGÍA CONFIABLE</span>
-                        </div>
-                    </div>
-                    <p>Empresa especializada en servicios eléctricos de alta calidad para hogares, empresas e industrias. Más de 5 años brindando soluciones confiables y seguras en toda la República Dominicana.</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook" title="Síguenos en Facebook">f</a>
-                        <a href="#" aria-label="Instagram" title="Síguenos en Instagram">ig</a>
-                        <a href="#" aria-label="Twitter" title="Síguenos en Twitter">𝕏</a>
-                        <a href="#" aria-label="WhatsApp" title="Contáctanos por WhatsApp">📱</a>
-                    </div>
-                </div>
-                
                 <div class="footer-column">
-                    <h3>Nuestros Servicios</h3>
+                    <div class="footer-logo" id="footerLogo">
+                        <div class="footer-logo-icon"><i class="fas fa-bolt"></i></div>
+                        <div><h4 style="color:white">VOLTAJE EXPRESS</h4><span style="color:#8e9ccd; font-size:12px;">⚡ Energía confiable</span></div>
+                    </div>
+                    <p style="color:var(--text-secondary); font-size:0.8rem;">Expertos en soluciones eléctricas de alta calidad para hogares, empresas e industrias. Más de 5 años brindando soluciones confiables y seguras.</p>
+                    <div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div>
+                </div>
+                <div class="footer-column">
+                    <h3>Servicios</h3>
                     <ul class="footer-links">
-                        <li><a href="servicios.html#instalaciones">⚡ Instalaciones Eléctricas</a></li>
-                        <li><a href="servicios.html#mantenimiento">🔧 Mantenimiento y Reparaciones</a></li>
-                        <li><a href="servicios.html#iluminacion">💡 Iluminación y Diseño</a></li>
-                        <li><a href="servicios.html#industrial">🏭 Electricidad Industrial</a></li>
-                        <li><a href="servicios.html#renovables">🔋 Energías Renovables</a></li>
-                        <li><a href="servicios.html#carga">🚗 Puntos de Carga VE</a></li>
+                        <li><a href="servicios.html"><i class="fas fa-bolt"></i> Instalaciones Eléctricas</a></li>
+                        <li><a href="servicios.html"><i class="fas fa-tools"></i> Mantenimiento</a></li>
+                        <li><a href="servicios.html"><i class="fas fa-lightbulb"></i> Iluminación</a></li>
+                        <li><a href="servicios.html"><i class="fas fa-solar-panel"></i> Energías Renovables</a></li>
+                        <li><a href="servicios.html"><i class="fas fa-car"></i> Puntos de Carga VE</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-column">
-                    <h3>Contáctanos</h3>
+                    <h3>Contacto</h3>
                     <ul class="contact-info">
-                        <li>
-                            <div class="contact-icon">📍</div>
-                            <div>
-                                <strong>Oficina Principal</strong><br>
-                                Mahata Calle C, sector f1<br>
-                                Santo Domingo, República Dominicana
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon">📞</div>
-                            <div>
-                                <strong>Teléfono y WhatsApp</strong><br>
-                                +1 (809) 523-8283<br>
-                                Disponible 24/7 para emergencias
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon">✉️</div>
-                            <div>
-                                <strong>Correo Electrónico</strong><br>
-                                voltajeexpress2@gmail.com<br>
-                                Respuesta en menos de 24h
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon">🕒</div>
-                            <div>
-                                <strong>Horario de Atención</strong><br>
-                                Lunes a Viernes: 8:00 AM - 5:00 PM<br>
-                                Sábados: 8:00 AM - 12:00 PM
-                            </div>
-                        </li>
+                        <li><i class="fas fa-map-marker-alt"></i> Mahata Calle C, Santo Domingo</li>
+                        <li><i class="fas fa-phone-alt"></i> +1 (809) 523-8283</li>
+                        <li><i class="fas fa-envelope"></i> voltajeexpress2@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Lun-Vie 8am-5pm · Urgencias 24/7</li>
                     </ul>
                 </div>
             </div>
-            
             <div class="copyright">
-                <p>&copy; 2021-2026 Voltaje Express. Todos los derechos reservados.</p>
-                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;">
-                    "Energizando hogares e industrias con excelencia y seguridad"
-                </p>
-                
-                <div class="copyright-stats">
-                    <div class="stat-item">
-                        <span class="icon">👁️</span>
-                        <span>Visitas: <strong id="footerVisitCount">0</strong></span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="icon">🔒</span>
-                        <span>Seguridad: <strong>100%</strong></span>
-                    </div>
-                </div>
+                <p>&copy; 2026 Voltaje Express - Energía que transforma espacios</p>
+                <p style="font-size: 0.7rem; margin-top: 0.5rem;">"Energizando hogares e industrias con excelencia y seguridad"</p>
             </div>
         </div>
     </footer>
 
-    <!-- Contador de visitas -->
-    <div class="visit-counter" id="visitCounter">
-        👁️ <span id="counterDisplay">0</span> visitas
-    </div>
-
     <script>
-        // =============================================
-        // SISTEMA EXACTO DE DOBLE CLICK - IGUAL A LAS OTRAS PÁGINAS
-        // =============================================
-
+        // Double Click Handler
         class DoubleClickHandler {
-            constructor(element, doubleCallback, singleCallback = null, delay = 300) {
-                this.element = element;
-                this.doubleCallback = doubleCallback;
-                this.singleCallback = singleCallback;
+            constructor(el, callback, delay = 280) {
+                this.el = el;
+                this.callback = callback;
                 this.delay = delay;
-                this.clickCount = 0;
+                this.clicks = 0;
                 this.timer = null;
-                
-                this.element.addEventListener('click', this.handleClick.bind(this));
-            }
-
-            handleClick(event) {
-                event.preventDefault();
-                event.stopPropagation();
-                this.clickCount++;
-
-                if (this.clickCount === 1) {
-                    this.timer = setTimeout(() => {
-                        // Click único
-                        if (this.singleCallback) {
-                            this.singleCallback(event);
-                        }
+                el.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.clicks++;
+                    if (this.clicks === 1) {
+                        this.timer = setTimeout(() => this.reset(), this.delay);
+                    } else if (this.clicks === 2) {
+                        clearTimeout(this.timer);
+                        this.callback(e);
                         this.reset();
-                    }, this.delay);
-                } else if (this.clickCount === 2) {
-                    clearTimeout(this.timer);
-                    // Doble click
-                    this.doubleCallback(event);
-                    this.reset();
-                }
+                    }
+                });
             }
-
-            reset() {
-                this.clickCount = 0;
-                if (this.timer) {
-                    clearTimeout(this.timer);
-                    this.timer = null;
-                }
-            }
+            reset() { this.clicks = 0; if (this.timer) clearTimeout(this.timer); this.timer = null; }
         }
 
-        // =============================================
-        // FUNCIÓN DE RECARGA DE PÁGINA - MODIFICADA
-        // =============================================
-
-        function triggerPageReload() {
-            // Mostrar overlay de recarga
-            const reloadOverlay = document.getElementById('reloadOverlay');
-            reloadOverlay.classList.add('show');
-            
-            // Aplicar efectos al logo (SIN GIRO - EXACTO A LAS OTRAS PÁGINAS)
-            const logo = document.querySelector('.logo');
-            const logoIcon = document.querySelector('.logo-icon');
-            const bolt = document.querySelector('.logo-icon .bolt');
-            const logoDecoration = document.querySelector('.logo-decoration');
-            
-            logo.classList.add('double-click-active');
-            logoIcon.classList.add('double-click-effect');
-            bolt.classList.add('double-click-effect');
-            logoDecoration.classList.add('double-click-effect');
-            
-            // Recargar la página después de 1.5 segundos
-            setTimeout(() => {
-                location.reload(true);
-            }, 1500);
+        function reloadPage() {
+            document.getElementById('reloadOverlay').classList.add('show');
+            setTimeout(() => location.reload(true), 1300);
         }
 
-        // =============================================
-        // SISTEMA DE VISITAS SIMPLIFICADO
-        // =============================================
-
-        const footerVisitCount = document.getElementById('footerVisitCount');
-        const visitCounter = document.getElementById('visitCounter');
-        const counterDisplay = document.getElementById('counterDisplay');
-
-        // Sistema de visitas
-        function setupVisitSystem() {
-            let totalVisitCount = localStorage.getItem('totalVisits') || 0;
-            totalVisitCount = parseInt(totalVisitCount) + 1;
-            localStorage.setItem('totalVisits', totalVisitCount);
-            
-            // Actualizar displays
-            counterDisplay.textContent = totalVisitCount;
-            footerVisitCount.textContent = totalVisitCount;
-            
-            // Mostrar contador de visitas
-            document.getElementById('visitCounter').classList.add('show');
+        // Animaciones scroll
+        function checkScroll() {
+            const trigger = window.innerHeight * 0.85;
+            document.querySelectorAll('.about-text p, .timeline-item, .value-card, .team-member, .cert-item').forEach(el => {
+                if (el.getBoundingClientRect().top < trigger) el.classList.add('visible');
+            });
         }
-
-        // =============================================
-        // FUNCIONALIDADES EXISTENTES
-        // =============================================
 
         // Menú móvil
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navUl = document.querySelector('nav ul');
-        
-        mobileMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navUl.classList.toggle('active');
-            mobileMenu.textContent = navUl.classList.contains('active') ? '✕' : '☰';
-        });
-        
-        // Cerrar menú móvil al hacer clic en un enlace
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 768 && navUl.classList.contains('active')) {
-                    navUl.classList.remove('active');
-                    mobileMenu.textContent = '☰';
-                }
-            });
-        });
-        
-        // Cerrar menú al hacer clic fuera
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768 &&
-                !navUl.contains(e.target) &&
-                !mobileMenu.contains(e.target) &&
-                navUl.classList.contains('active')) {
-                navUl.classList.remove('active');
-                mobileMenu.textContent = '☰';
-            }
-        });
-        
-        // Header al hacer scroll
-        const header = document.querySelector('header');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                header.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
-            } else {
-                header.style.backgroundColor = '';
-                header.style.backdropFilter = '';
-            }
-        });
-        
-        // Animaciones al hacer scroll
-        const aboutParagraphs = document.querySelectorAll('.about-text p');
-        const timelineItems = document.querySelectorAll('.timeline-item');
-        const valueCards = document.querySelectorAll('.value-card');
-        const teamMembers = document.querySelectorAll('.team-member');
-        const certItems = document.querySelectorAll('.cert-item');
-        
-        function checkScroll() {
-            const triggerBottom = window.innerHeight * 0.85;
-            
-            // Párrafos de historia
-            aboutParagraphs.forEach((para, index) => {
-                const paraTop = para.getBoundingClientRect().top;
-                if (paraTop < triggerBottom) {
-                    setTimeout(() => {
-                        para.classList.add('visible');
-                    }, index * 200);
-                }
-            });
-            
-            // Elementos de línea de tiempo
-            timelineItems.forEach((item, index) => {
-                const itemTop = item.getBoundingClientRect().top;
-                if (itemTop < triggerBottom) {
-                    setTimeout(() => {
-                        item.classList.add('visible');
-                    }, index * 200);
-                }
-            });
-            
-            // Tarjetas de valores
-            valueCards.forEach((card, index) => {
-                const cardTop = card.getBoundingClientRect().top;
-                if (cardTop < triggerBottom) {
-                    setTimeout(() => {
-                        card.classList.add('visible');
-                    }, index * 150);
-                }
-            });
-            
-            // Miembros del equipo
-            teamMembers.forEach((member, index) => {
-                const memberTop = member.getBoundingClientRect().top;
-                if (memberTop < triggerBottom) {
-                    setTimeout(() => {
-                        member.classList.add('visible');
-                    }, index * 150);
-                }
-            });
-            
-            // Elementos de certificación
-            certItems.forEach((item, index) => {
-                const itemTop = item.getBoundingClientRect().top;
-                if (itemTop < triggerBottom) {
-                    setTimeout(() => {
-                        item.classList.add('visible');
-                    }, index * 150);
-                }
-            });
+        const mobileBtn = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('nav ul');
+        if (mobileBtn) {
+            mobileBtn.addEventListener('click', () => navMenu.classList.toggle('active'));
         }
 
-        // =============================================
-        // INICIALIZACIÓN COMPLETA CON DOBLE CLICK
-        // =============================================
-
-        window.addEventListener('DOMContentLoaded', () => {
-            // Configurar sistema de visitas
-            setupVisitSystem();
-            
-            // Verificar elementos visibles al cargar
-            checkScroll();
-            
-            // Asegurar menú cerrado en desktop
-            if (window.innerWidth > 768 && navUl.classList.contains('active')) {
-                navUl.classList.remove('active');
-                mobileMenu.textContent = '☰';
-            }
-            
-            // AGREGAR SISTEMA DE DOBLE CLICK AL LOGO PRINCIPAL
-            const mainLogo = document.getElementById('mainLogo');
-            new DoubleClickHandler(mainLogo, triggerPageReload, null);
-            
-            // AGREGAR SISTEMA DE DOBLE CLICK AL LOGO DEL FOOTER
-            const footerLogo = document.getElementById('footerLogo');
-            if (footerLogo) {
-                new DoubleClickHandler(footerLogo, triggerPageReload, null);
-            }
-            
-            // Agregar tooltip a los logos
-            mainLogo.title = "Haz doble clic para recargar la página";
-            if (footerLogo) {
-                footerLogo.title = "Haz doble clic para recargar la página";
-            }
+        // Cerrar menú al hacer clic en enlace
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768 && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                }
+            });
         });
 
-        // Event listeners para scroll
+        window.addEventListener('DOMContentLoaded', () => {
+            checkScroll();
+            new DoubleClickHandler(document.getElementById('mainLogo'), reloadPage);
+            const footerLogo = document.getElementById('footerLogo');
+            if (footerLogo) new DoubleClickHandler(footerLogo, reloadPage);
+        });
         window.addEventListener('scroll', checkScroll);
     </script>
 </body>

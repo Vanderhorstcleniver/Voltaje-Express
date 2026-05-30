@@ -1,1895 +1,958 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voltaje Express - Servicios Eléctricos Profesionales</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Voltaje Express | Energía Inteligente y Soluciones Eléctricas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Estilos base - Optimizados */
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-         :root {
-            --primary: #0d6efd;
-            --secondary: #6c757d;
-            --success: #198754;
-            --warning: #ffc107;
-            --danger: #dc3545;
-            --dark: #212529;
-            --light: #f8f9fa;
-            --electric-blue: #00a8ff;
-            --electric-yellow: #ffdd59;
+
+        :root {
+            --bg-dark: #05070c;
+            --bg-card: #0e121c;
+            --surface: #131a2c;
+            --primary-electric: #0ae0ff;
+            --primary-glow: #00c8ff;
+            --accent-gold: #ffd966;
+            --accent-amber: #ffb347;
+            --text-primary: #f0f3fa;
+            --text-secondary: #9aa4bf;
+            --border-glow: rgba(10, 224, 255, 0.25);
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.6);
+            --transition-brisk: 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
-        
+
         body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at 25% 0%, rgba(10, 224, 255, 0.03) 0%, transparent 50%),
+                              radial-gradient(circle at 85% 100%, rgba(255, 217, 102, 0.03) 0%, transparent 55%);
+            color: var(--text-primary);
+            line-height: 1.5;
             overflow-x: hidden;
         }
-        
+
         .container {
-            width: 90%;
-            max-width: 1200px;
+            width: 92%;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 1rem;
         }
-        
-        /* Header mejorado con nuevo logo */
+
         header {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            padding: 1rem 0;
+            background: rgba(5, 7, 12, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(10, 224, 255, 0.2);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
         }
-        
+
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0.9rem 0;
         }
-        
-        /* =============================================
-           LOGO CON SISTEMA DE DOBLE CLICK - IGUAL AL OTRO CÓDIGO
-           ============================================= */
+
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 1rem;
             cursor: pointer;
-            position: relative;
-            transition: all 0.3s ease;
-            user-select: none; /* Evitar selección de texto */
+            user-select: none;
+            transition: transform 0.2s ease;
         }
-        
-        /* Efectos específicos para doble click - EXACTAMENTE IGUAL AL OTRO CÓDIGO */
-        .logo.double-click-active {
-            animation: logoPulse 0.3s ease;
+
+        .logo:active {
+            transform: scale(0.97);
         }
-        
-        .logo:hover {
-            transform: translateY(-2px);
-        }
-        
+
         .logo-icon {
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, var(--electric-blue), #3b82f6);
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(145deg, #0b1120, #07111f);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(10, 224, 255, 0.4);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.4);
+        }
+
+        .logo-icon .bolt {
+            font-size: 28px;
+            color: var(--primary-electric);
+            filter: drop-shadow(0 0 4px #0ae0ff);
+        }
+
+        .logo-text h1 {
+            font-size: 1.7rem;
+            font-weight: 800;
+            background: linear-gradient(120deg, #ffffff, #b9e6ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.3px;
+            font-family: 'Space Grotesk', monospace;
+        }
+
+        .logo-text .tagline {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 1.8px;
+            color: var(--primary-electric);
+            text-transform: uppercase;
+            border-left: 2px solid var(--accent-gold);
+            padding-left: 8px;
+            margin-top: 4px;
+        }
+
+        .logo-decoration {
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-electric), var(--accent-gold), transparent);
+            width: 80%;
+            margin-top: 4px;
+            border-radius: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2.2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: 0.2s;
+            position: relative;
+            padding: 0.4rem 0;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-electric), var(--accent-gold));
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .hero {
+            padding: 5rem 0 7rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(10, 224, 255, 0.12);
+            border: 1px solid rgba(10, 224, 255, 0.3);
+            border-radius: 40px;
+            padding: 0.35rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.8rem;
+            backdrop-filter: blur(4px);
+            color: var(--primary-electric);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #FFFFFF 0%, #B9E6FF 45%, #FFE2A4 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #9aa4bf;
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: linear-gradient(105deg, #0ae0ff, #0084b3);
+            border: none;
+            padding: 1rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #05070c;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 14px rgba(10, 224, 255, 0.2);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn i {
+            font-size: 1.2rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(10, 224, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1.5px solid rgba(10, 224, 255, 0.5);
+            color: var(--primary-electric);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(10, 224, 255, 0.1);
+            border-color: var(--primary-electric);
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 3.5rem;
+            position: relative;
+        }
+
+        .section-title span {
+            background: linear-gradient(120deg, #fff, var(--primary-electric));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 90px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-electric), var(--accent-gold));
+            display: block;
+            margin: 1.2rem auto 0;
+            border-radius: 3px;
+        }
+
+        #servicios {
+            padding: 5rem 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(18, 25, 45, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            border: 1px solid rgba(10, 224, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(10, 224, 255, 0.5);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.6);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            text-align: center;
+            padding: 2rem 0 1rem;
+            background: linear-gradient(145deg, #0b1322, #03070f);
+            color: var(--primary-electric);
+        }
+
+        .service-content {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .service-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.8rem;
+        }
+
+        .btn-small {
+            background: rgba(10, 224, 255, 0.1);
+            border: 1px solid rgba(10, 224, 255, 0.4);
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            color: var(--primary-electric);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-small:hover {
+            background: rgba(10, 224, 255, 0.2);
+            gap: 0.8rem;
+        }
+
+        .why-us {
+            padding: 5rem 0;
+            background: radial-gradient(ellipse at 30% 40%, rgba(10, 224, 255, 0.05), transparent);
+            border-top: 1px solid rgba(10, 224, 255, 0.1);
+            border-bottom: 1px solid rgba(10, 224, 255, 0.1);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature {
+            background: rgba(8, 14, 24, 0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 1.8rem;
+            padding: 2rem 1.8rem;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature:hover {
+            border-color: var(--primary-electric);
+            transform: scale(1.02);
+        }
+
+        .feature-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .feature h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: #eef3ff;
+        }
+
+        .feature p {
+            color: #8f9bb3;
+        }
+
+        #contacto {
+            padding: 5rem 0;
+            background: radial-gradient(circle at 70% 20%, rgba(10,224,255,0.02), transparent);
+        }
+
+        .contact-card {
+            background: rgba(18, 25, 45, 0.6);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            border: 1px solid rgba(10, 224, 255, 0.2);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        footer {
+            background: #03060c;
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(10, 224, 255, 0.2);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(145deg, #0ae0ff20, #0b1120);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #0ae0ff40;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            width: 45px;
+            height: 2px;
+            background: var(--primary-electric);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links, .contact-info {
+            list-style: none;
+        }
+
+        .footer-links li, .contact-info li {
+            margin-bottom: 0.9rem;
+        }
+
+        .footer-links a {
+            color: #9aa4bf;
+            text-decoration: none;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-electric);
+            transform: translateX(5px);
+        }
+
+        .contact-info li {
+            display: flex;
+            gap: 0.8rem;
+            color: #b1bbd4;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            background: #101826;
+            width: 40px;
+            height: 40px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 168, 255, 0.25);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            color: var(--primary-electric);
+            transition: 0.2s;
+            text-decoration: none;
         }
-        
-        .logo-icon.double-click-effect {
-            animation: iconShock 0.5s ease;
-            box-shadow: 0 0 30px var(--electric-blue), 0 0 60px var(--electric-yellow);
+
+        .social-links a:hover {
+            background: var(--primary-electric);
+            color: #05070c;
+            transform: translateY(-3px);
         }
-        
-        .logo-icon::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-        }
-        
-        .logo-icon .bolt {
-            font-size: 32px;
-            font-weight: 900;
-            color: white;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            z-index: 2;
-            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
-            transform: rotate(-5deg);
-            transition: all 0.3s ease;
-        }
-        
-        .logo-icon .bolt.double-click-effect {
-            animation: boltFlash 0.5s ease;
-        }
-        
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .logo-text h1 {
-            font-size: 1.9rem;
-            font-weight: 800;
-            background: linear-gradient(90deg, #ffffff, #c7d2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 4px;
-            letter-spacing: 0.8px;
-            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
-            transition: all 0.3s ease;
-        }
-        
-        .logo-text .tagline {
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #6c7a91;
             font-size: 0.85rem;
-            color: #94a3b8;
-            letter-spacing: 1.2px;
-            font-weight: 500;
-            text-transform: uppercase;
-            border-left: 2px solid var(--electric-blue);
-            padding-left: 8px;
-            margin-top: 2px;
-            transition: all 0.3s ease;
         }
-        
-        /* Línea decorativa elegante para el logo */
-        .logo-decoration {
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--electric-blue), 
-                var(--electric-yellow), 
-                transparent);
-            border-radius: 1px;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
-        
-        .logo-decoration.double-click-effect {
-            animation: lineGlow 1s ease;
-            opacity: 1;
-            height: 4px;
-        }
-        
-        /* =============================================
-           OVERLAY DE RECARGA - EXACTAMENTE IGUAL
-           ============================================= */
+
         .reload-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+            background: rgba(2, 5, 12, 0.96);
+            backdrop-filter: blur(12px);
             z-index: 9999;
             display: none;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(10px);
+            flex-direction: column;
         }
-        
+
         .reload-overlay.show {
             display: flex;
             animation: fadeIn 0.3s ease;
         }
-        
-        .reload-content {
-            text-align: center;
-            color: white;
-            max-width: 500px;
-            padding: 2rem;
-        }
-        
+
         .reload-icon {
-            font-size: 5rem;
-            margin-bottom: 1.5rem;
-            animation: pulse 1.5s ease-in-out infinite;
-            display: inline-block;
-            background: linear-gradient(135deg, var(--electric-blue), var(--electric-yellow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        @keyframes pulse {
-            0% { 
-                transform: scale(1);
-                filter: drop-shadow(0 0 5px var(--electric-blue));
-            }
-            50% { 
-                transform: scale(1.1);
-                filter: drop-shadow(0 0 20px var(--electric-blue));
-            }
-            100% { 
-                transform: scale(1);
-                filter: drop-shadow(0 0 5px var(--electric-blue));
-            }
-        }
-        
-        .reload-content h3 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-        }
-        
-        .reload-content p {
-            color: #94a3b8;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-        
-        /* =============================================
-           ANIMACIONES ESPECÍFICAS PARA DOBLE CLICK - SIN GIRO
-           ============================================= */
-        @keyframes logoPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes iconShock {
-            0% { transform: scale(1); }
-            25% { transform: scale(1.2); }
-            50% { transform: scale(1.1); }
-            75% { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes boltFlash {
-            0% { 
-                color: white;
-                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
-            }
-            50% { 
-                color: var(--electric-yellow);
-                filter: drop-shadow(0 0 15px var(--electric-yellow));
-                transform: rotate(-5deg) scale(1.3);
-            }
-            100% { 
-                color: white;
-                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
-                transform: rotate(-5deg);
-            }
-        }
-        
-        @keyframes lineGlow {
-            0% { 
-                opacity: 0.7;
-                height: 2px;
-                background: linear-gradient(90deg, 
-                    transparent, 
-                    var(--electric-blue), 
-                    var(--electric-yellow), 
-                    transparent);
-            }
-            50% { 
-                opacity: 1;
-                height: 6px;
-                background: linear-gradient(90deg, 
-                    var(--electric-blue), 
-                    var(--electric-yellow),
-                    var(--electric-blue), 
-                    var(--electric-yellow));
-                box-shadow: 0 0 20px var(--electric-blue);
-            }
-            100% { 
-                opacity: 0.7;
-                height: 2px;
-                background: linear-gradient(90deg, 
-                    transparent, 
-                    var(--electric-blue), 
-                    var(--electric-yellow), 
-                    transparent);
-            }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* =============================================
-           ESTILOS EXISTENTES DE LA PÁGINA ACTUAL
-           ============================================= */
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        nav a {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-            padding: 0.5rem 0;
-            font-size: 1.05rem;
-        }
-        
-        nav a:hover {
-            color: white;
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            transition: width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            color: #cbd5e1;
-        }
-        
-        .mobile-menu:hover {
-            transform: scale(1.1);
-            color: white;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.95)), 
-                        url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            padding: 8rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 221, 89, 0.1) 0%, transparent 50%);
-            z-index: 1;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .hero h1 {
             font-size: 4rem;
-            margin-bottom: 1.5rem;
+            animation: pulse 1.2s infinite;
+            color: var(--primary-electric);
+        }
+
+        @keyframes pulse {
+            0% { text-shadow: 0 0 0px #0ae0ff; transform: scale(1);}
+            100% { text-shadow: 0 0 20px #0ae0ff; transform: scale(1.08);}
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0;}
+            to { opacity: 1;}
+        }
+
+        .service-card, .feature {
             opacity: 0;
-            transform: translateY(40px);
-            animation: fadeInUp 1s forwards 0.3s;
-            background: linear-gradient(90deg, #ffffff, #c7d2fe, #fef3c7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-            line-height: 1.1;
+            transform: translateY(25px);
+            transition: opacity 0.7s ease, transform 0.6s ease;
         }
-        
-        .hero-subtitle {
-            font-size: 1.8rem;
-            margin-bottom: 2.5rem;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeInUp 1s forwards 0.6s;
-            color: #94a3b8;
-            font-weight: 400;
-            letter-spacing: 1px;
-        }
-        
-        .hero p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            margin: 0 auto 4rem;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeInUp 1s forwards 0.9s;
-            color: #cbd5e1;
-            line-height: 1.8;
-        }
-        
-        .hero-buttons {
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeInUp 1s forwards 1.2s;
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
-            padding: 1.3rem 2.8rem;
-            border-radius: 15px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            min-width: 240px;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.2), 
-                transparent);
-            transition: left 0.7s;
-        }
-        
-        .btn:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
-        }
-        
-        .btn:hover::before {
-            left: 100%;
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: white;
-            box-shadow: 0 18px 35px rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Servicios Destacados - COMPLETO */
-        #servicios-destacados {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, #ffffff, #f8fafc);
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 4rem;
-            font-size: 2.8rem;
-            color: #0f172a;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 120px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            margin: 1.5rem auto;
-            border-radius: 2px;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-        }
-        
-        .service-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 0;
-            transform: translateY(30px);
-            border: 1px solid #e2e8f0;
-        }
-        
-        .service-card.visible {
+
+        .service-card.visible, .feature.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        .service-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            border-color: var(--electric-blue);
-        }
-        
-        .service-icon {
-            font-size: 3.5rem;
-            text-align: center;
-            padding: 2.5rem;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
-        }
-        
-        .service-content {
-            padding: 2.5rem;
-        }
-        
-        .service-content h3 {
-            margin-bottom: 1.2rem;
-            color: #0f172a;
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-        
-        .service-content p {
-            margin-bottom: 2rem;
-            color: #64748b;
-            line-height: 1.8;
-        }
-        
-        .btn-small {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
-            padding: 0.8rem 1.8rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn-small:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-        }
-        
-        /* Por qué elegirnos - COMPLETO */
-        .why-us {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            position: relative;
-        }
-        
-        /* TÍTULO VISIBLE - CORREGIDO */
-        .why-us .section-title {
-            color: #ffffff;
-            text-shadow: 0 2px 10px rgba(0, 168, 255, 0.5);
-        }
-        
-        .why-us .section-title::after {
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-        }
-        
-        .feature {
-            text-align: center;
-            padding: 3rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            transition: all 0.5s;
-            opacity: 0;
-            transform: translateY(30px);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .feature.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .feature:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--electric-blue);
-            box-shadow: 0 20px 40px rgba(0, 168, 255, 0.1);
-        }
-        
-        .feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.8rem;
-            filter: drop-shadow(0 0 10px rgba(0, 168, 255, 0.3));
-        }
-        
-        .feature h3 {
-            margin-bottom: 1.2rem;
-            color: #c7d2fe;
-            font-size: 1.5rem;
-        }
-        
-        .feature p {
-            color: #94a3b8;
-            line-height: 1.8;
-        }
-        
-        /* =============================================
-           FOOTER ELEGANTE Y MODERNO - CON LOGO PARA DOBLE CLICK
-           ============================================= */
-        footer {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            padding: 5rem 0 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, 
-                var(--electric-blue), 
-                var(--electric-yellow),
-                var(--electric-blue));
-            z-index: 1;
-        }
-        
-        .footer-wave {
-            position: absolute;
-            top: -100px;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0 0v46.29c47.79 22.2 103.59 32.17 158 28 70.36-5.37 136.33-33.31 206.8-37.5 73.84-4.36 147.54 16.88 218.2 35.26 69.27 18 138.3 24.88 209.4 13.08 36.15-6 69.85-17.84 104.45-29.34C989.49 25 1113-14.29 1200 52.47V0z' fill='%230f172a'/%3E%3C/svg%3E");
-            background-size: 1200px 100px;
-            animation: wave 20s linear infinite;
-        }
-        
-        @keyframes wave {
-            0% { background-position-x: 0; }
-            100% { background-position-x: 1200px; }
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 4rem;
-            margin-bottom: 3rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .footer-column {
-            position: relative;
-        }
-        
-        .footer-column h3 {
-            margin-bottom: 2rem;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-            position: relative;
-            padding-bottom: 1rem;
-        }
-        
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--electric-blue), var(--electric-yellow));
-            border-radius: 1.5px;
-        }
-        
-        .footer-about {
-            max-width: 350px;
-        }
-        
-        .footer-about p {
-            color: #94a3b8;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-        
-        /* Logo del footer también clickeable */
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            user-select: none;
-        }
-        
-        .footer-logo:hover {
-            transform: translateY(-2px);
-        }
-        
-        .footer-logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--electric-blue), #3b82f6);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.25);
-            transition: all 0.3s ease;
-        }
-        
-        .footer-logo-text h4 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, #ffffff, #c7d2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 5px;
-        }
-        
-        .footer-logo-text span {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            letter-spacing: 1px;
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 1.2rem;
-            transition: transform 0.3s;
-        }
-        
-        .footer-links li:hover {
-            transform: translateX(10px);
-        }
-        
-        .footer-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.05rem;
-            padding: 0.3rem 0;
-        }
-        
-        .footer-links a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-        
-        .footer-links a::before {
-            content: '→';
-            color: var(--electric-blue);
-            font-weight: bold;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s;
-        }
-        
-        .footer-links a:hover::before {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .contact-info {
-            list-style: none;
-        }
-        
-        .contact-info li {
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            color: #cbd5e1;
-            line-height: 1.6;
-        }
-        
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--electric-blue);
-            flex-shrink: 0;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1.2rem;
-            margin-top: 2rem;
-        }
-        
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 1.3rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .social-links a:hover {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            transform: translateY(-5px) rotate(5deg);
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
-            border-color: transparent;
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 3rem;
-            margin-top: 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #94a3b8;
-            font-size: 0.95rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .copyright p {
-            margin-bottom: 0.8rem;
-        }
-        
-        .copyright-stats {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-            font-size: 0.85rem;
-        }
-        
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-        }
-        
-        .stat-item .icon {
-            color: var(--electric-blue);
-        }
-        
-        /* Contador de visitas */
-        .visit-counter {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(33, 37, 41, 0.9));
-            color: white;
-            padding: 12px 18px;
-            border-radius: 25px;
-            font-size: 0.95rem;
-            z-index: 100;
-            display: none;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-            cursor: pointer;
-            user-select: none;
-        }
-        
-        .visit-counter.show {
-            display: flex;
-            animation: slideUp 0.5s ease;
-        }
-        
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .visit-counter:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-        }
-        
-        /* ESTILOS EXACTAMENTE IGUALES PARA EL MENSAJE DE RECARGA */
-        #reloadMessageContainer {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 10px;
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            gap: 15px;
-            font-weight: 600;
-            animation: slideIn 0.5s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 30px rgba(0, 168, 255, 0.5);
-        }
-        
-        #reloadMessageContainer.show {
-            display: flex;
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -60%);
-            }
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
-        }
-        
-        #reloadMessageContainer span {
-            font-size: 1.2rem;
-        }
-        
-        /* ESTILOS PARA LA BARRA DE CARGA DEL COMBO DE TECLAS */
+
+        /* Secret Loading Overlay */
         .secret-loading-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+            background: #01020ae6;
+            backdrop-filter: blur(12px);
+            z-index: 10000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.5s, visibility 0.5s;
+            transition: 0.4s;
         }
-        
+
         .secret-loading-overlay.active {
             opacity: 1;
             visibility: visible;
         }
-        
-        .secret-loading-text {
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            font-weight: 700;
-            background: linear-gradient(90deg, #00a8ff, #ffdd59);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 20px rgba(0, 168, 255, 0.3);
-        }
-        
-        .secret-loading-subtext {
-            color: #94a3b8;
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-        
-        .secret-loading-bar-container {
-            width: 80%;
-            max-width: 500px;
-            height: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 2rem;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .secret-loading-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #00a8ff, #ffdd59);
-            border-radius: 15px;
-            transition: width 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .secret-loading-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.3), 
-                transparent);
-            animation: loadingShimmer 1.5s infinite;
-        }
-        
-        @keyframes loadingShimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        
-        .secret-loading-percentage {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-        }
-        
+
         .secret-key-combo {
             display: flex;
-            gap: 10px;
-            margin-bottom: 3rem;
+            gap: 20px;
+            margin: 2rem 0;
         }
-        
+
         .secret-key {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
+            background: #0b1424;
+            border: 2px solid #0ae0ff;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 168, 255, 0.1);
-            border: 2px solid #00a8ff;
-            border-radius: 10px;
+            font-size: 2.2rem;
+            font-weight: bold;
             color: white;
-            font-size: 1.8rem;
-            font-weight: bold;
-            box-shadow: 0 0 15px rgba(0, 168, 255, 0.3);
+            transition: 0.1s linear;
         }
-        
+
         .secret-key.active {
-            background: #00a8ff;
+            background: #0ae0ff;
+            color: #03070f;
+            box-shadow: 0 0 20px #0ae0ff;
             transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(0, 168, 255, 0.6);
         }
-        
-        .secret-loading-message {
-            color: #cbd5e1;
-            font-size: 1.1rem;
-            text-align: center;
-            max-width: 500px;
-            margin-top: 1rem;
-            transition: all 0.3s;
+
+        .secret-loading-bar-container {
+            width: 70%;
+            max-width: 400px;
+            height: 12px;
+            background: #1f2a3e;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 1rem 0;
         }
-        
-        .success-message {
-            color: #00ff88;
-            font-size: 1.3rem;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 1rem;
-            animation: pulseSuccess 1s infinite;
+
+        .secret-loading-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #0ae0ff, #ffd966);
+            transition: width 0.1s linear;
         }
-        
-        @keyframes pulseSuccess {
-            0% { opacity: 0.7; text-shadow: 0 0 5px #00ff88; }
-            50% { opacity: 1; text-shadow: 0 0 15px #00ff88; }
-            100% { opacity: 0.7; text-shadow: 0 0 5px #00ff88; }
-        }
-        
-        .countdown-message {
-            color: #ffdd59;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 0.5rem;
-            animation: pulseCountdown 1s infinite;
-        }
-        
-        @keyframes pulseCountdown {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        /* Animaciones */
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Media Queries */
-        @media (max-width: 768px) {
-            .mobile-menu {
-                display: block;
-            }
-            
+
+        @media (max-width: 800px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.3rem; }
+            .mobile-menu { display: block; }
             nav ul {
                 display: none;
-                flex-direction: column;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: linear-gradient(135deg, #0f172a, #1e293b);
+                background: #05070cee;
+                backdrop-filter: blur(12px);
+                flex-direction: column;
                 padding: 1.5rem;
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-                backdrop-filter: blur(10px);
-                z-index: 1000;
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.4rem;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            
-            .copyright-stats {
-                flex-direction: column;
                 gap: 1rem;
+                text-align: center;
             }
-            
-            /* Ajustes para la barra de carga en móvil */
-            .secret-loading-text {
-                font-size: 1.8rem;
-            }
-            
-            .secret-loading-subtext {
-                font-size: 1rem;
-            }
-            
-            .secret-key {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero {
-                padding: 6rem 0;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            /* Ajustes para la barra de carga en móvil pequeño */
-            .secret-loading-text {
-                font-size: 1.5rem;
-            }
-            
-            .secret-key-combo {
-                gap: 5px;
-            }
-            
-            .secret-key {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
+            nav ul.active { display: flex; }
+            .secret-key { width: 55px; height: 55px; font-size: 1.8rem; }
         }
     </style>
 </head>
-
 <body>
-    <!-- =============================================
-         OVERLAY DE RECARGA - EXACTAMENTE IGUAL
-         ============================================= -->
-    <div class="reload-overlay" id="reloadOverlay">
-        <div class="reload-content">
-            <div class="reload-icon">⚡</div>
-            <h3>Recargando Energía</h3>
-            <p>Voltaje Express está recargando la página con energía eléctrica...</p>
-        </div>
-    </div>
 
-    <!-- Header con nuevo logo -->
-    <header>
-        <div class="container header-container">
-            <div class="logo" id="mainLogo">
-                <div class="logo-icon">
-                    <div class="bolt">⚡</div>
-                </div>
-                <div class="logo-text">
-                    <h1>VOLTAJE EXPRESS</h1>
-                    <div class="tagline">ENERGÍA INTELIGENTE</div>
-                    <div class="logo-decoration"></div>
-                </div>
+<div class="reload-overlay" id="reloadOverlay">
+    <div class="reload-icon"><i class="fas fa-bolt"></i></div>
+    <h3 style="color:white; margin-top:1rem;">⚡ Recargando Voltaje Express ⚡</h3>
+    <p style="color:#aaa">Energía en cada conexión...</p>
+</div>
+
+<header>
+    <div class="container header-container">
+        <div class="logo" id="mainLogo">
+            <div class="logo-icon"><i class="fas fa-bolt bolt"></i></div>
+            <div class="logo-text">
+                <h1>VOLTAJE EXPRESS</h1>
+                <div class="tagline">ENERGÍA INTELIGENTE · 2026</div>
+                <div class="logo-decoration"></div>
             </div>
-            <nav>
-                <div class="mobile-menu">☰</div>
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="servicios.html">Servicios</a></li>
-                    <li><a href="nosotros.html">Nosotros</a></li>
-                    <li><a href="contacto.html">Contacto</a></li>
-                </ul>
-            </nav>
         </div>
-    </header>
+        <nav>
+            <div class="mobile-menu"><i class="fas fa-bars"></i></div>
+            <ul id="navMenu">
+                <li><a class="nav-link" data-section="inicio">Inicio</a></li>
+                <li><a class="nav-link" data-section="servicios">Servicios</a></li>
+                <li><a class="nav-link" data-section="nosotros">Nosotros</a></li>
+                <li><a class="nav-link" data-section="contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="inicio">
+<main>
+    <section id="inicio" class="hero">
         <div class="container hero-content">
-            <h1>Soluciones Eléctricas Profesionales</h1>
-            <div class="hero-subtitle">Excelencia en cada conexión eléctrica</div>
-            <p>En Voltaje Express ofrecemos servicios eléctricos de alta calidad para hogares, empresas e industrias. Garantizamos seguridad, eficiencia y profesionalidad en cada proyecto.</p>
+            <div class="hero-badge"><i class="fas fa-shield-alt"></i> CERTIFICADOS · RESPALDO 24/7</div>
+            <h1>Soluciones Eléctricas<br>Conectadas al Futuro</h1>
+            <div class="hero-subtitle">Excelencia y velocidad en cada instalación</div>
+            <p>Instalaciones residenciales, industriales, iluminación inteligente y energía renovable. Calidad garantizada y respuesta inmediata.</p>
             <div class="hero-buttons">
-                <a href="servicios.html" class="btn">
-                    <span>⚡</span>
-                    Ver Servicios
-                </a>
-                <a href="contacto.html" class="btn btn-secondary">
-                    <span>📋</span>
-                    Solicitar Presupuesto
-                </a>
+                <a class="btn" data-section="servicios"><i class="fas fa-charging-station"></i> Ver Servicios</a>
+                <a class="btn btn-secondary" data-section="contacto"><i class="fas fa-file-invoice-dollar"></i> Presupuesto sin costo</a>
             </div>
         </div>
     </section>
 
-    <!-- Servicios Destacados - COMPLETO -->
-    <section id="servicios-destacados">
+    <section id="servicios">
         <div class="container">
-            <h2 class="section-title">Servicios Destacados</h2>
+            <h2 class="section-title"><span>⚡ Servicios</span> de élite</h2>
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">⚡</div>
-                    <div class="service-content">
-                        <h3>Instalaciones Eléctricas</h3>
-                        <p>Realizamos instalaciones eléctricas completas para viviendas, locales comerciales y naves industriales. Desde cableado básico hasta sistemas complejos de distribución de energía, garantizando cumplimiento de normativas y máxima seguridad.</p>
-                        <a href="servicios.html#instalaciones" class="btn-small">
-                            <span>🔍</span>
-                            Ver Detalles
-                        </a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔧</div>
-                    <div class="service-content">
-                        <h3>Mantenimiento y Reparaciones</h3>
-                        <p>Servicio de mantenimiento preventivo y correctivo para todo tipo de instalaciones eléctricas. Diagnóstico preciso, reparaciones urgentes 24/7 y programas de mantenimiento personalizados para evitar fallos futuros.</p>
-                        <a href="servicios.html#mantenimiento" class="btn-small">
-                            <span>🔍</span>
-                            Ver Detalles
-                        </a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💡</div>
-                    <div class="service-content">
-                        <h3>Iluminación y Diseño</h3>
-                        <p>Diseño e implementación de sistemas de iluminación inteligente y eficiente. Soluciones LED personalizadas, automatización de iluminación, diseño de ambientes y optimización del consumo energético para hogares y empresas.</p>
-                        <a href="servicios.html#iluminacion" class="btn-small">
-                            <span>🔍</span>
-                            Ver Detalles
-                        </a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🏭</div>
-                    <div class="service-content">
-                        <h3>Electricidad Industrial</h3>
-                        <p>Soluciones eléctricas especializadas para el sector industrial. Instalación y mantenimiento de maquinaria industrial, sistemas de potencia, automatización de procesos y tableros de control de alta eficiencia.</p>
-                        <a href="servicios.html#industrial" class="btn-small">
-                            <span>🔍</span>
-                            Ver Detalles
-                        </a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔋</div>
-                    <div class="service-content">
-                        <h3>Energías Renovables</h3>
-                        <p>Instalación de sistemas fotovoltaicos para autoconsumo. Diseño de proyectos solares, instalación de paneles, sistemas de almacenamiento energético y gestión de subvenciones para energías limpias.</p>
-                        <a href="servicios.html#renovables" class="btn-small">
-                            <span>🔍</span>
-                            Ver Detalles
-                        </a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🚗</div>
-                    <div class="service-content">
-                        <h3>Puntos de Carga VE</h3>
-                        <p>Instalación de puntos de carga para vehículos eléctricos en hogares, empresas y comunidades. Asesoramiento técnico, wallboxes de alta potencia y gestión integral de proyectos de movilidad eléctrica.</p>
-                        <a href="servicios.html#carga" class="btn-small">
-                            <span>🔍</span>
-                            Ver Detalles
-                        </a>
-                    </div>
-                </div>
+                <div class="service-card"><div class="service-icon"><i class="fas fa-bolt"></i></div><div class="service-content"><h3>Instalaciones Eléctricas</h3><p>Cableado, centros de carga y proyectos completos con normas vigentes y máxima seguridad.</p><a class="btn-small" data-service="instalaciones">Ver más <i class="fas fa-arrow-right"></i></a></div></div>
+                <div class="service-card"><div class="service-icon"><i class="fas fa-tools"></i></div><div class="service-content"><h3>Mantenimiento 24/7</h3><p>Reparaciones urgentes, diagnóstico avanzado y programas preventivos a medida.</p><a class="btn-small" data-service="mantenimiento">Ver más <i class="fas fa-arrow-right"></i></a></div></div>
+                <div class="service-card"><div class="service-icon"><i class="fas fa-lightbulb"></i></div><div class="service-content"><h3>Iluminación + Diseño</h3><p>LED inteligente, automatización, ambientes eficientes y decoración lumínica.</p><a class="btn-small" data-service="iluminacion">Ver más <i class="fas fa-arrow-right"></i></a></div></div>
+                <div class="service-card"><div class="service-icon"><i class="fas fa-industry"></i></div><div class="service-content"><h3>Electricidad Industrial</h3><p>Tableros de potencia, automatización industrial y sistemas trifásicos.</p><a class="btn-small" data-service="industrial">Ver más <i class="fas fa-arrow-right"></i></a></div></div>
+                <div class="service-card"><div class="service-icon"><i class="fas fa-solar-panel"></i></div><div class="service-content"><h3>Energías Renovables</h3><p>Instalación de paneles solares, inversores y gestión de autoconsumo.</p><a class="btn-small" data-service="renovables">Ver más <i class="fas fa-arrow-right"></i></a></div></div>
+                <div class="service-card"><div class="service-icon"><i class="fas fa-car"></i></div><div class="service-content"><h3>Puntos de Carga VE</h3><p>Carga inteligente para autos eléctricos, wallboxes y asesoría técnica.</p><a class="btn-small" data-service="carga">Ver más <i class="fas fa-arrow-right"></i></a></div></div>
             </div>
         </div>
     </section>
 
-    <!-- Por qué elegirnos - COMPLETO -->
-    <section class="why-us">
+    <section id="nosotros" class="why-us">
         <div class="container">
-            <h2 class="section-title">¿Por Qué Elegirnos?</h2>
+            <h2 class="section-title"><span>✨ ¿Por qué</span> Voltaje Express?</h2>
             <div class="features-grid">
-                <div class="feature">
-                    <div class="feature-icon">⏱️</div>
-                    <h3>Respuesta Inmediata</h3>
-                    <p>Atendemos sus necesidades en menos de 24 horas. Servicio de emergencias disponible 24/7 para resolver cualquier incidencia eléctrica de manera inmediata.</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">⭐</div>
-                    <h3>Calidad Certificada</h3>
-                    <p>Trabajamos con materiales de primera calidad y contamos con certificaciones internacionales. Garantía por escrito en todos nuestros servicios y trabajos.</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">👨‍🔧</div>
-                    <h3>Expertos Certificados</h3>
-                    <p>Nuestro equipo de electricistas cuenta con más de 5 años de experiencia y certificaciones especializadas en sistemas eléctricos residenciales e industriales.</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">💰</div>
-                    <h3>Precios Transparentes</h3>
-                    <p>Presupuestos detallados sin costos ocultos. Ofrecemos las mejores tarifas del mercado manteniendo los más altos estándares de calidad y seguridad.</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>Seguridad Garantizada</h3>
-                    <p>Todas nuestras instalaciones cumplen con las normativas de seguridad vigentes. Implementamos los más altos estándares de protección eléctrica.</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">📞</div>
-                    <h3>Soporte Continuo</h3>
-                    <p>Atención personalizada antes, durante y después de cada proyecto. Asesoramiento técnico permanente y seguimiento de todas las instalaciones realizadas.</p>
-                </div>
+                <div class="feature"><div class="feature-icon"><i class="fas fa-stopwatch"></i></div><h3>Respuesta inmediata</h3><p>Emergencias eléctricas atendidas en menos de 2 horas.</p></div>
+                <div class="feature"><div class="feature-icon"><i class="fas fa-certificate"></i></div><h3>Calidad Certificada</h3><p>Materiales premium y garantía por escrito en cada obra.</p></div>
+                <div class="feature"><div class="feature-icon"><i class="fas fa-user-tie"></i></div><h3>Expertos Certificados</h3><p>Más de 5 años de experiencia y formación continua.</p></div>
+                <div class="feature"><div class="feature-icon"><i class="fas fa-hand-holding-usd"></i></div><h3>Precios Transparentes</h3><p>Presupuesto detallado sin letra pequeña.</p></div>
+                <div class="feature"><div class="feature-icon"><i class="fas fa-shield-virus"></i></div><h3>Seguridad Garantizada</h3><p>Normativas RETIE y equipos de protección de punta.</p></div>
+                <div class="feature"><div class="feature-icon"><i class="fas fa-headset"></i></div><h3>Soporte Continuo</h3><p>Acompañamiento post-instalación y asesoría personalizada.</p></div>
             </div>
         </div>
     </section>
 
-    <!-- Footer elegante y moderno -->
-    <footer>
-        <div class="footer-wave"></div>
+    <section id="contacto">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column footer-about">
-                    <div class="footer-logo" id="footerLogo">
-                        <div class="footer-logo-icon">
-                            <div style="font-size: 24px; color: white; font-weight: bold;">⚡</div>
-                        </div>
-                        <div class="footer-logo-text">
-                            <h4>VOLTAJE EXPRESS</h4>
-                            <span>ENERGÍA CONFIABLE</span>
-                        </div>
-                    </div>
-                    <p>Empresa especializada en servicios eléctricos de alta calidad para hogares, empresas e industrias. Más de 5 años brindando soluciones confiables y seguras en toda la República Dominicana.</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook" title="Síguenos en Facebook">f</a>
-                        <a href="#" aria-label="Instagram" title="Síguenos en Instagram">ig</a>
-                        <a href="#" aria-label="Twitter" title="Síguenos en Twitter">𝕏</a>
-                        <a href="#" aria-label="WhatsApp" title="Contáctanos por WhatsApp">📱</a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Nuestros Servicios</h3>
-                    <ul class="footer-links">
-                        <li><a href="servicios.html#instalaciones">⚡ Instalaciones Eléctricas</a></li>
-                        <li><a href="servicios.html#mantenimiento">🔧 Mantenimiento y Reparaciones</a></li>
-                        <li><a href="servicios.html#iluminacion">💡 Iluminación y Diseño</a></li>
-                        <li><a href="servicios.html#industrial">🏭 Electricidad Industrial</a></li>
-                        <li><a href="servicios.html#renovables">🔋 Energías Renovables</a></li>
-                        <li><a href="servicios.html#carga">🚗 Puntos de Carga VE</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contáctanos</h3>
-                    <ul class="contact-info">
-                        <li>
-                            <div class="contact-icon">📍</div>
-                            <div>
-                                <strong>Oficina Principal</strong><br>
-                                Mahata Calle C, sector f1<br>
-                                Santo Domingo, República Dominicana
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon">📞</div>
-                            <div>
-                                <strong>Teléfono y WhatsApp</strong><br>
-                                +1 (809) 523-8283<br>
-                                Disponible 24/7 para emergencias
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon">✉️</div>
-                            <div>
-                                <strong>Correo Electrónico</strong><br>
-                                voltajeexpress2@gmail.com<br>
-                                Respuesta en menos de 24h
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon">🕒</div>
-                            <div>
-                                <strong>Horario de Atención</strong><br>
-                                Lunes a Viernes: 8:00 AM - 5:00 PM<br>
-                                Sábados: 8:00 AM - 12:00 PM
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2021-2026 Voltaje Express. Todos los derechos reservados.</p>
-                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;">
-                    "Energizando hogares e industrias con excelencia y seguridad"
-                </p>
-                
-                <div class="copyright-stats">
-                    <div class="stat-item">
-                        <span class="icon">👁️</span>
-                        <span>Visitas: <strong id="footerVisitCount">0</strong></span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="icon">⚡</span>
-                        <span>Servicios: <strong>6</strong></span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="icon">👆👆</span>
-                        <span>Doble click activo</span>
-                    </div>
+            <div class="contact-card">
+                <i class="fas fa-headset" style="font-size: 3rem; color: var(--primary-electric); margin-bottom: 1rem;"></i>
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">¿Listo para electrificar tu proyecto?</h3>
+                <p style="color: #9aa4bf; margin-bottom: 2rem;">Llama o escríbenos y recibe asesoría sin compromiso</p>
+                <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                    <a class="btn" style="background: #25d366; box-shadow: none;"><i class="fab fa-whatsapp"></i> +1 (809) 523-8283</a>
+                    <a class="btn btn-secondary"><i class="fas fa-envelope"></i> voltajeexpress2@gmail.com</a>
                 </div>
             </div>
         </div>
-    </footer>
+    </section>
+</main>
 
-    <!-- Contador de visitas -->
-    <div class="visit-counter" id="visitCounter">
-        👁️ <span id="counterDisplay">0</span> visitas
-    </div>
-
-    <!-- Overlay de carga para el combo secreto -->
-    <div id="secretLoadingOverlay" class="secret-loading-overlay">
-        <div class="secret-loading-text">Accediendo al Panel de Administración</div>
-        <div class="secret-loading-subtext">Por favor espera mientras configuramos tu acceso seguro</div>
-        
-        <div class="secret-key-combo">
-            <div class="secret-key" id="keyV">V</div>
-            <div class="secret-key" id="keyL">L</div>
-            <div class="secret-key" id="keyT">T</div>
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo" id="footerLogo">
+                    <div class="footer-logo-icon"><i class="fas fa-bolt" style="color:#0ae0ff; font-size:24px;"></i></div>
+                    <div class="footer-logo-text"><h4 style="color:white">VOLTAJE EXPRESS</h4><span style="color:#8e9ccd">⚡ Energía confiable</span></div>
+                </div>
+                <p style="color:#9aa4bf; margin:1rem 0">Expertos en soluciones eléctricas, ofrecemos calidad y velocidad con los más altos estándares en RD.</p>
+                <div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div>
+            </div>
+            <div class="footer-column"><h3>Servicios</h3><ul class="footer-links"><li><a data-footer-service="instalaciones"><i class="fas fa-angle-right"></i> Instalaciones</a></li><li><a data-footer-service="mantenimiento"><i class="fas fa-angle-right"></i> Mantenimiento</a></li><li><a data-footer-service="renovables"><i class="fas fa-angle-right"></i> Energía Solar</a></li><li><a data-footer-service="carga"><i class="fas fa-angle-right"></i> Carga VE</a></li></ul></div>
+            <div class="footer-column"><h3>Contacto</h3><ul class="contact-info"><li><i class="fas fa-map-marker-alt"></i> Mahata Calle C, Santo Domingo</li><li><i class="fas fa-phone-alt"></i> +1 (809) 523-8283</li><li><i class="fas fa-envelope"></i> voltajeexpress2@gmail.com</li><li><i class="fas fa-clock"></i> Lun-Vie 8am-5pm · Emergencias 24/7</li></ul></div>
         </div>
-        
-        <div class="secret-loading-bar-container">
-            <div class="secret-loading-bar" id="secretLoadingBar"></div>
-        </div>
-        
-        <div class="secret-loading-percentage" id="secretLoadingPercentage">0%</div>
-        <div class="secret-loading-message" id="secretLoadingMessage">Combinación de teclas detectada: V + L + T</div>
-        <div id="successMessage" class="success-message" style="display: none;"></div>
-        <div id="countdownMessage" class="countdown-message" style="display: none;"></div>
+        <div class="copyright"><p>&copy; 2026 Voltaje Express — Energía que transforma espacios</p></div>
     </div>
+</footer>
 
-    <!-- =============================================
-         JAVASCRIPT EXACTO AL OTRO CÓDIGO
-         ============================================= -->
-    <script>
-        // =============================================
-        // SISTEMA DE DOBLE CLICK EXACTO AL OTRO CÓDIGO
-        // =============================================
+<div id="secretLoadingOverlay" class="secret-loading-overlay">
+    <div class="secret-key-combo"><div class="secret-key" id="keyV">V</div><div class="secret-key" id="keyL">L</div><div class="secret-key" id="keyT">T</div></div>
+    <div class="secret-loading-bar-container"><div class="secret-loading-bar" id="secretLoadingBar"></div></div>
+    <div class="secret-loading-percentage" id="secretLoadingPercentage" style="color:white">0%</div>
+    <div class="secret-loading-message" id="secretLoadingMessage" style="color:#9aa4bf">Combo VLT detectado · Acceso restringido</div>
+    <div id="successMessage" style="display:none; color:#0ae0ff; margin-top:1rem;"></div>
+    <div id="countdownMessage" style="display:none; color:#ffd966;"></div>
+</div>
 
-        class DoubleClickHandler {
-            constructor(element, doubleCallback, singleCallback = null, delay = 300) {
-                this.element = element;
-                this.doubleCallback = doubleCallback;
-                this.singleCallback = singleCallback;
-                this.delay = delay;
-                this.clickCount = 0;
-                this.timer = null;
-                
-                this.element.addEventListener('click', this.handleClick.bind(this));
-            }
-
-            handleClick(event) {
-                event.preventDefault();
-                event.stopPropagation();
-                this.clickCount++;
-
-                if (this.clickCount === 1) {
-                    this.timer = setTimeout(() => {
-                        // Click único
-                        if (this.singleCallback) {
-                            this.singleCallback(event);
-                        }
-                        this.reset();
-                    }, this.delay);
-                } else if (this.clickCount === 2) {
-                    clearTimeout(this.timer);
-                    // Doble click
-                    this.doubleCallback(event);
-                    this.reset();
-                }
-            }
-
-            reset() {
-                this.clickCount = 0;
-                if (this.timer) {
-                    clearTimeout(this.timer);
-                    this.timer = null;
-                }
-            }
-        }
-
-        // =============================================
-        // FUNCIÓN DE RECARGA DE PÁGINA - SIN GIRO
-        // =============================================
-
-        function triggerPageReload() {
-            // Mostrar overlay de recarga
-            const reloadOverlay = document.getElementById('reloadOverlay');
-            reloadOverlay.classList.add('show');
-            
-            // Aplicar efectos al logo (SIN GIRO)
-            const logo = document.querySelector('.logo');
-            const logoIcon = document.querySelector('.logo-icon');
-            const bolt = document.querySelector('.logo-icon .bolt');
-            const logoDecoration = document.querySelector('.logo-decoration');
-            
-            logo.classList.add('double-click-active');
-            logoIcon.classList.add('double-click-effect');
-            bolt.classList.add('double-click-effect');
-            logoDecoration.classList.add('double-click-effect');
-            
-            // Recargar la página después de 1.5 segundos
-            setTimeout(() => {
-                location.reload(true);
-            }, 1500);
-        }
-
-        // =============================================
-        // SISTEMA DE VISITAS
-        // =============================================
-
-        function setupVisitSystem() {
-            let totalVisitCount = localStorage.getItem('totalVisits') || 0;
-            totalVisitCount = parseInt(totalVisitCount) + 1;
-            localStorage.setItem('totalVisits', totalVisitCount);
-            
-            // Actualizar displays
-            document.getElementById('counterDisplay').textContent = totalVisitCount;
-            document.getElementById('footerVisitCount').textContent = totalVisitCount;
-            
-            // Mostrar contador de visitas
-            document.getElementById('visitCounter').classList.add('show');
-        }
-
-        // =============================================
-        // FUNCIONES EXISTENTES DE LA PÁGINA ACTUAL
-        // =============================================
-
-        // Menú móvil
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navUl = document.querySelector('nav ul');
-
-        mobileMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navUl.classList.toggle('active');
-            mobileMenu.textContent = navUl.classList.contains('active') ? '✕' : '☰';
-        });
-
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 768 && navUl.classList.contains('active')) {
+<script>
+    (function(){
+        // Navegación por menú - REDIRECCIÓN A SECCIONES
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if(section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Cerrar menú móvil si está abierto
+                const navUl = document.querySelector('nav ul');
+                if(window.innerWidth <= 800 && navUl?.classList.contains('active')) {
                     navUl.classList.remove('active');
-                    mobileMenu.textContent = '☰';
+                    const mobileIcon = document.querySelector('.mobile-menu i');
+                    if(mobileIcon) mobileIcon.className = 'fas fa-bars';
                 }
+            }
+        }
+
+        // Todos los enlaces de navegación
+        document.querySelectorAll('.nav-link, [data-section]').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = el.getAttribute('data-section');
+                if(section === 'inicio') scrollToSection('inicio');
+                else if(section === 'servicios') scrollToSection('servicios');
+                else if(section === 'nosotros') scrollToSection('nosotros');
+                else if(section === 'contacto') scrollToSection('contacto');
+                else if(section) scrollToSection(section);
             });
         });
 
-        // Animación al hacer scroll
-        function checkScroll() {
-            const triggerBottom = window.innerHeight * 0.85;
-            
-            document.querySelectorAll('.service-card, .feature').forEach((element, index) => {
-                const elementTop = element.getBoundingClientRect().top;
-                if (elementTop < triggerBottom) {
-                    setTimeout(() => {
-                        element.classList.add('visible');
-                    }, index * 150);
-                }
+        // Botones de servicios (muestran mensaje informativo)
+        document.querySelectorAll('[data-service]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const service = btn.getAttribute('data-service');
+                alert(`📋 Información sobre ${service}\n\nContáctanos al +1 (809) 523-8283 para recibir asesoría personalizada y presupuesto sin compromiso.`);
+            });
+        });
+
+        document.querySelectorAll('[data-footer-service]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert(`📋 Solicita presupuesto para este servicio llamando al +1 (809) 523-8283 o escribiendo a voltajeexpress2@gmail.com`);
+            });
+        });
+
+        // DOBLE CLICK RECARGA
+        class DoubleClickHandler {
+            constructor(el, doubleCb, delay=280) {
+                this.el = el;
+                this.doubleCb = doubleCb;
+                this.delay = delay;
+                this.timer = null;
+                this.clickCount = 0;
+                el.addEventListener('click', (e) => {
+                    this.clickCount++;
+                    if(this.clickCount === 1){
+                        this.timer = setTimeout(() => this.reset(), this.delay);
+                    } else if(this.clickCount === 2){
+                        clearTimeout(this.timer);
+                        this.doubleCb(e);
+                        this.reset();
+                    }
+                });
+            }
+            reset(){ this.clickCount = 0; if(this.timer) clearTimeout(this.timer); this.timer=null;}
+        }
+
+        function reloadPageWithStyle(){
+            const overlay = document.getElementById('reloadOverlay');
+            overlay.classList.add('show');
+            setTimeout(() => { location.reload(true); }, 1300);
+        }
+
+        const mainLogo = document.getElementById('mainLogo');
+        const footerLogo = document.getElementById('footerLogo');
+        if(mainLogo) new DoubleClickHandler(mainLogo, reloadPageWithStyle);
+        if(footerLogo) new DoubleClickHandler(footerLogo, reloadPageWithStyle);
+
+        // SCROLL ANIMACION
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.2 });
+        document.querySelectorAll('.service-card, .feature').forEach(el => observer.observe(el));
+
+        // MENU MOVIL
+        const mobileBtn = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('nav ul');
+        if(mobileBtn && navMenu){
+            mobileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navMenu.classList.toggle('active');
+                const icon = mobileBtn.querySelector('i');
+                if(icon) icon.className = navMenu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
             });
         }
 
-        // =============================================
-        // FUNCIÓN PARA EL COMBO DE TECLAS V + L + T
-        // =============================================
+        // COMBO TECLAS VLT
+        const keysPressed = { v:false, l:false, t:false };
+        const secretOverlay = document.getElementById('secretLoadingOverlay');
+        const keyV = document.getElementById('keyV'), keyL = document.getElementById('keyL'), keyT = document.getElementById('keyT');
+        const loadingBar = document.getElementById('secretLoadingBar');
+        const loadingPercent = document.getElementById('secretLoadingPercentage');
+        const loadingMsg = document.getElementById('secretLoadingMessage');
+        const successMsgDiv = document.getElementById('successMessage');
+        const countdownDiv = document.getElementById('countdownMessage');
 
-        function setupKeyComboListener() {
-            const keys = {
-                v: false,
-                l: false,
-                t: false
-            };
-            
-            const secretOverlay = document.getElementById('secretLoadingOverlay');
-            const keyV = document.getElementById('keyV');
-            const keyL = document.getElementById('keyL');
-            const keyT = document.getElementById('keyT');
-            const loadingBar = document.getElementById('secretLoadingBar');
-            const loadingPercentage = document.getElementById('secretLoadingPercentage');
-            const loadingMessage = document.getElementById('secretLoadingMessage');
-            const successMessage = document.getElementById('successMessage');
-            const countdownMessage = document.getElementById('countdownMessage');
-            
-            // Función para verificar si todas las teclas están presionadas
-            function checkCombo() {
-                if (keys.v && keys.l && keys.t) {
-                    // Activar la barra de carga
-                    secretOverlay.classList.add('active');
-                    
-                    // Animar las teclas
-                    [keyV, keyL, keyT].forEach(key => key.classList.add('active'));
-                    
-                    // Iniciar la barra de carga
-                    let progress = 0;
-                    const interval = setInterval(() => {
-                        progress += 2;
-                        loadingBar.style.width = `${progress}%`;
-                        loadingPercentage.textContent = `${progress}%`;
-                        
-                        // Actualizar mensajes según el progreso
-                        if (progress < 25) {
-                            loadingMessage.textContent = "Verificando credenciales...";
-                        } else if (progress < 50) {
-                            loadingMessage.textContent = "Conectando con el servidor seguro...";
-                        } else if (progress < 75) {
-                            loadingMessage.textContent = "Estableciendo conexión encriptada...";
-                        } else if (progress < 95) {
-                            loadingMessage.textContent = "Preparando panel de administración...";
-                        } else if (progress < 100) {
-                            loadingMessage.textContent = "Finalizando configuración...";
+        function resetComboVisuals(){
+            [keyV, keyL, keyT].forEach(k => k?.classList.remove('active'));
+            keysPressed.v = keysPressed.l = keysPressed.t = false;
+        }
+
+        function triggerVLTLoading(){
+            if(secretOverlay.classList.contains('active')) return;
+            secretOverlay.classList.add('active');
+            [keyV, keyL, keyT].forEach(k => k.classList.add('active'));
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 2;
+                if(loadingBar) loadingBar.style.width = `${Math.min(progress,100)}%`;
+                if(loadingPercent) loadingPercent.innerText = `${Math.min(progress,100)}%`;
+                if(progress < 30) loadingMsg.innerText = "⚡ Verificando credenciales de ingeniero...";
+                else if(progress < 70) loadingMsg.innerText = "🔌 Estableciendo túnel de energía segura";
+                else if(progress < 98) loadingMsg.innerText = "✨ Preparando panel de administración";
+                if(progress >= 100){
+                    clearInterval(interval);
+                    loadingBar.style.width = '100%';
+                    loadingMsg.style.display = 'none';
+                    successMsgDiv.style.display = 'block';
+                    successMsgDiv.innerHTML = '<i class="fas fa-check-circle"></i> Acceso eléctrico concedido';
+                    countdownDiv.style.display = 'block';
+                    let cdown = 3;
+                    countdownDiv.innerHTML = `Redirigiendo al panel en ${cdown}s`;
+                    const cdInterval = setInterval(() => {
+                        cdown--;
+                        if(cdown <= 0){
+                            clearInterval(cdInterval);
+                            countdownDiv.innerHTML = '⚡ Redirigiendo ahora...';
+                            setTimeout(() => { window.location.href = 'login.html'; }, 400);
                         } else {
-                            // Cuando llegue al 100%
-                            clearInterval(interval);
-                            
-                            // Cambiar color de la barra a verde de éxito
-                            loadingBar.style.background = 'linear-gradient(90deg, #00ff88, #00ffcc)';
-                            loadingBar.style.boxShadow = '0 0 20px rgba(0, 255, 136, 0.5)';
-                            
-                            // Ocultar mensaje normal y mostrar mensaje de éxito
-                            loadingMessage.style.display = 'none';
-                            successMessage.style.display = 'block';
-                            successMessage.textContent = "✅ ¡Acceso concedido exitosamente!";
-                            
-                            // Mostrar contador regresivo
-                            countdownMessage.style.display = 'block';
-                            
-                            // Contador regresivo de 3 segundos
-                            let countdown = 3;
-                            countdownMessage.textContent = `Redirigiendo en ${countdown} segundos...`;
-                            
-                            const countdownInterval = setInterval(() => {
-                                countdown--;
-                                if (countdown > 0) {
-                                    countdownMessage.textContent = `Redirigiendo en ${countdown} segundos...`;
-                                } else {
-                                    clearInterval(countdownInterval);
-                                    countdownMessage.textContent = "¡Redirigiendo ahora!";
-                                    
-                                    // Redirigir después de un breve momento
-                                    setTimeout(() => {
-                                        window.location.href = 'login.html';
-                                    }, 500);
-                                }
-                            }, 1000);
+                            countdownDiv.innerHTML = `Redirigiendo al panel en ${cdown}s`;
                         }
-                    }, 60); // Actualizar cada 60ms para ~3 segundos de carga
-                    
-                    // Resetear las teclas después de activar el combo
-                    setTimeout(() => {
-                        keys.v = keys.l = keys.t = false;
-                        [keyV, keyL, keyT].forEach(key => key.classList.remove('active'));
-                    }, 3000);
-                }
-            }
-            
-            // Detectar cuando se presionan las teclas
-            document.addEventListener('keydown', (e) => {
-                const key = e.key.toLowerCase();
-                
-                if (key === 'v') {
-                    keys.v = true;
-                    keyV.classList.add('active');
-                }
-                if (key === 'l') {
-                    keys.l = true;
-                    keyL.classList.add('active');
-                }
-                if (key === 't') {
-                    keys.t = true;
-                    keyT.classList.add('active');
-                }
-                
-                checkCombo();
-            });
-            
-            // Detectar cuando se sueltan las teclas
-            document.addEventListener('keyup', (e) => {
-                const key = e.key.toLowerCase();
-                
-                if (key === 'v') {
-                    keys.v = false;
-                    keyV.classList.remove('active');
-                }
-                if (key === 'l') {
-                    keys.l = false;
-                    keyL.classList.remove('active');
-                }
-                if (key === 't') {
-                    keys.t = false;
-                    keyT.classList.remove('active');
-                }
-            });
-            
-            // También permitir hacer clic en las teclas para activar el combo (para móviles)
-            [keyV, keyL, keyT].forEach((keyElement, index) => {
-                keyElement.addEventListener('click', () => {
-                    const key = ['v', 'l', 't'][index];
-                    keys[key] = true;
-                    keyElement.classList.add('active');
-                    checkCombo();
-                    
-                    // Resetear después de un tiempo
-                    setTimeout(() => {
-                        keys[key] = false;
-                        keyElement.classList.remove('active');
                     }, 1000);
+                }
+            }, 35);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const k = e.key.toLowerCase();
+            if(k === 'v') { keysPressed.v=true; keyV?.classList.add('active'); }
+            if(k === 'l') { keysPressed.l=true; keyL?.classList.add('active'); }
+            if(k === 't') { keysPressed.t=true; keyT?.classList.add('active'); }
+            if(keysPressed.v && keysPressed.l && keysPressed.t) {
+                triggerVLTLoading();
+                resetComboVisuals();
+            }
+        });
+        document.addEventListener('keyup', (e) => {
+            const k = e.key.toLowerCase();
+            if(k === 'v') { keysPressed.v=false; keyV?.classList.remove('active'); }
+            if(k === 'l') { keysPressed.l=false; keyL?.classList.remove('active'); }
+            if(k === 't') { keysPressed.t=false; keyT?.classList.remove('active'); }
+        });
+        if(keyV && keyL && keyT) {
+            [keyV, keyL, keyT].forEach((el, idx) => {
+                el.addEventListener('click', () => {
+                    const map = ['v','l','t'];
+                    keysPressed[map[idx]] = true;
+                    el.classList.add('active');
+                    if(keysPressed.v && keysPressed.l && keysPressed.t) triggerVLTLoading();
+                    setTimeout(() => { keysPressed[map[idx]] = false; el.classList.remove('active'); }, 500);
                 });
             });
         }
-
-        // =============================================
-        // INICIALIZACIÓN COMPLETA CON DOBLE CLICK
-        // =============================================
-
-        window.addEventListener('DOMContentLoaded', () => {
-            // Configurar sistema de visitas
-            setupVisitSystem();
-            
-            // Verificar elementos visibles al cargar
-            checkScroll();
-            
-            // Asegurar menú cerrado en desktop
-            if (window.innerWidth > 768 && navUl.classList.contains('active')) {
-                navUl.classList.remove('active');
-                mobileMenu.textContent = '☰';
-            }
-            
-            // AGREGAR SISTEMA DE DOBLE CLICK AL LOGO PRINCIPAL - EXACTO AL OTRO CÓDIGO
-            const mainLogo = document.getElementById('mainLogo');
-            new DoubleClickHandler(mainLogo, triggerPageReload, null);
-            
-            // AGREGAR SISTEMA DE DOBLE CLICK AL LOGO DEL FOOTER - EXACTO AL OTRO CÓDIGO
-            const footerLogo = document.getElementById('footerLogo');
-            if (footerLogo) {
-                new DoubleClickHandler(footerLogo, triggerPageReload, null);
-            }
-            
-            // Configurar el combo de teclas V + L + T
-            setupKeyComboListener();
-            
-            // Agregar tooltip a los logos
-            mainLogo.title = "Haz doble clic para recargar la página";
-            if (footerLogo) {
-                footerLogo.title = "Haz doble clic para recargar la página";
-            }
-        });
-
-        // Event listeners para scroll
-        window.addEventListener('scroll', checkScroll);
-    </script>
+    })();
+</script>
 </body>
 </html>

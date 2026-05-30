@@ -3,3507 +3,1245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voltaje Express - Panel de Control</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Voltaje Express - Panel Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    
     <style>
-        /* =============================================
-           VARIABLES Y RESET - DISEÑO MODERNO
-           ============================================= */
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --electric-gradient: linear-gradient(135deg, #00a8ff 0%, #3b82f6 100%);
-            --dark-bg: #0f172a;
-            --darker-bg: #0a0f1f;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: #94a3b8;
-            --accent-blue: #00a8ff;
-            --accent-purple: #8b5cf6;
-            --accent-green: #10b981;
-            --accent-red: #ef4444;
-            --accent-yellow: #f59e0b;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.3);
-            --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
-            color: var(--text-primary);
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: #03050b;
+            color: #fff;
             overflow-x: hidden;
-            transition: all 0.3s ease;
         }
-
-        /* =============================================
-           ANIMACIONES GLOBALES
-           ============================================= */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px var(--accent-blue); }
-            50% { box-shadow: 0 0 40px var(--accent-blue); }
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-
-        /* =============================================
-           LAYOUT PRINCIPAL
-           ============================================= */
-        .app-container {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            min-height: 100vh;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
-        }
-
-        /* =============================================
-           SIDEBAR MODERNO
-           ============================================= */
-        .sidebar {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(20px);
-            border-right: 1px solid var(--glass-border);
-            padding: 2rem;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            overflow-y: auto;
-            z-index: 100;
-            transition: transform 0.3s ease;
-        }
-
-        .sidebar.collapsed {
-            transform: translateX(-280px);
-        }
-
-        /* Logo con efectos de doble click */
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            padding: 1rem;
-            background: var(--glass-bg);
-            border-radius: 16px;
-            border: 1px solid var(--glass-border);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logo-container:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent-blue);
-        }
-
-        .logo-container.double-click-active {
-            animation: logoPulse 0.3s ease;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--electric-gradient);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: white;
-            box-shadow: 0 8px 25px rgba(0, 168, 255, 0.25);
-            transition: all 0.3s ease;
-        }
-
-        .logo-icon.double-click-effect {
-            animation: iconShock 0.5s ease;
-        }
-
-        .logo-icon .bolt.double-click-effect {
-            animation: boltFlash 0.5s ease;
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .logo-text h1 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(90deg, #ffffff, #c7d2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
-        }
-
-        .logo-text .tagline {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-
-        /* Navegación del sidebar */
-        .nav-section {
-            margin-bottom: 2.5rem;
-        }
-
-        .nav-title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .nav-links {
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-bottom: 0.5rem;
-        }
-
-        .nav-links a {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.8rem 1rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            background: var(--glass-bg);
-            color: var(--text-primary);
-            transform: translateX(5px);
-        }
-
-        .nav-links a i {
-            font-size: 1.2rem;
-            width: 24px;
-            text-align: center;
-        }
-
-        /* Indicador de sesión */
-        .session-indicator {
-            background: var(--glass-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: auto;
-            border: 1px solid var(--glass-border);
-        }
-
-        .session-status {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--accent-green);
-        }
-
-        .status-dot.offline {
-            background: var(--accent-red);
-        }
-
-        /* =============================================
-           CONTENIDO PRINCIPAL
-           ============================================= */
-        .main-content {
-            padding: 2rem;
-            overflow-y: auto;
-            transition: margin-left 0.3s ease;
-        }
-
-        /* Header principal */
-        .main-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .header-title h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            background: linear-gradient(90deg, #ffffff, #c7d2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-
-        .header-title p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.8rem 1.5rem;
-            background: var(--glass-bg);
-            border-radius: 12px;
-            border: 1px solid var(--glass-border);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .user-profile:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent-blue);
-        }
-
-        .user-avatar {
-            width: 45px;
-            height: 45px;
-            background: var(--electric-gradient);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: white;
-        }
-
-        .user-info h4 {
-            font-size: 1rem;
-            margin-bottom: 0.2rem;
-        }
-
-        .user-info span {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        /* =============================================
-           ESTADÍSTICAS PRINCIPALES
-           ============================================= */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, 
-                rgba(59, 130, 246, 0.1) 0%,
-                transparent 50%,
-                rgba(139, 92, 246, 0.1) 100%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-blue);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .stat-card:hover::before {
-            opacity: 1;
-        }
-
-        .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-        }
-
-        .stat-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .stat-value {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #ffffff, #c7d2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .stat-trend {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .trend-up {
-            color: var(--accent-green);
-        }
-
-        .trend-down {
-            color: var(--accent-red);
-        }
-
-        /* =============================================
-           GRÁFICOS Y DATOS
-           ============================================= */
-        .data-section {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .chart-container {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 2rem;
-        }
-
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .chart-header h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        .chart-controls {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .time-btn {
-            padding: 0.5rem 1rem;
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .time-btn:hover,
-        .time-btn.active {
-            background: var(--electric-gradient);
-            color: white;
-            border-color: transparent;
-        }
-
-        .chart-canvas {
-            width: 100%;
-            height: 300px;
-            position: relative;
-        }
-
-        .chart-placeholder {
-            height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .quick-stats {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .quick-stat {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .quick-stat:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-blue);
-        }
-
-        /* =============================================
-           TABLA DE ACTIVIDAD
-           ============================================= */
-        .activity-section {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .activity-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .activity-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-        }
-
-        .activity-table th {
-            text-align: left;
-            padding: 1rem 1.5rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .activity-table td {
-            padding: 1.2rem 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .activity-table tr:hover {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .activity-badge {
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .badge-success {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--accent-green);
-        }
-
-        .badge-warning {
-            background: rgba(245, 158, 11, 0.1);
-            color: var(--accent-yellow);
-        }
-
-        .badge-danger {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--accent-red);
-        }
-
-        .badge-info {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--accent-blue);
-        }
-
-        /* =============================================
-           ACCIONES RÁPIDAS
-           ============================================= */
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .action-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-        }
-
-        .action-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--accent-blue);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .action-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 1.5rem;
-            background: var(--electric-gradient);
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-            box-shadow: 0 10px 30px rgba(0, 168, 255, 0.3);
-        }
-
-        .action-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-            font-weight: 700;
-        }
-
-        .action-card p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        /* =============================================
-           MODAL DE LOGIN
-           ============================================= */
-        .login-modal {
+        :root {
+            --cyan: #00f5ff;
+            --purple: #7b2cbf;
+            --text-sec: #a0a8c3;
+            --glass: rgba(255,255,255,0.05);
+            --border: rgba(255,255,255,0.1);
+        }
+        
+        /* Login */
+        .login-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, #03050b 0%, #0a0f1a 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 2000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
         }
-
-        .login-modal.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .login-container {
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 3rem;
-            width: 90%;
-            max-width: 450px;
-            box-shadow: var(--shadow-xl);
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .login-modal.active .login-container {
-            transform: scale(1);
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .login-header h2 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #ffffff, #c7d2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .form-group {
-            position: relative;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 1rem 1.2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(0, 168, 255, 0.1);
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 1rem;
-            top: 2.8rem;
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        .login-btn {
-            background: var(--electric-gradient);
-            color: white;
-            border: none;
-            padding: 1.2rem;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 168, 255, 0.3);
-        }
-
-        .login-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Botón de inicio en login */
-        .login-home-button {
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 1rem;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            width: 100%;
-        }
-
-        .login-home-button:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-            border-color: var(--accent-blue);
-            transform: translateY(-2px);
-        }
-
-        /* =============================================
-           OVERLAY DE RECARGA
-           ============================================= */
-        .reload-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            justify-content: center;
+        .login-box {
+            background: rgba(15,22,34,0.95);
             backdrop-filter: blur(20px);
-        }
-
-        .reload-overlay.show {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .reload-content {
-            text-align: center;
-            max-width: 500px;
-            padding: 3rem;
-        }
-
-        .reload-icon {
-            font-size: 6rem;
-            margin-bottom: 2rem;
-            animation: pulse 1.5s ease-in-out infinite;
-            background: linear-gradient(135deg, #00a8ff, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .reload-content h3 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, #00a8ff, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-        }
-
-        .reload-content p {
-            color: #94a3b8;
-            font-size: 1.3rem;
-            line-height: 1.6;
-        }
-
-        /* =============================================
-           MODALES DE ACCIÓN
-           ============================================= */
-        .action-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1500;
-        }
-
-        .action-modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
+            border: 1px solid var(--border);
+            border-radius: 2rem;
             padding: 2.5rem;
             width: 90%;
-            max-width: 500px;
-            box-shadow: var(--shadow-xl);
-            animation: slideIn 0.3s ease;
+            max-width: 420px;
+            text-align: center;
         }
-
+        .login-logo {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        .login-logo i { font-size: 2.5rem; }
+        .login-box h2 { margin-bottom: 0.5rem; }
+        .login-box p { color: var(--text-sec); margin-bottom: 2rem; font-size: 0.9rem; }
+        .login-input {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(3,5,11,0.6);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .login-btn:hover { opacity: 0.9; }
+        .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .login-error {
+            color: #ef4444;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            padding: 0.5rem;
+            background: rgba(239,68,68,0.1);
+            border-radius: 8px;
+        }
+        .btn-home {
+            background: rgba(255,255,255,0.1);
+            margin-top: 1rem;
+        }
+        .btn-home:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Panel */
+        .app { display: flex; min-height: 100vh; }
+        
+        .sidebar {
+            width: 260px;
+            background: rgba(10,15,26,0.95);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: 0.3s;
+            z-index: 100;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-icon i { font-size: 1.5rem; }
+        .logo-text h2 { font-size: 1.2rem; font-weight: 700; }
+        .logo-text p { font-size: 0.7rem; color: var(--text-sec); }
+        
+        .nav-links {
+            list-style: none;
+            padding: 1rem;
+        }
+        .nav-links li { margin-bottom: 0.3rem; }
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.8rem 1rem;
+            color: var(--text-sec);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--glass);
+            color: var(--cyan);
+        }
+        .nav-links a i { width: 24px; }
+        
+        .badge-notif {
+            background: #ef4444;
+            color: white;
+            border-radius: 50px;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            margin-left: auto;
+        }
+        
+        .user-footer {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+        .logout-btn {
+            width: 100%;
+            background: rgba(239,68,68,0.2);
+            border: none;
+            padding: 0.7rem;
+            border-radius: 10px;
+            color: #ef4444;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+        .logout-btn:hover {
+            background: rgba(239,68,68,0.4);
+        }
+        
+        .main {
+            flex: 1;
+            margin-left: 260px;
+            padding: 1.5rem;
+            transition: 0.3s;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .menu-toggle {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 0.6rem;
+            border-radius: 10px;
+            cursor: pointer;
+            display: none;
+        }
+        .page-title h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(120deg, #fff, var(--cyan));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .page-title p { color: var(--text-sec); font-size: 0.85rem; }
+        .user-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--glass);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+        }
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: rgba(15,22,34,0.8);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.2rem;
+        }
+        .stat-value { font-size: 2rem; font-weight: 800; }
+        .stat-label { color: var(--text-sec); font-size: 0.8rem; }
+        
+        /* Tables */
+        .table-container {
+            background: rgba(15,22,34,0.8);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.2rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .search-box {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .search-box input {
+            padding: 0.5rem;
+            background: rgba(3,5,11,0.6);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: white;
+        }
+        .btn {
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-small {
+            padding: 0.3rem 0.7rem;
+            font-size: 0.8rem;
+        }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { text-align: left; padding: 0.8rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        th { color: var(--text-sec); font-weight: 500; cursor: pointer; }
+        th:hover { color: var(--cyan); }
+        .badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .badge-completado { background: rgba(16,185,129,0.2); color: #10b981; }
+        .badge-pendiente { background: rgba(245,158,11,0.2); color: #f59e0b; }
+        .badge-leido { background: rgba(16,185,129,0.2); color: #10b981; }
+        .badge-no-leido { background: rgba(239,68,68,0.2); color: #ef4444; }
+        .badge-disponible { background: rgba(16,185,129,0.2); color: #10b981; }
+        .badge-ocupado { background: rgba(239,68,68,0.2); color: #ef4444; }
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--text-sec);
+            cursor: pointer;
+            padding: 4px;
+            margin: 0 2px;
+        }
+        .action-btn:hover { color: var(--cyan); }
+        .action-btn.danger:hover { color: #ef4444; }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: #0a0f1a;
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 500px;
+        }
         .modal-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
-
-        .modal-header h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
         .close-modal {
             background: none;
             border: none;
-            color: var(--text-secondary);
             font-size: 1.5rem;
+            color: var(--text-sec);
             cursor: pointer;
-            transition: color 0.3s;
         }
-
-        .close-modal:hover {
-            color: var(--accent-red);
-        }
-
-        .modal-body {
-            margin-bottom: 2rem;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-        }
-
-        .btn {
-            padding: 0.8rem 1.5rem;
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: var(--text-sec); font-size: 0.85rem; }
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.7rem;
+            background: rgba(3,5,11,0.6);
+            border: 1px solid var(--border);
             border-radius: 10px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: var(--electric-gradient);
             color: white;
         }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 168, 255, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        /* =============================================
-           ANIMACIONES ESPECÍFICAS PARA DOBLE CLICK
-           ============================================= */
-        @keyframes logoPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes iconShock {
-            0% { transform: scale(1); }
-            25% { transform: scale(1.2); }
-            50% { transform: scale(1.1); }
-            75% { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes boltFlash {
-            0% { 
-                color: white;
-                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
-            }
-            50% { 
-                color: #ffdd59;
-                filter: drop-shadow(0 0 20px #ffdd59);
-                transform: scale(1.3);
-            }
-            100% { 
-                color: white;
-                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
-            }
-        }
-
-        /* =============================================
-           COMPONENTES INTERACTIVOS
-           ============================================= */
-        .search-box {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .search-input {
+        .btn-submit {
             width: 100%;
-            padding: 1rem 1.2rem 1rem 3rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 1rem;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
-        }
-
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-content {
-            position: absolute;
-            right: 0;
-            top: 100%;
-            background: var(--dark-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            min-width: 200px;
-            padding: 0.5rem;
-            display: none;
-            z-index: 100;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown-item {
-            display: block;
-            padding: 0.8rem 1rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .dropdown-item:hover {
-            background: var(--glass-bg);
-            color: var(--text-primary);
-        }
-
-        /* Botones de control */
-        .btn-control {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            border: none;
             padding: 0.8rem;
-            color: var(--text-secondary);
+            border-radius: 10px;
+            color: white;
             cursor: pointer;
-            transition: all 0.3s ease;
+            margin-top: 0.5rem;
         }
-
-        .btn-control:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
-            border-color: var(--accent-blue);
-        }
-
-        /* =============================================
-           ESTADOS Y ALERTAS
-           ============================================= */
         .alert {
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            border: 1px solid;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            animation: slideIn 0.3s ease;
             position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 1000;
-            max-width: 400px;
-            backdrop-filter: blur(10px);
-        }
-
-        .alert-success {
-            background: rgba(16, 185, 129, 0.1);
-            border-color: rgba(16, 185, 129, 0.3);
-            color: var(--accent-green);
-        }
-
-        .alert-error {
-            background: rgba(239, 68, 68, 0.1);
-            border-color: rgba(239, 68, 68, 0.3);
-            color: var(--accent-red);
-        }
-
-        .alert-warning {
-            background: rgba(245, 158, 11, 0.1);
-            border-color: rgba(245, 158, 11, 0.3);
-            color: var(--accent-yellow);
-        }
-
-        .alert-info {
-            background: rgba(59, 130, 246, 0.1);
-            border-color: rgba(59, 130, 246, 0.3);
-            color: var(--accent-blue);
-        }
-
-        /* =============================================
-           RESPONSIVE DESIGN
-           ============================================= */
-        @media (max-width: 1200px) {
-            .app-container {
-                grid-template-columns: 250px 1fr;
-            }
-            
-            .data-section {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .app-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                position: fixed;
-                left: -280px;
-                transition: left 0.3s ease;
-                z-index: 1000;
-            }
-            
-            .sidebar.active {
-                left: 0;
-            }
-            
-            .mobile-menu-toggle {
-                display: block;
-                position: fixed;
-                top: 1.5rem;
-                left: 1.5rem;
-                z-index: 1001;
-                background: var(--glass-bg);
-                border: 1px solid var(--glass-border);
-                border-radius: 10px;
-                padding: 0.8rem;
-                cursor: pointer;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-            
-            .main-header {
-                flex-direction: column;
-                gap: 1.5rem;
-                align-items: flex-start;
-            }
-            
-            .header-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
-            .user-profile {
-                width: auto;
-            }
-            
-            .quick-actions {
-                grid-template-columns: 1fr;
-            }
-            
-            .login-container {
-                padding: 2rem;
-            }
-            
-            .modal-content {
-                padding: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-content {
-                padding: 1.5rem;
-            }
-            
-            .stat-card {
-                padding: 1.5rem;
-            }
-            
-            .chart-container,
-            .activity-section {
-                padding: 1.5rem;
-            }
-            
-            .reload-content h3 {
-                font-size: 2rem;
-            }
-            
-            .header-title h2 {
-                font-size: 1.8rem;
-            }
-        }
-
-        /* =============================================
-           UTILIDADES
-           ============================================= */
-        .glass-effect {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, #00a8ff, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hover-lift {
-            transition: transform 0.3s ease;
-        }
-
-        .hover-lift:hover {
-            transform: translateY(-5px);
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease;
-        }
-
-        .slide-in {
-            animation: slideIn 0.5s ease;
-        }
-
-        /* =============================================
-           CONTADOR DE VISITAS
-           ============================================= */
-        .visit-counter {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
             padding: 0.8rem 1.2rem;
-            font-size: 0.9rem;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            backdrop-filter: blur(10px);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            border-radius: 10px;
+            z-index: 1100;
+            animation: slideIn 0.3s;
         }
-
-        .visit-counter:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent-blue);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        .alert-success { background: #10b981; }
+        .alert-error { background: #ef4444; }
+        .alert-info { background: #3b82f6; }
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.6s linear infinite;
         }
-
-        /* =============================================
-           BOTÓN DE INICIO
-           ============================================= */
-        .home-button {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: var(--electric-gradient);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 1rem 1.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 10px 30px rgba(0, 168, 255, 0.3);
-            z-index: 100;
-            transition: all 0.3s ease;
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
-
-        .home-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 168, 255, 0.4);
-        }
-
-        /* =============================================
-           PALETA DE COLORES - APARTADO EN SIDEBAR
-           ============================================= */
-        .color-palette-section {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        .color-palette-toggle {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        
+        /* Detalle solicitud */
+        .detail-card {
+            background: rgba(15,22,34,0.6);
+            border-radius: 1rem;
             padding: 1rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.3s ease;
             margin-bottom: 1rem;
         }
-
-        .color-palette-toggle:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-            transform: translateY(-2px);
-            border-color: var(--accent-blue);
+        .detail-label {
+            color: var(--cyan);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-
-        .color-palette-toggle.active {
-            background: rgba(59, 130, 246, 0.1);
-            border-color: rgba(59, 130, 246, 0.3);
-            color: var(--accent-blue);
+        .detail-value {
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            word-break: break-word;
         }
-
-        .color-palette-content {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-            display: none;
-            animation: slideIn 0.3s ease;
-        }
-
-        .color-palette-content.active {
-            display: block;
-        }
-
-        .color-themes-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .color-theme-option {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            padding: 1rem;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .color-theme-option:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-3px);
-        }
-
-        .color-theme-option.active {
-            background: rgba(59, 130, 246, 0.1);
-            border-color: rgba(59, 130, 246, 0.3);
-        }
-
-        .theme-preview {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .theme-name-small {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            text-align: center;
-        }
-
-        .current-theme-display {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-            padding: 1rem;
-            margin-top: 1rem;
-            text-align: center;
-            border: 1px solid var(--glass-border);
-        }
-
-        .current-theme-name {
-            font-weight: 600;
-            color: var(--accent-blue);
-            margin-bottom: 0.5rem;
-        }
-
-        .theme-reset-btn {
-            width: 100%;
-            padding: 0.8rem;
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .theme-reset-btn:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-        }
-
-        /* Paleta flotante para el dashboard */
-        .floating-color-palette {
-            position: fixed;
-            bottom: 80px;
-            left: 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 1.5rem;
-            width: 300px;
-            box-shadow: var(--shadow-xl);
-            z-index: 100;
-            transform: translateX(-400px);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .floating-color-palette.active {
-            transform: translateX(0);
-        }
-
-        .floating-palette-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .floating-palette-header h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-
-        .close-floating-palette {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close-floating-palette:hover {
-            color: var(--accent-red);
-        }
-
-        .toggle-floating-palette-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: var(--electric-gradient);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 10px 30px rgba(0, 168, 255, 0.3);
-            z-index: 100;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-floating-palette-btn:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 15px 40px rgba(0, 168, 255, 0.4);
-        }
-
-        /* Ajustes para móvil */
+        
         @media (max-width: 768px) {
-            .home-button {
-                bottom: 80px;
-                left: 20px;
-            }
-            
-            .toggle-floating-palette-btn {
-                bottom: 20px;
-                left: 20px;
-            }
-            
-            .floating-color-palette {
-                width: calc(100vw - 40px);
-                left: 20px;
-                right: 20px;
-                transform: translateY(100%);
-            }
-            
-            .floating-color-palette.active {
-                transform: translateY(0);
-            }
-            
-            .color-themes-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            .sidebar { transform: translateX(-260px); }
+            .sidebar.active { transform: translateX(0); }
+            .main { margin-left: 0; }
+            .menu-toggle { display: block; }
         }
     </style>
 </head>
 <body>
-    <!-- Overlay de Recarga -->
-    <div class="reload-overlay" id="reloadOverlay">
-        <div class="reload-content">
-            <div class="reload-icon">⚡</div>
-            <h3>Recargando Sistema</h3>
-            <p>El panel se está recargando con energía eléctrica...</p>
-        </div>
+
+<!-- Login -->
+<div class="login-container" id="loginContainer">
+    <div class="login-box">
+        <div class="login-logo"><i class="fas fa-bolt"></i></div>
+        <h2>Voltaje Express</h2>
+        <p>Panel de Administración</p>
+        <input type="email" id="loginEmail" class="login-input" placeholder="Email" value="klkytter@gmail.com">
+        <input type="password" id="loginPass" class="login-input" placeholder="Contraseña">
+        <button class="login-btn" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
+        <button class="login-btn btn-home" id="goHomeBtn"><i class="fas fa-home"></i> Volver al Inicio</button>
+        <div id="loginError" class="login-error"></div>
     </div>
+</div>
 
-    <!-- Modal de Login -->
-    <div class="login-modal" id="loginModal">
-        <div class="login-container">
-            <div class="login-header">
-                <h2>Panel de Control</h2>
-                <p>Acceso exclusivo para administradores</p>
-            </div>
-            <form class="login-form" id="loginForm">
-                <div class="form-group">
-                    <label class="form-label">Usuario</label>
-                    <input type="text" class="form-input" placeholder="admin o jefe" id="username" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Contraseña</label>
-                    <input type="password" class="form-input" placeholder="••••••••" id="password" required>
-                    <button type="button" class="password-toggle" id="togglePassword">👁️</button>
-                </div>
-                <button type="submit" class="login-btn" id="loginBtn">Acceder al Panel</button>
-                
-                <!-- Botón de inicio en login -->
-                <button type="button" class="login-home-button" onclick="goToHomePage()">
-                    <i class="fas fa-home"></i>
-                    Ir a Página de Inicio
-                </button>
-                
-                <div style="margin-top: 1rem; text-align: center; font-size: 0.9rem; color: var(--text-secondary);">
-                    <p>Credenciales: admin/voltaje2023 o jefe/110806</p>
-                </div>
-            </form>
+<!-- Panel Principal -->
+<div class="app" id="mainApp" style="display: none;">
+    <aside class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+            <div class="logo-text"><h2>VOLTAJE EXPRESS</h2><p>Panel de Control</p></div>
         </div>
-    </div>
-
-    <!-- Modal para Nuevo Servicio -->
-    <div class="action-modal" id="newServiceModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Nuevo Servicio</h3>
-                <button class="close-modal" onclick="closeModal('newServiceModal')">&times;</button>
+        <ul class="nav-links">
+            <li><a data-page="dashboard"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+            <li><a data-page="solicitudes"><i class="fas fa-envelope"></i> Solicitudes <span id="solicitudesBadge" class="badge-notif" style="display:none;">0</span></a></li>
+            <li><a data-page="servicios"><i class="fas fa-tools"></i> Servicios</a></li>
+            <li><a data-page="clientes"><i class="fas fa-users"></i> Clientes</a></li>
+            <li><a data-page="tecnicos"><i class="fas fa-user-tie"></i> Técnicos</a></li>
+        </ul>
+        <div class="user-footer">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                <div class="user-avatar" style="width: 35px; height: 35px;" id="sidebarAvatar">A</div>
+                <div><div id="sidebarUserName">Admin</div><div style="font-size: 0.7rem; color: var(--text-sec);" id="sidebarUserRole">Admin</div></div>
             </div>
-            <div class="modal-body">
-                <form id="serviceForm">
-                    <div class="form-group">
-                        <label class="form-label">Tipo de Servicio</label>
-                        <select class="form-input" id="serviceType" required>
-                            <option value="">Seleccionar...</option>
-                            <option value="instalacion">Instalación Eléctrica</option>
-                            <option value="mantenimiento">Mantenimiento</option>
-                            <option value="reparacion">Reparación</option>
-                            <option value="iluminacion">Iluminación</option>
-                            <option value="solar">Energía Solar</option>
-                            <option value="carga">Punto de Carga</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Cliente</label>
-                        <input type="text" class="form-input" id="clientName" placeholder="Nombre del cliente" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Fecha Programada</label>
-                        <input type="date" class="form-input" id="serviceDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Descripción</label>
-                        <textarea class="form-input" id="serviceDescription" rows="3" placeholder="Descripción del servicio..." required></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="closeModal('newServiceModal')">Cancelar</button>
-                <button class="btn btn-primary" onclick="createNewService()">Crear Servicio</button>
-            </div>
+            <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+            <button class="logout-btn" id="goHomeFromPanelBtn" style="background: rgba(0,245,255,0.1); color: var(--cyan); margin-top: 0.5rem;"><i class="fas fa-home"></i> Volver al Inicio</button>
         </div>
-    </div>
+    </aside>
 
-    <!-- Modal para Generar Reporte -->
-    <div class="action-modal" id="reportModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Generar Reporte</h3>
-                <button class="close-modal" onclick="closeModal('reportModal')">&times;</button>
+    <main class="main">
+        <div class="header">
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+                <div class="page-title"><h1 id="pageTitle">Dashboard</h1><p id="pageSubtitle">Panel de control</p></div>
             </div>
-            <div class="modal-body">
-                <form id="reportForm">
-                    <div class="form-group">
-                        <label class="form-label">Tipo de Reporte</label>
-                        <select class="form-input" id="reportType" required>
-                            <option value="">Seleccionar...</option>
-                            <option value="financiero">Financiero</option>
-                            <option value="servicios">Servicios Realizados</option>
-                            <option value="clientes">Clientes Nuevos</option>
-                            <option value="tecnico">Rendimiento Técnico</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Período</label>
-                        <select class="form-input" id="reportPeriod" required>
-                            <option value="">Seleccionar...</option>
-                            <option value="semanal">Esta Semana</option>
-                            <option value="mensual">Este Mes</option>
-                            <option value="trimestral">Este Trimestre</option>
-                            <option value="anual">Este Año</option>
-                            <option value="personalizado">Personalizado</option>
-                        </select>
-                    </div>
-                    <div class="form-group" id="customDateRange" style="display: none;">
-                        <label class="form-label">Rango de Fechas</label>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                            <input type="date" class="form-input" id="startDate" placeholder="Desde">
-                            <input type="date" class="form-input" id="endDate" placeholder="Hasta">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Formato</label>
-                        <div style="display: flex; gap: 1rem;">
-                            <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                <input type="radio" name="format" value="pdf" checked> PDF
-                            </label>
-                            <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                <input type="radio" name="format" value="excel"> Excel
-                            </label>
-                            <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                <input type="radio" name="format" value="csv"> CSV
-                            </label>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="closeModal('reportModal')">Cancelar</button>
-                <button class="btn btn-primary" onclick="generateReport()">Generar Reporte</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal para Agendar Cita -->
-    <div class="action-modal" id="appointmentModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Agendar Nueva Cita</h3>
-                <button class="close-modal" onclick="closeModal('appointmentModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="appointmentForm">
-                    <div class="form-group">
-                        <label class="form-label">Cliente</label>
-                        <select class="form-input" id="appointmentClient" required>
-                            <option value="">Seleccionar cliente...</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Tipo de Cita</label>
-                        <select class="form-input" id="appointmentType" required>
-                            <option value="">Seleccionar...</option>
-                            <option value="consulta">Consulta</option>
-                            <option value="presupuesto">Presupuesto</option>
-                            <option value="instalacion">Instalación</option>
-                            <option value="reparacion">Reparación</option>
-                            <option value="mantenimiento">Mantenimiento</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Fecha y Hora</label>
-                        <input type="datetime-local" class="form-input" id="appointmentDateTime" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Duración Estimada</label>
-                        <select class="form-input" id="appointmentDuration" required>
-                            <option value="30">30 minutos</option>
-                            <option value="60" selected>1 hora</option>
-                            <option value="90">1.5 horas</option>
-                            <option value="120">2 horas</option>
-                            <option value="180">3 horas</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Técnico Asignado</label>
-                        <select class="form-input" id="appointmentTechnician" required>
-                            <option value="">Seleccionar técnico...</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Notas Adicionales</label>
-                        <textarea class="form-input" id="appointmentNotes" rows="2" placeholder="Notas importantes..."></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="closeModal('appointmentModal')">Cancelar</button>
-                <button class="btn btn-primary" onclick="scheduleAppointment()">Agendar Cita</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal para Asignar Técnico -->
-    <div class="action-modal" id="assignTechnicianModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Asignar Técnico</h3>
-                <button class="close-modal" onclick="closeModal('assignTechnicianModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="assignForm">
-                    <div class="form-group">
-                        <label class="form-label">Servicio</label>
-                        <select class="form-input" id="assignService" required>
-                            <option value="">Seleccionar servicio...</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Técnico</label>
-                        <select class="form-input" id="assignTech" required>
-                            <option value="">Seleccionar técnico...</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Fecha de Asignación</label>
-                        <input type="date" class="form-input" id="assignDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Prioridad</label>
-                        <select class="form-input" id="assignPriority" required>
-                            <option value="baja">Baja</option>
-                            <option value="media" selected>Media</option>
-                            <option value="alta">Alta</option>
-                            <option value="urgente">Urgente</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Notas de Asignación</label>
-                        <textarea class="form-input" id="assignNotes" rows="2" placeholder="Instrucciones especiales..."></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="closeModal('assignTechnicianModal')">Cancelar</button>
-                <button class="btn btn-primary" onclick="assignTechnician()">Asignar Técnico</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Paleta de Colores Flotante -->
-    <div class="floating-color-palette" id="floatingColorPalette">
-        <div class="floating-palette-header">
-            <h3>Selector de Tema</h3>
-            <button class="close-floating-palette" onclick="toggleFloatingPalette()">&times;</button>
-        </div>
-        <div class="color-themes-grid" id="floatingColorThemes">
-            <!-- Los temas de color se generarán dinámicamente -->
-        </div>
-        <div class="current-theme-display">
-            <div class="current-theme-name" id="currentThemeName">Voltaje Azul</div>
-            <div style="font-size: 0.8rem; color: var(--text-secondary);">
-                Tema actual seleccionado
-            </div>
-        </div>
-        <button class="theme-reset-btn" onclick="resetTheme()">
-            <i class="fas fa-undo"></i> Restablecer tema por defecto
-        </button>
-    </div>
-
-    <!-- Botón para mostrar/ocultar paleta de colores flotante -->
-    <button class="toggle-floating-palette-btn" id="toggleFloatingPaletteBtn" onclick="toggleFloatingPalette()">
-        🎨
-    </button>
-
-    <!-- Botón para ir a inicio -->
-    <button class="home-button" id="homeButton" onclick="goToHome()">
-        <i class="fas fa-home"></i>
-        <span>Ir a Inicio</span>
-    </button>
-
-    <!-- Layout Principal -->
-    <div class="app-container">
-        <!-- Sidebar -->
-        <div class="sidebar" id="sidebar">
-            <div class="logo-container" id="mainLogo">
-                <div class="logo-icon">
-                    <div class="bolt">⚡</div>
-                </div>
-                <div class="logo-text">
-                    <h1>VOLTAJE EXPRESS</h1>
-                    <div class="tagline">PANEL DE CONTROL</div>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <h3 class="nav-title">Navegación</h3>
-                <ul class="nav-links">
-                    <li><a href="#" class="active" data-page="dashboard"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-                    <li><a href="#" data-page="clients"><i class="fas fa-users"></i> Clientes</a></li>
-                    <li><a href="#" data-page="services"><i class="fas fa-tools"></i> Servicios</a></li>
-                    <li><a href="#" data-page="finances"><i class="fas fa-dollar-sign"></i> Finanzas</a></li>
-                    <li><a href="#" data-page="reports"><i class="fas fa-chart-bar"></i> Reportes</a></li>
-                </ul>
-            </div>
-
-            <div class="nav-section">
-                <h3 class="nav-title">Herramientas</h3>
-                <ul class="nav-links">
-                    <li><a href="#" data-page="settings"><i class="fas fa-cog"></i> Configuración</a></li>
-                    <li><a href="#" data-page="staff"><i class="fas fa-user-tie"></i> Personal</a></li>
-                    <li><a href="#" data-page="devices"><i class="fas fa-mobile-alt"></i> Dispositivos</a></li>
-                    <li><a href="#" data-page="security"><i class="fas fa-shield-alt"></i> Seguridad</a></li>
-                </ul>
-            </div>
-
-            <!-- APARTADO DE PALETA DE COLORES EN SIDEBAR -->
-            <div class="color-palette-section">
-                <button class="color-palette-toggle" id="colorPaletteToggle" onclick="toggleSidebarPalette()">
-                    <i class="fas fa-palette"></i>
-                    <span>Personalizar Tema</span>
-                </button>
-                
-                <div class="color-palette-content" id="sidebarColorPalette">
-                    <div class="color-themes-grid" id="sidebarColorThemes">
-                        <!-- Los temas de color se generarán dinámicamente -->
-                    </div>
-                    
-                    <div class="current-theme-display">
-                        <div class="current-theme-name" id="sidebarThemeName">Voltaje Azul</div>
-                        <div style="font-size: 0.8rem; color: var(--text-secondary);">
-                            Tema actual
-                        </div>
-                    </div>
-                    
-                    <button class="theme-reset-btn" onclick="resetTheme()">
-                        <i class="fas fa-undo"></i> Restablecer tema por defecto
-                    </button>
-                    
-                    <div style="margin-top: 1rem; font-size: 0.8rem; color: var(--text-secondary); text-align: center;">
-                        <p>Tu selección se guardará automáticamente.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="session-indicator">
-                <div class="session-status">
-                    <div class="status-dot" id="statusDot"></div>
-                    <span id="statusText">Conectando...</span>
-                </div>
-                <p id="lastAccess">Último acceso: Cargando...</p>
-                <button class="btn-control" style="width: 100%; margin-top: 1rem;" onclick="logout()">
-                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                </button>
+            <div class="user-card">
+                <div class="user-avatar" id="userAvatar">A</div>
+                <div><h4 id="userName">Admin</h4><span id="userRole" style="font-size: 0.7rem; color: var(--text-sec);">Admin</span></div>
             </div>
         </div>
 
-        <!-- Contenido Principal -->
-        <div class="main-content" id="mainContent">
-            <!-- Header -->
-            <div class="main-header">
-                <div class="header-title">
-                    <h2 id="pageTitle">Dashboard General</h2>
-                    <p id="pageSubtitle">Bienvenido de vuelta, Administrador</p>
-                </div>
-                <div class="header-actions">
-                    <button class="btn-control" onclick="toggleSidebar()" id="sidebarToggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
+        <!-- Dashboard -->
+        <div id="dashboardContent">
+            <div class="stats" id="statsGrid"></div>
+            <div class="table-container">
+                <div class="table-header"><h3><i class="fas fa-history"></i> Servicios Recientes</h3><button class="btn" data-modal="serviceModal"><i class="fas fa-plus"></i> Nuevo</button></div>
+                <table id="recentTable">
+                    <thead><tr><th>Cliente</th><th>Tipo</th><th>Fecha</th><th>Estado</th><th></th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Solicitudes -->
+        <div id="solicitudesContent" style="display: none;">
+            <div class="table-container">
+                <div class="table-header">
+                    <h3><i class="fas fa-envelope"></i> Solicitudes de Contacto</h3>
                     <div class="search-box">
-                        <input type="text" class="search-input" id="globalSearch" placeholder="Buscar en el sistema...">
-                        <span class="search-icon"><i class="fas fa-search"></i></span>
+                        <input type="text" id="solicitudSearch" placeholder="Buscar por nombre o email...">
                     </div>
-                    <div class="user-profile" id="userProfile">
-                        <div class="user-avatar" id="userAvatar">A</div>
-                        <div class="user-info">
-                            <h4 id="userName">Cargando...</h4>
-                            <span id="userRole">Cargando...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Barra de búsqueda -->
-            <div id="searchResults" style="display: none; margin-bottom: 2rem;">
-                <div class="glass-effect" style="padding: 1rem; border-radius: 12px;">
-                    <h4 style="margin-bottom: 0.5rem;">Resultados de búsqueda:</h4>
-                    <div id="searchResultsContent"></div>
-                </div>
-            </div>
-
-            <!-- Estadísticas -->
-            <div class="stats-grid" id="statsGrid">
-                <!-- Las estadísticas se cargan dinámicamente -->
-            </div>
-
-            <!-- Gráficos y Datos -->
-            <div class="data-section">
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3>Ingresos Mensuales</h3>
-                        <div class="chart-controls">
-                            <button class="time-btn active" data-period="1M">1M</button>
-                            <button class="time-btn" data-period="6M">6M</button>
-                            <button class="time-btn" data-period="1A">1A</button>
-                        </div>
-                    </div>
-                    <div class="chart-placeholder" id="revenueChart">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">📈</div>
-                        <p>Gráfico interactivo de ingresos</p>
-                        <small style="color: var(--text-secondary);">Cargando datos...</small>
-                    </div>
-                </div>
-
-                <div class="quick-stats" id="quickStats">
-                    <!-- Los quick stats se cargan dinámicamente -->
-                </div>
-            </div>
-
-            <!-- Actividad Reciente -->
-            <div class="activity-section">
-                <div class="activity-header">
-                    <h3>Actividad Reciente</h3>
-                    <button class="time-btn" onclick="refreshActivity()">Actualizar</button>
                 </div>
                 <div style="overflow-x: auto;">
-                    <table class="activity-table" id="activityTable">
+                    <table id="solicitudesTable">
                         <thead>
                             <tr>
-                                <th>Servicio</th>
-                                <th>Cliente</th>
-                                <th>Estado</th>
                                 <th>Fecha</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Servicio</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="activityTableBody">
-                            <!-- La actividad se carga dinámicamente -->
+                        <tbody>
+                            <tr><td colspan="7" style="text-align:center;">Cargando solicitudes...</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
 
-            <!-- Acciones Rápidas -->
-            <div class="quick-actions">
-                <div class="action-card" onclick="openModal('newServiceModal')">
-                    <div class="action-icon">➕</div>
-                    <h4>Nuevo Servicio</h4>
-                    <p>Crea un nuevo servicio para un cliente</p>
-                </div>
-                <div class="action-card" onclick="openModal('reportModal')">
-                    <div class="action-icon">📋</div>
-                    <h4>Generar Reporte</h4>
-                    <p>Genera reportes detallados de actividad</p>
-                </div>
-                <div class="action-card" onclick="openModal('appointmentModal')">
-                    <div class="action-icon">📅</div>
-                    <h4>Agendar Cita</h4>
-                    <p>Programa una nueva cita con cliente</p>
-                </div>
-                <div class="action-card" onclick="openModal('assignTechnicianModal')">
-                    <div class="action-icon">👨‍🔧</div>
-                    <h4>Asignar Técnico</h4>
-                    <p>Asigna técnicos a servicios pendientes</p>
-                </div>
-            </div>
-
-            <!-- Información del Sistema -->
-            <div class="glass-effect" style="padding: 2rem; border-radius: 20px; margin-top: 2rem;">
-                <h3 style="margin-bottom: 1rem;">Estado del Sistema</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                    <div>
-                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">Versión</p>
-                        <p style="font-weight: 600;">2.1.0</p>
-                    </div>
-                    <div>
-                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">Última Actualización</p>
-                        <p style="font-weight: 600;" id="lastUpdate">Cargando...</p>
-                    </div>
-                    <div>
-                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">Servidores</p>
-                        <p style="font-weight: 600; color: var(--accent-green);" id="serverStatus">● Operativos</p>
-                    </div>
-                    <div>
-                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">Tema Actual</p>
-                        <p style="font-weight: 600; color: var(--accent-blue);" id="currentThemeStatus">Voltaje Azul</p>
+        <!-- Servicios -->
+        <div id="serviciosContent" style="display: none;">
+            <div class="table-container">
+                <div class="table-header">
+                    <h3><i class="fas fa-tools"></i> Todos los Servicios</h3>
+                    <div class="search-box">
+                        <input type="text" id="serviceSearch" placeholder="Buscar...">
+                        <button class="btn" data-modal="serviceModal"><i class="fas fa-plus"></i> Nuevo</button>
                     </div>
                 </div>
+                <table id="servicesTable">
+                    <thead><tr><th>ID</th><th>Cliente</th><th>Tipo</th><th>Fecha</th><th>Técnico</th><th>Estado</th><th></th></tr></thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
+
+        <!-- Clientes -->
+        <div id="clientesContent" style="display: none;">
+            <div class="table-container">
+                <div class="table-header">
+                    <h3><i class="fas fa-users"></i> Clientes</h3>
+                    <div class="search-box">
+                        <input type="text" id="clientSearch" placeholder="Buscar...">
+                        <button class="btn" data-modal="clientModal"><i class="fas fa-plus"></i> Nuevo</button>
+                    </div>
+                </div>
+                <table id="clientsTable">
+                    <thead><tr><th>ID</th><th>Nombre</th><th>Teléfono</th><th>Email</th><th></th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Técnicos -->
+        <div id="tecnicosContent" style="display: none;">
+            <div class="table-container">
+                <div class="table-header">
+                    <h3><i class="fas fa-user-tie"></i> Técnicos</h3>
+                    <div class="search-box">
+                        <input type="text" id="tecnicoSearch" placeholder="Buscar...">
+                        <button class="btn" data-modal="tecnicoModal"><i class="fas fa-plus"></i> Nuevo</button>
+                    </div>
+                </div>
+                <table id="tecnicosTable">
+                    <thead><tr><th>ID</th><th>Nombre</th><th>Especialidad</th><th>Teléfono</th><th>Estado</th><th></th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Modales -->
+<div class="modal" id="serviceModal"><div class="modal-content"><div class="modal-header"><h3>Nuevo Servicio</h3><button class="close-modal">&times;</button></div>
+<form id="serviceForm"><div class="form-group"><label>Cliente</label><select id="serviceClient" class="form-select" required></select></div>
+<div class="form-group"><label>Tipo</label><select id="serviceType" class="form-select"><option>Instalación</option><option>Mantenimiento</option><option>Reparación</option></select></div>
+<div class="form-group"><label>Fecha</label><input type="date" id="serviceDate" class="form-input" required></div>
+<div class="form-group"><label>Técnico</label><select id="serviceTechnician" class="form-select" required></select></div>
+<button type="submit" class="btn-submit">Crear</button></form></div></div>
+
+<div class="modal" id="clientModal"><div class="modal-content"><div class="modal-header"><h3>Nuevo Cliente</h3><button class="close-modal">&times;</button></div>
+<form id="clientForm"><div class="form-group"><label>Nombre</label><input type="text" id="clientName" class="form-input" required></div>
+<div class="form-group"><label>Teléfono</label><input type="text" id="clientPhone" class="form-input" required></div>
+<div class="form-group"><label>Email</label><input type="email" id="clientEmail" class="form-input"></div>
+<button type="submit" class="btn-submit">Guardar</button></form></div></div>
+
+<div class="modal" id="tecnicoModal"><div class="modal-content"><div class="modal-header"><h3>Nuevo Técnico</h3><button class="close-modal">&times;</button></div>
+<form id="tecnicoForm"><div class="form-group"><label>Nombre</label><input type="text" id="tecnicoName" class="form-input" required></div>
+<div class="form-group"><label>Especialidad</label><select id="tecnicoSpecialty" class="form-select"><option>Instalaciones</option><option>Mantenimiento</option><option>Reparaciones</option></select></div>
+<div class="form-group"><label>Teléfono</label><input type="text" id="tecnicoPhone" class="form-input" required></div>
+<button type="submit" class="btn-submit">Guardar</button></form></div></div>
+
+<!-- Modal para ver detalle de solicitud -->
+<div class="modal" id="solicitudModal">
+    <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-header">
+            <h3><i class="fas fa-file-alt"></i> Detalle de Solicitud</h3>
+            <button class="close-modal" onclick="closeModal('solicitudModal')">&times;</button>
+        </div>
+        <div id="solicitudDetalle">
+            <div class="loading-spinner" style="margin: 20px auto;"></div>
+        </div>
+        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <button id="marcarLeidaBtn" class="btn" style="flex:1"><i class="fas fa-check"></i> Marcar como leída</button>
+            <button id="eliminarSolicitudBtn" class="btn" style="flex:1; background: linear-gradient(135deg, #ef4444, #dc2626);"><i class="fas fa-trash"></i> Eliminar</button>
+        </div>
     </div>
+</div>
 
-    <!-- Contador de Visitas -->
-    <div class="visit-counter" id="visitCounter">
-        <i class="fas fa-eye"></i>
-        <span id="visitCount">0</span> visitas
-    </div>
+<script>
+// ============ CONFIGURACIÓN DE FIREBASE ============
+const firebaseConfig = {
+    apiKey: "AIzaSyD5w94fMf-siqXHa3LRMvungnUV7hxNwP0",
+    authDomain: "voltaje-d605d.firebaseapp.com",
+    projectId: "voltaje-d605d",
+    storageBucket: "voltaje-d605d.firebasestorage.app",
+    messagingSenderId: "632285544171",
+    appId: "1:632285544171:web:b185d37c2a25d568d3c8ae"
+};
 
-    <!-- Botón para mostrar/ocultar sidebar en móvil -->
-    <button class="mobile-menu-toggle" id="mobileMenuToggle" style="display: none;">
-        <i class="fas fa-bars"></i>
-    </button>
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
 
-    <script>
-        // =============================================
-        // DATOS Y ESTADO DE LA APLICACIÓN
-        // =============================================
+// Variables
+let currentPage = 'dashboard';
+let currentUser = null;
+let solicitudesData = [];
 
-        // Base de datos simulada
-        const mockDatabase = {
-            currentUser: null,
-            visits: parseInt(localStorage.getItem('totalVisits')) || 0,
-            clients: [
-                { id: 1, name: 'Empresa XYZ', type: 'empresa', email: 'contacto@empresaxyz.com', phone: '809-555-0101', status: 'active' },
-                { id: 2, name: 'Residencia ABC', type: 'residencial', email: 'abc@email.com', phone: '809-555-0102', status: 'active' },
-                { id: 3, name: 'Comercio DEF', type: 'comercial', email: 'def@comercio.com', phone: '809-555-0103', status: 'active' },
-                { id: 4, name: 'Industria GHI', type: 'industrial', email: 'ghi@industria.com', phone: '809-555-0104', status: 'active' },
-                { id: 5, name: 'Hotel JKL', type: 'comercial', email: 'reservas@hoteljkl.com', phone: '809-555-0105', status: 'pending' }
-            ],
-            services: [
-                { id: 1, type: 'instalacion', clientId: 1, clientName: 'Empresa XYZ', date: '2024-02-24', status: 'completado', technician: 'Carlos R.', revenue: 2500 },
-                { id: 2, type: 'mantenimiento', clientId: 2, clientName: 'Residencia ABC', date: '2024-02-23', status: 'en progreso', technician: 'María L.', revenue: 800 },
-                { id: 3, type: 'reparacion', clientId: 3, clientName: 'Comercio DEF', date: '2024-02-23', status: 'completado', technician: 'Juan P.', revenue: 1200 },
-                { id: 4, type: 'instalacion', clientId: 4, clientName: 'Industria GHI', date: '2024-02-22', status: 'pendiente', technician: null, revenue: 0 },
-                { id: 5, type: 'iluminacion', clientId: 1, clientName: 'Empresa XYZ', date: '2024-02-21', status: 'completado', technician: 'Ana M.', revenue: 1800 }
-            ],
-            technicians: [
-                { id: 1, name: 'Carlos Rodríguez', specialty: 'instalaciones', status: 'available' },
-                { id: 2, name: 'María López', specialty: 'mantenimiento', status: 'busy' },
-                { id: 3, name: 'Juan Pérez', specialty: 'reparaciones', status: 'available' },
-                { id: 4, name: 'Ana Martínez', specialty: 'iluminacion', status: 'available' },
-                { id: 5, name: 'Pedro Sánchez', specialty: 'solar', status: 'busy' }
-            ],
-            appointments: [],
-            activity: []
-        };
+// ============ FUNCIONES CRUD ============
+async function loadData(collection) {
+    try {
+        const snapshot = await db.collection(collection).get();
+        const data = [];
+        snapshot.forEach(doc => data.push({ id: doc.id, ...doc.data() }));
+        return data;
+    } catch (error) {
+        console.error("Error loading data:", error);
+        return [];
+    }
+}
 
-        // Credenciales válidas
-        const validCredentials = [
-            { username: 'admin', password: 'voltaje2023', name: 'Administrador Principal', role: 'Super Admin' },
-            { username: 'jefe', password: '110806', name: 'Jefe de Operaciones', role: 'Administrador' },
-            { username: 'jefe1', password: '110806', name: 'Jefe de Operaciones', role: 'Administrador' }
-        ];
+async function loadSolicitudes() {
+    try {
+        const snapshot = await db.collection('solicitudes_contacto').orderBy('fecha', 'desc').get();
+        const data = [];
+        snapshot.forEach(doc => data.push({ id: doc.id, ...doc.data() }));
+        solicitudesData = data;
+        return data;
+    } catch (error) {
+        console.error("Error loading solicitudes:", error);
+        return [];
+    }
+}
 
-        // =============================================
-        // SISTEMA DE TEMAS DE COLOR
-        // =============================================
+async function deleteRecord(collection, id) {
+    await db.collection(collection).doc(id).delete();
+}
 
-        const colorThemes = {
-            'default': {
-                name: 'Voltaje Azul',
-                colors: {
-                    '--primary-gradient': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                    '--electric-gradient': 'linear-gradient(135deg, #00a8ff 0%, #3b82f6 100%)',
-                    '--dark-bg': '#0f172a',
-                    '--darker-bg': '#0a0f1f',
-                    '--card-bg': 'rgba(255, 255, 255, 0.05)',
-                    '--card-border': 'rgba(255, 255, 255, 0.1)',
-                    '--text-primary': '#ffffff',
-                    '--text-secondary': '#94a3b8',
-                    '--accent-blue': '#00a8ff',
-                    '--accent-purple': '#8b5cf6',
-                    '--accent-green': '#10b981',
-                    '--accent-red': '#ef4444',
-                    '--accent-yellow': '#f59e0b',
-                    '--glass-bg': 'rgba(255, 255, 255, 0.05)',
-                    '--glass-border': 'rgba(255, 255, 255, 0.1)'
-                },
-                preview: '#3b82f6'
-            },
-            'green-energy': {
-                name: 'Energía Verde',
-                colors: {
-                    '--primary-gradient': 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                    '--electric-gradient': 'linear-gradient(135deg, #34d399 0%, #10b981 100%)',
-                    '--dark-bg': '#064e3b',
-                    '--darker-bg': '#022c22',
-                    '--card-bg': 'rgba(255, 255, 255, 0.05)',
-                    '--card-border': 'rgba(255, 255, 255, 0.1)',
-                    '--text-primary': '#ffffff',
-                    '--text-secondary': '#a7f3d0',
-                    '--accent-blue': '#34d399',
-                    '--accent-purple': '#10b981',
-                    '--accent-green': '#10b981',
-                    '--accent-red': '#f87171',
-                    '--accent-yellow': '#fbbf24',
-                    '--glass-bg': 'rgba(255, 255, 255, 0.05)',
-                    '--glass-border': 'rgba(255, 255, 255, 0.1)'
-                },
-                preview: '#10b981'
-            },
-            'purple-power': {
-                name: 'Poder Púrpura',
-                colors: {
-                    '--primary-gradient': 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
-                    '--electric-gradient': 'linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%)',
-                    '--dark-bg': '#1e1b4b',
-                    '--darker-bg': '#0f172a',
-                    '--card-bg': 'rgba(255, 255, 255, 0.05)',
-                    '--card-border': 'rgba(255, 255, 255, 0.1)',
-                    '--text-primary': '#ffffff',
-                    '--text-secondary': '#c7d2fe',
-                    '--accent-blue': '#8b5cf6',
-                    '--accent-purple': '#8b5cf6',
-                    '--accent-green': '#10b981',
-                    '--accent-red': '#f87171',
-                    '--accent-yellow': '#fbbf24',
-                    '--glass-bg': 'rgba(255, 255, 255, 0.05)',
-                    '--glass-border': 'rgba(255, 255, 255, 0.1)'
-                },
-                preview: '#8b5cf6'
-            },
-            'dark-night': {
-                name: 'Noche Oscura',
-                colors: {
-                    '--primary-gradient': 'linear-gradient(135deg, #1f2937 0%, #111827 100%)',
-                    '--electric-gradient': 'linear-gradient(135deg, #4b5563 0%, #374151 100%)',
-                    '--dark-bg': '#111827',
-                    '--darker-bg': '#030712',
-                    '--card-bg': 'rgba(255, 255, 255, 0.05)',
-                    '--card-border': 'rgba(255, 255, 255, 0.1)',
-                    '--text-primary': '#ffffff',
-                    '--text-secondary': '#9ca3af',
-                    '--accent-blue': '#60a5fa',
-                    '--accent-purple': '#8b5cf6',
-                    '--accent-green': '#10b981',
-                    '--accent-red': '#f87171',
-                    '--accent-yellow': '#fbbf24',
-                    '--glass-bg': 'rgba(255, 255, 255, 0.05)',
-                    '--glass-border': 'rgba(255, 255, 255, 0.1)'
-                },
-                preview: '#374151'
-            },
-            'red-voltage': {
-                name: 'Voltaje Rojo',
-                colors: {
-                    '--primary-gradient': 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
-                    '--electric-gradient': 'linear-gradient(135deg, #f87171 0%, #ef4444 100%)',
-                    '--dark-bg': '#450a0a',
-                    '--darker-bg': '#1f2937',
-                    '--card-bg': 'rgba(255, 255, 255, 0.05)',
-                    '--card-border': 'rgba(255, 255, 255, 0.1)',
-                    '--text-primary': '#ffffff',
-                    '--text-secondary': '#fca5a5',
-                    '--accent-blue': '#ef4444',
-                    '--accent-purple': '#dc2626',
-                    '--accent-green': '#10b981',
-                    '--accent-red': '#ef4444',
-                    '--accent-yellow': '#fbbf24',
-                    '--glass-bg': 'rgba(255, 255, 255, 0.05)',
-                    '--glass-border': 'rgba(255, 255, 255, 0.1)'
-                },
-                preview: '#ef4444'
-            },
-            'golden-energy': {
-                name: 'Energía Dorada',
-                colors: {
-                    '--primary-gradient': 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
-                    '--electric-gradient': 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
-                    '--dark-bg': '#78350f',
-                    '--darker-bg': '#451a03',
-                    '--card-bg': 'rgba(255, 255, 255, 0.05)',
-                    '--card-border': 'rgba(255, 255, 255, 0.1)',
-                    '--text-primary': '#ffffff',
-                    '--text-secondary': '#fde68a',
-                    '--accent-blue': '#f59e0b',
-                    '--accent-purple': '#d97706',
-                    '--accent-green': '#10b981',
-                    '--accent-red': '#ef4444',
-                    '--accent-yellow': '#f59e0b',
-                    '--glass-bg': 'rgba(255, 255, 255, 0.05)',
-                    '--glass-border': 'rgba(255, 255, 255, 0.1)'
-                },
-                preview: '#f59e0b'
-            }
-        };
+async function updateRecord(collection, id, data) {
+    await db.collection(collection).doc(id).update(data);
+}
 
-        // Estado de la aplicación
-        let appState = {
-            isLoggedIn: false,
-            currentPage: 'dashboard',
-            searchQuery: '',
-            currentTheme: 'default',
-            stats: {
-                clients: 0,
-                services: 0,
-                revenue: 0,
-                satisfaction: 0,
-                pendingServices: 0
-            },
-            chartData: {
-                '1M': [1200, 1900, 3000, 5000, 2000, 3000, 4500, 3200, 2800, 3500, 4200, 3800],
-                '6M': [5000, 7000, 8500, 9200, 7800, 9500],
-                '1A': [45000, 52000, 48000, 61000]
-            }
-        };
+async function addRecord(collection, data) {
+    return await db.collection(collection).add(data);
+}
 
-        // =============================================
-        // FUNCIONES PARA BOTÓN DE INICIO Y COLORES
-        // =============================================
-
-        function goToHomePage() {
-            // Cerrar modal de login
-            hideLoginModal();
-            
-            // Mostrar mensaje
-            showAlert('🏠 Redirigiendo a la página de inicio...', 'info');
-            
-            // Redirigir a la página de inicio
-            // CAMBIA 'index.html' POR LA URL REAL DE TU PÁGINA DE INICIO
-            setTimeout(() => {
-                window.location.href = 'index.html'; // <-- CAMBIA ESTA URL
-            }, 1500);
+// ============ RENDERIZADO ============
+async function renderDashboard() {
+    const servicios = await loadData('servicios');
+    const clientes = await loadData('clientes');
+    const tecnicos = await loadData('tecnicos');
+    const solicitudes = await loadSolicitudes();
+    const noLeidas = solicitudes.filter(s => s.leido !== true).length;
+    
+    const badge = document.getElementById('solicitudesBadge');
+    if (badge) {
+        if (noLeidas > 0) {
+            badge.style.display = 'inline-block';
+            badge.textContent = noLeidas;
+        } else {
+            badge.style.display = 'none';
         }
+    }
+    
+    document.getElementById('statsGrid').innerHTML = `
+        <div class="stat-card"><div class="stat-value">${servicios.length}</div><div class="stat-label">Total Servicios</div></div>
+        <div class="stat-card"><div class="stat-value">${servicios.filter(s => s.estado === 'completado').length}</div><div class="stat-label">Completados</div></div>
+        <div class="stat-card"><div class="stat-value">${servicios.filter(s => s.estado === 'pendiente').length}</div><div class="stat-label">Pendientes</div></div>
+        <div class="stat-card"><div class="stat-value">${clientes.length}</div><div class="stat-label">Clientes</div></div>
+        <div class="stat-card"><div class="stat-value">${tecnicos.filter(t => t.estado === 'disponible').length}</div><div class="stat-label">Técnicos Disp.</div></div>
+        <div class="stat-card"><div class="stat-value">${solicitudes.length}</div><div class="stat-label">Solicitudes</div></div>
+    `;
+    
+    const recent = servicios.slice(0, 5);
+    const tbody = document.querySelector('#recentTable tbody');
+    if (tbody) {
+        tbody.innerHTML = recent.map(s => `
+            <tr>
+                <td>${s.cliente || ''}</td>
+                <td>${s.tipo || ''}</td>
+                <td>${s.fecha || ''}</td>
+                <td><span class="badge badge-${s.estado}">${s.estado === 'completado' ? 'Completado' : 'Pendiente'}</span></td>
+                <td><button class="action-btn" onclick="deleteItem('servicios','${s.id}')"><i class="fas fa-trash"></i></button></td>
+            </tr>
+        `).join('');
+    }
+}
 
-        function goToHome() {
-            // Redirigir a la página de inicio
-            showAlert('🏠 Redirigiendo a la página de inicio...', 'info');
-            
-            // Redirigir a la misma página de inicio
-            // CAMBIA 'index.html' POR LA URL REAL DE TU PÁGINA DE INICIO
-            setTimeout(() => {
-                window.location.href = 'index.html'; // <-- CAMBIA ESTA URL
-            }, 1500);
+async function renderSolicitudes() {
+    let solicitudes = await loadSolicitudes();
+    const search = document.getElementById('solicitudSearch')?.value || '';
+    if (search) {
+        const searchLower = search.toLowerCase();
+        solicitudes = solicitudes.filter(s => 
+            s.nombre?.toLowerCase().includes(searchLower) ||
+            s.email?.toLowerCase().includes(searchLower) ||
+            s.telefono?.includes(search)
+        );
+    }
+    
+    const tbody = document.querySelector('#solicitudesTable tbody');
+    if (tbody) {
+        if (solicitudes.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No hay solicitudes registradas</td></tr>';
+        } else {
+            tbody.innerHTML = solicitudes.map(s => `
+                <tr>
+                    <td>${s.fecha ? new Date(s.fecha).toLocaleDateString('es-ES') : '-'}</td>
+                    <td>${s.nombre || '-'}</td>
+                    <td>${s.email || '-'}</td>
+                    <td>${s.telefono || '-'}</td>
+                    <td>${s.servicio || '-'}</td>
+                    <td><span class="badge badge-${s.leido ? 'leido' : 'no-leido'}">${s.leido ? 'Leída' : 'No leída'}</span></td>
+                    <td>
+                        <button class="action-btn" onclick="verSolicitud('${s.id}')" title="Ver detalles"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn danger" onclick="eliminarSolicitud('${s.id}')" title="Eliminar"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
         }
+    }
+}
 
-        function toggleFloatingPalette() {
-            const palette = document.getElementById('floatingColorPalette');
-            const toggleBtn = document.getElementById('toggleFloatingPaletteBtn');
-            
-            if (palette.classList.contains('active')) {
-                palette.classList.remove('active');
-                toggleBtn.innerHTML = '🎨';
-            } else {
-                palette.classList.add('active');
-                toggleBtn.innerHTML = '✕';
-            }
+async function renderServices() {
+    let servicios = await loadData('servicios');
+    const search = document.getElementById('serviceSearch')?.value || '';
+    if (search) {
+        servicios = servicios.filter(s => 
+            s.cliente?.toLowerCase().includes(search.toLowerCase()) ||
+            s.tipo?.toLowerCase().includes(search.toLowerCase())
+        );
+    }
+    
+    const tbody = document.querySelector('#servicesTable tbody');
+    if (tbody) {
+        tbody.innerHTML = servicios.map(s => `
+            <tr>
+                <td>${s.id.substring(0,6)}</div>
+                <td>${s.cliente || ''}</div>
+                <td>${s.tipo || ''}</div>
+                <td>${s.fecha || ''}</div>
+                <td>${s.tecnico || ''}</div>
+                <td>
+                    <select onchange="updateStatus('servicios','${s.id}', this.value)" class="form-select" style="padding:0.2rem">
+                        <option value="pendiente" ${s.estado === 'pendiente' ? 'selected' : ''}>Pendiente</option>
+                        <option value="completado" ${s.estado === 'completado' ? 'selected' : ''}>Completado</option>
+                    </select>
+                 </div>
+                <td><button class="action-btn" onclick="deleteItem('servicios','${s.id}')"><i class="fas fa-trash"></i></button></div>
+            </tr>
+        `).join('');
+    }
+}
+
+async function renderClients() {
+    let clientes = await loadData('clientes');
+    const search = document.getElementById('clientSearch')?.value || '';
+    if (search) {
+        clientes = clientes.filter(c => 
+            c.nombre?.toLowerCase().includes(search.toLowerCase()) ||
+            c.telefono?.includes(search)
+        );
+    }
+    
+    const tbody = document.querySelector('#clientsTable tbody');
+    if (tbody) {
+        tbody.innerHTML = clientes.map(c => `
+            <tr>
+                <td>${c.id.substring(0,6)}</div>
+                <td>${c.nombre || ''}</div>
+                <td>${c.telefono || ''}</div>
+                <td>${c.email || ''}</div>
+                <td><button class="action-btn" onclick="deleteItem('clientes','${c.id}')"><i class="fas fa-trash"></i></button></div>
+            </tr>
+        `).join('');
+    }
+}
+
+async function renderTechnicians() {
+    let tecnicos = await loadData('tecnicos');
+    const search = document.getElementById('tecnicoSearch')?.value || '';
+    if (search) {
+        tecnicos = tecnicos.filter(t => 
+            t.nombre?.toLowerCase().includes(search.toLowerCase()) ||
+            t.especialidad?.toLowerCase().includes(search.toLowerCase())
+        );
+    }
+    
+    const tbody = document.querySelector('#tecnicosTable tbody');
+    if (tbody) {
+        tbody.innerHTML = tecnicos.map(t => `
+            <tr>
+                <td>${t.id.substring(0,6)}</div>
+                <td>${t.nombre || ''}</div>
+                <td>${t.especialidad || ''}</div>
+                <td>${t.telefono || ''}</div>
+                <td>
+                    <select onchange="updateStatus('tecnicos','${t.id}', this.value)" class="form-select" style="padding:0.2rem">
+                        <option value="disponible" ${t.estado === 'disponible' ? 'selected' : ''}>Disponible</option>
+                        <option value="ocupado" ${t.estado === 'ocupado' ? 'selected' : ''}>Ocupado</option>
+                    </select>
+                 </div>
+                <td><button class="action-btn" onclick="deleteItem('tecnicos','${t.id}')"><i class="fas fa-trash"></i></button></div>
+            </tr>
+        `).join('');
+    }
+}
+
+async function populateSelects() {
+    const clientes = await loadData('clientes');
+    const tecnicos = await loadData('tecnicos');
+    
+    const clientSelect = document.getElementById('serviceClient');
+    if (clientSelect && clientes.length > 0) {
+        clientSelect.innerHTML = clientes.map(c => `<option value="${c.id}">${c.nombre}</option>`).join('');
+    }
+    
+    const techSelect = document.getElementById('serviceTechnician');
+    if (techSelect && tecnicos.length > 0) {
+        techSelect.innerHTML = tecnicos.map(t => `<option value="${t.nombre}">${t.nombre}</option>`).join('');
+    }
+}
+
+// ============ FUNCIONES PARA SOLICITUDES ============
+window.verSolicitud = async function(id) {
+    const solicitud = solicitudesData.find(s => s.id === id);
+    if (!solicitud) return;
+    
+    const modal = document.getElementById('solicitudModal');
+    const detalleDiv = document.getElementById('solicitudDetalle');
+    
+    detalleDiv.innerHTML = `
+        <div class="detail-card">
+            <div class="detail-label">Fecha</div>
+            <div class="detail-value">${solicitud.fecha ? new Date(solicitud.fecha).toLocaleString('es-ES') : '-'}</div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-label">Nombre</div>
+            <div class="detail-value">${solicitud.nombre || '-'}</div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-label">Email</div>
+            <div class="detail-value">${solicitud.email || '-'}</div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-label">Teléfono</div>
+            <div class="detail-value">${solicitud.telefono || '-'}</div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-label">Dirección</div>
+            <div class="detail-value">${solicitud.direccion || '-'}</div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-label">Servicio solicitado</div>
+            <div class="detail-value">${solicitud.servicio || '-'}</div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-label">Mensaje / Descripción</div>
+            <div class="detail-value">${solicitud.mensaje || '-'}</div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-label">Estado</div>
+            <div class="detail-value"><span class="badge badge-${solicitud.leido ? 'leido' : 'no-leido'}">${solicitud.leido ? 'Leída' : 'No leída'}</span></div>
+        </div>
+    `;
+    
+    modal.classList.add('active');
+    
+    const marcarBtn = document.getElementById('marcarLeidaBtn');
+    const eliminarBtn = document.getElementById('eliminarSolicitudBtn');
+    
+    marcarBtn.onclick = async () => {
+        if (!solicitud.leido) {
+            await updateRecord('solicitudes_contacto', id, { leido: true });
+            showAlert('Solicitud marcada como leída', 'success');
+            await renderSolicitudes();
+            await renderDashboard();
+            closeModal('solicitudModal');
+        } else {
+            showAlert('Esta solicitud ya estaba marcada como leída', 'info');
         }
-
-        function toggleSidebarPalette() {
-            const toggleBtn = document.getElementById('colorPaletteToggle');
-            const paletteContent = document.getElementById('sidebarColorPalette');
-            
-            if (paletteContent.classList.contains('active')) {
-                paletteContent.classList.remove('active');
-                toggleBtn.classList.remove('active');
-            } else {
-                paletteContent.classList.add('active');
-                toggleBtn.classList.add('active');
-            }
+    };
+    
+    eliminarBtn.onclick = async () => {
+        if (confirm('¿Eliminar esta solicitud permanentemente?')) {
+            await deleteRecord('solicitudes_contacto', id);
+            showAlert('Solicitud eliminada', 'success');
+            await renderSolicitudes();
+            await renderDashboard();
+            closeModal('solicitudModal');
         }
+    };
+};
 
-        function loadColorThemes() {
-            // Cargar en paleta flotante
-            const floatingThemes = document.getElementById('floatingColorThemes');
-            if (floatingThemes) {
-                floatingThemes.innerHTML = '';
-                
-                Object.entries(colorThemes).forEach(([key, theme]) => {
-                    const themeElement = document.createElement('div');
-                    themeElement.className = `color-theme-option ${key === appState.currentTheme ? 'active' : ''}`;
-                    themeElement.setAttribute('data-theme', key);
-                    themeElement.onclick = () => applyTheme(key);
-                    
-                    themeElement.innerHTML = `
-                        <div class="theme-preview" style="background: ${theme.preview};"></div>
-                        <div class="theme-name-small">${theme.name}</div>
-                    `;
-                    
-                    floatingThemes.appendChild(themeElement);
-                });
-            }
-            
-            // Cargar en sidebar
-            const sidebarThemes = document.getElementById('sidebarColorThemes');
-            if (sidebarThemes) {
-                sidebarThemes.innerHTML = '';
-                
-                Object.entries(colorThemes).forEach(([key, theme]) => {
-                    const themeElement = document.createElement('div');
-                    themeElement.className = `color-theme-option ${key === appState.currentTheme ? 'active' : ''}`;
-                    themeElement.setAttribute('data-theme', key);
-                    themeElement.onclick = () => applyTheme(key);
-                    
-                    themeElement.innerHTML = `
-                        <div class="theme-preview" style="background: ${theme.preview};"></div>
-                        <div class="theme-name-small">${theme.name}</div>
-                    `;
-                    
-                    sidebarThemes.appendChild(themeElement);
-                });
-            }
-            
-            // Actualizar nombre del tema actual
-            updateCurrentThemeName();
-        }
+window.eliminarSolicitud = async function(id) {
+    if (confirm('¿Eliminar esta solicitud?')) {
+        await deleteRecord('solicitudes_contacto', id);
+        await renderSolicitudes();
+        await renderDashboard();
+        showAlert('Solicitud eliminada', 'success');
+    }
+};
 
-        function applyTheme(themeKey) {
-            if (!colorThemes[themeKey]) return;
-            
-            const theme = colorThemes[themeKey];
-            appState.currentTheme = themeKey;
-            
-            // Aplicar colores al root
-            Object.entries(theme.colors).forEach(([property, value]) => {
-                document.documentElement.style.setProperty(property, value);
-            });
-            
-            // Guardar preferencia
-            localStorage.setItem('preferredTheme', themeKey);
-            
-            // Actualizar UI de temas
-            updateThemeUI();
-            
-            // Mostrar notificación
-            showAlert(`🎨 Tema aplicado: ${theme.name}`, 'success');
-            
-            // Registrar actividad
-            if (mockDatabase.currentUser) {
-                logActivity('theme_change', `Cambió el tema a ${theme.name}`);
-            }
-        }
+// ============ FUNCIONES GENERALES ============
+window.deleteItem = async function(collection, id) {
+    if (confirm('¿Eliminar este registro?')) {
+        await deleteRecord(collection, id);
+        updateAll();
+        showAlert('Registro eliminado', 'success');
+    }
+}
 
-        function updateThemeUI() {
-            // Actualizar todos los selectores de tema
-            document.querySelectorAll('.color-theme-option').forEach(el => {
-                el.classList.remove('active');
-                if (el.getAttribute('data-theme') === appState.currentTheme) {
-                    el.classList.add('active');
-                }
-            });
-            
-            // Actualizar nombre del tema
-            updateCurrentThemeName();
-            
-            // Actualizar estado en dashboard
-            const themeName = colorThemes[appState.currentTheme].name;
-            document.getElementById('currentThemeStatus').textContent = themeName;
-        }
+window.updateStatus = async function(collection, id, status) {
+    await updateRecord(collection, id, { estado: status });
+    updateAll();
+    showAlert('Estado actualizado', 'success');
+}
 
-        function updateCurrentThemeName() {
-            const theme = colorThemes[appState.currentTheme];
-            if (theme) {
-                document.getElementById('currentThemeName').textContent = theme.name;
-                document.getElementById('sidebarThemeName').textContent = theme.name;
-            }
-        }
+function showAlert(msg, type) {
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type}`;
+    alert.innerHTML = `<i class="fas fa-${type === 'error' ? 'exclamation-circle' : type === 'info' ? 'info-circle' : 'check-circle'}"></i> ${msg}`;
+    document.body.appendChild(alert);
+    setTimeout(() => alert.remove(), 3000);
+}
 
-        function loadSavedTheme() {
-            const savedTheme = localStorage.getItem('preferredTheme');
-            if (savedTheme && colorThemes[savedTheme]) {
-                applyTheme(savedTheme);
-            } else {
-                applyTheme('default');
-            }
-        }
+function updateAll() {
+    if (currentPage === 'dashboard') renderDashboard();
+    else if (currentPage === 'solicitudes') renderSolicitudes();
+    else if (currentPage === 'servicios') renderServices();
+    else if (currentPage === 'clientes') renderClients();
+    else if (currentPage === 'tecnicos') renderTechnicians();
+}
 
-        function resetTheme() {
-            if (confirm('¿Restablecer el tema por defecto? Se perderán tus personalizaciones.')) {
-                applyTheme('default');
-                showAlert('✅ Tema restablecido a Voltaje Azul', 'success');
-            }
-        }
+// ============ NAVEGACIÓN ============
+function showPage(page) {
+    currentPage = page;
+    document.getElementById('dashboardContent').style.display = page === 'dashboard' ? 'block' : 'none';
+    document.getElementById('solicitudesContent').style.display = page === 'solicitudes' ? 'block' : 'none';
+    document.getElementById('serviciosContent').style.display = page === 'servicios' ? 'block' : 'none';
+    document.getElementById('clientesContent').style.display = page === 'clientes' ? 'block' : 'none';
+    document.getElementById('tecnicosContent').style.display = page === 'tecnicos' ? 'block' : 'none';
+    
+    const titles = { dashboard: 'Dashboard', solicitudes: 'Solicitudes', servicios: 'Servicios', clientes: 'Clientes', tecnicos: 'Técnicos' };
+    const subtitles = {
+        dashboard: 'Panel de control',
+        solicitudes: 'Solicitudes del formulario de contacto',
+        servicios: 'Gestión de servicios técnicos',
+        clientes: 'Base de datos de clientes',
+        tecnicos: 'Equipo de trabajo'
+    };
+    
+    document.getElementById('pageTitle').innerText = titles[page];
+    document.getElementById('pageSubtitle').innerText = subtitles[page];
+    
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    const activeLink = document.querySelector(`.nav-links a[data-page="${page}"]`);
+    if (activeLink) activeLink.classList.add('active');
+    
+    updateAll();
+}
 
-        // =============================================
-        // SISTEMA DE DOBLE CLICK
-        // =============================================
-
-        class DoubleClickHandler {
-            constructor(element, doubleCallback, singleCallback = null, delay = 300) {
-                this.element = element;
-                this.doubleCallback = doubleCallback;
-                this.singleCallback = singleCallback;
-                this.delay = delay;
-                this.clickCount = 0;
-                this.timer = null;
-                
-                this.element.addEventListener('click', this.handleClick.bind(this));
-            }
-
-            handleClick(event) {
-                event.preventDefault();
-                event.stopPropagation();
-                this.clickCount++;
-
-                if (this.clickCount === 1) {
-                    this.timer = setTimeout(() => {
-                        // Click único
-                        if (this.singleCallback) {
-                            this.singleCallback(event);
-                        }
-                        this.reset();
-                    }, this.delay);
-                } else if (this.clickCount === 2) {
-                    clearTimeout(this.timer);
-                    // Doble click
-                    this.doubleCallback(event);
-                    this.reset();
-                }
-            }
-
-            reset() {
-                this.clickCount = 0;
-                if (this.timer) {
-                    clearTimeout(this.timer);
-                    this.timer = null;
-                }
-            }
-        }
-
-        // =============================================
-        // FUNCIÓN DE RECARGA DE PÁGINA
-        // =============================================
-
-        function triggerPageReload() {
-            // Mostrar overlay de recarga
-            const reloadOverlay = document.getElementById('reloadOverlay');
-            reloadOverlay.classList.add('show');
-            
-            // Aplicar efectos al logo
-            const logoContainer = document.querySelector('.logo-container');
-            const logoIcon = document.querySelector('.logo-icon');
-            const bolt = document.querySelector('.logo-icon .bolt');
-            
-            if (logoContainer) logoContainer.classList.add('double-click-active');
-            if (logoIcon) logoIcon.classList.add('double-click-effect');
-            if (bolt) bolt.classList.add('double-click-effect');
-            
-            // Recargar la página después de 1.5 segundos
-            setTimeout(() => {
-                location.reload(true);
-            }, 1500);
-        }
-
-        // =============================================
-        // SISTEMA DE VISITAS
-        // =============================================
-
-        function setupVisitSystem() {
-            mockDatabase.visits++;
-            localStorage.setItem('totalVisits', mockDatabase.visits);
-            updateVisitCounter();
-        }
-
-        function updateVisitCounter() {
-            const visitCountElement = document.getElementById('visitCount');
-            if (visitCountElement) {
-                visitCountElement.textContent = mockDatabase.visits.toLocaleString();
-            }
-        }
-
-        // =============================================
-        // SISTEMA DE LOGIN
-        // =============================================
-
-        const loginModal = document.getElementById('loginModal');
-        const loginForm = document.getElementById('loginForm');
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-        const loginBtn = document.getElementById('loginBtn');
-
-        // Mostrar modal de login al cargar
-        window.addEventListener('load', () => {
-            const savedUser = localStorage.getItem('currentUser');
-            if (savedUser) {
-                try {
-                    mockDatabase.currentUser = JSON.parse(savedUser);
-                    appState.isLoggedIn = true;
-                    initializeDashboard();
-                } catch (e) {
-                    showLoginModal();
-                }
-            } else {
-                showLoginModal();
-            }
+// ============ FORMULARIOS ============
+document.getElementById('serviceForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = e.target.querySelector('.btn-submit');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="loading-spinner"></span> Creando...';
+    
+    try {
+        const clientSelect = document.getElementById('serviceClient');
+        const clientName = clientSelect.options[clientSelect.selectedIndex]?.text;
+        
+        await addRecord('servicios', {
+            cliente: clientName,
+            clienteId: clientSelect.value,
+            tipo: document.getElementById('serviceType').value,
+            fecha: document.getElementById('serviceDate').value,
+            tecnico: document.getElementById('serviceTechnician').value,
+            estado: 'pendiente'
         });
+        updateAll();
+        closeModal('serviceModal');
+        showAlert('Servicio creado', 'success');
+        e.target.reset();
+    } catch (error) {
+        showAlert('Error al crear servicio', 'error');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Crear';
+    }
+});
 
-        function showLoginModal() {
-            setTimeout(() => {
-                loginModal.classList.add('active');
-                document.getElementById('username').focus();
-            }, 500);
-        }
-
-        function hideLoginModal() {
-            loginModal.classList.remove('active');
-            loginForm.reset();
-        }
-
-        // Toggle visibilidad de contraseña
-        togglePassword.addEventListener('click', () => {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            togglePassword.innerHTML = type === 'password' ? '👁️' : '🔒';
+document.getElementById('clientForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = e.target.querySelector('.btn-submit');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="loading-spinner"></span> Guardando...';
+    
+    try {
+        await addRecord('clientes', {
+            nombre: document.getElementById('clientName').value,
+            telefono: document.getElementById('clientPhone').value,
+            email: document.getElementById('clientEmail').value
         });
+        updateAll();
+        closeModal('clientModal');
+        showAlert('Cliente creado', 'success');
+        e.target.reset();
+    } catch (error) {
+        showAlert('Error al crear cliente', 'error');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Guardar';
+    }
+});
 
-        // Manejo del login
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value;
-            
-            // Deshabilitar botón durante validación
-            loginBtn.disabled = true;
-            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Validando...';
-            
-            // Simular delay de validación
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            const validUser = validCredentials.find(cred => 
-                cred.username === username && cred.password === password
-            );
-            
-            if (validUser) {
-                // Login exitoso
-                mockDatabase.currentUser = validUser;
-                localStorage.setItem('currentUser', JSON.stringify(validUser));
-                appState.isLoggedIn = true;
-                
-                hideLoginModal();
-                showAlert('✅ ¡Inicio de sesión exitoso! Bienvenido ' + validUser.name, 'success');
-                initializeDashboard();
-                
-                // Registrar actividad
-                logActivity('login', `Inició sesión en el sistema`);
-            } else {
-                // Credenciales incorrectas
-                showAlert('❌ Credenciales incorrectas. Intenta con admin/voltaje2023 o jefe/110806', 'error');
-                passwordInput.value = '';
-                passwordInput.focus();
-                
-                // Agitar el formulario
-                loginForm.classList.add('shake');
-                setTimeout(() => loginForm.classList.remove('shake'), 500);
-            }
-            
-            // Rehabilitar botón
-            loginBtn.disabled = false;
-            loginBtn.innerHTML = 'Acceder al Panel';
+document.getElementById('tecnicoForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = e.target.querySelector('.btn-submit');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="loading-spinner"></span> Guardando...';
+    
+    try {
+        await addRecord('tecnicos', {
+            nombre: document.getElementById('tecnicoName').value,
+            especialidad: document.getElementById('tecnicoSpecialty').value,
+            telefono: document.getElementById('tecnicoPhone').value,
+            estado: 'disponible'
         });
+        updateAll();
+        closeModal('tecnicoModal');
+        showAlert('Técnico creado', 'success');
+        e.target.reset();
+    } catch (error) {
+        showAlert('Error al crear técnico', 'error');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Guardar';
+    }
+});
 
-        // =============================================
-        // INICIALIZACIÓN DEL DASHBOARD
-        // =============================================
+// ============ MODALES ============
+function openModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.classList.add('active');
+        if (id === 'serviceModal') populateSelects();
+    }
+}
 
-        function initializeDashboard() {
-            if (!appState.isLoggedIn) return;
-            
-            // Cargar tema guardado
-            loadSavedTheme();
-            
-            // Cargar paleta de colores
-            loadColorThemes();
-            
-            // Actualizar información de usuario
-            updateUserInfo();
-            
-            // Cargar estadísticas
-            loadStatistics();
-            
-            // Cargar actividad
-            loadActivity();
-            
-            // Cargar gráficos
-            loadChartData();
-            
-            // Actualizar estado del sistema
-            updateSystemStatus();
-            
-            // Inicializar sistema de doble click
-            initializeDoubleClick();
-            
-            // Configurar navegación
-            setupNavigation();
-            
-            // Configurar búsqueda
-            setupSearch();
-            
-            // Actualizar contador de visitas
-            updateVisitCounter();
-            
-            // Iniciar actualizaciones en tiempo real
-            startRealTimeUpdates();
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.classList.remove('active');
+}
+
+document.querySelectorAll('[data-modal]').forEach(btn => {
+    btn.addEventListener('click', () => openModal(btn.dataset.modal));
+});
+
+document.querySelectorAll('.close-modal').forEach(btn => {
+    btn.addEventListener('click', () => closeModal(btn.closest('.modal').id));
+});
+
+document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(modal.id); });
+});
+
+// ============ BÚSQUEDAS ============
+document.getElementById('serviceSearch')?.addEventListener('input', () => renderServices());
+document.getElementById('clientSearch')?.addEventListener('input', () => renderClients());
+document.getElementById('tecnicoSearch')?.addEventListener('input', () => renderTechnicians());
+document.getElementById('solicitudSearch')?.addEventListener('input', () => renderSolicitudes());
+
+// ============ CERRAR SESIÓN Y VOLVER AL INICIO ============
+async function cerrarSesionCompleta() {
+    try {
+        // 1. Cerrar sesión de Firebase
+        await auth.signOut();
+        
+        // 2. Limpiar localStorage
+        localStorage.removeItem('userName');
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('supabaseSession');
+        
+        // 3. Limpiar variables globales
+        currentUser = null;
+        
+        // 4. Ocultar panel y mostrar login
+        document.getElementById('mainApp').style.display = 'none';
+        document.getElementById('loginContainer').style.display = 'flex';
+        
+        // 5. Limpiar campos del login
+        document.getElementById('loginPass').value = '';
+        document.getElementById('loginError').innerHTML = '';
+        
+        showAlert('Sesión cerrada correctamente', 'success');
+        
+        // 6. Opcional: recargar la página para limpiar todo
+        // setTimeout(() => location.reload(), 1000);
+        
+    } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+        showAlert('Error al cerrar sesión', 'error');
+    }
+}
+
+function irAlInicio() {
+    // Redirigir a la página principal (index.html)
+    window.location.href = 'index.html';
+}
+
+// ============ AUTENTICACIÓN ============
+async function doLogin() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPass').value;
+    const errorDiv = document.getElementById('loginError');
+    const loginBtn = document.getElementById('loginBtn');
+    
+    if (!email || !password) {
+        errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese email y contraseña';
+        return;
+    }
+    
+    loginBtn.disabled = true;
+    loginBtn.innerHTML = '<span class="loading-spinner"></span> Ingresando...';
+    errorDiv.innerHTML = '';
+    
+    try {
+        const userCredential = await auth.signInWithEmailAndPassword(email, password);
+        currentUser = userCredential.user;
+        
+        const userName = currentUser.email.split('@')[0];
+        localStorage.setItem('userName', userName);
+        localStorage.setItem('currentUser', JSON.stringify({ name: userName, email: currentUser.email }));
+        
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('mainApp').style.display = 'flex';
+        
+        document.getElementById('userName').innerText = userName;
+        document.getElementById('userAvatar').innerText = userName.charAt(0).toUpperCase();
+        document.getElementById('sidebarUserName').innerText = userName;
+        document.getElementById('sidebarAvatar').innerText = userName.charAt(0).toUpperCase();
+        
+        showPage('dashboard');
+        
+    } catch (error) {
+        console.error('Error de login:', error);
+        if (error.code === 'auth/user-not-found') {
+            errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Usuario no encontrado. Créalo en Firebase Authentication.';
+        } else if (error.code === 'auth/wrong-password') {
+            errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Contraseña incorrecta';
+        } else if (error.code === 'auth/invalid-credential') {
+            errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Email o contraseña incorrectos';
+        } else {
+            errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${error.message}`;
         }
+    } finally {
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Ingresar';
+    }
+}
 
-        function updateUserInfo() {
-            if (mockDatabase.currentUser) {
-                document.getElementById('userName').textContent = mockDatabase.currentUser.name;
-                document.getElementById('userRole').textContent = mockDatabase.currentUser.role;
-                document.getElementById('userAvatar').textContent = mockDatabase.currentUser.name.charAt(0).toUpperCase();
-                document.getElementById('pageSubtitle').textContent = `Bienvenido de vuelta, ${mockDatabase.currentUser.name.split(' ')[0]}`;
-            }
+// ============ EVENT LISTENERS ============
+document.getElementById('loginBtn')?.addEventListener('click', doLogin);
+document.getElementById('logoutBtn')?.addEventListener('click', cerrarSesionCompleta);
+document.getElementById('goHomeBtn')?.addEventListener('click', irAlInicio);
+document.getElementById('goHomeFromPanelBtn')?.addEventListener('click', irAlInicio);
+document.getElementById('menuToggle')?.addEventListener('click', () => {
+    document.getElementById('sidebar').classList.toggle('active');
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage(link.dataset.page);
+        if (window.innerWidth <= 768) {
+            document.getElementById('sidebar').classList.remove('active');
         }
+    });
+});
 
-        function loadStatistics() {
-            // Calcular estadísticas
-            appState.stats.clients = mockDatabase.clients.filter(c => c.status === 'active').length;
-            appState.stats.services = mockDatabase.services.length;
-            appState.stats.revenue = mockDatabase.services.reduce((sum, service) => sum + service.revenue, 0);
-            appState.stats.pendingServices = mockDatabase.services.filter(s => s.status === 'pendiente').length;
-            appState.stats.satisfaction = 98; // Valor simulado
-            
-            // Actualizar UI
-            const statsGrid = document.getElementById('statsGrid');
-            if (statsGrid) {
-                statsGrid.innerHTML = `
-                    <div class="stat-card" onclick="navigateTo('clients')">
-                        <div class="stat-icon"><i class="fas fa-users"></i></div>
-                        <div class="stat-content">
-                            <div class="stat-value">${appState.stats.clients.toLocaleString()}</div>
-                            <div class="stat-label">Clientes Activos</div>
-                            <div class="stat-trend trend-up">
-                                <i class="fas fa-arrow-up"></i>
-                                <span>${Math.floor(Math.random() * 15) + 5}% este mes</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stat-card" onclick="navigateTo('services')">
-                        <div class="stat-icon"><i class="fas fa-tools"></i></div>
-                        <div class="stat-content">
-                            <div class="stat-value">${appState.stats.services}</div>
-                            <div class="stat-label">Servicios Activos</div>
-                            <div class="stat-trend trend-up">
-                                <i class="fas fa-arrow-up"></i>
-                                <span>${Math.floor(Math.random() * 20) + 8}% esta semana</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stat-card" onclick="navigateTo('finances')">
-                        <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
-                        <div class="stat-content">
-                            <div class="stat-value">$${(appState.stats.revenue / 1000).toFixed(1)}K</div>
-                            <div class="stat-label">Ingresos Totales</div>
-                            <div class="stat-trend trend-up">
-                                <i class="fas fa-arrow-up"></i>
-                                <span>${Math.floor(Math.random() * 30) + 15}% este mes</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stat-card" onclick="showPendingServices()">
-                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
-                        <div class="stat-content">
-                            <div class="stat-value">${appState.stats.pendingServices}</div>
-                            <div class="stat-label">Servicios Pendientes</div>
-                            <div class="stat-trend trend-down">
-                                <i class="fas fa-arrow-down"></i>
-                                <span>${Math.floor(Math.random() * 10) + 1}% pendientes</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            // Actualizar quick stats
-            const quickStats = document.getElementById('quickStats');
-            if (quickStats) {
-                quickStats.innerHTML = `
-                    <div class="quick-stat" onclick="navigateTo('clients')">
-                        <h4 style="margin-bottom: 0.5rem;">Clientes Nuevos</h4>
-                        <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">+${Math.floor(Math.random() * 10) + 3}</div>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Este mes</p>
-                    </div>
-                    <div class="quick-stat" onclick="navigateTo('services')">
-                        <h4 style="margin-bottom: 0.5rem;">Servicios Completados</h4>
-                        <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">${mockDatabase.services.filter(s => s.status === 'completado').length}</div>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Esta semana</p>
-                    </div>
-                    <div class="quick-stat" onclick="navigateTo('reports')">
-                        <h4 style="margin-bottom: 0.5rem;">Tiempo Promedio</h4>
-                        <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">${(Math.random() * 2 + 1.5).toFixed(1)}h</div>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Por servicio</p>
-                    </div>
-                `;
-            }
-        }
+document.getElementById('loginEmail')?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') doLogin();
+});
+document.getElementById('loginPass')?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') doLogin();
+});
 
-        function loadActivity() {
-            const tableBody = document.getElementById('activityTableBody');
-            if (!tableBody) return;
-            
-            // Generar actividad reciente
-            const recentActivity = [...mockDatabase.services]
-                .sort((a, b) => new Date(b.date) - new Date(a.date))
-                .slice(0, 5);
-            
-            tableBody.innerHTML = recentActivity.map(service => {
-                const serviceTypes = {
-                    instalacion: 'Instalación Eléctrica',
-                    mantenimiento: 'Mantenimiento Preventivo',
-                    reparacion: 'Reparación de Emergencia',
-                    iluminacion: 'Iluminación y Diseño',
-                    solar: 'Energía Solar',
-                    carga: 'Punto de Carga'
-                };
-                
-                const statusBadges = {
-                    completado: 'badge-success',
-                    'en progreso': 'badge-warning',
-                    pendiente: 'badge-danger'
-                };
-                
-                const statusTexts = {
-                    completado: 'Completado',
-                    'en progreso': 'En Progreso',
-                    pendiente: 'Pendiente'
-                };
-                
-                const date = new Date(service.date);
-                const formattedDate = date.toLocaleDateString('es-ES', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric'
-                });
-                
-                return `
-                    <tr>
-                        <td>${serviceTypes[service.type] || service.type}</td>
-                        <td>${service.clientName}</td>
-                        <td><span class="activity-badge ${statusBadges[service.status]}">${statusTexts[service.status]}</span></td>
-                        <td>${formattedDate}</td>
-                        <td>
-                            <button class="btn-control" onclick="viewServiceDetails(${service.id})" title="Ver detalles">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            ${service.status === 'pendiente' ? `
-                            <button class="btn-control" onclick="assignService(${service.id})" title="Asignar técnico">
-                                <i class="fas fa-user-plus"></i>
-                            </button>
-                            ` : ''}
-                        </td>
-                    </tr>
-                `;
-            }).join('');
-        }
+// ============ VERIFICAR SESIÓN (NO PERSISTE) ============
+// No guardamos sesión automáticamente - el usuario debe loguearse cada vez
+// Esto evita que quede sesión abierta al cerrar el navegador
 
-        function loadChartData() {
-            const chartPlaceholder = document.getElementById('revenueChart');
-            if (chartPlaceholder) {
-                // Simular gráfico con HTML básico
-                const currentData = appState.chartData['1M'];
-                const maxValue = Math.max(...currentData);
-                
-                chartPlaceholder.innerHTML = `
-                    <div style="width: 100%; height: 250px; display: flex; align-items: flex-end; justify-content: space-between; padding: 1rem;">
-                        ${currentData.map((value, index) => `
-                            <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div style="width: 20px; height: ${(value / maxValue) * 200}px; background: var(--electric-gradient); border-radius: 4px; margin-bottom: 0.5rem;"></div>
-                                <span style="font-size: 0.8rem; color: var(--text-secondary);">${index + 1}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <div style="text-align: center; margin-top: 1rem;">
-                        <p>Ingresos mensuales: $${currentData.reduce((a, b) => a + b, 0).toLocaleString()}</p>
-                        <small style="color: var(--text-secondary);">Gráfico simulado - En producción usaría Chart.js</small>
-                    </div>
-                `;
-            }
-        }
+// Si quieres que NO guarde sesión entre recargas, descomenta esto:
+/*
+auth.setPersistence(firebase.auth.Auth.Persistence.NONE);
+*/
 
-        function updateSystemStatus() {
-            const now = new Date();
-            document.getElementById('lastUpdate').textContent = now.toLocaleDateString('es-ES', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-            });
-            
-            document.getElementById('lastAccess').textContent = `Último acceso: Hoy ${now.toLocaleTimeString('es-ES', {
-                hour: '2-digit',
-                minute: '2-digit'
-            })}`;
-            
-            document.getElementById('statusText').textContent = 'Conectado';
-            document.getElementById('statusDot').className = 'status-dot';
-        }
-
-        // =============================================
-        // FUNCIONALIDADES PRINCIPALES
-        // =============================================
-
-        // Sistema de navegación
-        function setupNavigation() {
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const page = link.getAttribute('data-page');
-                    navigateTo(page);
-                });
-            });
-            
-            // Configurar botones de tiempo en gráficos
-            document.querySelectorAll('.time-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    const period = this.getAttribute('data-period');
-                    if (period && appState.chartData[period]) {
-                        // Actualizar gráfico con datos del período seleccionado
-                        loadChartData();
-                    }
-                });
-            });
-        }
-
-        function navigateTo(page) {
-            if (!page || page === appState.currentPage) return;
-            
-            appState.currentPage = page;
-            
-            // Actualizar navegación activa
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-page') === page) {
-                    link.classList.add('active');
-                }
-            });
-            
-            // Actualizar título de página
-            const pageTitles = {
-                dashboard: 'Dashboard General',
-                clients: 'Gestión de Clientes',
-                services: 'Servicios Activos',
-                finances: 'Finanzas y Facturación',
-                reports: 'Reportes y Análisis',
-                settings: 'Configuración del Sistema',
-                staff: 'Gestión de Personal',
-                devices: 'Dispositivos',
-                security: 'Seguridad'
-            };
-            
-            document.getElementById('pageTitle').textContent = pageTitles[page] || page;
-            
-            // Simular cambio de contenido
-            showAlert(`Navegando a: ${pageTitles[page] || page}`, 'info');
-            
-            // En una aplicación real, aquí cargarías el contenido de la página
-            logActivity('navigation', `Navegó a ${pageTitles[page] || page}`);
-        }
-
-        // Sistema de búsqueda
-        function setupSearch() {
-            const searchInput = document.getElementById('globalSearch');
-            const searchResults = document.getElementById('searchResults');
-            const searchResultsContent = document.getElementById('searchResultsContent');
-            
-            let searchTimeout;
-            
-            searchInput.addEventListener('input', (e) => {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(() => {
-                    const query = e.target.value.trim().toLowerCase();
-                    appState.searchQuery = query;
-                    
-                    if (query.length < 2) {
-                        searchResults.style.display = 'none';
-                        return;
-                    }
-                    
-                    // Buscar en clientes, servicios y técnicos
-                    const results = {
-                        clients: mockDatabase.clients.filter(client => 
-                            client.name.toLowerCase().includes(query) ||
-                            client.email.toLowerCase().includes(query) ||
-                            client.phone.includes(query)
-                        ),
-                        services: mockDatabase.services.filter(service => 
-                            service.clientName.toLowerCase().includes(query) ||
-                            service.type.includes(query)
-                        ),
-                        technicians: mockDatabase.technicians.filter(tech =>
-                            tech.name.toLowerCase().includes(query)
-                        )
-                    };
-                    
-                    const totalResults = results.clients.length + results.services.length + results.technicians.length;
-                    
-                    if (totalResults > 0) {
-                        let html = `<p>Se encontraron ${totalResults} resultados:</p>`;
-                        
-                        if (results.clients.length > 0) {
-                            html += `<h5 style="margin-top: 1rem; margin-bottom: 0.5rem;">Clientes (${results.clients.length})</h5>`;
-                            html += results.clients.map(client => `
-                                <div style="padding: 0.5rem; border-bottom: 1px solid var(--glass-border);">
-                                    <strong>${client.name}</strong> - ${client.type}
-                                    <br><small>${client.email} | ${client.phone}</small>
-                                </div>
-                            `).join('');
-                        }
-                        
-                        if (results.services.length > 0) {
-                            html += `<h5 style="margin-top: 1rem; margin-bottom: 0.5rem;">Servicios (${results.services.length})</h5>`;
-                            html += results.services.map(service => `
-                                <div style="padding: 0.5rem; border-bottom: 1px solid var(--glass-border);">
-                                    <strong>${service.clientName}</strong> - ${service.type}
-                                    <br><small>${service.date} | ${service.status}</small>
-                                </div>
-                            `).join('');
-                        }
-                        
-                        if (results.technicians.length > 0) {
-                            html += `<h5 style="margin-top: 1rem; margin-bottom: 0.5rem;">Técnicos (${results.technicians.length})</h5>`;
-                            html += results.technicians.map(tech => `
-                                <div style="padding: 0.5rem; border-bottom: 1px solid var(--glass-border);">
-                                    <strong>${tech.name}</strong> - ${tech.specialty}
-                                    <br><small>Estado: ${tech.status}</small>
-                                </div>
-                            `).join('');
-                        }
-                        
-                        searchResultsContent.innerHTML = html;
-                        searchResults.style.display = 'block';
-                    } else {
-                        searchResultsContent.innerHTML = '<p>No se encontraron resultados.</p>';
-                        searchResults.style.display = 'block';
-                    }
-                }, 300);
-            });
-            
-            // Ocultar resultados al hacer clic fuera
-            document.addEventListener('click', (e) => {
-                if (!searchResults.contains(e.target) && e.target !== searchInput) {
-                    searchResults.style.display = 'none';
-                }
-            });
-        }
-
-        // =============================================
-        // MODALES Y FORMULARIOS
-        // =============================================
-
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.add('active');
-                
-                // Inicializar datos del modal según su tipo
-                switch(modalId) {
-                    case 'newServiceModal':
-                        initializeServiceModal();
-                        break;
-                    case 'appointmentModal':
-                        initializeAppointmentModal();
-                        break;
-                    case 'assignTechnicianModal':
-                        initializeAssignModal();
-                        break;
-                    case 'reportModal':
-                        initializeReportModal();
-                        break;
-                }
-            }
-        }
-
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.remove('active');
-            }
-        }
-
-        function initializeServiceModal() {
-            // Establecer fecha mínima como hoy
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('serviceDate').min = today;
-            document.getElementById('serviceDate').value = today;
-        }
-
-        function initializeAppointmentModal() {
-            // Cargar clientes
-            const clientSelect = document.getElementById('appointmentClient');
-            clientSelect.innerHTML = '<option value="">Seleccionar cliente...</option>' +
-                mockDatabase.clients.map(client => 
-                    `<option value="${client.id}">${client.name} (${client.type})</option>`
-                ).join('');
-            
-            // Cargar técnicos
-            const techSelect = document.getElementById('appointmentTechnician');
-            techSelect.innerHTML = '<option value="">Seleccionar técnico...</option>' +
-                mockDatabase.technicians.map(tech => 
-                    `<option value="${tech.id}">${tech.name} - ${tech.specialty}</option>`
-                ).join('');
-            
-            // Establecer fecha y hora mínimas
-            const now = new Date();
-            const minDateTime = now.toISOString().slice(0, 16);
-            document.getElementById('appointmentDateTime').min = minDateTime;
-            
-            // Establecer valor por defecto (mañana a las 9 AM)
-            const tomorrow = new Date(now);
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            tomorrow.setHours(9, 0, 0, 0);
-            document.getElementById('appointmentDateTime').value = tomorrow.toISOString().slice(0, 16);
-        }
-
-        function initializeAssignModal() {
-            // Cargar servicios pendientes
-            const serviceSelect = document.getElementById('assignService');
-            const pendingServices = mockDatabase.services.filter(s => s.status === 'pendiente');
-            
-            serviceSelect.innerHTML = '<option value="">Seleccionar servicio...</option>' +
-                pendingServices.map(service => 
-                    `<option value="${service.id}">${service.clientName} - ${service.type}</option>`
-                ).join('');
-            
-            // Cargar técnicos disponibles
-            const techSelect = document.getElementById('assignTech');
-            const availableTechs = mockDatabase.technicians.filter(t => t.status === 'available');
-            
-            techSelect.innerHTML = '<option value="">Seleccionar técnico...</option>' +
-                availableTechs.map(tech => 
-                    `<option value="${tech.id}">${tech.name} - ${tech.specialty}</option>`
-                ).join('');
-            
-            // Establecer fecha mínima como hoy
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('assignDate').min = today;
-            document.getElementById('assignDate').value = today;
-        }
-
-        function initializeReportModal() {
-            // Mostrar/ocultar rango de fechas personalizado
-            const periodSelect = document.getElementById('reportPeriod');
-            const dateRangeDiv = document.getElementById('customDateRange');
-            
-            periodSelect.addEventListener('change', function() {
-                dateRangeDiv.style.display = this.value === 'personalizado' ? 'block' : 'none';
-            });
-            
-            // Establecer fechas por defecto
-            const endDate = new Date();
-            const startDate = new Date();
-            startDate.setMonth(startDate.getMonth() - 1);
-            
-            document.getElementById('startDate').value = startDate.toISOString().split('T')[0];
-            document.getElementById('endDate').value = endDate.toISOString().split('T')[0];
-        }
-
-        // Funciones de creación
-        function createNewService() {
-            const serviceType = document.getElementById('serviceType').value;
-            const clientName = document.getElementById('clientName').value;
-            const serviceDate = document.getElementById('serviceDate').value;
-            const description = document.getElementById('serviceDescription').value;
-            
-            if (!serviceType || !clientName || !serviceDate || !description) {
-                showAlert('❌ Por favor complete todos los campos', 'error');
-                return;
-            }
-            
-            // Crear nuevo servicio
-            const newService = {
-                id: mockDatabase.services.length + 1,
-                type: serviceType,
-                clientName: clientName,
-                date: serviceDate,
-                status: 'pendiente',
-                technician: null,
-                revenue: 0,
-                description: description
-            };
-            
-            mockDatabase.services.push(newService);
-            
-            // Registrar actividad
-            logActivity('service_created', `Creó nuevo servicio para ${clientName}`);
-            
-            // Actualizar estadísticas
-            loadStatistics();
-            loadActivity();
-            
-            // Cerrar modal y mostrar confirmación
-            closeModal('newServiceModal');
-            showAlert(`✅ Servicio creado exitosamente para ${clientName}`, 'success');
-            
-            // Limpiar formulario
-            document.getElementById('serviceForm').reset();
-        }
-
-        function scheduleAppointment() {
-            const clientId = document.getElementById('appointmentClient').value;
-            const type = document.getElementById('appointmentType').value;
-            const dateTime = document.getElementById('appointmentDateTime').value;
-            const duration = document.getElementById('appointmentDuration').value;
-            const technicianId = document.getElementById('appointmentTechnician').value;
-            const notes = document.getElementById('appointmentNotes').value;
-            
-            if (!clientId || !type || !dateTime || !duration || !technicianId) {
-                showAlert('❌ Por favor complete todos los campos requeridos', 'error');
-                return;
-            }
-            
-            const client = mockDatabase.clients.find(c => c.id == clientId);
-            const technician = mockDatabase.technicians.find(t => t.id == technicianId);
-            
-            if (!client || !technician) {
-                showAlert('❌ Cliente o técnico no encontrado', 'error');
-                return;
-            }
-            
-            const newAppointment = {
-                id: mockDatabase.appointments.length + 1,
-                clientId: clientId,
-                clientName: client.name,
-                type: type,
-                dateTime: dateTime,
-                duration: parseInt(duration),
-                technicianId: technicianId,
-                technicianName: technician.name,
-                notes: notes,
-                status: 'programada'
-            };
-            
-            mockDatabase.appointments.push(newAppointment);
-            
-            // Registrar actividad
-            logActivity('appointment_scheduled', `Agendó cita con ${client.name} para el ${dateTime}`);
-            
-            closeModal('appointmentModal');
-            showAlert(`✅ Cita agendada exitosamente con ${client.name}`, 'success');
-            
-            // Limpiar formulario
-            document.getElementById('appointmentForm').reset();
-        }
-
-        function assignTechnician() {
-            const serviceId = document.getElementById('assignService').value;
-            const technicianId = document.getElementById('assignTech').value;
-            const date = document.getElementById('assignDate').value;
-            const priority = document.getElementById('assignPriority').value;
-            const notes = document.getElementById('assignNotes').value;
-            
-            if (!serviceId || !technicianId || !date || !priority) {
-                showAlert('❌ Por favor complete todos los campos', 'error');
-                return;
-            }
-            
-            const service = mockDatabase.services.find(s => s.id == serviceId);
-            const technician = mockDatabase.technicians.find(t => t.id == technicianId);
-            
-            if (!service || !technician) {
-                showAlert('❌ Servicio o técnico no encontrado', 'error');
-                return;
-            }
-            
-            // Actualizar servicio
-            service.technician = technician.name;
-            service.status = 'en progreso';
-            
-            // Actualizar estado del técnico
-            technician.status = 'busy';
-            
-            // Registrar actividad
-            logActivity('technician_assigned', `Asignó ${technician.name} al servicio de ${service.clientName}`);
-            
-            // Actualizar UI
-            loadStatistics();
-            loadActivity();
-            
-            closeModal('assignTechnicianModal');
-            showAlert(`✅ Técnico ${technician.name} asignado exitosamente`, 'success');
-            
-            // Limpiar formulario
-            document.getElementById('assignForm').reset();
-        }
-
-        function generateReport() {
-            const reportType = document.getElementById('reportType').value;
-            const period = document.getElementById('reportPeriod').value;
-            const format = document.querySelector('input[name="format"]:checked').value;
-            
-            if (!reportType || !period) {
-                showAlert('❌ Por favor seleccione tipo de reporte y período', 'error');
-                return;
-            }
-            
-            // Simular generación de reporte
-            showAlert(`⏳ Generando reporte ${reportType} en formato ${format.toUpperCase()}...`, 'info');
-            
-            setTimeout(() => {
-                closeModal('reportModal');
-                showAlert(`✅ Reporte generado exitosamente. Se descargará automáticamente.`, 'success');
-                
-                // Registrar actividad
-                logActivity('report_generated', `Generó reporte de ${reportType} para período ${period}`);
-            }, 2000);
-        }
-
-        // =============================================
-        // FUNCIONES DE UTILIDAD
-        // =============================================
-
-        function showAlert(message, type = 'info') {
-            // Remover alertas existentes
-            const existingAlert = document.querySelector('.alert');
-            if (existingAlert) {
-                existingAlert.remove();
-            }
-            
-            // Crear nueva alerta
-            const alert = document.createElement('div');
-            alert.className = `alert alert-${type}`;
-            alert.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
-                <span>${message}</span>
-            `;
-            
-            // Agregar al body
-            document.body.appendChild(alert);
-            
-            // Remover después de 5 segundos
-            setTimeout(() => {
-                alert.style.opacity = '0';
-                alert.style.transform = 'translateY(-10px)';
-                setTimeout(() => alert.remove(), 300);
-            }, 5000);
-        }
-
-        function logActivity(type, description) {
-            const activity = {
-                id: mockDatabase.activity.length + 1,
-                type: type,
-                description: description,
-                user: mockDatabase.currentUser ? mockDatabase.currentUser.name : 'Sistema',
-                timestamp: new Date().toISOString()
-            };
-            
-            mockDatabase.activity.unshift(activity);
-            
-            // Mantener solo las últimas 100 actividades
-            if (mockDatabase.activity.length > 100) {
-                mockDatabase.activity.pop();
-            }
-        }
-
-        function refreshActivity() {
-            showAlert('⏳ Actualizando actividad...', 'info');
-            setTimeout(() => {
-                loadActivity();
-                showAlert('✅ Actividad actualizada', 'success');
-            }, 1000);
-        }
-
-        function viewServiceDetails(serviceId) {
-            const service = mockDatabase.services.find(s => s.id === serviceId);
-            if (service) {
-                showAlert(`🔍 Viendo detalles del servicio ${serviceId}: ${service.clientName} - ${service.type}`, 'info');
-                // En una aplicación real, aquí abrirías un modal con los detalles completos
-            }
-        }
-
-        function assignService(serviceId) {
-            openModal('assignTechnicianModal');
-            // Podrías pre-seleccionar el servicio en el modal
-            setTimeout(() => {
-                document.getElementById('assignService').value = serviceId;
-            }, 100);
-        }
-
-        function showPendingServices() {
-            const pending = mockDatabase.services.filter(s => s.status === 'pendiente');
-            if (pending.length > 0) {
-                showAlert(`📋 Tienes ${pending.length} servicios pendientes por asignar`, 'warning');
-                navigateTo('services');
-            } else {
-                showAlert('✅ No hay servicios pendientes', 'success');
-            }
-        }
-
-        function logout() {
-            if (confirm('¿Está seguro de que desea cerrar sesión?')) {
-                // Registrar actividad
-                logActivity('logout', 'Cerró sesión en el sistema');
-                
-                // Limpiar datos de sesión
-                localStorage.removeItem('currentUser');
-                mockDatabase.currentUser = null;
-                appState.isLoggedIn = false;
-                
-                // Mostrar modal de login
-                showLoginModal();
-                
-                // Limpiar interfaz
-                document.getElementById('userName').textContent = 'Cargando...';
-                document.getElementById('userRole').textContent = 'Cargando...';
-                
-                showAlert('✅ Sesión cerrada exitosamente', 'success');
-            }
-        }
-
-        // =============================================
-        // UI Y CONTROLES
-        // =============================================
-
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const mainContent = document.getElementById('mainContent');
-            const toggleBtn = document.getElementById('sidebarToggle');
-            
-            if (sidebar.classList.contains('collapsed')) {
-                sidebar.classList.remove('collapsed');
-                mainContent.style.marginLeft = '0';
-                toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            } else {
-                sidebar.classList.add('collapsed');
-                mainContent.style.marginLeft = '-280px';
-                toggleBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
-            }
-        }
-
-        function initializeDoubleClick() {
-            const mainLogo = document.getElementById('mainLogo');
-            if (mainLogo) {
-                new DoubleClickHandler(mainLogo, triggerPageReload);
-                mainLogo.title = "Doble click para recargar el sistema";
-            }
-        }
-
-        // =============================================
-        // ACTUALIZACIONES EN TIEMPO REAL
-        // =============================================
-
-        function startRealTimeUpdates() {
-            // Actualizar hora de última actividad cada minuto
-            setInterval(() => {
-                const now = new Date();
-                document.getElementById('lastAccess').textContent = 
-                    `Último acceso: Hoy ${now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}`;
-            }, 60000);
-            
-            // Simular actualización de estadísticas cada 30 segundos
-            setInterval(() => {
-                if (Math.random() > 0.7) { // 30% de probabilidad
-                    const statCards = document.querySelectorAll('.stat-card');
-                    if (statCards.length > 0) {
-                        const randomCard = statCards[Math.floor(Math.random() * statCards.length)];
-                        randomCard.style.animation = 'pulse 1s';
-                        setTimeout(() => {
-                            randomCard.style.animation = '';
-                        }, 1000);
-                    }
-                }
-            }, 30000);
-            
-            // Actualizar estado del servidor aleatoriamente
-            setInterval(() => {
-                if (Math.random() > 0.9) { // 10% de probabilidad
-                    const serverStatus = document.getElementById('serverStatus');
-                    serverStatus.innerHTML = '● <span style="color: var(--accent-yellow);">Mantenimiento</span>';
-                    setTimeout(() => {
-                        serverStatus.innerHTML = '● <span style="color: var(--accent-green);">Operativos</span>';
-                    }, 5000);
-                }
-            }, 60000);
-        }
-
-        // =============================================
-        // INICIALIZACIÓN COMPLETA
-        // =============================================
-
-        // Configurar menú móvil
-        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        if (mobileMenuToggle) {
-            mobileMenuToggle.addEventListener('click', () => {
-                const sidebar = document.getElementById('sidebar');
-                sidebar.classList.toggle('active');
-            });
-            
-            // Detectar tamaño de pantalla
-            function checkScreenSize() {
-                if (window.innerWidth <= 992) {
-                    mobileMenuToggle.style.display = 'block';
-                    
-                    // Ajustar posición de botones para móvil
-                    document.getElementById('homeButton').style.bottom = '80px';
-                    document.getElementById('toggleFloatingPaletteBtn').style.bottom = '20px';
-                } else {
-                    mobileMenuToggle.style.display = 'none';
-                    document.getElementById('sidebar').classList.remove('active');
-                    
-                    // Restaurar posición original
-                    document.getElementById('homeButton').style.bottom = '20px';
-                    document.getElementById('toggleFloatingPaletteBtn').style.bottom = '20px';
-                }
-            }
-            
-            checkScreenSize();
-            window.addEventListener('resize', checkScreenSize);
-        }
-
-        // Configurar efectos hover
-        document.querySelectorAll('.stat-card, .action-card, .quick-stat').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-10px)';
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0)';
-            });
-        });
-
-        // Efectos de entrada
-        window.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.stat-card, .action-card').forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
-                card.classList.add('slide-in');
-            });
-            
-            // Sistema de visitas
-            setupVisitSystem();
-            
-            // Cerrar paleta flotante al hacer clic fuera
-            document.addEventListener('click', (e) => {
-                const palette = document.getElementById('floatingColorPalette');
-                const toggleBtn = document.getElementById('toggleFloatingPaletteBtn');
-                
-                if (palette.classList.contains('active') && 
-                    !palette.contains(e.target) && 
-                    e.target !== toggleBtn) {
-                    toggleFloatingPalette();
-                }
-            });
-        });
-
-        // =============================================
-        // ACCESOS SECRETOS Y ATAJOS
-        // =============================================
-
-        document.addEventListener('keydown', (e) => {
-            // Ctrl+Shift+L para logout
-            if (e.ctrlKey && e.shiftKey && e.key === 'L') {
-                e.preventDefault();
-                logout();
-            }
-            
-            // Ctrl+Shift+D para dashboard
-            if (e.ctrlKey && e.shiftKey && e.key === 'D') {
-                e.preventDefault();
-                navigateTo('dashboard');
-            }
-            
-            // Ctrl+Shift+S para nuevo servicio
-            if (e.ctrlKey && e.shiftKey && e.key === 'S') {
-                e.preventDefault();
-                openModal('newServiceModal');
-            }
-            
-            // Ctrl+Shift+C para paleta de colores flotante
-            if (e.ctrlKey && e.shiftKey && e.key === 'C') {
-                e.preventDefault();
-                toggleFloatingPalette();
-            }
-            
-            // Ctrl+Shift+H para ir a inicio
-            if (e.ctrlKey && e.shiftKey && e.key === 'H') {
-                e.preventDefault();
-                goToHome();
-            }
-            
-            // Combo V+E+L para recarga rápida
-            if (e.key === 'v' || e.key === 'e' || e.key === 'l') {
-                const keySequence = sessionStorage.getItem('keySequence') || '';
-                sessionStorage.setItem('keySequence', keySequence + e.key);
-                
-                setTimeout(() => {
-                    if (sessionStorage.getItem('keySequence') === 'vel') {
-                        showAlert('⚡ Recarga rápida activada', 'success');
-                        setTimeout(() => triggerPageReload(), 1000);
-                    }
-                    sessionStorage.removeItem('keySequence');
-                }, 1000);
-            }
-            
-            // Escape para cerrar modales
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.action-modal.active').forEach(modal => {
-                    modal.classList.remove('active');
-                });
-                
-                if (loginModal.classList.contains('active')) {
-                    hideLoginModal();
-                }
-                
-                if (document.getElementById('floatingColorPalette').classList.contains('active')) {
-                    toggleFloatingPalette();
-                }
-            }
-            
-            // Ctrl+F para buscar
-            if (e.ctrlKey && e.key === 'f') {
-                e.preventDefault();
-                document.getElementById('globalSearch').focus();
-            }
-        });
-
-        // Configurar click en contador de visitas
-        const visitCounter = document.getElementById('visitCounter');
-        if (visitCounter) {
-            visitCounter.addEventListener('click', () => {
-                showAlert(`👁️ Total de visitas al sistema: ${mockDatabase.visits.toLocaleString()}`, 'info');
-            });
-        }
-    </script>
+// Verificar si hay sesión activa SOLO si el usuario no cerró
+auth.onAuthStateChanged((user) => {
+    if (user && document.getElementById('mainApp').style.display !== 'flex') {
+        // Si hay usuario pero el panel no está visible, mostramos login
+        // Esto evita sesiones fantasma
+        auth.signOut();
+        localStorage.clear();
+    }
+});
+</script>
 </body>
 </html>
