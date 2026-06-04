@@ -526,6 +526,11 @@
             font-size: 0.85rem;
         }
 
+        .contact-info i {
+            width: 20px;
+            color: var(--electric-cyan);
+        }
+
         .social-links {
             display: flex;
             gap: 0.8rem;
@@ -543,6 +548,10 @@
             color: var(--electric-cyan);
             transition: 0.2s;
             text-decoration: none;
+        }
+
+        .social-links a i {
+            font-size: 1rem;
         }
 
         .social-links a:hover {
@@ -845,9 +854,10 @@
                     </div>
                     <p style="color:var(--text-secondary); font-size:0.8rem;">Expertos en soluciones eléctricas de alta calidad para hogares, empresas e industrias.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://web.whatsapp.com/send?phone=18095238283" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
@@ -885,7 +895,7 @@
     </div>
 
     <script>
-        // ============ CONFIGURACIÓN DE FIREBASE (MISMA QUE TU PANEL) ============
+        // ============ CONFIGURACIÓN DE FIREBASE ============
         const firebaseConfig = {
             apiKey: "AIzaSyD5w94fMf-siqXHa3LRMvungnUV7hxNwP0",
             authDomain: "voltaje-d605d.firebaseapp.com",
@@ -995,7 +1005,6 @@
         // Guardar en Firestore
         async function guardarSolicitud(datos) {
             try {
-                // Crear un nuevo documento en la colección 'solicitudes_contacto'
                 const docRef = await db.collection('solicitudes_contacto').add({
                     nombre: datos.nombre,
                     email: datos.email,
@@ -1045,13 +1054,11 @@
 
         // Inicialización
         window.addEventListener('DOMContentLoaded', () => {
-            // Double click para recargar
             const mainLogo = document.getElementById('mainLogo');
             const footerLogo = document.getElementById('footerLogo');
             if (mainLogo) new DoubleClickHandler(mainLogo, reloadPage);
             if (footerLogo) new DoubleClickHandler(footerLogo, reloadPage);
             
-            // Menú móvil
             const mobileBtn = document.querySelector('.mobile-menu');
             const navMenu = document.querySelector('nav ul');
             if (mobileBtn) {
@@ -1060,7 +1067,6 @@
                 });
             }
             
-            // Cerrar menú al hacer click en enlace
             document.querySelectorAll('nav a').forEach(link => {
                 link.addEventListener('click', () => {
                     if (window.innerWidth <= 768 && navMenu.classList.contains('active')) {
